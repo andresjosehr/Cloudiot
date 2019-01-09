@@ -2,7 +2,7 @@
 
    <!-- Large Size -->
             <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document" style="width: 75%;">
+                <div class="modal-dialog modal-lg" role="document" style="width: 95%;">
                     <div class="modal-content">
                         <div class="modal-header">
                           <div class="row">
