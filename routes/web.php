@@ -21,6 +21,12 @@ Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal');
 
 Route::get('Prueba','PruebaController@index')->name("Prueba");
 
+Route::get('/home', function (){
+	
+	return redirect("/panel-de-control");
+
+})->name("home");
+
 
 
 
