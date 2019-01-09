@@ -37,11 +37,11 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td>516521</td>
+                                                    <td>{{ $Datos["EnergiaActivaInyectada"] }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -56,11 +56,11 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td>516521</td>
+                                                    <td>{{ $Datos["EnergíaReactivaInyectada"] }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td>516521</td>
+                                                    <td>{{ $Datos["EnergíaReactivaRetirada"] }}</td>
                                                 </tr>
                                             </tbody>
                                           </table>
@@ -75,11 +75,11 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                           </table>
@@ -94,11 +94,11 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                           </table>
@@ -113,11 +113,11 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td>516521</td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                           </table>
@@ -144,19 +144,19 @@
                                       <tbody>
                                           <tr>
                                               <th style="font-weight: 300;">Fase A</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FaseA"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Fase B</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FaseB"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Fase C</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FaseC"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Promedio</th>
-                                              <td>516521</td>
+                                              <td></td>
                                           </tr>
                                       </tbody>
                                   </table>
@@ -171,19 +171,19 @@
                                       <tbody>
                                           <tr>
                                               <th style="font-weight: 300;">VL ab</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeDeLineaAB"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">VL bc</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeDeLineaBC"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">VL ca</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeDeLineaCA"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Promedio</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeDeLineaPromedio"] }}</td>
                                           </tr>
                                       </tbody>
                                   </table>
@@ -198,19 +198,19 @@
                                       <tbody>
                                           <tr>
                                               <th style="font-weight: 300;">Voltaje A</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeA"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Voltaje B</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeB"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Voltaje C</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajeC"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Promedio</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["VoltajePromedio"] }}</td>
                                           </tr>
                                       </tbody>
                                   </table>
@@ -225,19 +225,19 @@
                                       <tbody>
                                           <tr>
                                               <th style="font-weight: 300;">F. Potencia A</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FactorPotenciaA"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">F. Potencia B</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FactorPotenciaB"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">F. Potencia C</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FactorPotenciaC"] }}</td>
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Total</th>
-                                              <td>516521</td>
+                                              <td>{{ $Datos["FactorPotenciaTotal"] }}</td>
                                           </tr>
                                       </tbody>
                                   </table>

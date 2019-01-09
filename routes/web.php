@@ -15,10 +15,11 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-
 Route::get('panel-de-control','InstalacionesController@index')->middleware("verificar_login");
 
 Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal');
+
+Route::get('Prueba','PruebaController@index')->name("Prueba");
 
 
 

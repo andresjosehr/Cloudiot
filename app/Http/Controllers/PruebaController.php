@@ -3,30 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+
 use DB;
 
-class InstalacionesController extends Controller{
-
+class PruebaController extends Controller{
     public function index(){
-
-    	$usuario =  Auth::user();
-    	$instalaciones = DB::table('instalaciones')->get();
-
-    	return view("home", ["Instalaciones" => $instalaciones, "Usuario" => $usuario]);
-    }
-
-    public function ConsultaModal(Request $request){
-		
-			$id=$_POST['id'];
-            $tabla_asociada=$_POST['tabla_asociada'];
-
-			$instalaciones = DB::table('instalaciones')
-												->where("id", $id)
-													->first();
-            if ($instalaciones->id==1) {
-
-               $datos = DB::connection('telemetria')
+    	
+    	$datos = DB::connection('telemetria')
                 ->select("SELECT * FROM mt_aasa WHERE mt_time BETWEEN DATE_SUB(NOW(), INTERVAL 15 MINUTE) AND NOW()");
 
                 $EnergiaActivaInyectada = array();
@@ -60,94 +43,94 @@ class InstalacionesController extends Controller{
 
                 for ($i=0; $i < count($datos); $i++) { 
 
-                    if ($datos[$i]->mt_value==null) {
-                        $datos[$i]->mt_value=0;
-                    }
+                	if ($datos[$i]->mt_value==null) {
+                		$datos[$i]->mt_value=0;
+                	}
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
-                        $EnergiaActivaInyectada[$i] = $datos[$i]->mt_value;
-                    }
-
-
-
-
-
-                    if ($datos[$i]->mt_name=="AASA--ION8650.EnerReactIny") {
-                        $EnergíaReactivaInyectada[$i] = $datos[$i]->mt_value;
-                    }
-
-                    if ($datos[$i]->mt_name=="AASA--ION8650.EnerReactRet") {
-                        $EnergíaReactivaRetirada[$i] = $datos[$i]->mt_value;
-                    }
+                	if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
+                		$EnergiaActivaInyectada[$i] = $datos[$i]->mt_value;
+                	}
 
 
 
 
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.CorrienteFaseA") {
-                        $FaseA[$i] = $datos[$i]->mt_value;
-                    }
+                	if ($datos[$i]->mt_name=="AASA--ION8650.EnerReactIny") {
+                		$EnergíaReactivaInyectada[$i] = $datos[$i]->mt_value;
+                	}
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.CorrienteFaseB") {
-                        $FaseB[$i] = $datos[$i]->mt_value;
-                    }
-
-                    if ($datos[$i]->mt_name=="AASA--ION8650.CorrienteFaseC") {
-                        $FaseC[$i] = $datos[$i]->mt_value;
-                    }
+                	if ($datos[$i]->mt_name=="AASA--ION8650.EnerReactRet") {
+                		$EnergíaReactivaRetirada[$i] = $datos[$i]->mt_value;
+                	}
 
 
 
 
 
+                	if ($datos[$i]->mt_name=="AASA--ION8650.CorrienteFaseA") {
+                		$FaseA[$i] = $datos[$i]->mt_value;
+                	}
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaab") {
-                        $VoltajeDeLineaAB[$i] = $datos[$i]->mt_value;
-                    }
-                    if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineabc") {
-                        $VoltajeDeLineaBC[$i] = $datos[$i]->mt_value;
-                    }
-                    if ($datos[$i]->mt_name=="AASA--ION8650.VotajeLineaca") {
-                        $VoltajeDeLineaCA[$i] = $datos[$i]->mt_value;
-                    }
-                    if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaPromedio") {
-                        $VoltajeDeLineaPromedio[$i] = $datos[$i]->mt_value;
-                    }
+                	if ($datos[$i]->mt_name=="AASA--ION8650.CorrienteFaseB") {
+                		$FaseB[$i] = $datos[$i]->mt_value;
+                	}
+
+                	if ($datos[$i]->mt_name=="AASA--ION8650.CorrienteFaseC") {
+                		$FaseC[$i] = $datos[$i]->mt_value;
+                	}
 
 
 
 
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.Voltajea") {
-                        $VoltajeA[$i] = $datos[$i]->mt_value;
-                    }
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.Voltajeb") {
-                        $VoltajeB[$i] = $datos[$i]->mt_value;
-                    }
+                	if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaab") {
+                		$VoltajeDeLineaAB[$i] = $datos[$i]->mt_value;
+                	}
+                	if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineabc") {
+                		$VoltajeDeLineaBC[$i] = $datos[$i]->mt_value;
+                	}
+                	if ($datos[$i]->mt_name=="AASA--ION8650.VotajeLineaca") {
+                		$VoltajeDeLineaCA[$i] = $datos[$i]->mt_value;
+                	}
+                	if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaPromedio") {
+                		$VoltajeDeLineaPromedio[$i] = $datos[$i]->mt_value;
+                	}
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.Voltajec") {
-                        $VoltajeC[$i] = $datos[$i]->mt_value;
-                    }
-                    if ($datos[$i]->mt_name=="AASA--ION8650.VoltajePromedio") {
-                        $VoltajePromedio[$i] = $datos[$i]->mt_value;
-                    }
 
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciaa") {
-                        $FactorPotenciaA[$i] = $datos[$i]->mt_value;
-                    }
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciab") {
-                        $FactorPotenciaB[$i] = $datos[$i]->mt_value;
-                    }
 
-                    if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciac") {
-                        $FactorPotenciaC[$i] = $datos[$i]->mt_value;
-                    }
-                    if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciaTotal") {
-                        $FactorPotenciaTotal[$i] = $datos[$i]->mt_value;
-                    }
+                	if ($datos[$i]->mt_name=="AASA--ION8650.Voltajea") {
+                		$VoltajeA[$i] = $datos[$i]->mt_value;
+                	}
+
+                	if ($datos[$i]->mt_name=="AASA--ION8650.Voltajeb") {
+                		$VoltajeB[$i] = $datos[$i]->mt_value;
+                	}
+
+                	if ($datos[$i]->mt_name=="AASA--ION8650.Voltajec") {
+                		$VoltajeC[$i] = $datos[$i]->mt_value;
+                	}
+                	if ($datos[$i]->mt_name=="AASA--ION8650.VoltajePromedio") {
+                		$VoltajePromedio[$i] = $datos[$i]->mt_value;
+                	}
+
+
+                	if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciaa") {
+                		$FactorPotenciaA[$i] = $datos[$i]->mt_value;
+                	}
+
+                	if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciab") {
+                		$FactorPotenciaB[$i] = $datos[$i]->mt_value;
+                	}
+
+                	if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciac") {
+                		$FactorPotenciaC[$i] = $datos[$i]->mt_value;
+                	}
+                	if ($datos[$i]->mt_name=="AASA--ION8650.FactorPotenciaTotal") {
+                		$FactorPotenciaTotal[$i] = $datos[$i]->mt_value;
+                	}
 
                 }
 
@@ -206,11 +189,7 @@ class InstalacionesController extends Controller{
                $Datos["FactorPotenciaC"] = number_format(round($FactorPotenciaC),0,",",".");
                $Datos["FactorPotenciaTotal"] = number_format(round($FactorPotenciaTotal),0,",",".");
 
-            }
-
-
-			return view("modals.modal", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
+     					return $Datos;
 
     }
-
 }

@@ -74,9 +74,6 @@
 
     <script>
 
-
-
-
 (function(){
 
   function Marcador(lon, lat, id) {
@@ -154,14 +151,16 @@
                 var id    = feature.values_.name;
                 var url   = "<?php echo Request::root() ?>/ConsultaInstalacion";
                 var datos = $('#consulta-form').serialize();
-                
-                $("#contenedor").load(url, {id: id});
+                $("#contenedor").load(url, {id: id, tabla_asociada: tabla_instalacion_asociada});
 
 
             })
         });
 
   })();
+
+    var tabla_instalacion_asociada = "<?php echo $Instalacion->tabla_asociada ?>";
+
     </script>
 
     <!-- Jquery Core Js -->
