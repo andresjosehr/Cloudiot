@@ -282,6 +282,7 @@
                   padding: 0px !important;
                 }
                 .table-bordered tbody tr td, .table-bordered tbody tr th {
+                  font-size: 13px;
                   border-color: #4e4e4e;
                 }
             </style>

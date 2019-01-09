@@ -153,58 +153,24 @@ class InstalacionesController extends Controller{
 
 
 
-               $EnergiaActivaInyectada = array_sum($EnergiaActivaInyectada) / count($EnergiaActivaInyectada);
-               $EnergíaReactivaInyectada = array_sum($EnergíaReactivaInyectada) / count($EnergíaReactivaInyectada);
-               $EnergíaReactivaRetirada = array_sum($EnergíaReactivaRetirada) / count($EnergíaReactivaRetirada);
-
-               $FaseA = array_sum($FaseA) / count($FaseA);
-
-               $FaseB = array_sum($FaseB) / count($FaseB);
-
-               $FaseC = array_sum($FaseC) / count($FaseC);
-
-               $VoltajeDeLineaAB = array_sum($VoltajeDeLineaAB) / count($VoltajeDeLineaAB);
-
-               $VoltajeDeLineaBC = array_sum($VoltajeDeLineaBC) / count($VoltajeDeLineaBC);
-
-               $VoltajeDeLineaCA = array_sum($VoltajeDeLineaCA) / count($VoltajeDeLineaCA);
-
-               $VoltajeDeLineaPromedio = array_sum($VoltajeDeLineaPromedio) / count($VoltajeDeLineaPromedio);
-
-               $VoltajeA = array_sum($VoltajeA) / count($VoltajeA);
-
-               $VoltajeB = array_sum($VoltajeB) / count($VoltajeB);
-
-               $VoltajeC = array_sum($VoltajeC) / count($VoltajeC);
-
-               $VoltajePromedio = array_sum($VoltajePromedio) / count($VoltajePromedio);
-
-               $FactorPotenciaA = array_sum($FactorPotenciaA) / count($FactorPotenciaA);
-
-               $FactorPotenciaB = array_sum($FactorPotenciaB) / count($FactorPotenciaB);
-
-               $FactorPotenciaC = array_sum($FactorPotenciaC) / count($FactorPotenciaC);
-               $FactorPotenciaTotal = array_sum($FactorPotenciaTotal) / count($FactorPotenciaTotal);
-
-
-               $Datos["EnergiaActivaInyectada"] = number_format(round($EnergiaActivaInyectada),0,",",".");
-               $Datos["EnergíaReactivaInyectada"] = number_format(round($EnergíaReactivaInyectada),0,",",".");
-               $Datos["EnergíaReactivaRetirada"] = number_format(round($EnergíaReactivaRetirada),0,",",".");
-               $Datos["FaseA"] = number_format(round($FaseA),0,",",".");
-               $Datos["FaseB"] = number_format(round($FaseB),0,",",".");
-               $Datos["FaseC"] = number_format(round($FaseC),0,",",".");
-               $Datos["VoltajeDeLineaAB"] = number_format(round($VoltajeDeLineaAB),0,",",".");
-               $Datos["VoltajeDeLineaBC"] = number_format(round($VoltajeDeLineaBC),0,",",".");
-               $Datos["VoltajeDeLineaCA"] = number_format(round($VoltajeDeLineaCA),0,",",".");
-               $Datos["VoltajeDeLineaPromedio"] = number_format(round($VoltajeDeLineaPromedio),0,",",".");
-               $Datos["VoltajeA"] = number_format(round($VoltajeA),0,",",".");
-               $Datos["VoltajeB"] = number_format(round($VoltajeB),0,",",".");
-               $Datos["VoltajeC"] = number_format(round($VoltajeC),0,",",".");
-               $Datos["VoltajePromedio"] = number_format(round($VoltajePromedio),0,",",".");
-               $Datos["FactorPotenciaA"] = number_format(round($FactorPotenciaA),0,",",".");
-               $Datos["FactorPotenciaB"] = number_format(round($FactorPotenciaB),0,",",".");
-               $Datos["FactorPotenciaC"] = number_format(round($FactorPotenciaC),0,",",".");
-               $Datos["FactorPotenciaTotal"] = number_format(round($FactorPotenciaTotal),0,",",".");
+               $Datos["EnergiaActivaInyectada"]    =   abs(reset($EnergiaActivaInyectada) - end($EnergiaActivaInyectada));
+               $Datos["EnergíaReactivaInyectada"]  =   abs(reset($EnergíaReactivaInyectada) - end($EnergíaReactivaInyectada));
+               $Datos["EnergíaReactivaRetirada"]   =   abs(reset($EnergíaReactivaRetirada) - end($EnergíaReactivaRetirada));
+               $Datos["FaseA"]                     =   abs(reset($FaseA) - end($FaseA));
+               $Datos["FaseB"]                     =   abs(reset($FaseB) - end($FaseB));
+               $Datos["FaseC"]                     =   abs(reset($FaseC) - end($FaseC));
+               $Datos["VoltajeDeLineaAB"]          =   abs(reset($VoltajeDeLineaAB) - end($VoltajeDeLineaAB));
+               $Datos["VoltajeDeLineaBC"]          =   abs(reset($VoltajeDeLineaBC) - end($VoltajeDeLineaBC));
+               $Datos["VoltajeDeLineaCA"]          =   abs(reset($VoltajeDeLineaCA) - end($VoltajeDeLineaCA));
+               $Datos["VoltajeDeLineaPromedio"]    =   abs(reset($VoltajeDeLineaPromedio) - end($VoltajeDeLineaPromedio));
+               $Datos["VoltajeA"]                  =   abs(reset($VoltajeA) - end($VoltajeA));
+               $Datos["VoltajeB"]                  =   abs(reset($VoltajeB) - end($VoltajeB));
+               $Datos["VoltajeC"]                  =   abs(reset($VoltajeC) - end($VoltajeC));
+               $Datos["VoltajePromedio"]           =   abs(reset($VoltajePromedio) - end($VoltajePromedio));
+               $Datos["FactorPotenciaA"]           =   abs(reset($FactorPotenciaA) - end($FactorPotenciaA));
+               $Datos["FactorPotenciaB"]           =   abs(reset($FactorPotenciaB) - end($FactorPotenciaB));
+               $Datos["FactorPotenciaC"]           =   abs(reset($FactorPotenciaC) - end($FactorPotenciaC));
+               $Datos["FactorPotenciaTotal"]       =   abs(reset($FactorPotenciaTotal) - end($FactorPotenciaTotal));
 
             }
 
