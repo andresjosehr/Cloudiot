@@ -27,7 +27,7 @@ class InstalacionesController extends Controller{
             if ($instalaciones->id==1) {
 
                $datos = DB::connection('telemetria')
-                ->select("SELECT * FROM mt_aasa WHERE mt_time BETWEEN DATE_SUB(NOW(), INTERVAL 15 MINUTE) AND NOW()");
+                ->select("SELECT * FROM mt_aasa WHERE mt_time > date_sub(now(), interval 15 minute) ORDER BY mt_time DESC");
 
                 $EnergiaActivaInyectada = array();
 
