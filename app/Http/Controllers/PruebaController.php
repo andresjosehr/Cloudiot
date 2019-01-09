@@ -156,7 +156,7 @@ class PruebaController extends Controller{
                $Datos["FactorPotenciaTotal"]       =   abs(reset($FactorPotenciaTotal) - end($FactorPotenciaTotal));
 
 
-     					return $Datos;
+     		   return end($FaseA);
 
     }
 }

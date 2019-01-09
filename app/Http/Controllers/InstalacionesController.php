@@ -156,9 +156,9 @@ class InstalacionesController extends Controller{
                $Datos["EnergiaActivaInyectada"]    =   abs(reset($EnergiaActivaInyectada) - end($EnergiaActivaInyectada));
                $Datos["EnergíaReactivaInyectada"]  =   abs(reset($EnergíaReactivaInyectada) - end($EnergíaReactivaInyectada));
                $Datos["EnergíaReactivaRetirada"]   =   abs(reset($EnergíaReactivaRetirada) - end($EnergíaReactivaRetirada));
-               $Datos["FaseA"]                     =   abs(reset($FaseA) - end($FaseA));
-               $Datos["FaseB"]                     =   abs(reset($FaseB) - end($FaseB));
-               $Datos["FaseC"]                     =   abs(reset($FaseC) - end($FaseC));
+               $Datos["FaseA"]                     =   end($FaseA);
+               $Datos["FaseB"]                     =   end($FaseB);
+               $Datos["FaseC"]                     =   end($FaseC);
                $Datos["VoltajeDeLineaAB"]          =   abs(reset($VoltajeDeLineaAB) - end($VoltajeDeLineaAB));
                $Datos["VoltajeDeLineaBC"]          =   abs(reset($VoltajeDeLineaBC) - end($VoltajeDeLineaBC));
                $Datos["VoltajeDeLineaCA"]          =   abs(reset($VoltajeDeLineaCA) - end($VoltajeDeLineaCA));
