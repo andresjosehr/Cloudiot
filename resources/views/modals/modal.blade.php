@@ -6,8 +6,11 @@
                     <div class="modal-content">
                         <div class="modal-header">
                           <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-2">
                               <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
+                            </div>
+                            <div class="col-md-3">
+                              <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >Ultima dato: {{ $Datos["UltimaMedicion"] }}</h4> 
                             </div>
                             <div class="col-md-3">
                               <div class="form-line">
@@ -27,8 +30,7 @@
                         <hr style=" color: black">  
                         <div class="modal-body">
                             <div class="row" align="center">
-                                <div class="col-md-1"></div>
-                                    <div class="col-md-2">
+                                    <div class="col-1-5">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -41,13 +43,13 @@
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                       </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-1-5">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -66,7 +68,7 @@
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-1-5">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -75,17 +77,17 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                             </tbody>
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-1-5">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -94,17 +96,17 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                             </tbody>
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-1-5">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -113,26 +115,23 @@
                                             <tbody>
                                                 <tr>
                                                     <th style="font-weight: 300;">Inyectada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td></td>
+                                                    <td>No definido</td>
                                                 </tr>
                                             </tbody>
                                           </table>
                                         </div>
                                     </div>
-                                <div class="col-md-1"></div>
                             </div>
                             <div class="row">
-                            <div class="col-md-1"></div>
-                                <div class="col-md-2" align="center"><canvas id="myChart0" height="150"></canvas></div>
-                                <div class="col-md-2" align="center"><canvas id="myChart1" height="150"></canvas></div>
-                                <div class="col-md-2" align="center"><canvas id="myChart2" height="150"></canvas></div>
-                                <div class="col-md-2" align="center"><canvas id="myChart3" height="150"></canvas></div>
-                                <div class="col-md-2" align="center"><canvas id="myChart4" height="150"></canvas></div>
-                              <div class="col-md-1"></div>
+                                <div class="col-1-5" align="center"><canvas id="myChart0" height="150"></canvas></div>
+                                <div class="col-1-5" align="center"><canvas id="myChart1" height="150"></canvas></div>
+                                <div class="col-1-5" align="center"><canvas id="myChart2" height="150"></canvas></div>
+                                <div class="col-1-5" align="center"><canvas id="myChart3" height="150"></canvas></div>
+                                <div class="col-1-5" align="center"><canvas id="myChart4" height="150"></canvas></div>
                           </div>
                             <div class="row" align="center" style="padding-top: 30px">
                               <div class="col-md-3">
@@ -156,7 +155,7 @@
                                           </tr>
                                           <tr>
                                               <th style="font-weight: 300;">Promedio</th>
-                                              <td></td>
+                                              <td>No definido</td>
                                           </tr>
                                       </tbody>
                                   </table>
@@ -252,7 +251,7 @@
                           <div class="col-md-3"><canvas id="myChart8"  height="150"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -261,14 +260,16 @@
             <style>
 
                 .tabla-titulo{
-                  background: #d4d4d4;
-                  border: 1px solid #4e4e4e;
+                      background: #cccccc;
+                  border: 1px solid #cccccc;
                   border-bottom: 0;
                   text-align: center; 
                   font-weight: 600; 
                   color: black;
                   padding-top: 4px;
                   padding-bottom: 4px;
+                      border-top-left-radius: 10px;
+             border-top-right-radius: 10px;
                 }
                 .nombre-instalacion{
                     text-align: left;
@@ -283,8 +284,18 @@
                 }
                 .table-bordered tbody tr td, .table-bordered tbody tr th {
                   font-size: 13px;
-                  border-color: #4e4e4e;
+                  border-color: #cccccc;
                 }
+
+                  .col-1-5{
+                    width: 20%;
+                    float: left;
+                    position: relative;
+                    min-height: 1px;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                  }
+
             </style>
 
             <script>
@@ -294,9 +305,9 @@
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            labels: [],
                             datasets: [{
-                                label: '# of Votes',
+                                label: '',
                                 data: [12, 19, 3, 5, 2, 3],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
