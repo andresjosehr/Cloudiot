@@ -23,7 +23,7 @@
                               </div>
                             </div>
                             <div class="col-md-1">
-                              <button type="button" class="btn btn-primary waves-effect">-></button>
+                              <button type="button" class="btn btn-primary waves-effect">→</button>
                             </div>
                           </div>
                         </div>
