@@ -26,6 +26,9 @@
 
     @include('header');
 
+    @include('loader.index');
+
+
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -148,6 +151,7 @@
                   }
                 });
 
+                $(".loader-insta").css("display", "block");
                 var id    = feature.values_.name;
                 var url   = "<?php echo Request::root() ?>/ConsultaInstalacion";
                 var datos = $('#consulta-form').serialize();

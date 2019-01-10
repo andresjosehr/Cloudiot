@@ -19,7 +19,7 @@ Route::get('panel-de-control','InstalacionesController@index')->middleware("veri
 
 Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal');
 
-Route::get('Prueba','PruebaController@index')->name("Prueba");
+// Route::get('Prueba','PruebaController@index')->name("Prueba");
 
 Route::get('/home', function (){
 	
@@ -30,8 +30,8 @@ Route::get('/home', function (){
 
 
 
-Route::get('panel', ['middleware' => 'verificar_login', function () {
+Route::get('Prueba', ['middleware' => 'verificar_login', function () {
 
-	return "Hola como estas";
+	return view("loader.index");
     
 }]);

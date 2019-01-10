@@ -342,4 +342,5 @@
                         }
                     });
                     }
+                    $(".loader-insta").css("display", "none");
             </script>
