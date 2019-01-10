@@ -54,6 +54,8 @@ class InstalacionesController extends Controller{
 
 
 
+
+
                 $fecha = DB::connection('telemetria')
                               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActIny' ORDER BY mt_time DESC LIMIT 1");
 
@@ -62,6 +64,21 @@ class InstalacionesController extends Controller{
                           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
                 $EnergiaActivaInyectada = DB::connection('telemetria')
+                                           ->table("mt_aasa")
+                                           ->where("mt_name", "AASA--ION8650.EnerActIny")
+                                           ->where("mt_time", ">", $newDate)
+                                           ->orderBy("mt_time", "desc")
+                                           ->get();
+
+
+                $fecha = DB::connection('telemetria')
+                              ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActRet' ORDER BY mt_time DESC LIMIT 1");
+
+                          $date= $fecha[0]->mt_time; 
+                          $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                          $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                $EnergiaActivarRetirada = DB::connection('telemetria')
                                            ->table("mt_aasa")
                                            ->where("mt_name", "AASA--ION8650.EnerActIny")
                                            ->where("mt_time", ">", $newDate)
@@ -387,7 +404,10 @@ class InstalacionesController extends Controller{
                $Datos["FaseB"] = $FaseB->mt_value;
                $Datos["FaseC"] = $FaseC->mt_value;
 
+              
+
                $Datos["EnergiaActivaInyectada"]    =   abs($EnergiaActivaInyectada[0]->mt_value - $EnergiaActivaInyectada[count($EnergiaActivaInyectada)-1]->mt_value);
+               $Datos["EnergiaActivarRetirada"]    =   abs($EnergiaActivarRetirada[0]->mt_value - $EnergiaActivarRetirada[count($EnergiaActivarRetirada)-1]->mt_value);
                $Datos["EnergíaReactivaInyectada"]  =   abs($EnergíaReactivaInyectada[0]->mt_value - $EnergíaReactivaInyectada[count($EnergíaReactivaInyectada)-1]->mt_value);
                $Datos["EnergíaReactivaRetirada"]   =   abs($EnergíaReactivaRetirada[0]->mt_value - $EnergíaReactivaRetirada[count($EnergíaReactivaRetirada)-1]->mt_value);
                $Datos["VoltajeDeLineaAB"]          =   abs($VoltajeDeLineaAB[0]->mt_value - $VoltajeDeLineaAB[count($VoltajeDeLineaAB)-1]->mt_value);

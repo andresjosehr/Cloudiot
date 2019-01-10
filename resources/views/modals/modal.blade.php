@@ -43,7 +43,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th style="font-weight: 300;">Retirada</th>
-                                                    <td>No definido</td>
+                                                    <td>{{ $Datos["EnergiaActivaRetirada"] }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
