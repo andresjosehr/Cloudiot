@@ -275,8 +275,11 @@
                     text-align: left;
                 }
                 .modal-table1 tbody tr th{
-                  padding: 0px !important;
-                  text-align: center;
+                  padding-top: 0px !important;
+                  padding-bottom: 0px !important;
+                  padding-right: 0px !important;
+                  padding-left: 10px !important;
+                  text-align: left;
                 }
                 .modal-table1 tbody tr td{
                   text-align: center;

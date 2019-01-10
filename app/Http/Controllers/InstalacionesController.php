@@ -26,7 +26,7 @@ class InstalacionesController extends Controller{
 													->first();
             if ($instalaciones->id==1) {
 
-                              $EnergiaActivaInyectada = array();
+                $EnergiaActivaInyectada = array();
 
                 $EnergíaReactivaInyectada= array();
                 $EnergíaReactivaRetirada = array();
