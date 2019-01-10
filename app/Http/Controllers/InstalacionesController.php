@@ -130,72 +130,72 @@ class InstalacionesController extends Controller{
 
 
 
-                $fecha = DB::connection('telemetria')
-                              ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajeLineaab' ORDER BY mt_time DESC LIMIT 1");
+                // $fecha = DB::connection('telemetria')
+                //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajeLineaab' ORDER BY mt_time DESC LIMIT 1");
 
-                          $date= $fecha[0]->mt_time; 
-                          $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                          $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+                //           $date= $fecha[0]->mt_time; 
+                //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
-                $VoltajeDeLineaAB = DB::connection('telemetria')
-                                           ->table("mt_aasa")
-                                           ->where("mt_name", "AASA--ION8650.VoltajeLineaab")
-                                           ->where("mt_time", ">", $newDate)
-                                           ->orderBy("mt_time", "desc")
-                                           ->get();
-
-
-
-
-
-                $fecha = DB::connection('telemetria')
-                              ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajeLineabc' ORDER BY mt_time DESC LIMIT 1");
-
-                          $date= $fecha[0]->mt_time; 
-                          $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                          $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                $VoltajeDeLineaBC = DB::connection('telemetria')
-                                           ->table("mt_aasa")
-                                           ->where("mt_name", "AASA--ION8650.VoltajeLineabc")
-                                           ->where("mt_time", ">", $newDate)
-                                           ->orderBy("mt_time", "desc")
-                                           ->get();
-
-
-
-
-                $fecha = DB::connection('telemetria')
-                              ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VotajeLineaca' ORDER BY mt_time DESC LIMIT 1");
-
-                          $date= $fecha[0]->mt_time; 
-                          $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                          $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                $VoltajeDeLineaCA = DB::connection('telemetria')
-                                           ->table("mt_aasa")
-                                           ->where("mt_name", "AASA--ION8650.VotajeLineaca")
-                                           ->where("mt_time", ">", $newDate)
-                                           ->orderBy("mt_time", "desc")
-                                           ->get();
+                // $VoltajeDeLineaAB = DB::connection('telemetria')
+                //                            ->table("mt_aasa")
+                //                            ->where("mt_name", "AASA--ION8650.VoltajeLineaab")
+                //                            ->where("mt_time", ">", $newDate)
+                //                            ->orderBy("mt_time", "desc")
+                //                            ->get();
 
 
 
 
 
-                $fecha = DB::connection('telemetria')
-                              ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajeLineaPromedio' ORDER BY mt_time DESC LIMIT 1");
+                // $fecha = DB::connection('telemetria')
+                //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajeLineabc' ORDER BY mt_time DESC LIMIT 1");
 
-                          $date= $fecha[0]->mt_time; 
-                          $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                          $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+                //           $date= $fecha[0]->mt_time; 
+                //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
-                $VoltajeDeLineaPromedio = DB::connection('telemetria')
-                                           ->table("mt_aasa")
-                                           ->where("mt_name", "AASA--ION8650.VoltajeLineaPromedio")
-                                           ->where("mt_time", ">", $newDate)
-                                           ->orderBy("mt_time", "desc")
-                                           ->get();
+                // $VoltajeDeLineaBC = DB::connection('telemetria')
+                //                            ->table("mt_aasa")
+                //                            ->where("mt_name", "AASA--ION8650.VoltajeLineabc")
+                //                            ->where("mt_time", ">", $newDate)
+                //                            ->orderBy("mt_time", "desc")
+                //                            ->get();
+
+
+
+
+                // $fecha = DB::connection('telemetria')
+                //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VotajeLineaca' ORDER BY mt_time DESC LIMIT 1");
+
+                //           $date= $fecha[0]->mt_time; 
+                //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                // $VoltajeDeLineaCA = DB::connection('telemetria')
+                //                            ->table("mt_aasa")
+                //                            ->where("mt_name", "AASA--ION8650.VotajeLineaca")
+                //                            ->where("mt_time", ">", $newDate)
+                //                            ->orderBy("mt_time", "desc")
+                //                            ->get();
+
+
+
+
+
+                // $fecha = DB::connection('telemetria')
+                //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajeLineaPromedio' ORDER BY mt_time DESC LIMIT 1");
+
+                //           $date= $fecha[0]->mt_time; 
+                //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                // $VoltajeDeLineaPromedio = DB::connection('telemetria')
+                //                            ->table("mt_aasa")
+                //                            ->where("mt_name", "AASA--ION8650.VoltajeLineaPromedio")
+                //                            ->where("mt_time", ">", $newDate)
+                //                            ->orderBy("mt_time", "desc")
+                //                            ->get();
 
 
 
@@ -399,21 +399,57 @@ class InstalacionesController extends Controller{
 
 
 
+
+
+
+
+
+
+                $VoltajeDeLineaAB = DB::connection('telemetria')
+                                           ->table("mt_aasa")
+                                           ->where("mt_name", "AASA--ION8650.VoltajeLineaab")
+                                           ->orderBy("mt_time", "desc")
+                                           ->first();
+                
+
+                
+                $VoltajeDeLineaBC = DB::connection('telemetria')
+                                           ->table("mt_aasa")
+                                           ->where("mt_name", "AASA--ION8650.VoltajeLineabc")
+                                           ->orderBy("mt_time", "desc")
+                                           ->first();
+                
+
+                
+                $VoltajeDeLineaCA = DB::connection('telemetria')
+                                           ->table("mt_aasa")
+                                           ->where("mt_name", "AASA--ION8650.VotajeLineaca")
+                                           ->orderBy("mt_time", "desc")
+                                           ->first();
+
+
+                $VoltajeDeLineaPromedio = DB::connection('telemetria')
+                                           ->table("mt_aasa")
+                                           ->where("mt_name", "AASA--ION8650.VoltajeLineaPromedio")
+                                           ->orderBy("mt_time", "desc")
+                                           ->first();
+
+
+
                $Datos["UltimaMedicion"] = $UltimaMedicion->mt_time;
                $Datos["FaseA"] = $FaseA->mt_value;
                $Datos["FaseB"] = $FaseB->mt_value;
                $Datos["FaseC"] = $FaseC->mt_value;
-
+                $Datos["VoltajeDeLineaAB"]       = $VoltajeDeLineaAB;
+                $Datos["VoltajeDeLineaBC"]       = $VoltajeDeLineaBC;
+                $Datos["VoltajeDeLineaCA"]       = $VoltajeDeLineaCA;
+                $Datos["VoltajeDeLineaPromedio"] = $VoltajeDeLineaPromedio;
               
 
                $Datos["EnergiaActivaInyectada"]    =   abs($EnergiaActivaInyectada[0]->mt_value - $EnergiaActivaInyectada[count($EnergiaActivaInyectada)-1]->mt_value);
                $Datos["EnergiaActivarRetirada"]    =   abs($EnergiaActivarRetirada[0]->mt_value - $EnergiaActivarRetirada[count($EnergiaActivarRetirada)-1]->mt_value);
                $Datos["EnergíaReactivaInyectada"]  =   abs($EnergíaReactivaInyectada[0]->mt_value - $EnergíaReactivaInyectada[count($EnergíaReactivaInyectada)-1]->mt_value);
                $Datos["EnergíaReactivaRetirada"]   =   abs($EnergíaReactivaRetirada[0]->mt_value - $EnergíaReactivaRetirada[count($EnergíaReactivaRetirada)-1]->mt_value);
-               $Datos["VoltajeDeLineaAB"]          =   abs($VoltajeDeLineaAB[0]->mt_value - $VoltajeDeLineaAB[count($VoltajeDeLineaAB)-1]->mt_value);
-               $Datos["VoltajeDeLineaBC"]          =   abs($VoltajeDeLineaBC[0]->mt_value - $VoltajeDeLineaBC[count($VoltajeDeLineaBC)-1]->mt_value);
-               $Datos["VoltajeDeLineaCA"]          =   abs($VoltajeDeLineaCA[0]->mt_value - $VoltajeDeLineaCA[count($VoltajeDeLineaCA)-1]->mt_value);
-               $Datos["VoltajeDeLineaPromedio"]    =   abs($VoltajeDeLineaPromedio[0]->mt_value - $VoltajeDeLineaPromedio[count($VoltajeDeLineaPromedio)-1]->mt_value);
                $Datos["VoltajeA"]                  =   abs($VoltajeA[0]->mt_value - $VoltajeA[count($VoltajeA)-1]->mt_value);
                $Datos["VoltajeB"]                  =   abs($VoltajeB[0]->mt_value - $VoltajeB[count($VoltajeB)-1]->mt_value);
                $Datos["VoltajeC"]                  =   abs($VoltajeC[0]->mt_value - $VoltajeC[count($VoltajeC)-1]->mt_value);
