@@ -30,7 +30,7 @@
                         <hr style=" color: black">  
                         <div class="modal-body">
                             <div class="row" align="center">
-                                    <div class="col-1-5">
+                                    <div class="col-md-3">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -49,7 +49,7 @@
                                         </table>
                                       </div>
                                     </div>
-                                    <div class="col-1-5">
+                                    <div class="col-md-3">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -68,26 +68,7 @@
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-1-5">
-                                      <div class="body table-responsive">
-                                          <table class="table table-bordered modal-table1" style="border: #5a5a5a">
-                                            <thead>
-                                                <caption scope="row" class="tabla-titulo">Potencia Activa</caption>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th style="font-weight: 300;">Inyectada</th>
-                                                    <td>No definido</td>
-                                                </tr>
-                                                <tr>
-                                                    <th style="font-weight: 300;">Retirada</th>
-                                                    <td>No definido</td>
-                                                </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                    </div>
-                                    <div class="col-1-5">
+                                    <div class="col-md-3">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -106,7 +87,7 @@
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-1-5">
+                                    <div class="col-md-3">
                                       <div class="body table-responsive">
                                           <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                             <thead>
@@ -134,34 +115,7 @@
                                 <div class="col-1-5" align="center"><canvas id="myChart4" height="150"></canvas></div>
                           </div>
                             <div class="row" align="center" style="padding-top: 30px">
-                              <div class="col-md-3">
-                                <div class="body table-responsive">
-                                    <table class="table table-bordered modal-table1" style="border: #5a5a5a">
-                                      <thead>
-                                          <caption scope="row" class="tabla-titulo">Corrientes</caption>
-                                      </thead>
-                                      <tbody>
-                                          <tr>
-                                              <th style="font-weight: 300;">Fase A</th>
-                                              <td>{{ $Datos["FaseA"] }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th style="font-weight: 300;">Fase B</th>
-                                              <td>{{ $Datos["FaseB"] }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th style="font-weight: 300;">Fase C</th>
-                                              <td>{{ $Datos["FaseC"] }}</td>
-                                          </tr>
-                                          <tr>
-                                              <th style="font-weight: 300;">Promedio</th>
-                                              <td>No definido</td>
-                                          </tr>
-                                      </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                              <div class="col-md-3">
+                              <div class="col-md-4">
                                 <div class="body table-responsive">
                                     <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                       <thead>
@@ -188,7 +142,7 @@
                                   </table>
                                 </div>
                               </div>
-                              <div class="col-md-3">
+                              <div class="col-md-4">
                                 <div class="body table-responsive">
                                     <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                       <thead>
@@ -215,7 +169,7 @@
                                   </table>
                                 </div>
                               </div>
-                              <div class="col-md-3">
+                              <div class="col-md-4">
                                 <div class="body table-responsive">
                                     <table class="table table-bordered modal-table1" style="border: #5a5a5a">
                                       <thead>
