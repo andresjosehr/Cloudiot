@@ -344,7 +344,7 @@ class InstalacionesController extends Controller{
             }
 
 
-            if ($instalaciones->id==2){
+            if ($instalaciones->id==2 || $instalaciones->id==4 ){
                 return view("modals.modal2", ["Instalacion" => $instalaciones]);
             }
 

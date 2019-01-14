@@ -42,11 +42,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => "45.7.228.248",
             'port' => env('DB_PORT', '3306'),
             'database' => 'cloudiot',
-            'username' => 'root',
-            'password' => "",
+            'username' => 'andres',
+            'password' => "Paralelepipe2",
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
