@@ -32,6 +32,8 @@
     <!-- Bootstrap Material Datetime Picker Css -->
     <link href="plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="rpm/css/style.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

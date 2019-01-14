@@ -28,7 +28,7 @@
                           </div>
                         </div>
                         <hr style=" color: black">  
-                        <div class="modal-body">
+                        <div class="modal-body table-custom">
                             <div class="row" align="center">
                                     <div class="col-md-3">
                                     	<h4 align="left" style="color:black;padding-left: 3%;">Flujos</h4>
@@ -36,29 +36,49 @@
 						                            <table class="table table-striped">
 						                                <thead>
 						                                    <tr>
-						                                        <th>Fecha / Hora</th>
-						                                        <th>Litros</th>
+						                                        <th style="text-align: center;">Fecha</div></th>
+						                                        <th style="text-align: center;">Hrs&nbsp;Op.</th>
+						                                        <th style="text-align: center;">m3</th>
+						                                        <th style="text-align: center;">Bombas</th>
 						                                    </tr>
 						                                </thead>
-						                                <tbody>
+						                                <tbody align="center">
 						                                    <tr>
-						                                        <td>2019-01-10</td>
+						                                        <td>01-10</td>
 						                                        <td>50</td>
+						                                        <td>1.245</td>
+						                                        <td>
+																										<i class="material-icons btn-bomba">add_circle</i>
+																										<i class="material-icons btn-bomba">add_circle</i>
+																										<i class="material-icons btn-bomba">add_circle</i>
+						                                        </td>
 						                                    </tr>
 						                                    <tr>
-						                                        <td>2019-01-8</td>
-						                                        <td>600</td>
+						                                        <td>01-10</td>
+						                                        <td>50</td>
+						                                        <td>1.245</td>
+						                                        <td>
+							                                        <i class="material-icons btn-bomba">add_circle</i>
+							                                        <i class="material-icons btn-bomba">add_circle</i>
+							                                        <i class="material-icons btn-bomba">add_circle</i>
+										                              	</td>
 						                                    </tr>
 						                                    <tr>
-						                                        <td>2019-01-5</td>
-						                                        <td>100</td>
+						                                        <td>01-10</td>
+						                                        <td>50</td>
+						                                        <td>1.245</td>
+						                                        <td>
+						                                        <i class="material-icons btn-bomba">add_circle</i>
+						                                        <i class="material-icons btn-bomba">add_circle</i>
+						                                        <i class="material-icons btn-bomba">add_circle</i>
+						                                        </td>
 						                                    </tr>
 						                                </tbody>
 						                            </table>
 						                        	</div>
                                     </div>
                                     <div class="col-md-3">
-                                    	<h4 align="left" style="color:black;padding-left: 3%;">Indicadores Clave</h4>
+                                    	<h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
                                     	<div class="body table-responsive">
 						                            <table class="table table-striped">
 						                                <thead>
@@ -85,39 +105,20 @@
 						                        	</div>
                                     </div>
                                     <div class="col-md-3">
-                                    	<h4 align="left" style="color:black;padding-left: 3%;">PH</h4>
-                                    	<div class="body table-responsive">
-						                            <table class="table table-striped">
-						                                <thead>
-						                                    <tr>
-						                                        <th>Fecha / Hora</th>
-						                                        <th>Litros</th>
-						                                    </tr>
-						                                </thead>
-						                                <tbody>
-						                                    <tr>
-						                                        <td>2019-01-10</td>
-						                                        <td>50</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>2019-01-8</td>
-						                                        <td>600</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>2019-01-5</td>
-						                                        <td>100</td>
-						                                    </tr>
-						                                </tbody>
-						                            </table>
-						                        	</div>
+                                    	<h4 align="left" style="color:black;padding-left: 3%;"></h4>
                                     </div>
                                     <div class="col-md-3">
-																			<button class="btn btn-primary btn-block">Bomba 1</button>
+																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 1</button>
+																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 2</button>
+																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 3</button>
+																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 4</button>
+																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 5</button>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6" align="center"><canvas id="myChart0" height="70"></canvas></div>
-                                <div class="col-md-6" align="center"><canvas id="myChart1" height="70"></canvas></div>
+                                <div class="col-md-3" align="center"><canvas id="gauge"></canvas></div>
+                                <div class="col-md-3" align="center"><canvas id="myChart1" height="140"></canvas></div>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -128,6 +129,15 @@
             </div>
 
             <style>
+
+            div .btn-bomba{
+    					color: #2b982b !important;
+    					font-size: 13px;
+						}
+						.boton-bombas{
+							width: 9px;
+    					height: 16px;
+						}						
 
                 .tabla-titulo{
                       background: #cccccc;
@@ -171,6 +181,10 @@
 
                   .table tbody tr td, .table tbody tr th {
    								 padding: 5px;
+  								}
+
+  								.table-custom table{
+  									font-size: 13px;
   								}
 
             </style>
@@ -218,3 +232,6 @@
                     }
                     $(".loader-insta").css("display", "none");
             </script>
+
+
+<script  src="rpm/js/index.js"></script>
