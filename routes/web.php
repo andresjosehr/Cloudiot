@@ -35,3 +35,8 @@ Route::get('Prueba', ['middleware' => 'verificar_login', function () {
 	return view("loader.index");
     
 }]);
+
+
+Route::post('SicutIgnisController','SicutIgnisController@index');
+Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index');
+Route::post('PlantaLicanController','PlantaLicanController@index');

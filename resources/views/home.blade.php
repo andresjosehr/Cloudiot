@@ -79,7 +79,7 @@
 
 (function(){
 
-  function Marcador(lon, lat, id) {
+  function Marcador(lon, lat, id, controlador) {
     var vectorSource = new ol.source.Vector({
       //create empty vector
     });
@@ -90,6 +90,7 @@
           geometry: new  
           ol.geom.Point([lon, lat]),
           name: id,
+          controlador: controlador,
           population: 4000,
           rainfall: 500
         });
@@ -122,7 +123,7 @@
     
 
     var map = new ol.Map({
-      layers: [new ol.layer.Tile({ source: new ol.source.OSM() }), @foreach ($Instalaciones as $Instalacion) Marcador({{ $Instalacion->longitud }}, {{ $Instalacion->latitud }}, {{ $Instalacion->id }}), @endforeach ],
+      layers: [new ol.layer.Tile({ source: new ol.source.OSM() }), @foreach ($Instalaciones as $Instalacion) Marcador({{ $Instalacion->longitud }}, {{ $Instalacion->latitud }}, {{ $Instalacion->id }}, "{{ $Instalacion->controlador }}"),  @endforeach ],
       target: document.getElementById('map'),
       view: new ol.View({
       center: [-71.148302, -34.078780],
@@ -152,9 +153,11 @@
                 });
 
                 $(".loader-insta").css("display", "block");
-                var id    = feature.values_.name;
-                var url   = "<?php echo Request::root() ?>/ConsultaInstalacion";
-                var datos = $('#consulta-form').serialize();
+                var id             = feature.values_.name;
+                var controlador    = feature.values_.controlador;
+                var url            = "<?php echo Request::root() ?>/"+controlador;
+                var datos          = $('#consulta-form').serialize();
+
                 $("#contenedor").load(url, {id: id, tabla_asociada: tabla_instalacion_asociada});
 
 
