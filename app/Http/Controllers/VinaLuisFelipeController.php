@@ -15,6 +15,6 @@ class VinaLuisFelipeController extends Controller{
 												->where("id", $id)
 													->first();
 
-    	return view("modals.modal2", ["Instalacion" => $instalaciones]);
+    	return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones]);
     }
 }

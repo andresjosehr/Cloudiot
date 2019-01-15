@@ -46,10 +46,12 @@ class SicutIgnisController extends Controller{
 
 
 
-
-
                       $fecha = DB::connection('telemetria')
                                     ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActIny' ORDER BY mt_time DESC LIMIT 1");
+
+
+
+                                  
 
                                 $date= $fecha[0]->mt_time; 
                                 $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
@@ -241,27 +243,7 @@ class SicutIgnisController extends Controller{
                                                                  ->get();
 
                                       
-                                      $FaseA = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.CorrienteFaseA")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
-                                      
 
-                                      
-                                      $FaseB = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.CorrienteFaseB")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
-                                      
-
-                                      
-                                      $FaseC = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.CorrienteFaseC")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
 
 
                                       $UltimaMedicion = DB::connection('telemetria')
@@ -309,9 +291,6 @@ class SicutIgnisController extends Controller{
 
 
                                      $Datos["UltimaMedicion"] = $UltimaMedicion->mt_time;
-                                     $Datos["FaseA"] = $FaseA->mt_value;
-                                     $Datos["FaseB"] = $FaseB->mt_value;
-                                     $Datos["FaseC"] = $FaseC->mt_value;
                                       $Datos["VoltajeDeLineaAB"]       = $VoltajeDeLineaAB->mt_value;
                                       $Datos["VoltajeDeLineaBC"]       = $VoltajeDeLineaBC->mt_value;
                                       $Datos["VoltajeDeLineaCA"]       = $VoltajeDeLineaCA->mt_value;
@@ -331,6 +310,6 @@ class SicutIgnisController extends Controller{
                                      $Datos["FactorPotenciaC"]           =   abs($FactorPotenciaC[0]->mt_value - $FactorPotenciaC[count($FactorPotenciaC)-1]->mt_value);
                                      $Datos["FactorPotenciaTotal"]       =   abs($FactorPotenciaTotal[0]->mt_value - $FactorPotenciaTotal[count($FactorPotenciaTotal)-1]->mt_value);
 
-                                     return view("modals.modal", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
+                                     return view("SicutIgnis.modal", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
     }
 }

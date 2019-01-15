@@ -28,13 +28,58 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">Instalaciones Asignadas</li>
-
-                        @foreach($Instalaciones as $Instalacion)
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">widgets</i>
-                                <span>{{ $Instalacion->nombre }}</span>
+                        @if ($Usuario->rol==1)
+                        <li>
+                            <a href="panel-de-control" class=" waves-effect waves-block">
+                                <i class="material-icons">home</i>
+                                <span>Panel de control</span>
                             </a>
-                        @endforeach
+                        </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">person_pin</i>
+                                    <span>Usuarios</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="registrar-usuario/">
+                                            <span>Registrar Usuario</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span>Lista de Usuarios</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">location_city</i>
+                                    <span>Instalaciones</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="#">
+                                            <span>Registrar Instalacion</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span>Editar Instalaciones</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        @if (Request::segment(1)=="panel-de-control")
+                                @foreach($Instalaciones as $Instalacion)
+                                <a href="javascript:void(0);" >
+                                  <span>{{ $Instalacion->nombre }}</span>
+                                </a>
+                            @endforeach
+                        @endif
                 </ul>
             </div>
             <!-- #Menu -->

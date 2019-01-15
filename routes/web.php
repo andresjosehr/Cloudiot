@@ -17,6 +17,10 @@ Auth::routes();
 
 Route::get('panel-de-control','InstalacionesController@index')->middleware("verificar_login");
 
+Route::get('registrar-usuario', function (){
+	return view("usuarios.registrar", ["Usuario" => Auth::user()]);
+})->middleware("verificar_login");
+
 Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal');
 
 // Route::get('Prueba','PruebaController@index')->name("Prueba");
@@ -30,11 +34,9 @@ Route::get('/home', function (){
 
 
 
-Route::get('Prueba', ['middleware' => 'verificar_login', function () {
 
-	return view("loader.index");
-    
-}]);
+
+Route::get('Prueba', "PruebaController@index");
 
 
 Route::post('SicutIgnisController','SicutIgnisController@index');
