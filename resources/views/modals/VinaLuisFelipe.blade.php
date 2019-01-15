@@ -142,40 +142,96 @@
                                             </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="bomba2">
-                                            <b>Profile Content</b>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                                sadipscing mel.
-                                            </p>
+                                            <b>Bomba 2</b>
+                                            <div class="row">
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">check</i>
+                                                </button>
+                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">error_outline</i>
+                                                </button>
+                                                <br>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-red waves-effect">
+                                                    <i class="material-icons">report_problem</i>
+                                                    <span>Error</span>
+                                                </button>
+                                              </div>
+                                            </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="bomba3">
-                                            <b>Message Content</b>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                                sadipscing mel.
-                                            </p>
+                                            <b>Bomba 3</b>
+                                            <div class="row">
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">check</i>
+                                                </button>
+                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">error_outline</i>
+                                                </button>
+                                                <br>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-red waves-effect">
+                                                    <i class="material-icons">report_problem</i>
+                                                    <span>Error</span>
+                                                </button>
+                                              </div>
+                                            </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="bomba4">
-                                            <b>Settings Content</b>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                                sadipscing mel.
-                                            </p>
+                                            <b>Bomba 4</b>
+                                            <div class="row">
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">check</i>
+                                                </button>
+                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">error_outline</i>
+                                                </button>
+                                                <br>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-red waves-effect">
+                                                    <i class="material-icons">report_problem</i>
+                                                    <span>Error</span>
+                                                </button>
+                                              </div>
+                                            </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="bomba5">
-                                            <b>Message Content</b>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                                sadipscing mel.
-                                            </p>
+                                            <b>Bomba 5</b>
+                                            <div class="row">
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">check</i>
+                                                </button>
+                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">error_outline</i>
+                                                </button>
+                                                <br>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <button type="button" class="btn bg-red waves-effect">
+                                                    <i class="material-icons">report_problem</i>
+                                                    <span>Error</span>
+                                                </button>
+                                              </div>
+                                            </div>
                                         </div>
                                       </div>
                                     </div>
