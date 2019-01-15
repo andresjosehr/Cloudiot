@@ -29,233 +29,280 @@
                         </div>
                         <hr style=" color: black">  
                         <div class="modal-body table-custom">
-                            <div class="row" align="center">
-                                    <div class="col-md-3">
-                                    	<h4 align="left" style="color:black;padding-left: 3%;">Flujos</h4>
-                                    	<div class="body table-responsive">
-						                            <table class="table table-striped">
-						                                <thead>
-						                                    <tr>
-						                                        <th style="text-align: center;">Fecha</div></th>
-						                                        <th style="text-align: center;">Hrs&nbsp;Op.</th>
-						                                        <th style="text-align: center;">m3</th>
-						                                        <th style="text-align: center;">Bombas</th>
-						                                    </tr>
-						                                </thead>
-						                                <tbody align="center">
-						                                    <tr>
-						                                        <td>01-10</td>
-						                                        <td>50</td>
-						                                        <td>1.245</td>
-						                                        <td>
-																										<i class="material-icons btn-bomba">add_circle</i>
-																										<i class="material-icons btn-bomba">add_circle</i>
-																										<i class="material-icons btn-bomba">add_circle</i>
-						                                        </td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>01-10</td>
-						                                        <td>50</td>
-						                                        <td>1.245</td>
-						                                        <td>
-							                                        <i class="material-icons btn-bomba">add_circle</i>
-							                                        <i class="material-icons btn-bomba">add_circle</i>
-							                                        <i class="material-icons btn-bomba">add_circle</i>
-										                              	</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>01-10</td>
-						                                        <td>50</td>
-						                                        <td>1.245</td>
-						                                        <td>
-						                                        <i class="material-icons btn-bomba">add_circle</i>
-						                                        <i class="material-icons btn-bomba">add_circle</i>
-						                                        <i class="material-icons btn-bomba">add_circle</i>
-						                                        </td>
-						                                    </tr>
-						                                </tbody>
-						                            </table>
-						                        	</div>
-                                    </div>
-                                    <div class="col-md-3">
-                                    	<h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
-                                    	<div class="body table-responsive">
-						                            <table class="table table-striped">
-						                                <thead>
-						                                    <tr>
-						                                        <th>Fecha / Hora</th>
-						                                        <th>Litros</th>
-						                                    </tr>
-						                                </thead>
-						                                <tbody>
-						                                    <tr>
-						                                        <td>Flujo Promedio</td>
-						                                        <td>5000</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>Flujo minimo</td>
-						                                        <td>5000</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>Flujo Maximo</td>
-						                                        <td>5000</td>
-						                                    </tr>
-						                                </tbody>
-						                            </table>
-						                        	</div>
-                                    </div>
-                                    {{-- <div class="col-md-3">
-																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 1</button>
-																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 2</button>
-																			<button class="btn btn-primary btn-block" style="width: 60%;">Bomba 3</button>
-                                    </div> --}}
-                                    <div class="col-md-6">
-                                      <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                          <li role="presentation" class="active"><a href="#bomba1" data-toggle="tab">Bomba 1</a></li>
-                                          <li role="presentation"><a href="#bomba2" data-toggle="tab">Bomba 2</a></li>
-                                          <li role="presentation"><a href="#bomba3" data-toggle="tab">Bomba 3</a></li>
-                                          <li role="presentation"><a href="#bomba4" data-toggle="tab">Bomba 4</a></li>
-                                          <li role="presentation"><a href="#bomba5" data-toggle="tab">Bomba 5</a></li>
-                                      </ul>
-                                      <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="bomba1">
-                                            <b>Bomba 1</b>
-                                            <div class="row">
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">check</i>
-                                                </button>
-                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">error_outline</i>
-                                                </button>
-                                                <br>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-red waves-effect">
-                                                    <i class="material-icons">report_problem</i>
-                                                    <span>Error</span>
-                                                </button>
-                                              </div>
-                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             <div class="row">
+                               <div class="col-md-6">
+                                 <div class="row">
+                                   <div class="col-md-6">    
+                                      <h4 align="left" style="color:black;padding-left: 3%;">Flujos</h4>
+                                      <div class="body table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center;">Fecha</div></th>
+                                                    <th style="text-align: center;">Hrs&nbsp;Op.</th>
+                                                    <th style="text-align: center;">m3</th>
+                                                    <th style="text-align: center;">Bombas</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody align="center">
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>01-10</td>
+                                                    <td>50</td>
+                                                    <td>1.245</td>
+                                                    <td>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    <i class="material-icons btn-bomba">add_circle</i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                      </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                      <h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
+                                      <div class="body table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha / Hora</th>
+                                                    <th>Litros</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Flujo Promedio</td>
+                                                    <td>5000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Flujo minimo</td>
+                                                    <td>5000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Flujo Maximo</td>
+                                                    <td>5000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                      </div>
+                                   </div>
+                                   <div class="col-md-12">
+                                     <div class="col-md-8" align="center">
+                                      <div class="row">
+                                         <div class="col-md-3">
+                                           Bomba 1
+                                         </div>
+                                        <div class="col-md-1">
+                                          <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
+                                              <i class="material-icons">check</i>
+                                          </button>
+                                          <br>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="bomba2">
-                                            <b>Bomba 2</b>
-                                            <div class="row">
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">check</i>
-                                                </button>
-                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">error_outline</i>
-                                                </button>
-                                                <br>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-red waves-effect">
-                                                    <i class="material-icons">report_problem</i>
-                                                    <span>Error</span>
-                                                </button>
-                                              </div>
-                                            </div>
+                                        <div class="col-md-3">
+                                          <span class="badge bg-red">No Operativa</span>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="bomba3">
-                                            <b>Bomba 3</b>
-                                            <div class="row">
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">check</i>
-                                                </button>
-                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">error_outline</i>
-                                                </button>
-                                                <br>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-red waves-effect">
-                                                    <i class="material-icons">report_problem</i>
-                                                    <span>Error</span>
-                                                </button>
-                                              </div>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="bomba4">
-                                            <b>Bomba 4</b>
-                                            <div class="row">
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">check</i>
-                                                </button>
-                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">error_outline</i>
-                                                </button>
-                                                <br>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-red waves-effect">
-                                                    <i class="material-icons">report_problem</i>
-                                                    <span>Error</span>
-                                                </button>
-                                              </div>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="bomba5">
-                                            <b>Bomba 5</b>
-                                            <div class="row">
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">check</i>
-                                                </button>
-                                                <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">error_outline</i>
-                                                </button>
-                                                <br>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <span class="badge bg-red" style="margin-top: 12px;">No Operativa</span>
-                                              </div>
-                                              <div class="col-md-4">
-                                                <button type="button" class="btn bg-red waves-effect">
-                                                    <i class="material-icons">report_problem</i>
-                                                    <span>Error</span>
-                                                </button>
-                                              </div>
-                                            </div>
+                                        <div class="col-md-3">
+                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
+                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
+                                              <span class="custom-error">Error</span>
+                                          </button>
                                         </div>
                                       </div>
-                                    </div>
-                            </div>
+                                      <div class="row">
+                                         <div class="col-md-3">
+                                           Bomba 2
+                                         </div>
+                                        <div class="col-md-1">
 
-                            <div class="row">
+                                          <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                              <i class="material-icons">error_outline</i>
+                                          </button>
+                                          <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <span class="badge bg-green">Operativa</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
+                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
+                                              <span class="custom-error">Error</span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                         <div class="col-md-3">
+                                           Bomba 3
+                                         </div>
+                                        <div class="col-md-1">
+                                          <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
+                                              <i class="material-icons">check</i>
+                                          </button>
+                                          <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <span class="badge bg-red">No Operativa</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
+                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
+                                              <span class="custom-error">Error</span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                         <div class="col-md-3">
+                                           Bomba 4
+                                         </div>
+                                        <div class="col-md-1">
+                                          <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                              <i class="material-icons">error_outline</i>
+                                          </button>
+                                          <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <span class="badge bg-green">Operativa</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
+                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
+                                              <span class="custom-error">Error</span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                         <div class="col-md-3">
+                                           Bomba 5
+                                         </div>
+                                        <div class="col-md-1">
+                                          <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                              <i class="material-icons">error_outline</i>
+                                          </button>
+                                          <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <span class="badge bg-green">Operativa</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
+                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
+                                              <span class="custom-error">Error</span>
+                                          </button>
+                                        </div>
+                                      </div>
 
-                              <div class="col-md-6">
-                                <div class="row" style="height: 253px;">
-                                  
-                                </div>
-                                <div class="row">
-                                 <div class="col-md-12" align="center">
-                                   <canvas id="myChart0" height="70"></canvas>
+
+
+                                     </div>
+                                   </div>
                                  </div>
-                                </div>
-                              </div>
+                               </div>
+                               <div class="col-md-6">
+
+                                 <canvas id="myChart0" height="50"></canvas>
 
 
-                              <div class="col-md-6">
+                               </div>
+                               <div class="col-md-6">
                                 <div class="row">
                                   <div class="col-md-4">
                                     <div class="row">
+                                      <p align="center"><b>PH</b></p>
                                       <div class="col-md-12">
+                                        <b class="vertical">Entrada</b>
                                         <canvas id="gauge0"></canvas>
                                       </div>
                                       <div class="col-md-12 chart-lfe">
@@ -265,6 +312,7 @@
                                   </div>
                                   <div class="col-md-4">
                                     <div class="row">
+                                      <p><b align="center">ORP</b></p>
                                       <div class="col-md-12">
                                         <canvas id="gauge1"></canvas>
                                       </div>
@@ -275,6 +323,7 @@
                                   </div>
                                   <div class="col-md-4">
                                     <div class="row">
+                                      <p align="center"><b>Conductividad</b></p>
                                       <div class="col-md-12">
                                         <canvas id="gauge2"></canvas>
                                       </div>
@@ -288,6 +337,7 @@
                                   <div class="col-md-4">
                                     <div class="row">
                                       <div class="col-md-12">
+                                        <b class="vertical">Salida</b>
                                         <canvas id="gauge3"></canvas>
                                       </div>
                                       <div class="col-md-12 chart-lfe">
@@ -317,7 +367,9 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                             </div>
+
+
 
 
                         </div>
@@ -329,6 +381,34 @@
             </div>
 
             <style>
+
+            .btn_error_custom{
+              padding: 2px 12px;
+            }
+
+            .ico_error_custom{
+              font-size: 15px;
+            }
+
+            .custom-error{
+                  font-size: 10px;
+            }
+            
+            .circle-custom{
+              width: 20px;
+              height: 20px;
+            }
+            .circle-custom i{
+              font-size: 13px !important;
+              left: -6.5px !important;
+              top: -2px !important;
+            }
+              
+            .vertical {
+                writing-mode: vertical-lr;
+                transform: rotate(180deg);
+                position: absolute;
+            }
 
             .chart-lfe{
               margin-top: -45px;

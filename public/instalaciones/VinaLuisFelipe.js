@@ -1,10 +1,20 @@
+var valor = [];
+
+valor[0]="PH";
+valor[1]="OPR";
+valor[2]="Conductividad";
+valor[3]="PH";
+valor[4]="OPR";
+valor[5]="Conductividad";
+
+
 for (var i = 0; i <= 5; i++) {
 
 var gauge = new RadialGauge({
     renderTo: 'gauge'+i,
-    width: 150,
-    height: 150,
-    units: "Flujos",
+    width: 115,
+    height: 115,
+    units: valor[i],
     value: 35,
     minValue: 0,
     startAngle: 90,
