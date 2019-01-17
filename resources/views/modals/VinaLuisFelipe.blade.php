@@ -7,6 +7,7 @@
                         <div class="modal-header">
                           <div class="row">
                             <div class="col-md-2">
+                              <p id="contenedorLFE"></p>
                               <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                             </div>
                             <div class="col-md-3">
@@ -29,30 +30,6 @@
                         </div>
                         <hr style=" color: black">  
                         <div class="modal-body table-custom">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                              <div class="row">
                                <div class="col-md-6">
                                  <div class="row">
@@ -301,11 +278,17 @@
                                   <div class="col-md-4">
                                     <div class="row">
                                       <p align="center"><b>PH</b></p>
-                                      <div class="col-md-12">
+                                      <div class="col-md-12" id="rpm-0">
+                                        <div class="loading"></div>
                                         <b class="vertical">Entrada</b>
-                                        <canvas id="gauge0"></canvas>
+                                        <div>
+                                          <img src="images/rpm.png" class="img-rpm-lfe">
+                                          <canvas id="gauge0"></canvas>
+                                        </div>
                                       </div>
-                                      <div class="col-md-12 chart-lfe">
+                                      <div class="col-md-12 chart-lfe" id="chart-lfe1">
+                                        <div class="loading"></div>
+                                        <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                         <canvas id="myChart1" height="140"></canvas>
                                       </div>
                                     </div>
@@ -313,10 +296,16 @@
                                   <div class="col-md-4">
                                     <div class="row">
                                       <p><b align="center">ORP</b></p>
-                                      <div class="col-md-12">
-                                        <canvas id="gauge1"></canvas>
+                                      <div class="col-md-12" id="rpm-1">
+                                        <div class="loading"></div>
+                                        <div>
+                                          <img src="images/rpm.png" class="img-rpm-lfe">
+                                          <canvas id="gauge1"></canvas>
+                                        </div>
                                       </div>
-                                      <div class="col-md-12 chart-lfe">
+                                      <div class="col-md-12 chart-lfe" id="chart-lfe2">
+                                        <div class="loading"></div>
+                                        <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                         <canvas id="myChart2" height="140"></canvas>
                                       </div>
                                     </div>
@@ -324,10 +313,16 @@
                                   <div class="col-md-4">
                                     <div class="row">
                                       <p align="center"><b>Conductividad</b></p>
-                                      <div class="col-md-12">
-                                        <canvas id="gauge2"></canvas>
+                                      <div class="col-md-12" id="rpm-2">
+                                        <div class="loading"></div>
+                                        <div>
+                                          <img src="images/rpm.png" class="img-rpm-lfe">
+                                          <canvas id="gauge2"></canvas>
+                                        </div>
                                       </div>
-                                      <div class="col-md-12 chart-lfe">
+                                      <div class="col-md-12 chart-lfe" id="chart-lfe3">
+                                        <div class="loading"></div>
+                                        <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                         <canvas id="myChart3" height="140"></canvas>
                                       </div>
                                     </div>
@@ -336,31 +331,49 @@
                                 <div class="row">
                                   <div class="col-md-4">
                                     <div class="row">
-                                      <div class="col-md-12">
+                                      <div class="col-md-12" id="rpm-3">
                                         <b class="vertical">Salida</b>
-                                        <canvas id="gauge3"></canvas>
+                                        <div class="loading"></div>
+                                        <div>
+                                          <img src="images/rpm.png" class="img-rpm-lfe">
+                                          <canvas id="gauge3"></canvas>
+                                        </div>
                                       </div>
-                                      <div class="col-md-12 chart-lfe">
+                                      <div class="col-md-12 chart-lfe" id="chart-lfe4">
+                                        <div class="loading"></div>
+                                        <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                         <canvas id="myChart4" height="140"></canvas>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="col-md-4">
                                     <div class="row">
-                                      <div class="col-md-12">
-                                        <canvas id="gauge4"></canvas>
+                                      <div class="col-md-12" id="rpm-4">
+                                        <div class="loading"></div>
+                                        <div>
+                                          <img src="images/rpm.png" class="img-rpm-lfe">
+                                          <canvas id="gauge4"></canvas>
+                                        </div>
                                       </div>
-                                      <div class="col-md-12 chart-lfe">
+                                      <div class="col-md-12 chart-lfe" id="chart-lfe5">
+                                        <div class="loading"></div>
+                                        <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                         <canvas id="myChart5" height="140"></canvas>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="col-md-4">
                                     <div class="row">
-                                      <div class="col-md-12">
-                                        <canvas id="gauge5"></canvas>
+                                      <div class="col-md-12" id="rpm-5">
+                                        <div class="loading"></div>
+                                        <div>
+                                          <img src="images/rpm.png" class="img-rpm-lfe">
+                                          <canvas id="gauge5"></canvas>
+                                        </div>
                                       </div>
-                                      <div class="col-md-12 chart-lfe">
+                                      <div class="col-md-12 chart-lfe" id="chart-lfe6">
+                                        <div class="loading"></div>
+                                        <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                         <canvas id="myChart6" height="140"></canvas>
                                       </div>
                                     </div>
@@ -368,10 +381,6 @@
                                 </div>
                               </div>
                              </div>
-
-
-
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
@@ -380,8 +389,24 @@
                 </div>
             </div>
 
-            <style>
 
+        
+            <style>
+            .img-chart-lfe{
+              width: 95%;
+            }
+            .cargando{
+              filter: blur(4px);
+            }
+
+            #rpm-0 canvas, #rpm-1 canvas, #rpm-2 canvas, #rpm-3 canvas, #rpm-4 canvas, #rpm-5 canvas, #myChart1, #myChart2, #myChart3, #myChart4, #myChart5, #myChart6{
+              display: none;
+            }
+            .img-rpm-lfe{
+              margin-bottom: -12px;
+            }
+
+            
             .btn_error_custom{
               padding: 2px 12px;
             }
@@ -411,7 +436,7 @@
             }
 
             .chart-lfe{
-              margin-top: -45px;
+              margin-top: -30px;
             }
 
             div .btn-bomba{
@@ -471,8 +496,49 @@
   									font-size: 13px;
   								}
 
+                  .loading{
+                          width: 35px;
+                          height: 35px;
+                          border-radius:150px;
+                          border:6px solid #797979;
+                          border-top-color:rgba(0,0,0,0.3);
+                          box-sizing:border-box;
+                          position:absolute;
+                          top: 99%;
+                          left: 76%;
+                          margin-top:-80px;
+                          margin-left:-80px;
+                          animation:loading 1.2s linear infinite;
+                          -webkit-animation:loading 1.2s linear infinite;
+                          z-index: 1;
+                        }
+                        @keyframes loading{
+                          0%{transform:rotate(0deg)}
+                          100%{transform:rotate(360deg)}
+                        }
+                        @-webkit-keyframes loading{
+                          0%{-webkit-transform:rotate(0deg)}
+                          100%{-webkit-transform:rotate(360deg)}
+                        }
+
+
             </style>
 
 
 
+
 <script  src="instalaciones/VinaLuisFelipe.js"></script>
+
+<script>
+
+
+
+
+
+var instalacion_info=<?php echo json_encode($Instalacion); ?>;
+
+var url = "<?php echo Request::root() ?>/CalculosLuisFelipe";  
+
+ $("#contenedorLFE").load(url, {instalacion: instalacion_info});
+
+</script>

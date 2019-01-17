@@ -1,90 +1,85 @@
-var valor = [];
-
-valor[0]="PH";
-valor[1]="OPR";
-valor[2]="Conductividad";
-valor[3]="PH";
-valor[4]="OPR";
-valor[5]="Conductividad";
 
 
-for (var i = 0; i <= 5; i++) {
-
-var gauge = new RadialGauge({
-    renderTo: 'gauge'+i,
-    width: 115,
-    height: 115,
-    units: valor[i],
-    value: 35,
-    minValue: 0,
-    startAngle: 90,
-    ticksAngle: 180,
-    valueBox: false,
-    maxValue: 100,
-    majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100",
-    ],
-    minorTicks: 2,
-    strokeTicks: true,
-    highlights: [
-        {
-          "from": 0,
-          "to": 30,
-          "color": "rgba(100, 255, 100, .2)"
-        },
-        {
-          "from": 30,
-          "to": 70,
-          "color": "rgba(220, 200, 0, .75)"
-        },
-        {
-            "from": 70,
-            "to": 100,
-            "color": "rgba(200, 50, 50, .75)"
-        }
-    ],
-    colorPlate: "#fff",
-    borderShadowWidth: 0,
-    borders: false,
-    needleType: "arrow",
-    needleWidth: 5,
-    needleCircleSize: 2,
-    needleCircleOuter: true,
-    needleCircleInner: false,
-    animationDuration: 1500,
-    animationRule: "linear"
-}).draw();
 
 
-setInterval(function() {
-  
-  // update the above chart...
-  var value = 50;
-  gauge.value = value;
-  
-  // Update the declarative chart...
-  document.getElementById("gauge-a"+i).setAttribute("data-value", value);
-}, 1800);
-
+function EstoEsUnAlert() {
+    alert();
 }
 
 
-$( ".display-modal" ).click();
 
-                      for (var i = 0; i <= 6; i++) {
-                      var ctx = document.getElementById("myChart"+i).getContext('2d');
-                    var myChart = new Chart(ctx, {
+function RPM(tipo, valor, id, gaugecanvas) {
+
+
+$("p").css("display", "block");
+
+        var gauge = new RadialGauge({
+            renderTo: id,
+            width: 115,
+            height: 115,
+            units: tipo,
+            value: valor,
+            minValue: 0,
+            startAngle: 90,
+            ticksAngle: 180,
+            valueBox: false,
+            maxValue: 100,
+            majorTicks: [
+                "0",
+                "20",
+                "40",
+                "60",
+                "80",
+                "100",
+            ],
+            minorTicks: 2,
+            strokeTicks: true,
+            highlights: [
+                {
+                  "from": 0,
+                  "to": 30,
+                  "color": "rgba(100, 255, 100, .2)"
+                },
+                {
+                  "from": 30,
+                  "to": 70,
+                  "color": "rgba(220, 200, 0, .75)"
+                },
+                {
+                    "from": 70,
+                    "to": 100,
+                    "color": "rgba(200, 50, 50, .75)"
+                }
+            ],
+            colorPlate: "#fff",
+            borderShadowWidth: 0,
+            borders: false,
+            needleType: "arrow",
+            needleWidth: 5,
+            needleCircleSize: 2,
+            needleCircleOuter: true,
+            needleCircleInner: false,
+            animationDuration: 1500,
+            animationRule: "linear"
+        }).draw();
+
+        $("#"+gaugecanvas+" canvas").css("display", "block");
+        $("#"+gaugecanvas+" img").css("display", "none");
+        $("#"+gaugecanvas+" .loading").css("display", "none");
+}
+
+
+function Graficos(divcanvas, chartcanvas, mt_value) {
+
+
+                      var ctx = document.getElementById(chartcanvas).getContext('2d');
+                        var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: [],
                             datasets: [{
                                 label: '',
-                                data: [12, 19, 3, 5, 2, 3],
+                                data: mt_value,
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -114,5 +109,12 @@ $( ".display-modal" ).click();
                             }
                         }
                     });
-                 }
-                    $(".loader-insta").css("display", "none");
+
+                    $("#"+divcanvas+" .loading").css("display", "none");
+                    $("#"+divcanvas+" img").css("display", "none");
+                    $("#"+chartcanvas).css("display", "block");
+}
+
+
+                 $( ".display-modal" ).click();
+                 $(".loader-insta").css("display", "none");
