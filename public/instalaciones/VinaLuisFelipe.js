@@ -115,6 +115,49 @@ function Graficos(divcanvas, chartcanvas, mt_value) {
                     $("#"+chartcanvas).css("display", "block");
 }
 
+function Bombas(Operativa, ErrorBomba) {
+
+    for (var i = 0; i <= 4; i++) {
+
+        $( ".bomba"+i+"-op" ).removeClass("bg-green");
+        $( ".bomba"+i+"-op" ).removeClass("bg-red");
+        $( ".btn-bomba-error"+i ).removeClass("bg-red");
+        $( ".btncasc"+i ).removeClass("bg-green");
+        $( ".btncasc"+i ).removeClass("bg-red");
+        $( ".bomba"+i+"-op" ).empty();
+        $( ".bomba"+i+"-op-btn" ).empty(); 
+        $( ".texto-error"+i ).empty();
+
+        if (Operativa[i]=="Operativa") {
+            $( ".bomba"+i+"-op" ).addClass("bg-green");
+            $( ".bomba"+i+"-op" ).text("Operativa");
+            $( ".bomba"+i+"-op-btn" ).text("error_outline");
+            $( ".btncasc"+i ).addClass("bg-red");
+        } else{
+            $( ".bomba"+i+"-op" ).addClass("bg-red");
+            $( ".bomba"+i+"-op" ).text("No Operativa");
+            $( ".bomba"+i+"-op-btn" ).text("check");
+            $( ".btncasc"+i ).addClass("bg-green");
+        }
+
+        if (ErrorBomba=="Error") {
+            $( ".btn-bomba-error"+i ).addClass("bg-red");
+            $( ".texto-error"+i ).text("Error");
+        } else{
+            $( ".btn-bomba-error"+i ).addClass("bg-green");
+            $( ".texto-error"+i ).text("Sin Error");
+        }
+        
+
+    }
+
+    $( ".bombas-cargando" ).removeClass("cargando");
+
+    $( ".loading-bomba" ).css("display", "none");
+
+    
+}
+
 
                  $( ".display-modal" ).click();
                  $(".loader-insta").css("display", "none");

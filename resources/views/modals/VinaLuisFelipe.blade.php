@@ -159,105 +159,103 @@
                                    </div>
                                    <div class="col-md-12">
                                      <div class="col-md-8" align="center">
-                                      <div class="row">
-                                         <div class="col-md-3">
-                                           Bomba 1
-                                         </div>
-                                        <div class="col-md-1">
-                                          <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
-                                              <i class="material-icons">check</i>
-                                          </button>
-                                          <br>
+                                      <div class="loading-bomba"></div>
+                                      <div class="cargando bombas-cargando">
+                                        <div class="row">
+                                           <div class="col-md-3">
+                                             Bomba 1
+                                           </div>
+                                          <div class="col-md-1">
+                                            <button type="button" class="btncasc0 btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
+                                                <i class="material-icons bomba0-op-btn">check</i>
+                                            </button>
+                                            <br>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <span class="badge bg-red bomba0-op">No Operativa</span>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn-bomba-error0 btn bg-red waves-effect btn_error_custom">
+                                                <span class="custom-error texto-error0">Error</span>
+                                            </button>
+                                          </div>
                                         </div>
-                                        <div class="col-md-3">
-                                          <span class="badge bg-red">No Operativa</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
-                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
-                                              <span class="custom-error">Error</span>
-                                          </button>
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                         <div class="col-md-3">
-                                           Bomba 2
-                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="row">
+                                           <div class="col-md-3">
+                                             Bomba 2
+                                           </div>
+                                          <div class="col-md-1">
 
-                                          <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
-                                              <i class="material-icons">error_outline</i>
-                                          </button>
-                                          <br>
+                                            <button type="button" class="btncasc1 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                                <i class="material-icons bomba1-op-btn">error_outline</i>
+                                            </button>
+                                            <br>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <span class="badge bg-green bomba1-op">Operativa</span>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn-bomba-error1 btn bg-red waves-effect btn_error_custom">
+                                                <span class="custom-error texto-error1">Error</span>
+                                            </button>
+                                          </div>
                                         </div>
-                                        <div class="col-md-3">
-                                          <span class="badge bg-green">Operativa</span>
+                                        <div class="row">
+                                           <div class="col-md-3">
+                                             Bomba 3
+                                           </div>
+                                          <div class="col-md-1">
+                                            <button type="button" class="btncasc2 btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
+                                                <i class="material-icons bomba2-op-btn">check</i>
+                                            </button>
+                                            <br>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <span class="badge bg-red bomba2-op">No Operativa</span>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn-bomba-error2 btn bg-red waves-effect btn_error_custom">
+                                                <span class="custom-error texto-error2">Error</span>
+                                            </button>
+                                          </div>
                                         </div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
-                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
-                                              <span class="custom-error">Error</span>
-                                          </button>
+                                        <div class="row">
+                                           <div class="col-md-3">
+                                             Bomba 4
+                                           </div>
+                                          <div class="col-md-1">
+                                            <button type="button" class="btncasc3 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                                <i class="material-icons bomba3-op-btn">error_outline</i>
+                                            </button>
+                                            <br>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <span class="badge bg-green bomba3-op">Operativa</span>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn-bomba-error3 btn bg-red waves-effect btn_error_custom">
+                                                <span class="custom-error texto-error3">Error</span>
+                                            </button>
+                                          </div>
                                         </div>
-                                      </div>
-                                      <div class="row">
-                                         <div class="col-md-3">
-                                           Bomba 3
-                                         </div>
-                                        <div class="col-md-1">
-                                          <button type="button" class="btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
-                                              <i class="material-icons">check</i>
-                                          </button>
-                                          <br>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <span class="badge bg-red">No Operativa</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
-                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
-                                              <span class="custom-error">Error</span>
-                                          </button>
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                         <div class="col-md-3">
-                                           Bomba 4
-                                         </div>
-                                        <div class="col-md-1">
-                                          <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
-                                              <i class="material-icons">error_outline</i>
-                                          </button>
-                                          <br>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <span class="badge bg-green">Operativa</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
-                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
-                                              <span class="custom-error">Error</span>
-                                          </button>
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                         <div class="col-md-3">
-                                           Bomba 5
-                                         </div>
-                                        <div class="col-md-1">
-                                          <button type="button" class="btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
-                                              <i class="material-icons">error_outline</i>
-                                          </button>
-                                          <br>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <span class="badge bg-green">Operativa</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                          <button type="button" class="btn bg-red waves-effect btn_error_custom">
-                                              <i class="material-icons error-custom ico_error_custom">report_problem</i>
-                                              <span class="custom-error">Error</span>
-                                          </button>
+                                        <div class="row">
+                                           <div class="col-md-3">
+                                             Bomba 5
+                                           </div>
+                                          <div class="col-md-1">
+                                            <button type="button" class="btncasc4 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                                <i class="material-icons bomba4-op-btn">error_outline</i>
+                                            </button>
+                                            <br>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <span class="badge bg-green bomba4-op">Operativa</span>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <button type="button" class="btn-bomba-error4 btn bg-red waves-effect btn_error_custom">
+                                                <span class="custom-error texto-error4">Error</span>
+                                            </button>
+                                          </div>
                                         </div>
                                       </div>
 
@@ -506,6 +504,22 @@
                           position:absolute;
                           top: 99%;
                           left: 76%;
+                          margin-top:-80px;
+                          margin-left:-80px;
+                          animation:loading 1.2s linear infinite;
+                          -webkit-animation:loading 1.2s linear infinite;
+                          z-index: 1;
+                        }
+                  .loading-bomba{
+                          width: 35px;
+                          height: 35px;
+                          border-radius:150px;
+                          border:6px solid #797979;
+                          border-top-color:rgba(0,0,0,0.3);
+                          box-sizing:border-box;
+                          position:absolute;
+                          top: 89%;
+                          left: 54%;
                           margin-top:-80px;
                           margin-left:-80px;
                           animation:loading 1.2s linear infinite;

@@ -141,18 +141,43 @@ class VinaLuisFelipeController extends Controller{
 
 
 
+       $datos = DB::connection('telemetria')
+                                  ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC) T1
+                                                                       WHERE  (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
+                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
+                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba4'
+                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba5'
+                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba1'
+                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba2'
+                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba3'
+                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba4'
+                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba5')
+                                                                            GROUP BY mt_name");
 
+        for ($i=0; $i <count($datos)/2 ; $i++) { 
 
+          if ($datos[$i]->mt_value==0) {
+            $Opertiva[$i]="No Opertiva";
+          } else{
+            $Opertiva[$i]="Opertiva";
+          }
+        }
 
+        for ($i=5; $i <count($datos)/2 ; $i++) { 
 
+          if ($datos[$i]->mt_value==0) {
+            $ErrorBomba[$i]="No hay Error";
+          } else{
+            $ErrorBomba[$i]="Error";
+          }
+        }
 
+        ?><script>
+          Bombas("<?php $Operativa ?>","<?php $ErrorBomba ?>")
+        </script><?php
 
-
-
-
-
-
-
+        // return $Opertiva;
     
    }
 
