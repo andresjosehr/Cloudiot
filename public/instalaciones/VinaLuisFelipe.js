@@ -151,6 +151,9 @@ function Bombas(Operativa, ErrorBomba) {
 
     }
 
+    $(".btncasc3").css("display", "none");
+    $(".btncasc4").css("display", "none");
+
     $( ".bombas-cargando" ).removeClass("cargando");
 
     $( ".loading-bomba" ).css("display", "none");

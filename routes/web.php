@@ -42,4 +42,5 @@ Route::get('Prueba', "PruebaController@index");
 Route::post('SicutIgnisController','SicutIgnisController@index');
 Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index');
 Route::post('CalculosLuisFelipe','VinaLuisFelipeController@Calculos');
+Route::post('CalculosLuisFelipe2','VinaLuisFelipeController@GraficarRelojes');
 Route::post('PlantaLicanController','PlantaLicanController@index');

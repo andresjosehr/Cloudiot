@@ -177,8 +177,59 @@ class VinaLuisFelipeController extends Controller{
           Bombas("<?php $Operativa ?>","<?php $ErrorBomba ?>")
         </script><?php
 
-        // return $Opertiva;
+       
     
+   }
+
+
+   public function GraficarRelojes(){
+
+
+     $dato = $_POST["dato"];
+
+     if ($dato==0) {
+       $mt_name='Biofiltro02--Consumo.PH_Entrada';
+       $titulo="PH Entrada";
+     }
+     if ($dato==1) {
+       $mt_name='Biofiltro02--Consumo.ORP_Entrada';
+       $titulo="ORP Entrada";
+     }
+     if ($dato==2) {
+       $mt_name='Biofiltro02--Consumo.Conductividad_Entrada';
+       $titulo="Conductividad Entrada";
+     }
+     if ($dato==3) {
+       $mt_name='Biofiltro02--Consumo.PH_Salida';
+       $titulo="PH Salida";
+     }
+     if ($dato==4) {
+       $mt_name='Biofiltro02--Consumo.ORP_Salida';
+       $titulo="ORP Salida";
+     }
+     if ($dato==5) {
+       $mt_name='Biofiltro02--Consumo.Conductividad_Salida';
+       $titulo="PH Salida";
+     }
+
+     $fecha = DB::connection('telemetria')
+                                  ->select("SELECT mt_time FROM log_biofil02 WHERE mt_name='$mt_name' ORDER BY mt_time DESC LIMIT 1");
+
+       $date= $fecha[0]->mt_time; 
+       $newDate = strtotime ( '-24 hours' , strtotime ($date) ) ; 
+       $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+        $Datos = DB::connection('telemetria')
+                                   ->select("SELECT * FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$newDate' ORDER BY mt_time DESC");
+
+
+
+       for ($i=0; $i <count($Datos) ; $i++) { 
+         $mt_value[$i]=$Datos[$i]->mt_value;
+         $mt_time[$i]=$Datos[$i]->mt_time;
+       }
+
+       return view("modals.VinaLuisFelipe.SubModal", ["mt_time" => $mt_time, "mt_value" => $mt_value, "Titulo" => $titulo]);
    }
 
 }

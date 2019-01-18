@@ -266,10 +266,7 @@
                                  </div>
                                </div>
                                <div class="col-md-6">
-
-                                 <canvas id="myChart0" height="50"></canvas>
-
-
+                                <canvas id="myChart0" height="50"></canvas>
                                </div>
                                <div class="col-md-6">
                                 <div class="row">
@@ -388,6 +385,7 @@
             </div>
 
 
+
         
             <style>
             .img-chart-lfe{
@@ -399,6 +397,10 @@
 
             #rpm-0 canvas, #rpm-1 canvas, #rpm-2 canvas, #rpm-3 canvas, #rpm-4 canvas, #rpm-5 canvas, #myChart1, #myChart2, #myChart3, #myChart4, #myChart5, #myChart6{
               display: none;
+            }
+
+            #gauge0, #gauge1, #gauge2, #gauge3, #gauge4, #gauge5{
+              cursor: pointer;
             }
             .img-rpm-lfe{
               margin-bottom: -12px;
@@ -546,13 +548,50 @@
 <script>
 
 
-
-
-
 var instalacion_info=<?php echo json_encode($Instalacion); ?>;
 
 var url = "<?php echo Request::root() ?>/CalculosLuisFelipe";  
 
  $("#contenedorLFE").load(url, {instalacion: instalacion_info});
+
+
+
+
+
+  $("#gauge0").click(function() {
+    var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
+    $("#contenedorLFE").load(url, {dato: "0"});
+    $(".loader-insta").css("display", "block");
+  });
+
+  $("#gauge1").click(function() {
+    var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
+    $("#contenedorLFE").load(url, {dato: "1"});
+    $(".loader-insta").css("display", "block");
+  });
+
+  $("#gauge2").click(function() {
+    var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
+    $("#contenedorLFE").load(url, {dato: "2"});
+    $(".loader-insta").css("display", "block");
+  });
+
+  $("#gauge3").click(function() {
+    var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
+    $("#contenedorLFE").load(url, {dato: "3"});
+    $(".loader-insta").css("display", "block");
+  });
+
+  $("#gauge4").click(function() {
+    var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
+    $("#contenedorLFE").load(url, {dato: "4"});
+    $(".loader-insta").css("display", "block");
+  });
+
+  $("#gauge5").click(function() {
+    var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
+    $("#contenedorLFE").load(url, {dato: "5"});
+    $(".loader-insta").css("display", "block");
+  });
 
 </script>
