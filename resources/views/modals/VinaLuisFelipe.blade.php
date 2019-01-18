@@ -14,13 +14,17 @@
                               <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion</h4> 
                             </div>
                             <div class="col-md-3">
-                              <div class="form-line">
-                                <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                              <div class="form-group">
+                                 <div class="form-line">
+                                     <input type="text" id="datetime" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                                 </div>
                               </div>
                             </div>
                             <div class="col-md-3">
-                              <div class="form-line">
-                                <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                              <div class="form-group">
+                                  <div class="form-line">
+                                      <input type="text" id="datetime" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                                  </div>
                               </div>
                             </div>
                             <div class="col-md-1">
@@ -593,5 +597,16 @@ var url = "<?php echo Request::root() ?>/CalculosLuisFelipe";
     $("#contenedorLFE").load(url, {dato: "5"});
     $(".loader-insta").css("display", "block");
   });
+
+
+  $('#datetime').bootstrapMaterialDatePicker
+      ({
+        format: 'DD/MM/YYYY HH:mm',
+        lang: 'fr',
+        weekStart: 1, 
+        cancelText : 'ANNULER',
+        nowButton : true,
+        switchOnClick : true
+      });
 
 </script>

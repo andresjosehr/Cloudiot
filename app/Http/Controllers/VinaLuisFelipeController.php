@@ -229,7 +229,28 @@ class VinaLuisFelipeController extends Controller{
          $mt_time[$i]=$Datos[$i]->mt_time;
        }
 
-       return view("modals.VinaLuisFelipe.SubModal", ["mt_time" => $mt_time, "mt_value" => $mt_value, "Titulo" => $titulo]);
+       return view("modals.VinaLuisFelipe.SubModal", ["mt_time" => $mt_time, "mt_value" => $mt_value, "Titulo" => $titulo, "mt_name" => $mt_name]);
+   }
+
+
+   public function GraficarRelojesFechaPersonalizada(Request $Request){
+     
+     $FechaInicio=$_POST["FechaInicio"];
+     $FechaFin=$_POST["FechaFin"];
+     $mt_name=$_POST["mt_name"];
+
+     $Datos = DB::connection('telemetria')
+                                   ->select("SELECT * FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$FechaInicio' AND mt_time<='$FechaFin' ORDER BY mt_time DESC");
+
+
+      for ($i=0; $i <count($Datos) ; $i++) { 
+         $mt_value[$i]=$Datos[$i]->mt_value;
+         $mt_time[$i]=$Datos[$i]->mt_time;
+       }
+
+     ?><script>
+       ChartSubModal("<?php $mt_time ?>", "<?php $mt_value ?>");
+     </script><?php
    }
 
 }
