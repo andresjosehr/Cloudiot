@@ -6,29 +6,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                           <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                               <p id="contenedorLFE"></p>
                               <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                             </div>
-                            <div class="col-md-3">
-                              <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion</h4> 
-                            </div>
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                 <div class="form-line">
-                                     <input type="text" id="datetime" class="datetimepicker form-control" placeholder="Please choose date & time...">
-                                 </div>
-                              </div>
-                            </div>
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                  <div class="form-line">
-                                      <input type="text" id="datetime" class="datetimepicker form-control" placeholder="Please choose date & time...">
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="col-md-1">
-                              <button type="button" class="btn btn-primary waves-effect">→</button>
+                            <div class="col-md-4">
+                              <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion {{ $UltimaMedicion->mt_time }}</h4> 
                             </div>
                           </div>
                         </div>
@@ -141,7 +124,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Fecha / Hora</th>
-                                                    <th>Litros</th>
+                                                    <th>Obs</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -392,6 +375,9 @@
 
         
             <style>
+            .btncasc3, .btncasc4{
+              display: none;
+            }
             .img-chart-lfe{
               width: 95%;
             }

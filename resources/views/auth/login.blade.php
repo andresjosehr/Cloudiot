@@ -87,7 +87,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Ingreso | Cloudiot</title>
+    <title>Ingreso | CloudIot</title>
     <!-- Favicon-->
 
     <!-- Google Fonts -->
@@ -113,8 +113,7 @@
 <body class="login-page">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);"><b>Cloudiot</b></a>
-            <small>Automatizacion de datos</small>
+            <a href="javascript:void(0);"><b>CloudIot</b></a>
         </div>
         <div class="card">
             <div class="body">

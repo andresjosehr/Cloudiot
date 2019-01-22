@@ -17,9 +17,14 @@ class VinaLuisFelipeController extends Controller{
 												->where("id", $id)
 													->first();
 
+      $UltimaMedicion = DB::connection("telemetria")
+                              ->table($tabla_asociada)
+                                ->orderBy("mt_time", "DESC")
+                                  ->first();
 
 
-    	 return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones]);
+
+    	 return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion]);
     }
 
     public static function Calculos(Request $Request){
