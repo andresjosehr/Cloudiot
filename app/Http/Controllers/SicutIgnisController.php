@@ -310,6 +310,6 @@ class SicutIgnisController extends Controller{
                                      $Datos["FactorPotenciaC"]           =   abs($FactorPotenciaC[0]->mt_value - $FactorPotenciaC[count($FactorPotenciaC)-1]->mt_value);
                                      $Datos["FactorPotenciaTotal"]       =   abs($FactorPotenciaTotal[0]->mt_value - $FactorPotenciaTotal[count($FactorPotenciaTotal)-1]->mt_value);
 
-                                     return view("SicutIgnis.modal", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
+                                     return view("modals.SicutIgnis", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
     }
 }

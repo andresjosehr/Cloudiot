@@ -39,6 +39,10 @@ Route::get('/home', function (){
 Route::get('Prueba', "PruebaController@index");
 
 
+Route::get('AlarmasInterval', "AlarmasController@Interval");
+Route::get('Alarmas', "AlarmasController@index");
+Route::post('RegistrarIntervaloAlarma', "AlarmasController@RegistrarIntervalo");
+
 Route::post('SicutIgnisController','SicutIgnisController@index');
 Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index');
 Route::post('CalculosLuisFelipe','VinaLuisFelipeController@Calculos');

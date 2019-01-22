@@ -69,6 +69,11 @@
                                             <span>Editar Instalaciones</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="Alarmas">
+                                            <span>Alarmas</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endif
