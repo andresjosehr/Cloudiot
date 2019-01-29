@@ -87,6 +87,10 @@ function Graficos(divcanvas, chartcanvas, mt_value, mt_time) {
                             }]
                         },
                         options: {
+                            tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
                             scales: {
                                 yAxes: [{
                                     ticks: {

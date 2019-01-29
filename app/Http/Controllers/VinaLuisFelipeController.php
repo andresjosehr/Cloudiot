@@ -80,79 +80,131 @@ class VinaLuisFelipeController extends Controller{
 
 
 
-       // $datos = DB::connection('telemetria')
-       //                            ->select("(SELECT * FROM  log_biofil02 
-       //                                        WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' 
-       //                                            ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+       $datos = DB::connection('telemetria')
+                                  ->select("(SELECT * FROM  log_biofil02 
+                                              WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' 
+                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
 
-       //  for ($i=0; $i < count($datos); $i++) { 
-       //      $mt_value[$i] =  $datos[$i]->mt_value;
-       //  }
+        for ($i=0; $i < count($datos); $i++) { 
+            $mt_value[$i] =  $datos[$i]->mt_value;
 
-       // ?><script>
-       //   Graficos("chart-lfe2","myChart2", "<?php $mt_value ?>");
-       // </script><?php
+            $date=  $datos[$i]->mt_value; 
+            $newDate = date ( 'j H:i:s' , $date); 
 
+            $mt_time[$i] =  $newDate;
+        }
 
+       ?><script>
+        var mt_value = '<?php echo json_encode($mt_value); ?>';
+         mt_value=JSON.parse(mt_value);
 
-       // $datos = DB::connection('telemetria')
-       //                            ->select("(SELECT * FROM  log_biofil02 
-       //                                        WHERE mt_name='Biofiltro02--Consumo.Conductividad_Entrada' 
-       //                                            ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
-
-       //  for ($i=0; $i < count($datos); $i++) { 
-       //      $mt_value[$i] =  $datos[$i]->mt_value;
-       //  }
-
-       // ?><script>
-       //   Graficos("chart-lfe3","myChart3", "<?php $mt_value ?>");
-       // </script><?php
+         var mt_time = '<?php echo json_encode($mt_time); ?>';
+         mt_time=JSON.parse(mt_time);
+         Graficos("chart-lfe2","myChart2", mt_value, mt_time);
+       </script><?php
 
 
 
-       // $datos = DB::connection('telemetria')
-       //                            ->select("(SELECT * FROM  log_biofil02 
-       //                                        WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
-       //                                            ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+       $datos = DB::connection('telemetria')
+                                  ->select("(SELECT * FROM  log_biofil02 
+                                              WHERE mt_name='Biofiltro02--Consumo.Conductividad_Entrada' 
+                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
 
-       //  for ($i=0; $i < count($datos); $i++) { 
-       //      $mt_value[$i] =  $datos[$i]->mt_value;
-       //  }
+        for ($i=0; $i < count($datos); $i++) { 
+            $mt_value[$i] =  $datos[$i]->mt_value;
 
-       // ?><script>
-       //   Graficos("chart-lfe4","myChart4", "<?php $mt_value ?>");
-       // </script><?php
+            $date=  $datos[$i]->mt_value; 
+            $newDate = date ( 'j H:i:s' , $date); 
 
+            $mt_time[$i] =  $newDate;
+        }
 
+       ?><script>
+        var mt_value = '<?php echo json_encode($mt_value); ?>';
+         mt_value=JSON.parse(mt_value);
 
-
-       // $datos = DB::connection('telemetria')
-       //                            ->select("(SELECT * FROM  log_biofil02 
-       //                                        WHERE mt_name='Biofiltro02--Consumo.ORP_Salida' 
-       //                                            ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
-
-       //  for ($i=0; $i < count($datos); $i++) { 
-       //      $mt_value[$i] =  $datos[$i]->mt_value;
-       //  }
-
-       // ?><script>
-       //   Graficos("chart-lfe5","myChart5", "<?php $mt_value ?>");
-       // </script><?php
+         var mt_time = '<?php echo json_encode($mt_time); ?>';
+         mt_time=JSON.parse(mt_time);
+         Graficos("chart-lfe3","myChart3", mt_value, mt_value);
+       </script><?php
 
 
 
-       // $datos = DB::connection('telemetria')
-       //                            ->select("(SELECT * FROM  log_biofil02 
-       //                                        WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' 
-       //                                            ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+       $datos = DB::connection('telemetria')
+                                  ->select("(SELECT * FROM  log_biofil02 
+                                              WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
+                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
 
-       //  for ($i=0; $i < count($datos); $i++) { 
-       //      $mt_value[$i] =  $datos[$i]->mt_value;
-       //  }
+        for ($i=0; $i < count($datos); $i++) { 
+            $mt_value[$i] =  $datos[$i]->mt_value;
 
-       // ?><script>
-       //   Graficos("chart-lfe6","myChart6", "<?php $mt_value ?>");
-       // </script><?php
+            $date=  $datos[$i]->mt_value; 
+            $newDate = date ( 'j H:i:s' , $date); 
+
+            $mt_time[$i] =  $newDate;
+        }
+
+       ?><script>
+        var mt_value = '<?php echo json_encode($mt_value); ?>';
+         mt_value=JSON.parse(mt_value);
+
+         var mt_time = '<?php echo json_encode($mt_time); ?>';
+         mt_time=JSON.parse(mt_time);
+
+         Graficos("chart-lfe4","myChart4", mt_value, mt_time);
+       </script><?php
+
+
+
+
+       $datos = DB::connection('telemetria')
+                                  ->select("(SELECT * FROM  log_biofil02 
+                                              WHERE mt_name='Biofiltro02--Consumo.ORP_Salida' 
+                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+
+        for ($i=0; $i < count($datos); $i++) { 
+            $mt_value[$i] =  $datos[$i]->mt_value;
+
+            $date=  $datos[$i]->mt_value; 
+            $newDate = date ( 'j H:i:s' , $date); 
+
+            $mt_time[$i] =  $newDate;
+        }
+
+       ?><script>
+        var mt_value = '<?php echo json_encode($mt_value); ?>';
+         mt_value=JSON.parse(mt_value);
+
+         var mt_time = '<?php echo json_encode($mt_time); ?>';
+         mt_time=JSON.parse(mt_time);
+
+         Graficos("chart-lfe5","myChart5", mt_value, mt_time);
+       </script><?php
+
+
+
+       $datos = DB::connection('telemetria')
+                                  ->select("(SELECT * FROM  log_biofil02 
+                                              WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' 
+                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+
+        for ($i=0; $i < count($datos); $i++) { 
+            $mt_value[$i] =  $datos[$i]->mt_value;
+
+            $date=  $datos[$i]->mt_value; 
+            $newDate = date ( 'j H:i:s' , $date); 
+
+            $mt_time[$i] =  $newDate;
+        }
+
+       ?><script>
+        var mt_value = '<?php echo json_encode($mt_value); ?>';
+         mt_value=JSON.parse(mt_value);
+
+         var mt_time = '<?php echo json_encode($mt_time); ?>';
+         mt_time=JSON.parse(mt_time);
+         Graficos("chart-lfe6","myChart6", mt_value, mt_time);
+       </script><?php
 
 
 
