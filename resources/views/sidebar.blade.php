@@ -60,12 +60,12 @@
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
-                                        <a href="#">
+                                        <a href="RegistrarInstalacion">
                                             <span>Registrar Instalacion</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="EditarInstalacion">
                                             <span>Editar Instalaciones</span>
                                         </a>
                                     </li>

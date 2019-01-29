@@ -21,7 +21,7 @@ Route::get('registrar-usuario', function (){
 	return view("usuarios.registrar", ["Usuario" => Auth::user()]);
 })->middleware("verificar_login");
 
-Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal');
+Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal')->middleware("verificar_login");
 
 // Route::get('Prueba','PruebaController@index')->name("Prueba");
 
@@ -38,14 +38,23 @@ Route::get('/home', function (){
 
 Route::get('Prueba', "PruebaController@index");
 
+Route::get('RegistrarInstalacion', function(){
+	return view("instalaciones.registrar", ["Usuario" => Auth::user()]);
+})->middleware("verificar_login");
 
-Route::get('AlarmasInterval', "AlarmasController@Interval");
-Route::get('Alarmas', "AlarmasController@index");
-Route::post('RegistrarIntervaloAlarma', "AlarmasController@RegistrarIntervalo");
 
-Route::post('SicutIgnisController','SicutIgnisController@index');
-Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index');
-Route::post('CalculosLuisFelipe','VinaLuisFelipeController@Calculos');
-Route::post('CalculosLuisFelipe2','VinaLuisFelipeController@GraficarRelojes');
-Route::post('CalculosLuisFelipe3','VinaLuisFelipeController@GraficarRelojesFechaPersonalizada');
-Route::post('PlantaLicanController','PlantaLicanController@index');
+Route::post('RegistarInstalacion2', "InstalacionesController@RegistarInstalacion")->middleware("verificar_login");
+Route::get('EditarInstalacion', "InstalacionesController@EditarInstalacion")->middleware("verificar_login");
+
+Route::get('AlarmasInterval', "AlarmasController@Interval")->middleware("verificar_login");
+Route::get('Alarmas', "AlarmasController@index")->middleware("verificar_login");
+Route::post('RegistrarIntervaloAlarma', "AlarmasController@RegistrarIntervalo")->middleware("verificar_login");
+Route::post('RegistrarDatoAlarma', "AlarmasController@RegistrarDatoAlarma")->middleware("verificar_login");
+Route::post('EditarDatoAlarma', "AlarmasController@EditarDatoAlarma")->middleware("verificar_login");
+
+Route::post('SicutIgnisController','SicutIgnisController@index')->middleware("verificar_login");
+Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe','VinaLuisFelipeController@Calculos')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe2','VinaLuisFelipeController@GraficarRelojes')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe3','VinaLuisFelipeController@GraficarRelojesFechaPersonalizada')->middleware("verificar_login");
+Route::post('PlantaLicanController','PlantaLicanController@index')->middleware("verificar_login");
