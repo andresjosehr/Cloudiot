@@ -79,34 +79,31 @@
                         var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: [],
+                            labels: mt_time,
                             datasets: [{
+                                radius: 0,
                                 label: '',
                                 data: mt_value,
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
+                                backgroundColor:'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255,99,132,1)',
                                 borderWidth: 1
                             }]
                         },
                         options: {
+                            tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
                             scales: {
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
                                     }
                                 }]
                             }
@@ -114,8 +111,13 @@
                     });
                         $(".loader-insta").css("display", "none");
                 }
+                  var mt_value = '<?php echo json_encode($mt_value); ?>';
+                   mt_value=JSON.parse(mt_value);
 
-                ChartSubModal("<?php $mt_time; ?>", "<?php $mt_value; ?>");
+                   var mt_time = '<?php echo json_encode($mt_time); ?>';
+                   mt_time=JSON.parse(mt_time);
+                   console.log(mt_value)
+                ChartSubModal(mt_time, mt_value);
 
 
                 $(".submodal").click();

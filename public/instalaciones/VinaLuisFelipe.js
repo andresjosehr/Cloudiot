@@ -8,8 +8,7 @@ function EstoEsUnAlert() {
 
 
 
-function RPM(tipo, valor, id, gaugecanvas) {
-
+function RPM(tipo, valor, id, gaugecanvas, rango) {
 
 $("p").css("display", "block");
 
@@ -24,15 +23,8 @@ $("p").css("display", "block");
             ticksAngle: 180,
             valueBox: false,
             maxValue: 100,
-            majorTicks: [
-                "0",
-                "20",
-                "40",
-                "60",
-                "80",
-                "100",
-            ],
-            minorTicks: 2,
+            majorTicks: rango,
+            minorTicks: 4,
             strokeTicks: true,
             highlights: [
                 {
@@ -96,6 +88,12 @@ function Graficos(divcanvas, chartcanvas, mt_value, mt_time) {
                                     ticks: {
                                         beginAtZero:true
                                     }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
+                                    }
                                 }]
                             }
                         }
@@ -131,7 +129,7 @@ function Bombas(Operativa, ErrorBomba) {
             $( ".btncasc"+i ).addClass("bg-green");
         }
 
-        if (ErrorBomba=="Error") {
+        if (ErrorBomba[i]=="Error") {
             $( ".btn-bomba-error"+i ).addClass("bg-red");
             $( ".texto-error"+i ).text("Error");
         } else{

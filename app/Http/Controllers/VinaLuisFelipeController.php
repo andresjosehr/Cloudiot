@@ -40,15 +40,51 @@ class VinaLuisFelipeController extends Controller{
                                                                             OR mt_name='Biofiltro02--Consumo.ORP_Salida'
                                                                             OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
                                                                             GROUP BY mt_name");
-     
+    
 
         ?><script>
-          RPM("PH", "<?php echo $datos[0]->mt_value ?>", "gauge0", "rpm-0");
-          RPM("PH", "<?php echo $datos[1]->mt_value ?>", "gauge1", "rpm-1");
-          RPM("PH", "<?php echo $datos[2]->mt_value ?>", "gauge2", "rpm-2");
-          RPM("PH", "<?php echo $datos[3]->mt_value ?>", "gauge3", "rpm-3");
-          RPM("PH", "<?php echo $datos[4]->mt_value ?>", "gauge4", "rpm-4");
-          RPM("PH", "<?php echo $datos[5]->mt_value ?>", "gauge5", "rpm-5");
+          var rango_orp = [];
+          rango_orp[0]="-1000";
+          rango_orp[1]="-600";
+          rango_orp[2]="-200";
+          rango_orp[3]="200";
+          rango_orp[4]="600";
+          rango_orp[5]="1000";
+
+          var rango_ph = [];
+          rango_ph[0]="0";
+          rango_ph[1]="2.8";
+          rango_ph[2]="5.6";
+          rango_ph[3]="8.4";
+          rango_ph[4]="11.2";
+          rango_ph[5]="14";
+
+          var rango_conductividad = [];
+          rango_conductividad[0]="0";
+          rango_conductividad[1]="20";
+          rango_conductividad[2]="40";
+          rango_conductividad[3]="60";
+          rango_conductividad[4]="80";
+          rango_conductividad[5]="100";
+
+
+          var PHEntrada=("<?php echo $datos[4]->mt_value ?>"*10)/14;
+          PHEntrada=PHEntrada/10;
+
+          var PHSalida=("<?php echo $datos[5]->mt_value ?>"*10)/14;
+          PHSalida=PHSalida/10;
+
+          var ORPEntrada=("<?php echo $datos[2]->mt_value+1000 ?>")/20;
+          var ORPSalida=("<?php echo $datos[3]->mt_value+1000 ?>")/20;
+
+
+          
+          RPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph);
+          RPM("PH", ORPEntrada, "gauge1", "rpm-1", rango_orp);
+          RPM("PH", "<?php echo $datos[0]->mt_value ?>", "gauge2", "rpm-2", rango_conductividad);
+          RPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph);
+          RPM("PH", ORPSalida, "gauge4", "rpm-4", rango_orp);
+          RPM("PH", "<?php echo $datos[1]->mt_value ?>", "gauge5", "rpm-5", rango_conductividad);
         </script><?php
 
 
@@ -60,7 +96,7 @@ class VinaLuisFelipeController extends Controller{
                                                   ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
 
         for ($i=0; $i < count($datos); $i++) { 
-            $mt_value[$i] =  $datos[$i]->mt_value;
+            $mt_value[$i] =  $datos[$i]->mt_value/100;
 
             $date=  $datos[$i]->mt_value; 
             $newDate = date ( 'j H:i:s' , $date); 
@@ -136,7 +172,7 @@ class VinaLuisFelipeController extends Controller{
                                                   ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
 
         for ($i=0; $i < count($datos); $i++) { 
-            $mt_value[$i] =  $datos[$i]->mt_value;
+            $mt_value[$i] =  $datos[$i]->mt_value/100;
 
             $date=  $datos[$i]->mt_value; 
             $newDate = date ( 'j H:i:s' , $date); 
@@ -287,13 +323,16 @@ class VinaLuisFelipeController extends Controller{
        $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
         $Datos = DB::connection('telemetria')
-                                   ->select("SELECT * FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$newDate' ORDER BY mt_time DESC");
+                                   ->select("(SELECT * FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$newDate' ORDER BY mt_time DESC) ORDER BY mt_time ASC");
 
 
-
+       $j=0;
        for ($i=0; $i <count($Datos) ; $i++) { 
-         $mt_value[$i]=$Datos[$i]->mt_value;
-         $mt_time[$i]=$Datos[$i]->mt_time;
+         if ($Datos[$i]->mt_value!=0) {
+           $mt_value[$j]=$Datos[$i]->mt_value;
+           $mt_time[$j]=$Datos[$i]->mt_time;
+           $j++;
+         }
        }
 
        return view("modals.VinaLuisFelipe.SubModal", ["mt_time" => $mt_time, "mt_value" => $mt_value, "Titulo" => $titulo, "mt_name" => $mt_name]);
