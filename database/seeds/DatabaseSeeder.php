@@ -9,6 +9,8 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
+    // php artisan db:seed
     public function run()
     {
        DB::table('users')->insert([
