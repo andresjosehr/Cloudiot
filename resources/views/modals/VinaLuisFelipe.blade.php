@@ -38,7 +38,7 @@
                                               @endphp
                                               @foreach ($Bombas as $Bomba)
                                                 <tr>
-                                                    <td>{{ $Bomba["FechaInicio"] }}</td>
+                                                    <td><?php echo date_format(date_create($Bomba["FechaInicio"]), 'H:i:s'); ?></td>
                                                     <td>{{ $Bomba["MinutosOperativa"] }}</td>
                                                     <td></td>
                                                     <td>
@@ -46,21 +46,21 @@
                                                         <i class="material-icons btn-bomba">add_circle</i>
                                                       @endif
                                                       @if ($Bomba["NumeroDeBomba"][1]==0)
-                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                        <i class="material-icons btn-bomba" style="color: #a0a0a0 !important;">add_circle</i>
                                                       @endif
 
                                                       @if ($Bomba["NumeroDeBomba"][2]==1)
                                                         <i class="material-icons btn-bomba">add_circle</i>
                                                       @endif
                                                       @if ($Bomba["NumeroDeBomba"][2]==0)
-                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                        <i class="material-icons btn-bomba" style="color: #a0a0a0 !important;">add_circle</i>
                                                       @endif
-
+                                                      
                                                       @if ($Bomba["NumeroDeBomba"][3]==1)
                                                         <i class="material-icons btn-bomba">add_circle</i>
                                                       @endif
                                                       @if ($Bomba["NumeroDeBomba"][3]==0)
-                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                        <i class="material-icons btn-bomba" style="color: #a0a0a0 !important;">add_circle</i>
                                                       @endif
                                                     </td>
                                                 </tr>
@@ -84,16 +84,52 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Flujo Promedio</td>
-                                                    <td>5000</td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Flujo minimo</td>
-                                                    <td>5000</td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Flujo Maximo</td>
-                                                    <td>5000</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>

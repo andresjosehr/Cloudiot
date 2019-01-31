@@ -35,48 +35,54 @@
                                 <span>Panel de control</span>
                             </a>
                         </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <i class="material-icons">person_pin</i>
-                                    <span>Usuarios</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="registrar-usuario/">
-                                            <span>Registrar Usuario</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span>Lista de Usuarios</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <i class="material-icons">location_city</i>
-                                    <span>Instalaciones</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="RegistrarInstalacion">
-                                            <span>Registrar Instalacion</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="EditarInstalacion">
-                                            <span>Editar Instalaciones</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="Alarmas">
-                                            <span>Alarmas</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">person_pin</i>
+                                <span>Usuarios</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="registrar-usuario/">
+                                        <span>Registrar Usuario</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Lista de Usuarios</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">location_city</i>
+                                <span>Instalaciones</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li>
+                                    <a href="RegistrarInstalacion">
+                                        <span>Registrar Instalacion</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="EditarInstalacion">
+                                        <span>Editar Instalaciones</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="Alarmas">
+                                        <span>Alarmas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         @endif
+                        <li>
+                            <a href="parametros">
+                                <i class="material-icons">build</i>
+                                <span>Parametros</span>
+                            </a>
+                        </li>
 
                         @if (Request::segment(1)=="panel-de-control")
                                 @foreach($Instalaciones as $Instalacion)

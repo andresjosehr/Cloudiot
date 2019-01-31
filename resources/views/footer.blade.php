@@ -21,8 +21,13 @@
     <!-- Custom Js -->
     <script src="js/admin.js"></script>
 
+    <!-- noUISlider Plugin Js -->
+    <script src="plugins/noUiSlider2/distribute/nouislider.min.js"></script>
+
     <!-- Demo Js -->
     <script src="js/demo.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
 
     <script src="js/custom.js"></script>
 

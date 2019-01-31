@@ -11,6 +11,7 @@ class PruebaController extends Controller{
 		$datos= DB::connection("telemetria")
                         ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
+                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
                                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
                                                                  ORDER BY mt_name ASC, mt_time ASC");
@@ -21,12 +22,19 @@ class PruebaController extends Controller{
 
             if ($datos[$i]->mt_value!="0") {
 
-              $BombaActiva[$k][$j]["mt_name"]=$datos[$i]->mt_name;
-              $BombaActiva[$k][$j]["value"]=$datos[$i]->mt_value;
-              $BombaActiva[$k][$j]["mt_time"]=$datos[$i]->mt_time;
-              $Tiempo[$k][$j]=$datos[$i]->mt_time;
-              $j++;
-              $h++;
+              if ($datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba1" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba2" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba3") {
+
+                $BombaActiva[$k][$j]["mt_name"]=$datos[$i]->mt_name;
+                $BombaActiva[$k][$j]["value"]=$datos[$i]->mt_value;
+                $BombaActiva[$k][$j]["mt_time"]=$datos[$i]->mt_time;
+                $Tiempo[$k][$j]=$datos[$i]->mt_time;
+                $j++;
+                $h++;
+              }
+
+              if ($datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba1") {
+                # code...
+              }
 
             }
             if ($datos[$i]->mt_value=="0") {
@@ -84,26 +92,6 @@ class PruebaController extends Controller{
        }
 
 
-        // $i=0;
-        // foreach ($valores as $key => $value) {
-        //    $Fecha[$i]=$key;
-        //   $i++;
-        //  } 
-
-
-         // for ($i=0; $i <count($Fecha) ; $i++) { 
-         //  if ($Fecha[]) {
-         //    # code...
-         //  }
-         //   $FechaDeConsulta[$i]
-         // }
-
-
-          
-        
-
-        // print_r($Fila);
-
         for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
           foreach ($BombasOperativas as $key => $val) {
                 if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
@@ -122,6 +110,7 @@ class PruebaController extends Controller{
 
         $columns = array_column($Fila, 'FechaInicio');
         array_multisort($columns, SORT_DESC, $Fila);
+
 
         return $Fila;
 

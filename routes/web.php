@@ -46,6 +46,14 @@ Route::get('RegistrarInstalacion', function(){
 Route::post('RegistarInstalacion2', "InstalacionesController@RegistarInstalacion")->middleware("verificar_login");
 Route::get('EditarInstalacion', "InstalacionesController@EditarInstalacion")->middleware("verificar_login");
 
+Route::get('parametros', function (){
+	return view("parametros", ["Usuario" =>  Auth::user()]);
+})->middleware("verificar_login");
+
+Route::post('InsertarParametroRiego', "ParametrosController@InsertarParametroRiego")->middleware("verificar_login");
+Route::post('InsertarParametroReposo', "ParametrosController@InsertarParametroReposo")->middleware("verificar_login");
+Route::post('InsertarParametroRangoPH', "ParametrosController@InsertarParametroRangoPH")->middleware("verificar_login");
+
 Route::get('AlarmasInterval', "AlarmasController@Interval")->middleware("verificar_login");
 Route::get('Alarmas', "AlarmasController@index")->middleware("verificar_login");
 Route::post('RegistrarIntervaloAlarma', "AlarmasController@RegistrarIntervalo")->middleware("verificar_login");
