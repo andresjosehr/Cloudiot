@@ -12,19 +12,6 @@
                             <div class="col-md-3">
                               <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion</h4> 
                             </div>
-                            <div class="col-md-3">
-                              <div class="form-line">
-                                <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
-                              </div>
-                            </div>
-                            <div class="col-md-3">
-                              <div class="form-line">
-                                <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
-                              </div>
-                            </div>
-                            <div class="col-md-1">
-                              <button type="button" class="btn btn-primary waves-effect">→</button>
-                            </div>
                           </div>
                         </div>
                         <hr style=" color: black">  
@@ -111,6 +98,7 @@
                                 <div class="col-md-3" align="center"><canvas id="myChart1" height="140"></canvas></div>
                           </div>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
@@ -178,50 +166,83 @@
   								}
 
             </style>
-
+             <script  src="instalaciones/PlantaLican.js"></script>
             <script>
                 $( ".display-modal" ).click();
-                      for (var i = 0; i <= 1; i++) {
-                      var ctx = document.getElementById("myChart"+i).getContext('2d');
+                      var Titulo = [];
+                      Titulo[0]="Flujos";
+                      Titulo[1]="PH";
+
+
+                function Graficar(mt_time, mt_value, titulo, id) {
+                      var ctx = document.getElementById(id).getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: [],
+                            labels:  mt_time,
                             datasets: [{
-                                label: '',
-                                data: [12, 19, 3, 5, 2, 3],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
+                                radius: 0,
+                                label: "",
+                                data: mt_value,
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255,99,132,1)',
                                 borderWidth: 1
                             }]
                         },
                         options: {
+                          tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
+                          title: {
+                              display: true,
+                              text: titulo
+                          },
                             scales: {
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
                                     }
                                 }]
                             }
                         }
                     });
                     }
+
+
+                     var mt_value = '<?php echo json_encode($Datos["Flujo"]["mt_value"]); ?>';
+                     mt_value=JSON.parse(mt_value);
+                     var mt_value = Object.values(mt_value).map(n => n.toString())
+
+                     var mt_time = '<?php echo json_encode($Datos["Flujo"]["mt_time"]); ?>';
+                     mt_time=JSON.parse(mt_time);
+                     var mt_time = Object.values(mt_time).map(n => n.toString())
+
+                      Graficar(mt_time, mt_value, "Flujos", "myChart0");
+
+
+                      var mt_value = '<?php echo json_encode($Datos["PH"]["mt_value"]); ?>';
+                     mt_value=JSON.parse(mt_value);
+                     var mt_value = Object.values(mt_value).map(n => n.toString())
+
+                     var mt_time = '<?php echo json_encode($Datos["PH"]["mt_time"]); ?>';
+                     mt_time=JSON.parse(mt_time);
+                     var mt_time = Object.values(mt_time).map(n => n.toString())
+
+                      Graficar(mt_time, mt_value, "PH", "myChart1");
+
                     $(".loader-insta").css("display", "none");
+
+
+                    var PH=("<?php echo end($Datos["PH"]["mt_value"]); ?>"*10)/14;
+                    PH=PH*10;
+
+                    RPM(PH)
             </script>
 
-
-<script  src="rpm/js/index.js"></script>

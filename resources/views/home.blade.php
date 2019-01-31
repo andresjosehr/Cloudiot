@@ -67,7 +67,7 @@
     <section>
         <div class="container-fluid">
             <div class="block-header">
-              <div align="center" id="contenedor"></div>
+              <div align="center" id="contenedor" style="position: absolute;z-index: 999999999;"></div>
                 <div class="right_col section-mapa" role="main">
                   <div id="map" class="map"></div>
                 </div>

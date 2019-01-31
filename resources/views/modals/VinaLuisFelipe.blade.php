@@ -27,92 +27,42 @@
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center;">Fecha</div></th>
-                                                    <th style="text-align: center;">Hrs&nbsp;Op.</th>
+                                                    <th style="text-align: center;">Min&nbsp;Op.</th>
                                                     <th style="text-align: center;">m3</th>
                                                     <th style="text-align: center;">Bombas</th>
                                                 </tr>
                                             </thead>
                                             <tbody align="center">
+                                              @php
+                                                $i=0;
+                                              @endphp
+                                              @foreach ($Bombas as $Bomba)
                                                 <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
+                                                    <td>{{ $Bomba["FechaInicio"] }}</td>
+                                                    <td>{{ $Bomba["MinutosOperativa"] }}</td>
+                                                    <td></td>
                                                     <td>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
+                                                      @if ($Bomba["Bombas"]==1)
+                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                      @endif
+                                                      @if ($Bomba["Bombas"]==2)
+                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                      @endif
+                                                      @if ($Bomba["Bombas"]==3)
+                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                      @endif
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>01-10</td>
-                                                    <td>50</td>
-                                                    <td>1.245</td>
-                                                    <td>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-                                                    </td>
-                                                </tr>
+                                                @php
+                                                  $i++;
+                                                @endphp
+                                              @endforeach
                                             </tbody>
                                         </table>
                                       </div>

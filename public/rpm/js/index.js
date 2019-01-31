@@ -2,7 +2,7 @@ var gauge = new RadialGauge({
     renderTo: 'gauge',
     width: 200,
     height: 200,
-    units: "Flujos",
+    units: "PH",
     value: 35,
     minValue: 0,
     startAngle: 90,
@@ -48,13 +48,3 @@ var gauge = new RadialGauge({
     animationRule: "linear"
 }).draw();
 
-
-setInterval(function() {
-  
-  // update the above chart...
-  var value = 50;
-  gauge.value = value;
-  
-  // Update the declarative chart...
-  document.getElementById("gauge-a").setAttribute("data-value", value);
-}, 1800);

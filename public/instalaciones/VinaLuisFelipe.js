@@ -1,14 +1,46 @@
 
 
+function RPM(tipo, valor, id, gaugecanvas, rango, dato) {
 
+    if (dato=="Normal") {
+        var colores= [
+                {
+                  "from": 0,
+                  "to": 30,
+                  "color": "rgba(100, 255, 100, .2)"
+                },
+                {
+                  "from": 30,
+                  "to": 70,
+                  "color": "rgba(220, 200, 0, .75)"
+                },
+                {
+                    "from": 70,
+                    "to": 100,
+                    "color": "rgba(200, 50, 50, .75)"
+                }
+            ];
+    } else{
 
-function EstoEsUnAlert() {
-    alert();
-}
+        var colores= [
+                {
+                  "from": 0,
+                  "to": 35.71,
+                  "color": "rgba(200, 50, 50, .75)"
+                },
+                {
+                  "from": 35.71,
+                  "to": 57.14,
+                  "color": "rgba(100, 255, 100, .2)"
+                },
+                {
+                    "from": 57.14,
+                    "to": 100,
+                    "color": "rgba(200, 50, 50, .75)"
+                }
+            ];
 
-
-
-function RPM(tipo, valor, id, gaugecanvas, rango) {
+    }
 
 $("p").css("display", "block");
 
@@ -26,23 +58,7 @@ $("p").css("display", "block");
             majorTicks: rango,
             minorTicks: 4,
             strokeTicks: true,
-            highlights: [
-                {
-                  "from": 0,
-                  "to": 30,
-                  "color": "rgba(100, 255, 100, .2)"
-                },
-                {
-                  "from": 30,
-                  "to": 70,
-                  "color": "rgba(220, 200, 0, .75)"
-                },
-                {
-                    "from": 70,
-                    "to": 100,
-                    "color": "rgba(200, 50, 50, .75)"
-                }
-            ],
+            highlights: colores,
             colorPlate: "#fff",
             borderShadowWidth: 0,
             borders: false,
