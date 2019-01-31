@@ -23,7 +23,7 @@ class VinaLuisFelipeController extends Controller{
                                   ->first();
 
 
-       $datos= DB::connection("telemetria")
+           $datos= DB::connection("telemetria")
                         ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
@@ -54,36 +54,68 @@ class VinaLuisFelipeController extends Controller{
             }   
        }
 
+       if (isset($BombaActiva)) {
+         
+          for ($i=0; $i <count($BombaActiva); $i++) { 
 
+              $BombasOperativas[$i]["FechaInicio"]=reset($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]=end($Tiempo[$i]);
+              $BombasOperativas[$i]["MinutosOperativa"]=count($BombaActiva[$i]);
+              $BombasOperativas[$i]["Bomba"]=$BombaActiva[$i][0]["mt_name"];
 
-    if (isset($BombaActiva)) {
-      for ($i=0; $i <count($BombaActiva); $i++) { 
+              $FechaInicio[$i]=reset($Tiempo[$i]);
+              $MinutosOperativa[$i]=count($BombaActiva[$i]);
+              $Bomba[$i]=$BombaActiva[$i][0]["mt_name"];
 
-          $BombasOperativas[$i]["FechaInicio"]=reset($Tiempo[$i]);
-          $BombasOperativas[$i]["FechaFin"]=end($Tiempo[$i]);
-          $BombasOperativas[$i]["MinutosOperativa"]=count($BombaActiva[$i]);
-          $BombasOperativas[$i]["Bomba"]=$BombaActiva[$i][0]["mt_name"];
+          }
 
-          $FechaInicio[$i]=reset($Tiempo[$i]);
-          $MinutosOperativa[$i]=count($BombaActiva[$i]);
-          $Bomba[$i]=$BombaActiva[$i][0]["mt_name"];
+          $valores = array_count_values($FechaInicio);
 
-      }
+          $k=0;
+          for ($i=0; $i < count($valores); $i++) { 
+            
+            $Fila[$i]["FechaInicio"]=$FechaInicio[$i];
+            $Fila[$i]["MinutosOperativa"]=$MinutosOperativa[$i];
+            $Fila[$i]["Bombas"]=$valores[$FechaInicio[$i]];
 
-      $valores = array_count_values($FechaInicio);
+            $Fila[$i]["NumeroDeBomba"][1]=0;
+            $Fila[$i]["NumeroDeBomba"][2]=0;
+            $Fila[$i]["NumeroDeBomba"][3]=0;
 
-      for ($i=0; $i < count($valores); $i++) { 
-        
-        $Fila[$i]["FechaInicio"]=$FechaInicio[$i];
-        $Fila[$i]["MinutosOperativa"]=$MinutosOperativa[$i];
-        $Fila[$i]["Bombas"]=$valores[$FechaInicio[$i]];
-      }
+            if ($Fila[$i]["Bombas"]==1) {
 
+              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
 
-      $columns = array_column($Fila, 'FechaInicio');
-      array_multisort($columns, SORT_DESC, $Fila);
+            }  
+            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
 
-}
+              $MasDeUnaBomba[$k]=$i;
+              $k++;
+
+            }
+
+          }
+
+       }
+
+        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
+          foreach ($BombasOperativas as $key => $val) {
+                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                      if ($val["Bomba"][32]==1) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
+                      }
+                      if ($val["Bomba"][32]==2) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
+                      }
+                      if ($val["Bomba"][32]==3) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
+                      }
+               }
+           }
+        }
+
+        $columns = array_column($Fila, 'FechaInicio');
+        array_multisort($columns, SORT_DESC, $Fila);
 
     	 return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila]);
     }

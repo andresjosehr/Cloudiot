@@ -42,20 +42,25 @@
                                                     <td>{{ $Bomba["MinutosOperativa"] }}</td>
                                                     <td></td>
                                                     <td>
-                                                      @if ($Bomba["Bombas"]==1)
+                                                      @if ($Bomba["NumeroDeBomba"][1]==1)
                                                         <i class="material-icons btn-bomba">add_circle</i>
-                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
+                                                      @endif
+                                                      @if ($Bomba["NumeroDeBomba"][1]==0)
                                                         <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
                                                       @endif
-                                                      @if ($Bomba["Bombas"]==2)
+
+                                                      @if ($Bomba["NumeroDeBomba"][2]==1)
                                                         <i class="material-icons btn-bomba">add_circle</i>
-                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                      @endif
+                                                      @if ($Bomba["NumeroDeBomba"][2]==0)
                                                         <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
                                                       @endif
-                                                      @if ($Bomba["Bombas"]==3)
+
+                                                      @if ($Bomba["NumeroDeBomba"][3]==1)
                                                         <i class="material-icons btn-bomba">add_circle</i>
-                                                        <i class="material-icons btn-bomba">add_circle</i>
-                                                        <i class="material-icons btn-bomba">add_circle</i>
+                                                      @endif
+                                                      @if ($Bomba["NumeroDeBomba"][3]==0)
+                                                        <i class="material-icons btn-bomba" style="color: red !important;">add_circle</i>
                                                       @endif
                                                     </td>
                                                 </tr>

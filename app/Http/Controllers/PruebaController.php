@@ -56,27 +56,74 @@ class PruebaController extends Controller{
 
           $valores = array_count_values($FechaInicio);
 
+          $k=0;
           for ($i=0; $i < count($valores); $i++) { 
             
             $Fila[$i]["FechaInicio"]=$FechaInicio[$i];
             $Fila[$i]["MinutosOperativa"]=$MinutosOperativa[$i];
             $Fila[$i]["Bombas"]=$valores[$FechaInicio[$i]];
+
+            $Fila[$i]["NumeroDeBomba"][1]=0;
+            $Fila[$i]["NumeroDeBomba"][2]=0;
+            $Fila[$i]["NumeroDeBomba"][3]=0;
+
+            if ($Fila[$i]["Bombas"]==1) {
+
+              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
+
+            }  
+            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
+
+              $MasDeUnaBomba[$k]=$i;
+              $k++;
+
+            }
+
           }
 
        }
 
-        $i=0;
-        foreach ($valores as $key => $value) {
-           $Fecha[$i]=$key;
-          $i++;
-         } 
+
+        // $i=0;
+        // foreach ($valores as $key => $value) {
+        //    $Fecha[$i]=$key;
+        //   $i++;
+        //  } 
+
+
+         // for ($i=0; $i <count($Fecha) ; $i++) { 
+         //  if ($Fecha[]) {
+         //    # code...
+         //  }
+         //   $FechaDeConsulta[$i]
+         // }
 
 
           
+        
+
+        // print_r($Fila);
+
+        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
+          foreach ($BombasOperativas as $key => $val) {
+                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                      if ($val["Bomba"][32]==1) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
+                      }
+                      if ($val["Bomba"][32]==2) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
+                      }
+                      if ($val["Bomba"][32]==3) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
+                      }
+               }
+           }
+        }
+
         $columns = array_column($Fila, 'FechaInicio');
         array_multisort($columns, SORT_DESC, $Fila);
-          
-        print_r($Fila);        
+
+        return $Fila;
 
 
     }
