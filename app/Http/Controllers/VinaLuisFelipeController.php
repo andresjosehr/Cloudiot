@@ -176,11 +176,11 @@ class VinaLuisFelipeController extends Controller{
 
           
           RPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH");
-          RPM("PH", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal");
-          RPM("PH", "<?php echo $datos[0]->mt_value ?>", "gauge2", "rpm-2", rango_conductividad, "Normal");
+          RPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal");
+          RPM("Conductividad", "<?php echo $datos[0]->mt_value ?>", "gauge2", "rpm-2", rango_conductividad, "Normal");
           RPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH");
-          RPM("PH", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal");
-          RPM("PH", "<?php echo $datos[1]->mt_value ?>", "gauge5", "rpm-5", rango_conductividad, "Normal");
+          RPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal");
+          RPM("Conductividad", "<?php echo $datos[1]->mt_value ?>", "gauge5", "rpm-5", rango_conductividad, "Normal");
         </script><?php
 
 
