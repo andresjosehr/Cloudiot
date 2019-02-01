@@ -20,7 +20,7 @@ class ParametrosController extends Controller
     	?><script>
     		swal("Listo", "Registro guardado exitosamente", "success");
     		$(".boton1").css("display", "block");
-        	$(".loading1").css("display", "none");
+        	$(".loadingg1").css("display", "none");
     	</script><?php
     }
 
@@ -37,7 +37,7 @@ class ParametrosController extends Controller
     	?><script>
     		swal("Listo", "Registro guardado exitosamente", "success");
     		$(".boton2").css("display", "block");
-        	$(".loading2").css("display", "none");
+        	$(".loadingg2").css("display", "none");
     	</script><?php
     }
 
@@ -62,7 +62,7 @@ class ParametrosController extends Controller
     	?><script>
     		swal("Listo", "Registro guardado exitosamente", "success");
     		$(".boton3").css("display", "block");
-        	$(".loading3").css("display", "none");
+        	$(".loadingg3").css("display", "none");
     	</script><?php
     }
 }

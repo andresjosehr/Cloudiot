@@ -31,6 +31,11 @@ Route::get('/home', function (){
 
 })->name("home");
 
+Route::get('CerrarSesion', function(){
+        //Desconctamos al usuario
+        Auth::logout();
+       return redirect("/");
+})->middleware("verificar_login");
 
 
 
