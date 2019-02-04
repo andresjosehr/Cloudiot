@@ -152,7 +152,7 @@
                                     <div class="col-md-3">
                                        Bomba 1
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
                                        <button type="button" class="btncasc0 btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
                                        <i class="material-icons bomba0-op-btn">check</i>
                                        </button>
@@ -171,7 +171,7 @@
                                     <div class="col-md-3">
                                        Bomba 2
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
                                        <button type="button" class="btncasc1 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
                                        <i class="material-icons bomba1-op-btn">error_outline</i>
                                        </button>
@@ -190,7 +190,7 @@
                                     <div class="col-md-3">
                                        Bomba 3
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
                                        <button type="button" class="btncasc2 btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
                                        <i class="material-icons bomba2-op-btn">check</i>
                                        </button>
@@ -209,7 +209,7 @@
                                     <div class="col-md-3">
                                        Bomba 4
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
                                        <button type="button" class="btncasc3 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
                                        <i class="material-icons bomba3-op-btn">error_outline</i>
                                        </button>
@@ -228,7 +228,7 @@
                                     <div class="col-md-3">
                                        Bomba 5
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
                                        <button type="button" class="btncasc4 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
                                        <i class="material-icons bomba4-op-btn">error_outline</i>
                                        </button>
