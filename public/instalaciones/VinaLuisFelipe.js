@@ -51,6 +51,7 @@ $("p").css("display", "block");
             units: tipo,
             value: valor,
             minValue: 0,
+            title: "Epale",
             startAngle: 90,
             ticksAngle: 180,
             valueBox: false,
@@ -95,6 +96,9 @@ function Graficos(divcanvas, chartcanvas, mt_value, mt_time) {
                             }]
                         },
                         options: {
+                            legend: {
+                                display: false
+                             },
                             tooltips: {
                                 enabled: true,
                                 intersect: false

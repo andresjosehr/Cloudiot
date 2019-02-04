@@ -20,18 +20,17 @@
          <div class="modal-body table-custom">
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
                <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel de control</a></li>
-               <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros de Configuracion</a></li>
                <li role="presentation"><a href="#flujos" data-toggle="tab">Vista de Flujos</a></li>
+               <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros de Configuracion</a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
                <div role="tabpanel" class="tab-pane fade in active" id="home">
-                  <b>Home Content</b>
                   <div>
                      <div class="row">
                         <div class="col-md-6">
                            <div class="row">
-                              <div class="col-md-6">
+                              <div class="col-md-6" style="cursor: pointer;" id="ListarBombas">
                                  <h4 align="left" style="color:black;padding-left: 3%;">Flujos</h4>
                                  <div class="body table-responsive">
                                     <table class="table table-striped">
@@ -83,6 +82,12 @@
                                     </tbody>
                                  @endif
                                  </table>
+                                 @if ($Bombas==null)
+                                    <div>
+                                       <p>Sin datos de Bombas activas en las ultimas 3 horas</p>
+                                       <p>Haga click para obetener datos en una fecha de mayor rango</p>
+                                    </div>
+                                 @endif
                               </div>
                            </div>
                            <div class="col-md-6">
@@ -356,7 +361,6 @@
                </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="profile">
-               <b>Configuracion de Parametros</b>
                <div id='parametros-ejecucion'></div>
                <p>
                <div class="row clearfix">
@@ -626,6 +630,12 @@
        }
    });
 
+   $("#ListarBombas").click(function() {
+      $(".loader-insta").css("display", "block");
+      var url = "<?php echo Request::root() ?>/CalculosLuisFelipe5";
+      $("#contenedorLFE").load(url, {dato: "Epa"});
+   });
+
    function GraficarFlujoPersonalizado() {
 
       var FechaInicio = document.getElementById('fecha_flujo_inicio').value;
@@ -740,12 +750,9 @@
    function CompilarRango() {
    
          var slider = document.getElementById('slider');
-   
-         console.log(slider);
-         console.log("Epale compadre");
-   
+      
              noUiSlider.create(slider, {
-                 start: [6, 8],
+                 start: [@foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Bajo") "<?php echo $Parametro->mt_value/100 ?>" @endif  @endforeach, @foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Alto") "<?php echo $Parametro->mt_value/100 ?>" @endif  @endforeach],
                  step: 0.1,
                  connect: true,
                  range: {
@@ -772,7 +779,7 @@
              var riego = document.getElementById('Riego');
    
              noUiSlider.create(riego, {
-                 start: 0,
+                 start: @foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.TiempoRiego") "<?php echo $Parametro->mt_value ?>" @endif  @endforeach,
    
                  // Disable animation on value-setting,
                  // so the sliders respond immediately.
@@ -797,7 +804,7 @@
              var reposo = document.getElementById('Reposo');
    
              noUiSlider.create(reposo, {
-                 start: 0,
+                 start: @foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.TiempoReposo") "<?php echo $Parametro->mt_value ?>" @endif  @endforeach,
    
                  // Disable animation on value-setting,
                  // so the sliders respond immediately.

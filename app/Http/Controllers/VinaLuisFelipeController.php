@@ -132,7 +132,26 @@ class VinaLuisFelipeController extends Controller{
                                                    GROUP BY DAY(mt_time) 
                                                      ORDER BY mt_time ASC");
 
-       return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras]);
+
+
+
+
+
+
+
+
+
+      $Parametros= DB::connection("telemetria")
+                                    ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC) T1
+                                                                       WHERE  (mt_name='Biofiltro02--Consumo.TiempoRiego'
+                                                                            OR mt_name='Biofiltro02--Consumo.TiempoReposo'
+                                                                            OR mt_name='Biofiltro02--Consumo.LimitePH_Bajo'
+                                                                            OR mt_name='Biofiltro02--Consumo.LimitePH_Alto')
+                                                                            GROUP BY mt_name");
+
+      // return $Parametros;
+
+        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros]);
     }
 
     public static function Calculos(Request $Request){
@@ -204,15 +223,13 @@ class VinaLuisFelipeController extends Controller{
 
 
         $datos = DB::connection('telemetria')
-                                  ->select("(SELECT * FROM  log_biofil02 
-                                              WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' 
-                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+                                  ->select("SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 120");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value/100;
 
-            $date=  $datos[$i]->mt_value; 
-            $newDate = date ( 'j H:i:s' , $date); 
+            $date=  $datos[$i]->mt_time; 
+            $newDate = date_format(date_create($date), 'j H:i:s'); 
 
             $mt_time[$i] =  $newDate;
         }
@@ -223,6 +240,7 @@ class VinaLuisFelipeController extends Controller{
 
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
+         console.log(mt_time);
          Graficos("chart-lfe1","myChart1", mt_value, mt_time);
        </script><?php
 
@@ -230,15 +248,15 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("(SELECT * FROM  log_biofil02 
+                                  ->select("SELECT * FROM  log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' 
-                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+                                                  ORDER BY mt_time DESC LIMIT 120");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
 
-            $date=  $datos[$i]->mt_value; 
-            $newDate = date ( 'j H:i:s' , $date); 
+            $date=  $datos[$i]->mt_time; 
+            $newDate = date_format(date_create($date), 'j H:i:s'); 
 
             $mt_time[$i] =  $newDate;
         }
@@ -255,15 +273,15 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("(SELECT * FROM  log_biofil02 
+                                  ->select("SELECT * FROM  log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.Conductividad_Entrada' 
-                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+                                                  ORDER BY mt_time DESC LIMIT 120");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
 
-            $date=  $datos[$i]->mt_value; 
-            $newDate = date ( 'j H:i:s' , $date); 
+            $date=  $datos[$i]->mt_time; 
+            $newDate = date_format(date_create($date), 'j H:i:s'); 
 
             $mt_time[$i] =  $newDate;
         }
@@ -280,15 +298,15 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("(SELECT * FROM  log_biofil02 
+                                  ->select("SELECT * FROM  log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
-                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+                                                  ORDER BY mt_time DESC LIMIT 120");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value/100;
 
-            $date=  $datos[$i]->mt_value; 
-            $newDate = date ( 'j H:i:s' , $date); 
+            $date=  $datos[$i]->mt_time; 
+            $newDate = date_format(date_create($date), 'j H:i:s'); 
 
             $mt_time[$i] =  $newDate;
         }
@@ -307,15 +325,15 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("(SELECT * FROM  log_biofil02 
+                                  ->select("SELECT * FROM  log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.ORP_Salida' 
-                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+                                                  ORDER BY mt_time DESC LIMIT 120");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
 
-            $date=  $datos[$i]->mt_value; 
-            $newDate = date ( 'j H:i:s' , $date); 
+            $date=  $datos[$i]->mt_time; 
+            $newDate = date_format(date_create($date), 'j H:i:s'); 
 
             $mt_time[$i] =  $newDate;
         }
@@ -333,15 +351,15 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("(SELECT * FROM  log_biofil02 
+                                  ->select("SELECT * FROM  log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' 
-                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC;");
+                                                  ORDER BY mt_time DESC LIMIT 120");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
 
-            $date=  $datos[$i]->mt_value; 
-            $newDate = date ( 'j H:i:s' , $date); 
+            $date=  $datos[$i]->mt_time; 
+            $newDate = date_format(date_create($date), 'j H:i:s'); 
 
             $mt_time[$i] =  $newDate;
         }
@@ -476,6 +494,113 @@ class VinaLuisFelipeController extends Controller{
 
      echo $FechaInicio."<br>";
      echo $FechaFin;
+   }
+
+   public function ListarBombas(){
+
+    $datos= DB::connection("telemetria")
+                        ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
+                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
+                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
+                                                                 ORDER BY mt_name ASC, mt_time ASC");
+       $j=0;
+       $k=0;
+       $h=0;
+       for ($i=0; $i <count($datos); $i++) {
+
+            if ($datos[$i]->mt_value!="0") {
+
+              $BombaActiva[$k][$j]["mt_name"] =   $datos[$i]->mt_name;
+              $BombaActiva[$k][$j]["value"]   =   $datos[$i]->mt_value;
+              $BombaActiva[$k][$j]["mt_time"] =   $datos[$i]->mt_time;
+              $Tiempo[$k][$j]                 =   $datos[$i]->mt_time;
+              $j++;
+              $h++;
+
+            }
+            if ($datos[$i]->mt_value=="0") {
+              $j=0;
+            }
+            if ($i!=0) {
+              if ($datos[$i]->mt_value=="0" && $datos[$i-1]->mt_value=="1") {
+                $k++;
+              } 
+            }   
+       }
+
+       if (isset($BombaActiva)) {
+         
+          for ($i=0; $i <count($BombaActiva); $i++) { 
+
+              $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
+              $BombasOperativas[$i]["MinutosOperativa"] =  count($BombaActiva[$i]);
+              $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
+              $FechaInicio[$i]                          =  reset($Tiempo[$i]);
+              $MinutosOperativa[$i]                     =  count($BombaActiva[$i]);
+              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
+
+          }
+
+          $valores = array_count_values($FechaInicio);
+
+          $k=0;
+          for ($i=0; $i < count($valores); $i++) { 
+            
+            $Fila[$i]["FechaInicio"]      =$FechaInicio[$i];
+            $Fila[$i]["MinutosOperativa"] =$MinutosOperativa[$i];
+            $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
+            
+            $Fila[$i]["NumeroDeBomba"][1] =0;
+            $Fila[$i]["NumeroDeBomba"][2] =0;
+            $Fila[$i]["NumeroDeBomba"][3] =0;
+
+            if ($Fila[$i]["Bombas"]==1) {
+
+              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
+
+            }  
+            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
+
+              $MasDeUnaBomba[$k]=$i;
+              $k++;
+
+            }
+
+          }
+
+       }
+
+       if (isset($MasDeUnaBomba)) {
+        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
+          foreach ($BombasOperativas as $key => $val) {
+                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                      if ($val["Bomba"][32]==1) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
+                      }
+                      if ($val["Bomba"][32]==2) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
+                      }
+                      if ($val["Bomba"][32]==3) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
+                      }
+               }
+           }
+        }
+
+        }
+        if (isset($MasDeUnaBomba)) {
+
+          $columns = array_column($Fila, 'FechaInicio');
+          array_multisort($columns, SORT_DESC, $Fila);
+
+        } else{
+          $Fila=null;
+        }
+
+        return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila]);
+     
    }
 
 }
