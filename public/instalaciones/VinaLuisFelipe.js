@@ -1,6 +1,6 @@
 
 
-function RPM(tipo, valor, id, gaugecanvas, rango, dato) {
+function RPM(tipo, valor, id, gaugecanvas, rango, dato, valor_real) {
 
     if (dato=="Normal") {
         var colores= [
@@ -48,7 +48,8 @@ $("p").css("display", "block");
             renderTo: id,
             width: 115,
             height: 115,
-            units: tipo,
+            units: valor_real,
+            fontUnitsSize: 50,
             value: valor,
             minValue: 0,
             title: "Epale",
@@ -75,6 +76,8 @@ $("p").css("display", "block");
         $("#"+gaugecanvas+" canvas").css("display", "block");
         $("#"+gaugecanvas+" img").css("display", "none");
         $("#"+gaugecanvas+" .loading").css("display", "none");
+
+
 }
 
 

@@ -203,18 +203,24 @@ class VinaLuisFelipeController extends Controller{
           
           var PHSalida   =("<?php echo $datos[5]->mt_value ?>"*10)/14;
           PHSalida       =PHSalida/10;
+
+          var ValorReal_PHEntrada   ="<?php echo $datos[4]->mt_value/100 ?>";
+          var ValorReal_PHSalida   ="<?php echo $datos[5]->mt_value/100 ?>";
+
+          var ValorReal_ORPEntrada ="<?php echo $datos[2]->mt_value ?>";
+          var ValorReal_ORPSalida  ="<?php echo $datos[3]->mt_value ?>";
           
           var ORPEntrada =("<?php echo $datos[2]->mt_value+1000 ?>")/20;
           var ORPSalida  =("<?php echo $datos[3]->mt_value+1000 ?>")/20;
 
 
           
-          RPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH");
-          RPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal");
-          RPM("Conductividad", "<?php echo $datos[0]->mt_value ?>", "gauge2", "rpm-2", rango_conductividad, "Normal");
-          RPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH");
-          RPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal");
-          RPM("Conductividad", "<?php echo $datos[1]->mt_value ?>", "gauge5", "rpm-5", rango_conductividad, "Normal");
+          RPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH", ValorReal_PHEntrada);
+          RPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal", ValorReal_ORPEntrada);
+          RPM("Conductividad", "<?php echo $datos[0]->mt_value ?>", "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value ?>");
+          RPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH", ValorReal_PHSalida);
+          RPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal", ValorReal_ORPSalida);
+          RPM("Conductividad", "<?php echo $datos[1]->mt_value ?>", "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value ?>");
 
 
         </script><?php
@@ -223,7 +229,7 @@ class VinaLuisFelipeController extends Controller{
 
 
         $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 120");
+                                  ->select("(SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value/100;
@@ -240,7 +246,7 @@ class VinaLuisFelipeController extends Controller{
 
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
-         console.log(mt_time);
+
          Graficos("chart-lfe1","myChart1", mt_value, mt_time);
        </script><?php
 
@@ -248,9 +254,7 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM  log_biofil02 
-                                              WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' 
-                                                  ORDER BY mt_time DESC LIMIT 120");
+                                  ->select("(SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
@@ -273,10 +277,8 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM  log_biofil02 
-                                              WHERE mt_name='Biofiltro02--Consumo.Conductividad_Entrada' 
-                                                  ORDER BY mt_time DESC LIMIT 120");
 
+                                  ->select("(SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Entrada' ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
 
@@ -298,9 +300,9 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM  log_biofil02 
+                                  ->select("(SELECT * FROM log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
-                                                  ORDER BY mt_time DESC LIMIT 120");
+                                                 ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value/100;
@@ -325,9 +327,9 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM  log_biofil02 
+                                  ->select("(SELECT * FROM log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.ORP_Salida' 
-                                                  ORDER BY mt_time DESC LIMIT 120");
+                                                  ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
@@ -351,9 +353,9 @@ class VinaLuisFelipeController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM  log_biofil02 
+                                  ->select("(SELECT * FROM log_biofil02 
                                               WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' 
-                                                  ORDER BY mt_time DESC LIMIT 120");
+                                                   ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
 
         for ($i=0; $i < count($datos); $i++) { 
             $mt_value[$i] =  $datos[$i]->mt_value;
