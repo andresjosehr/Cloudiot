@@ -116,8 +116,7 @@
 
                    var mt_time = '<?php echo json_encode($mt_time); ?>';
                    mt_time=JSON.parse(mt_time);
-                   console.log(mt_value)
-                ChartSubModal(mt_time, mt_value);
+                    ChartSubModal(mt_time, mt_value);
 
 
                 $(".submodal").click();

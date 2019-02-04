@@ -72,4 +72,5 @@ Route::post('CalculosLuisFelipe2','VinaLuisFelipeController@GraficarRelojes')->m
 Route::post('CalculosLuisFelipe3','VinaLuisFelipeController@GraficarRelojesFechaPersonalizada')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe4','VinaLuisFelipeController@GraficarFlujoFechaPersonalizado')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe5','VinaLuisFelipeController@ListarBombas')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe6','VinaLuisFelipeController@BombasPersonalizadas')->middleware("verificar_login");
 Route::post('PlantaLicanController','PlantaLicanController@index')->middleware("verificar_login");

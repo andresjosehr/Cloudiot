@@ -46,13 +46,12 @@ $("p").css("display", "block");
 
         var gauge = new RadialGauge({
             renderTo: id,
-            width: 115,
-            height: 115,
+            width: 120,
+            height: 120,
             units: valor_real,
             fontUnitsSize: 50,
             value: valor,
             minValue: 0,
-            title: "Epale",
             startAngle: 90,
             ticksAngle: 180,
             valueBox: false,
