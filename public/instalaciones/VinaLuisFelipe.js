@@ -139,12 +139,12 @@ function Bombas(Operativa, ErrorBomba) {
 
         if (Operativa[i]=="Operativa") {
             $( ".bomba"+i+"-op" ).addClass("bg-green");
-            $( ".bomba"+i+"-op" ).text("Operativa");
+            $( ".bomba"+i+"-op" ).text("Op.");
             $( ".bomba"+i+"-op-btn" ).text("error_outline");
             $( ".btncasc"+i ).addClass("bg-red");
         } else{
             $( ".bomba"+i+"-op" ).addClass("bg-red");
-            $( ".bomba"+i+"-op" ).text("No Operativa");
+            $( ".bomba"+i+"-op" ).text("No Op.");
             $( ".bomba"+i+"-op-btn" ).text("check");
             $( ".btncasc"+i ).addClass("bg-green");
         }

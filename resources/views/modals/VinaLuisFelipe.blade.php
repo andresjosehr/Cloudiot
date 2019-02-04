@@ -149,7 +149,7 @@
                               <div class="loading-bomba"></div>
                               <div class="cargando bombas-cargando">
                                  <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        Bomba 1
                                     </div>
                                     <div class="col-md-1">
@@ -159,7 +159,7 @@
                                        <br>
                                     </div>
                                     <div class="col-md-3">
-                                       <span class="badge bg-red bomba0-op">No Operativa</span>
+                                       <span class="badge bg-red bomba0-op">No Op.</span>
                                     </div>
                                     <div class="col-md-3">
                                        <button type="button" class="btn-bomba-error0 btn bg-red waves-effect btn_error_custom">
@@ -168,7 +168,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        Bomba 2
                                     </div>
                                     <div class="col-md-1">
@@ -187,7 +187,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        Bomba 3
                                     </div>
                                     <div class="col-md-1">
@@ -197,7 +197,7 @@
                                        <br>
                                     </div>
                                     <div class="col-md-3">
-                                       <span class="badge bg-red bomba2-op">No Operativa</span>
+                                       <span class="badge bg-red bomba2-op">No Op.</span>
                                     </div>
                                     <div class="col-md-3">
                                        <button type="button" class="btn-bomba-error2 btn bg-red waves-effect btn_error_custom">
@@ -206,7 +206,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        Bomba 4
                                     </div>
                                     <div class="col-md-1">
@@ -225,7 +225,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                        Bomba 5
                                     </div>
                                     <div class="col-md-1">
