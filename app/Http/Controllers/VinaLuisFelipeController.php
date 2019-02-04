@@ -460,7 +460,7 @@ class VinaLuisFelipeController extends Controller{
        $j=0;
        for ($i=0; $i <count($Datos) ; $i++) { 
          if ($Datos[$i]->mt_value!=0) {
-           $mt_value[$j] =$Datos[$i]->mt_value;
+           $mt_value[$j] =$Datos[$i]->mt_value/100;
            $mt_time[$j]  =$Datos[$i]->mt_time;
            $j++;
          }
