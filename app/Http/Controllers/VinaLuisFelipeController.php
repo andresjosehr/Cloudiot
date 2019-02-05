@@ -114,7 +114,7 @@ class VinaLuisFelipeController extends Controller{
        if (isset($MasDeUnaBomba)) {
         for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
           foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
                       if ($val["Bomba"][32]==1) {
                          $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
                       }
@@ -605,7 +605,7 @@ class VinaLuisFelipeController extends Controller{
        if (isset($MasDeUnaBomba)) {
         for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
           foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
                       if ($val["Bomba"][32]==1) {
                          $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
                       }
@@ -733,7 +733,7 @@ class VinaLuisFelipeController extends Controller{
        if (isset($MasDeUnaBomba)) {
         for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
           foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
                       if ($val["Bomba"][32]==1) {
                          $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
                       }

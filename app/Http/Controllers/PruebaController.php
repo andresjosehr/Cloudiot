@@ -8,7 +8,7 @@ use DB;
 class PruebaController extends Controller{
     public function index(){
 
-		    $datos= DB::connection("telemetria")
+		       $datos= DB::connection("telemetria")
                         ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
@@ -39,7 +39,7 @@ class PruebaController extends Controller{
             }   
        }
 
-
+       if (isset($BombaActiva)) {
          
           for ($i=0; $i <count($BombaActiva); $i++) { 
 
@@ -50,7 +50,6 @@ class PruebaController extends Controller{
               $FechaInicio[$i]                          =  reset($Tiempo[$i]);
               $MinutosOperativa[$i]                     =  count($BombaActiva[$i]);
               $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
 
           }
 
@@ -70,17 +69,16 @@ class PruebaController extends Controller{
             }
           }
 
-
           $k=0;
           for ($i=0; $i < count($valores); $i++) { 
             
-            $Fila[$i]["FechaInicio"]      = $Fecha_Inicio[$i];
-            $Fila[$i]["MinutosOperativa"] = $Minutos_Operativa[$i];
-            $Fila[$i]["Bombas"]           = $valores[$FechaInicio[$i]];            
-
-            $Fila[$i]["NumeroDeBomba"][1] = 0;
-            $Fila[$i]["NumeroDeBomba"][2] = 0;
-            $Fila[$i]["NumeroDeBomba"][3] = 0;
+            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
+            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
+            $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
+            
+            $Fila[$i]["NumeroDeBomba"][1] =0;
+            $Fila[$i]["NumeroDeBomba"][2] =0;
+            $Fila[$i]["NumeroDeBomba"][3] =0;
 
             if ($Fila[$i]["Bombas"]==1) {
 
@@ -96,12 +94,12 @@ class PruebaController extends Controller{
 
           }
 
+       }
 
-
-
+       if (isset($MasDeUnaBomba)) {
         for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
           foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $BombasOperativas[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
                       if ($val["Bomba"][32]==1) {
                          $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
                       }
@@ -115,6 +113,7 @@ class PruebaController extends Controller{
            }
         }
 
+        }
         if (isset($MasDeUnaBomba)) {
 
           $columns = array_column($Fila, 'FechaInicio');
