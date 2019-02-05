@@ -70,11 +70,25 @@ class VinaLuisFelipeController extends Controller{
 
           $valores = array_count_values($FechaInicio);
 
+          $FechaInicio_=array_unique($FechaInicio);
+
+
+          $k=0;
+          for ($i=0; $i < count($FechaInicio); $i++) { 
+
+            if (array_key_exists($i, $FechaInicio_)) {
+
+              $Fecha_Inicio[$k]=$FechaInicio_[$i];
+              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
+              $k++;
+            }
+          }
+
           $k=0;
           for ($i=0; $i < count($valores); $i++) { 
             
-            $Fila[$i]["FechaInicio"]      =$FechaInicio[$i];
-            $Fila[$i]["MinutosOperativa"] =$MinutosOperativa[$i];
+            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
+            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
@@ -547,11 +561,25 @@ class VinaLuisFelipeController extends Controller{
 
           $valores = array_count_values($FechaInicio);
 
+          $FechaInicio_=array_unique($FechaInicio);
+
+
+          $k=0;
+          for ($i=0; $i < count($FechaInicio); $i++) { 
+
+            if (array_key_exists($i, $FechaInicio_)) {
+
+              $Fecha_Inicio[$k]=$FechaInicio_[$i];
+              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
+              $k++;
+            }
+          }
+
           $k=0;
           for ($i=0; $i < count($valores); $i++) { 
             
-            $Fila[$i]["FechaInicio"]      =$FechaInicio[$i];
-            $Fila[$i]["MinutosOperativa"] =$MinutosOperativa[$i];
+            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
+            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
@@ -660,11 +688,26 @@ class VinaLuisFelipeController extends Controller{
 
           $valores = array_count_values($FechaInicio);
 
+          $FechaInicio_=array_unique($FechaInicio);
+
+
+          $k=0;
+          for ($i=0; $i < count($FechaInicio); $i++) { 
+
+            if (array_key_exists($i, $FechaInicio_)) {
+
+              $Fecha_Inicio[$k]=$FechaInicio_[$i];
+              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
+              $k++;
+            }
+          }
+
+
           $k=0;
           for ($i=0; $i < count($valores); $i++) { 
             
-            $Fila[$i]["FechaInicio"]      =$FechaInicio[$i];
-            $Fila[$i]["MinutosOperativa"] =$MinutosOperativa[$i];
+            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
+            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
