@@ -439,12 +439,14 @@
               </div>
               <div class="col-md-12">
                 <canvas id="flujo-bar-chart" width="400" height="70"></canvas>
+                <div style="text-align: center;padding-top: 20px;">
+                  <a onclick="DescargarExcelFlujosDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
+                </div>
               </div>
             </div>
          </div>
       </div>
       <div class="modal-footer">
-         <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
       </div>
    </div>
 </div>
@@ -671,20 +673,33 @@
    var i=0;
    var mt_time = [];
    var mt_value = [];
+
+   var mt_time_flujos = [];
+   var mt_value_flujos = [];
+   var labels= [];
    @foreach ($GraficoBarras as $Barra)
      mt_time[i]='{{ date_format(date_create($Barra->mt_time), 'm-j') }}';
      mt_value[i]='{{$Barra->mt_value}}';
+
+     mt_time_flujos[i] = "{{$Barra->mt_time}}";
+     mt_value_flujos = mt_value;
+
+     labels.push(['Fecha: {{ date_format(date_create($Barra->mt_time), 'm-j') }}','Flujo: {{$Barra->mt_value}}']);
      i++;
    @endforeach
+
+   function DescargarExcelFlujosDiarios() {
+
+       window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos, '_blank' )
+   }
    
    
    var ctx = document.getElementById("flujo-bar-chart").getContext('2d');
    var myChart = new Chart(ctx, {
      type: 'bar',
      data: {
-         labels: mt_time,
+         labels: labels,
          datasets: [{
-             label: 'Flujo - Ultimos 7 dias',
              data: mt_value,
              backgroundColor: 'rgba(255, 99, 132, 0.2)',
              borderColor: 'rgba(255,99,132,1)',
@@ -695,7 +710,15 @@
          scales: {
              yAxes: [{
                  ticks: {
-                     beginAtZero:true
+                     beginAtZero:true,
+                     padding: 100
+                 }
+             }], xAxes: [{
+                     padding: 50,
+                     lineHeight: 3,
+                 ticks: {
+                     padding: 50,
+                     lineHeight: 3
                  }
              }]
          }

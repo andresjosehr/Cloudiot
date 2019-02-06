@@ -142,7 +142,7 @@ class VinaLuisFelipeController extends Controller{
         $GraficoBarras = DB::connection("telemetria")
                                   ->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM 
                                               log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
-                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 6 DAY)
+                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                                    GROUP BY DAY(mt_time) 
                                                      ORDER BY mt_time ASC");
 

@@ -2,129 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use Maatwebsite\Excel\Facades\Excel;
+
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
 use Request;
 use DB;
 
 class PruebaController extends Controller{
+
+
     public function index(){
 
-		       $datos= DB::connection("telemetria")
-                        ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
-                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
-                                                                 ORDER BY mt_name ASC, mt_time ASC");
-       $j=0;
-       $k=0;
-       $h=0;
-       for ($i=0; $i <count($datos); $i++) {
+ 
 
-            if ($datos[$i]->mt_value!="0") {
-
-              $BombaActiva[$k][$j]["mt_name"] =   $datos[$i]->mt_name;
-              $BombaActiva[$k][$j]["value"]   =   $datos[$i]->mt_value;
-              $BombaActiva[$k][$j]["mt_time"] =   $datos[$i]->mt_time;
-              $Tiempo[$k][$j]                 =   $datos[$i]->mt_time;
-              $j++;
-              $h++;
-
-            }
-            if ($datos[$i]->mt_value=="0") {
-              $j=0;
-            }
-            if ($i!=0) {
-              if ($datos[$i]->mt_value=="0" && $datos[$i-1]->mt_value=="1") {
-                $k++;
-              } 
-            }   
-       }
-
-       if (isset($BombaActiva)) {
-         
-          for ($i=0; $i <count($BombaActiva); $i++) { 
-
-              $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
-              $BombasOperativas[$i]["MinutosOperativa"] =  count($BombaActiva[$i]);
-              $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
-              $FechaInicio[$i]                          =  reset($Tiempo[$i]);
-              $MinutosOperativa[$i]                     =  count($BombaActiva[$i]);
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
-          }
-
-          $valores = array_count_values($FechaInicio);
-
-          $FechaInicio_=array_unique($FechaInicio);
+   return Excel::download(new UsersExport, 'FlujosDiarios.xlsx');
 
 
-          $k=0;
-          for ($i=0; $i < count($FechaInicio); $i++) { 
+}
 
-            if (array_key_exists($i, $FechaInicio_)) {
 
-              $Fecha_Inicio[$k]=$FechaInicio_[$i];
-              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
-              $k++;
-            }
-          }
 
-          $k=0;
-          for ($i=0; $i < count($valores); $i++) { 
-            
-            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
-            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
-            $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            
-            $Fila[$i]["NumeroDeBomba"][1] =0;
-            $Fila[$i]["NumeroDeBomba"][2] =0;
-            $Fila[$i]["NumeroDeBomba"][3] =0;
+    public function ExportarPersonas(){
 
-            if ($Fila[$i]["Bombas"]==1) {
+      $Personas[0]["Nombre"]    ="Jose Andres";
+      $Personas[0]["Genero"]    = "Masculino";
+      $Personas[0]["Edad"]      = "23";
+      $Personas[0]["Ocupacion"] = "Programador";
+      
+      $Personas[1]["Nombre"]    = "Omar Jose";
+      $Personas[1]["Genero"]    = "Mujer";
+      $Personas[1]["Edad"]      = "17";
+      $Personas[1]["Ocupacion"] = "Sin oficio";
 
-              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
+      $VariableBonita = json_decode(json_encode($Personas));
 
-            }  
-            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
+      return $VariableBonita;
 
-              $MasDeUnaBomba[$k]=$i;
-              $k++;
-
-            }
-
-          }
-
-       }
-
-       if (isset($MasDeUnaBomba)) {
-        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
-          foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
-                      if ($val["Bomba"][32]==1) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
-                      }
-                      if ($val["Bomba"][32]==2) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
-                      }
-                      if ($val["Bomba"][32]==3) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
-                      }
-               }
-           }
-        }
-
-        }
-        if (isset($MasDeUnaBomba)) {
-
-          $columns = array_column($Fila, 'FechaInicio');
-          array_multisort($columns, SORT_DESC, $Fila);
-
-        } else{
-          $Fila=null;
-        }
-
-  
-        return $Fila;
     }
 
 
@@ -132,5 +48,50 @@ class PruebaController extends Controller{
 }
 
 
+class UsersExport implements FromCollection, WithHeadings
+{
+    use Exportable;
 
-         
+    public function collection()
+    {
+
+       $mt_time = explode(",", $_GET["mt_time"]);
+       $mt_value = explode(",", $_GET["mt_value"]);
+
+
+       for ($i=0; $i <count($mt_time) ; $i++) { 
+         for ($k=0; $k < 2 ; $k++) { 
+           $Datos[$i]["mt_time"]=$mt_time[$i];
+           $Datos[$i]["mt_value"]=$mt_value[$i];
+         }
+       }
+
+       return collect($Datos);
+
+
+
+        // return collect([
+        //     [
+        //         'name' => $_GET["Valriable"],
+        //         'surname' => 'Korop',
+        //         'email' => 'povilas@laraveldaily.com',
+        //         'twitter' => '@povilaskorop'
+        //     ],
+        //     [
+        //         'name' => 'Taylor',
+        //         'surname' => 'Otwell',
+        //         'email' => 'taylor@laravel.com',
+        //         'twitter' => '@taylorotwell'
+        //     ]
+        // ]);
+    }
+
+    public function headings(): array
+    {
+        return [
+            'mt_value',
+            'mt_time',
+        ];
+    }
+
+}

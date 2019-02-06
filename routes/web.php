@@ -74,3 +74,6 @@ Route::post('CalculosLuisFelipe4','VinaLuisFelipeController@GraficarFlujoFechaPe
 Route::post('CalculosLuisFelipe5','VinaLuisFelipeController@ListarBombas')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe6','VinaLuisFelipeController@BombasPersonalizadas')->middleware("verificar_login");
 Route::post('PlantaLicanController','PlantaLicanController@index')->middleware("verificar_login");
+
+
+Route::get('ExcelFlujosDiarios', "ExcelController@ExcelFlujosDiarios")->middleware("verificar_login");
