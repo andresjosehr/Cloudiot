@@ -24,7 +24,7 @@ class VinaLuisFelipeController extends Controller{
 
 
            $datos= DB::connection("telemetria")
-                        ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                        ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
                                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
@@ -515,7 +515,7 @@ class VinaLuisFelipeController extends Controller{
    public function ListarBombas(){
 
     $datos= DB::connection("telemetria")
-                        ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                        ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
                                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
@@ -642,7 +642,7 @@ class VinaLuisFelipeController extends Controller{
 
 
     $datos= DB::connection("telemetria")
-                        ->select("SELECT * FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                        ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
                                                                  AND mt_time BETWEEN '$FechaInicio_' AND '$FechaFin_'
