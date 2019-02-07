@@ -30,7 +30,7 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
                                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
                                                                  ORDER BY mt_name ASC, mt_time ASC");
-        $j=0;
+       $j=0;
        $k=0;
        $h=0;
        $g=0;
@@ -56,7 +56,7 @@ class VinaLuisFelipeController extends Controller{
                 $k++;
               } 
             }   
-       }else{
+       }  else{
         $Flujo[$g]["mt_name"]=$datos[$i]->mt_name;
         $Flujo[$g]["mt_time"]=$datos[$i]->mt_time;
         $Flujo[$g]["mt_value"]=$datos[$i]->mt_value;
@@ -81,16 +81,20 @@ class VinaLuisFelipeController extends Controller{
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
 
-              if ($BombasOperativas[$i]["FechaPenultima"]==null) {
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[date ( 'Y-m-d H:i:s' , strtotime ( '-1 minute' , strtotime ($BombasOperativas[$i]["FechaFin"]) ))];
-              } else{
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i]["FechaPenultima"]];
+              if ($i>=1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
+                if ($BombasOperativas[$i]["Flujo"]<"0") {
+                }
               }
+
+
 
           }
 
-          $valores = array_count_values($FechaInicio);
 
+
+          $BombasOperativas[0]["Flujo"]=0;
+          $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
 
@@ -152,12 +156,17 @@ class VinaLuisFelipeController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
-
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
+        }
+        unset($Fila[count($Fila)-1]);
+        for ($i=0; $i <count($Fila) ; $i++) { 
+          if ($Fila[$i]["Flujo"]<0) {
+            unset($Fila[$i]);
+          }
         }
 
 
@@ -564,7 +573,7 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
                                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
                                                                  ORDER BY mt_name ASC, mt_time ASC");
-              $j=0;
+       $j=0;
        $k=0;
        $h=0;
        $g=0;
@@ -590,7 +599,7 @@ class VinaLuisFelipeController extends Controller{
                 $k++;
               } 
             }   
-       }else{
+       }  else{
         $Flujo[$g]["mt_name"]=$datos[$i]->mt_name;
         $Flujo[$g]["mt_time"]=$datos[$i]->mt_time;
         $Flujo[$g]["mt_value"]=$datos[$i]->mt_value;
@@ -615,16 +624,20 @@ class VinaLuisFelipeController extends Controller{
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
 
-              if ($BombasOperativas[$i]["FechaPenultima"]==null) {
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[date ( 'Y-m-d H:i:s' , strtotime ( '-1 minute' , strtotime ($BombasOperativas[$i]["FechaFin"]) ))];
-              } else{
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i]["FechaPenultima"]];
+              if ($i>=1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
+                if ($BombasOperativas[$i]["Flujo"]<"0") {
+                }
               }
+
+
 
           }
 
-          $valores = array_count_values($FechaInicio);
 
+
+          $BombasOperativas[0]["Flujo"]=0;
+          $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
 
@@ -686,12 +699,17 @@ class VinaLuisFelipeController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
-
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
+        }
+        unset($Fila[count($Fila)-1]);
+        for ($i=0; $i <count($Fila) ; $i++) { 
+          if ($Fila[$i]["Flujo"]<0) {
+            unset($Fila[$i]);
+          }
         }
 
         return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila]);
@@ -713,7 +731,7 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
                                                                  AND mt_time BETWEEN '$FechaInicio_' AND '$FechaFin_'
                                                                  ORDER BY mt_name ASC, mt_time ASC");
-              $j=0;
+       $j=0;
        $k=0;
        $h=0;
        $g=0;
@@ -739,7 +757,7 @@ class VinaLuisFelipeController extends Controller{
                 $k++;
               } 
             }   
-       }else{
+       }  else{
         $Flujo[$g]["mt_name"]=$datos[$i]->mt_name;
         $Flujo[$g]["mt_time"]=$datos[$i]->mt_time;
         $Flujo[$g]["mt_value"]=$datos[$i]->mt_value;
@@ -764,16 +782,20 @@ class VinaLuisFelipeController extends Controller{
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
 
-              if ($BombasOperativas[$i]["FechaPenultima"]==null) {
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[date ( 'Y-m-d H:i:s' , strtotime ( '-1 minute' , strtotime ($BombasOperativas[$i]["FechaFin"]) ))];
-              } else{
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i]["FechaPenultima"]];
+              if ($i>=1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
+                if ($BombasOperativas[$i]["Flujo"]<"0") {
+                }
               }
+
+
 
           }
 
-          $valores = array_count_values($FechaInicio);
 
+
+          $BombasOperativas[0]["Flujo"]=0;
+          $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
 
@@ -835,12 +857,17 @@ class VinaLuisFelipeController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
-
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
+        }
+        unset($Fila[count($Fila)-1]);
+        for ($i=0; $i <count($Fila) ; $i++) { 
+          if ($Fila[$i]["Flujo"]<0) {
+            unset($Fila[$i]);
+          }
         }
 
 

@@ -49,7 +49,7 @@ class PruebaController extends Controller{
                 $k++;
               } 
             }   
-       }else{
+       }  else{
         $Flujo[$g]["mt_name"]=$datos[$i]->mt_name;
         $Flujo[$g]["mt_time"]=$datos[$i]->mt_time;
         $Flujo[$g]["mt_value"]=$datos[$i]->mt_value;
@@ -74,16 +74,20 @@ class PruebaController extends Controller{
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
 
-              if ($BombasOperativas[$i]["FechaPenultima"]==null) {
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[date ( 'Y-m-d H:i:s' , strtotime ( '-1 minute' , strtotime ($BombasOperativas[$i]["FechaFin"]) ))];
-              } else{
-                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i]["FechaPenultima"]];
+              if ($i>=1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
+                if ($BombasOperativas[$i]["Flujo"]<"0") {
+                }
               }
+
+
 
           }
 
-          $valores = array_count_values($FechaInicio);
 
+
+          $BombasOperativas[0]["Flujo"]=0;
+          $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
 
@@ -145,12 +149,17 @@ class PruebaController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
-
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
+        }
+        unset($Fila[count($Fila)-1]);
+        for ($i=0; $i <count($Fila) ; $i++) { 
+          if ($Fila[$i]["Flujo"]<0) {
+            unset($Fila[$i]);
+          }
         }
 
         return $Fila;
