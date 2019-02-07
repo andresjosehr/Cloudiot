@@ -16,79 +16,146 @@ class PruebaController extends Controller{
 
     public function index(){
 
-      echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
-            <div style="padding-top:50px">
-            <canvas id="myChart" height="50"></canvas>
-            </div>';
+      $datos= DB::connection("telemetria")
+                        ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
+                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
+                                                                 OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
+                                                                 AND mt_time > DATE_SUB('2019-02-07 09:00:00', INTERVAL 12 HOUR)
+                                                                 ORDER BY mt_name ASC, mt_time ASC");
+       $j=0;
+       $k=0;
+       $h=0;
+       $g=0;
+       for ($i=0; $i <count($datos); $i++) {
 
-      ?><script>
-        var ctx = document.getElementById("myChart");
+        if ($datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba1" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba2" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba3") {
 
-var data = {
-  labels: ["2 Jan", "9 Jan", "16 Jan", "23 Jan", "30 Jan", "6 Feb", "13 Feb"],
-  datasets: [{
-    data: [110, 87, 56, 50, 88, 60, 45],
-    backgroundColor: "#4082c4"
-  }]
-}
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: data,
-  options: {
-    "hover": {
-      "animationDuration": 0
-    },
-    "animation": {
-      "duration": 1,
-      "onComplete": function() {
-        var chartInstance = this.chart,
-          ctx = chartInstance.ctx;
+            if ($datos[$i]->mt_value!="0") {
 
-        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
+              $BombaActiva[$k][$j]["mt_name"] =   $datos[$i]->mt_name;
+              $BombaActiva[$k][$j]["value"]   =   $datos[$i]->mt_value;
+              $BombaActiva[$k][$j]["mt_time"] =   $datos[$i]->mt_time;
+              $Tiempo[$k][$j]                 =   $datos[$i]->mt_time;
+              $j++;
+              $h++;
 
-        this.data.datasets.forEach(function(dataset, i) {
-          var meta = chartInstance.controller.getDatasetMeta(i);
-          meta.data.forEach(function(bar, index) {
-            var data = dataset.data[index];
-            ctx.fillText(data, bar._model.x, bar._model.y - 5);
-          });
-        });
+            }
+            if ($datos[$i]->mt_value=="0") {
+              $j=0;
+            }
+            if ($i!=0) {
+              if ($datos[$i]->mt_value=="0" && $datos[$i-1]->mt_value=="1") {
+                $k++;
+              } 
+            }   
+       }else{
+        $Flujo[$g]["mt_name"]=$datos[$i]->mt_name;
+        $Flujo[$g]["mt_time"]=$datos[$i]->mt_time;
+        $Flujo[$g]["mt_value"]=$datos[$i]->mt_value;
+
+        $FlujoEpa[$datos[$i]->mt_time]=$datos[$i]->mt_value;
+        $g++;
       }
-    },
-    legend: {
-      "display": false
-    },
-    tooltips: {
-      "enabled": false
-    },
-    scales: {
-      yAxes: [{
-        display: false,
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          max: Math.max(...data.datasets[0].data) + 10,
-          display: false,
-          beginAtZero: true
+    
+    } 
+
+
+
+       if (isset($BombaActiva)) {
+         
+          for ($i=0; $i <count($BombaActiva); $i++) { 
+              $FechaInicio[$i]                          =  reset($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]         =  array_pop($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaPenultima"]   =  end($Tiempo[$i]);
+              $BombasOperativas[$i]["MinutosOperativa"] =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
+              $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
+              $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
+              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
+
+              if ($BombasOperativas[$i]["FechaPenultima"]==null) {
+                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[date ( 'Y-m-d H:i:s' , strtotime ( '-1 minute' , strtotime ($BombasOperativas[$i]["FechaFin"]) ))];
+              } else{
+                $BombasOperativas[$i]["Flujo"]            = $FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i]["FechaPenultima"]];
+              }
+
+          }
+
+          $valores = array_count_values($FechaInicio);
+
+          $FechaInicio_=array_unique($FechaInicio);
+
+
+          $k=0;
+          for ($i=0; $i < count($FechaInicio); $i++) { 
+
+            if (array_key_exists($i, $FechaInicio_)) {
+
+              $Fecha_Inicio[$k]=$FechaInicio_[$i];
+              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
+              $k++;
+            }
+          }
+
+          $k=0;
+          for ($i=0; $i < count($valores); $i++) { 
+            
+            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
+            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
+            $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
+            $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
+            
+            $Fila[$i]["NumeroDeBomba"][1] =0;
+            $Fila[$i]["NumeroDeBomba"][2] =0;
+            $Fila[$i]["NumeroDeBomba"][3] =0;
+
+            if ($Fila[$i]["Bombas"]==1) {
+
+              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
+
+            }  
+            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
+
+              $MasDeUnaBomba[$k]=$i;
+              $k++;
+
+            }
+
+          }
+
+       }
+
+       if (isset($MasDeUnaBomba)) {
+        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
+          foreach ($BombasOperativas as $key => $val) {
+                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
+                      if ($val["Bomba"][32]==1) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
+                      }
+                      if ($val["Bomba"][32]==2) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
+                      }
+                      if ($val["Bomba"][32]==3) {
+                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
+                      }
+               }
+           }
         }
-      }],
-      xAxes: [{
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          beginAtZero: true
+
         }
-      }]
-    }
-  }
-});
-      </script><?php
-      
-  }
+        if (isset($MasDeUnaBomba)) {
+
+          $columns = array_column($Fila, 'FechaInicio');
+          array_multisort($columns, SORT_DESC, $Fila);
+
+        } else{
+          $Fila=null;
+        }
+
+        return $Fila;
+     
+   }
 
 }
 

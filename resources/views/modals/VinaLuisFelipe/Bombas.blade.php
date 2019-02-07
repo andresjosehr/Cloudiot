@@ -49,7 +49,7 @@
                                                    <tr>
                                                       <td><?php echo date_format(date_create($Bomba["FechaInicio"]), 'Y-m-j H:i:s'); ?></td>
                                                       <td>{{ $Bomba["MinutosOperativa"] }}</td>
-                                                      <td></td>
+                                                      <td>{{ $Bomba["Flujo"] }}</td>
                                                       <td>
                                                       @if ($Bomba["NumeroDeBomba"][1]==1)
                                                          <i class="material-icons btn-bomba">add_circle</i>
