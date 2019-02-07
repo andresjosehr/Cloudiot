@@ -139,20 +139,37 @@ class VinaLuisFelipeController extends Controller{
         }
 
 
-        $GraficoBarras = DB::connection("telemetria")
-                                  ->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM 
-                                              log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
-                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
-                                                   GROUP BY DAY(mt_time) 
-                                                     ORDER BY mt_time ASC");
+        $PrimerosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) as mt_value,
+                                             MIN(mt_time) as mt_time
+                                              FROM log_biofil02 
+                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_value<>0 AND mt_value>1000
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
 
 
+        $SegundosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MAX(mt_value) as mt_value,
+                                             MAX(mt_time)as mt_time
+                                              FROM log_biofil02 
+                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_value<>0 AND mt_value>1000
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
 
+        for ($i=0; $i <count($PrimerosDatosBarras) ; $i++) { 
+          $GraficoBarras[$i]["mt_time"]=$PrimerosDatosBarras[$i]->mt_time;
+          $GraficoBarras[$i]["mt_value"]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$i]->mt_value;
+        }
 
-
-
-
-
+        $GraficoBarras = json_decode(json_encode($GraficoBarras));
 
 
       $Parametros= DB::connection("telemetria")
@@ -163,7 +180,6 @@ class VinaLuisFelipeController extends Controller{
                                                                             OR mt_name='Biofiltro02--Consumo.LimitePH_Alto')
                                                                             GROUP BY mt_name");
 
-      // return $Parametros;
 
         return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros]);
     }

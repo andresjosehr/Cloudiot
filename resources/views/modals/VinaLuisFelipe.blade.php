@@ -4,13 +4,13 @@
    <div class="modal-dialog modal-lg" role="document" style="width: 95%;margin-top: 2%;">
       <div class="modal-content">
          <div class="modal-header">
+            <p id="contenedorLFE"></p>
             <div class="row">
                <div class="col-md-4">
-                  <p id="contenedorLFE"></p>
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                </div>
                <div class="col-md-4">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion {{ $UltimaMedicion->mt_time }}</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Última Mendición {{ $UltimaMedicion->mt_time }}</h4>
                </div>
             </div>
          </div>
@@ -447,6 +447,7 @@
          </div>
       </div>
       <div class="modal-footer">
+         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar ventana</button>
       </div>
    </div>
 </div>
@@ -698,15 +699,37 @@
    var myChart = new Chart(ctx, {
      type: 'bar',
      data: {
-         labels: labels,
+         labels: mt_time,
          datasets: [{
              data: mt_value,
-             backgroundColor: 'rgba(255, 99, 132, 0.2)',
+             backgroundColor: 'rgba(255, 99, 132, 0.8)',
              borderColor: 'rgba(255,99,132,1)',
              borderWidth: 1
          }]
      },
      options: {
+      legend: {
+         display: false
+      },
+      "animation": {
+         "duration": 1,
+         "onComplete": function() {
+           var chartInstance = this.chart,
+             ctx = chartInstance.ctx;
+
+           ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+           ctx.textAlign = 'center';
+           ctx.textBaseline = 'bottom';
+
+           this.data.datasets.forEach(function(dataset, i) {
+             var meta = chartInstance.controller.getDatasetMeta(i);
+             meta.data.forEach(function(bar, index) {
+               var data = dataset.data[index];
+               ctx.fillText(data, bar._model.x, bar._model.y - 5);
+             });
+           });
+         }
+      },
          scales: {
              yAxes: [{
                  ticks: {

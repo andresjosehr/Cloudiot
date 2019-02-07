@@ -15,124 +15,80 @@ class PruebaController extends Controller{
 
 
     public function index(){
-      $datos= DB::connection("telemetria")
-                        ->select("SELECT DISTINCT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3')
-                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
-                                                                 ORDER BY mt_name ASC, mt_time ASC");
-       $j=0;
-       $k=0;
-       $h=0;
-       for ($i=0; $i <count($datos); $i++) {
 
-            if ($datos[$i]->mt_value!="0") {
+      echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+            <div style="padding-top:50px">
+            <canvas id="myChart" height="50"></canvas>
+            </div>';
 
-              $BombaActiva[$k][$j]["mt_name"] =   $datos[$i]->mt_name;
-              $BombaActiva[$k][$j]["value"]   =   $datos[$i]->mt_value;
-              $BombaActiva[$k][$j]["mt_time"] =   $datos[$i]->mt_time;
-              $Tiempo[$k][$j]                 =   $datos[$i]->mt_time;
-              $j++;
-              $h++;
+      ?><script>
+        var ctx = document.getElementById("myChart");
 
-            }
-            if ($datos[$i]->mt_value=="0") {
-              $j=0;
-            }
-            if ($i!=0) {
-              if ($datos[$i]->mt_value=="0" && $datos[$i-1]->mt_value=="1") {
-                $k++;
-              } 
-            }   
-       }
-
-       if (isset($BombaActiva)) {
-         
-          for ($i=0; $i <count($BombaActiva); $i++) { 
-
-              $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
-              $BombasOperativas[$i]["MinutosOperativa"] =  count($BombaActiva[$i]);
-              $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
-              $FechaInicio[$i]                          =  reset($Tiempo[$i]);
-              $MinutosOperativa[$i]                     =  count($BombaActiva[$i]);
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
-          }
-
-          $valores = array_count_values($FechaInicio);
-
-          $FechaInicio_=array_unique($FechaInicio);
-
-
-          $k=0;
-          for ($i=0; $i < count($FechaInicio); $i++) { 
-
-            if (array_key_exists($i, $FechaInicio_)) {
-
-              $Fecha_Inicio[$k]=$FechaInicio_[$i];
-              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
-              $k++;
-            }
-          }
-
-          $k=0;
-          for ($i=0; $i < count($valores); $i++) { 
-            
-            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
-            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
-            $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            
-            $Fila[$i]["NumeroDeBomba"][1] =0;
-            $Fila[$i]["NumeroDeBomba"][2] =0;
-            $Fila[$i]["NumeroDeBomba"][3] =0;
-
-            if ($Fila[$i]["Bombas"]==1) {
-
-              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
-
-            }  
-            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
-
-              $MasDeUnaBomba[$k]=$i;
-              $k++;
-
-            }
-
-          }
-
-       }
-
-       if (isset($MasDeUnaBomba)) {
-        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
-          foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
-                      if ($val["Bomba"][32]==1) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
-                      }
-                      if ($val["Bomba"][32]==2) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
-                      }
-                      if ($val["Bomba"][32]==3) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
-                      }
-               }
-           }
-        }
-
-        }
-        if (isset($MasDeUnaBomba)) {
-
-          $columns = array_column($Fila, 'FechaInicio');
-          array_multisort($columns, SORT_DESC, $Fila);
-
-        } else{
-          $Fila=null;
-        }
-
-        return $Fila;
-
+var data = {
+  labels: ["2 Jan", "9 Jan", "16 Jan", "23 Jan", "30 Jan", "6 Feb", "13 Feb"],
+  datasets: [{
+    data: [110, 87, 56, 50, 88, 60, 45],
+    backgroundColor: "#4082c4"
+  }]
 }
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: data,
+  options: {
+    "hover": {
+      "animationDuration": 0
+    },
+    "animation": {
+      "duration": 1,
+      "onComplete": function() {
+        var chartInstance = this.chart,
+          ctx = chartInstance.ctx;
+
+        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+
+        this.data.datasets.forEach(function(dataset, i) {
+          var meta = chartInstance.controller.getDatasetMeta(i);
+          meta.data.forEach(function(bar, index) {
+            var data = dataset.data[index];
+            ctx.fillText(data, bar._model.x, bar._model.y - 5);
+          });
+        });
+      }
+    },
+    legend: {
+      "display": false
+    },
+    tooltips: {
+      "enabled": false
+    },
+    scales: {
+      yAxes: [{
+        display: false,
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          max: Math.max(...data.datasets[0].data) + 10,
+          display: false,
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+      </script><?php
+      
+  }
 
 }
 
