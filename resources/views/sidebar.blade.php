@@ -77,12 +77,6 @@
                             </ul>
                         </li>
                         @endif
-                        <li>
-                            <a href="parametros">
-                                <i class="material-icons">build</i>
-                                <span>Parametros</span>
-                            </a>
-                        </li>
 
                         @if (Request::segment(1)=="panel-de-control")
                                 @foreach($Instalaciones as $Instalacion)
