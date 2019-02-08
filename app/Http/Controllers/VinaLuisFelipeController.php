@@ -184,6 +184,7 @@ class VinaLuisFelipeController extends Controller{
         for ($i=0; $i < count($valores); $i++) { 
           $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
+        unset($Fila[count($Fila)-1]);
 
 
         $PrimerosDatosBarras = DB::connection("telemetria")
@@ -744,6 +745,8 @@ class VinaLuisFelipeController extends Controller{
           $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
 
+        unset($Fila[count($Fila)-1]);
+
         return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila]);
      
    }
@@ -917,6 +920,8 @@ class VinaLuisFelipeController extends Controller{
         for ($i=0; $i < count($valores); $i++) { 
           $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
+
+       unset($Fila[count($Fila)-1]);
 
 
 
