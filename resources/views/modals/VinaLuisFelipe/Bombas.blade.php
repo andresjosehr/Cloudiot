@@ -102,6 +102,7 @@
                 var FechaFin = document.getElementById('FechaFinBomba').value;
                 var url = "<?php echo Request::root() ?>/CalculosLuisFelipe6";
                 $("#contenedorLFE").load(url, {FechaInicio: FechaInicio, FechaFin: FechaFin});
+                $('body').removeClass('modal-open');
                 $('.modalbomba').modal('hide');
                 $('.modalbomba').empty();
                 $('.modalbomba').remove();

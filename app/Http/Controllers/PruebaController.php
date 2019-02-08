@@ -16,12 +16,13 @@ class PruebaController extends Controller{
 
     public function index(){
 
-      $datos= DB::connection("telemetria")
+
+       $datos= DB::connection("telemetria")
                         ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
-                                                                 AND mt_time > DATE_SUB('2019-02-07 09:00:00', INTERVAL 12 HOUR)
+                                                                 AND mt_time BETWEEN '2019-02-07 00:00:00' AND '2019-02-07 23:59:59'
                                                                  ORDER BY mt_name ASC, mt_time ASC");
        $j=0;
        $k=0;
@@ -62,31 +63,48 @@ class PruebaController extends Controller{
 
 
 
+
+
        if (isset($BombaActiva)) {
          
           for ($i=0; $i <count($BombaActiva); $i++) { 
               $FechaInicio[$i]                          =  reset($Tiempo[$i]);
+              $FechaFin[$i]["date"]  =  end($Tiempo[$i]);
               $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  array_pop($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaPenultima"]   =  end($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
               $BombasOperativas[$i]["MinutosOperativa"] =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
-              if ($i>=1) {
-                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
-                if ($BombasOperativas[$i]["Flujo"]<"0") {
-                }
-              }
-
+              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];  
 
 
           }
 
 
 
-          $BombasOperativas[0]["Flujo"]=0;
+          $columns = array_column($FechaFin, 'date');
+          array_multisort($columns, SORT_DESC, $FechaFin);
+
+
+          for ($i=0; $i <count($FechaFin); $i++) { 
+            $FechaFin__[$i]=$FechaFin[$i]["date"];
+          }
+          unset($FechaFin);
+          $FechaFin__=array_count_values($FechaFin__);
+
+          $i=0;
+          foreach ($FechaFin__ as $key => $value) {
+           $FechaFin[$i]=$key;
+           $i++;
+          }
+
+
+          for ($i=0; $i <count($FechaFin) ; $i++) { 
+            if ($i < count($FechaFin)-1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$FechaFin[$i]]-$FlujoEpa[$FechaFin[$i+1]];
+              }
+          }
+          $BombasOperativas[count($FechaFin)-1]["Flujo"]=0;
           $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
@@ -108,7 +126,7 @@ class PruebaController extends Controller{
             $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
             $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
+            // $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
             $Fila[$i]["NumeroDeBomba"][2] =0;
@@ -149,18 +167,18 @@ class PruebaController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
+
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
         }
-        unset($Fila[count($Fila)-1]);
-        for ($i=0; $i <count($Fila) ; $i++) { 
-          if ($Fila[$i]["Flujo"]<0) {
-            unset($Fila[$i]);
-          }
+
+        for ($i=0; $i < count($valores); $i++) { 
+          $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
+
 
         return $Fila;
      

@@ -69,31 +69,48 @@ class VinaLuisFelipeController extends Controller{
 
 
 
+
+
        if (isset($BombaActiva)) {
          
           for ($i=0; $i <count($BombaActiva); $i++) { 
               $FechaInicio[$i]                          =  reset($Tiempo[$i]);
+              $FechaFin[$i]["date"]  =  end($Tiempo[$i]);
               $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  array_pop($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaPenultima"]   =  end($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
               $BombasOperativas[$i]["MinutosOperativa"] =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
-              if ($i>=1) {
-                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
-                if ($BombasOperativas[$i]["Flujo"]<"0") {
-                }
-              }
-
-
-
+              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];  
           }
 
 
 
-          $BombasOperativas[0]["Flujo"]=0;
+          $i=0;
+          foreach ($FechaFin as $key => $part) {
+               $sort[$i] = strtotime($part["date"]);
+               $i++;
+          }
+          array_multisort($sort, SORT_DESC, $FechaFin);
+          for ($i=0; $i <count($FechaFin); $i++) { 
+            $FechaFin_[$i]=$FechaFin[$i]["date"];
+          }
+          unset($FechaFin);
+          $FechaFin_=array_count_values($FechaFin_);
+
+          $i=0;
+          foreach ($FechaFin_ as $key => $value) {
+           $FechaFin[$i]=$key;
+           $i++;
+          }
+
+
+          for ($i=0; $i <count($FechaFin) ; $i++) { 
+            if ($i < count($FechaFin)-1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$FechaFin[$i]]-$FlujoEpa[$FechaFin[$i+1]];
+              }
+          }
+          $BombasOperativas[count($FechaFin)-1]["Flujo"]=0;
           $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
@@ -115,7 +132,7 @@ class VinaLuisFelipeController extends Controller{
             $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
             $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
+            // $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
             $Fila[$i]["NumeroDeBomba"][2] =0;
@@ -156,17 +173,16 @@ class VinaLuisFelipeController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
+
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
         }
-        unset($Fila[count($Fila)-1]);
-        for ($i=0; $i <count($Fila) ; $i++) { 
-          if ($Fila[$i]["Flujo"]<0) {
-            unset($Fila[$i]);
-          }
+
+        for ($i=0; $i < count($valores); $i++) { 
+          $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
 
 
@@ -612,31 +628,48 @@ class VinaLuisFelipeController extends Controller{
 
 
 
+
+
        if (isset($BombaActiva)) {
          
           for ($i=0; $i <count($BombaActiva); $i++) { 
               $FechaInicio[$i]                          =  reset($Tiempo[$i]);
+              $FechaFin[$i]["date"]  =  end($Tiempo[$i]);
               $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  array_pop($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaPenultima"]   =  end($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
               $BombasOperativas[$i]["MinutosOperativa"] =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
-              if ($i>=1) {
-                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
-                if ($BombasOperativas[$i]["Flujo"]<"0") {
-                }
-              }
-
-
-
+              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];  
           }
 
 
 
-          $BombasOperativas[0]["Flujo"]=0;
+          $i=0;
+          foreach ($FechaFin as $key => $part) {
+               $sort[$i] = strtotime($part["date"]);
+               $i++;
+          }
+          array_multisort($sort, SORT_DESC, $FechaFin);
+          for ($i=0; $i <count($FechaFin); $i++) { 
+            $FechaFin_[$i]=$FechaFin[$i]["date"];
+          }
+          unset($FechaFin);
+          $FechaFin_=array_count_values($FechaFin_);
+
+          $i=0;
+          foreach ($FechaFin_ as $key => $value) {
+           $FechaFin[$i]=$key;
+           $i++;
+          }
+
+
+          for ($i=0; $i <count($FechaFin) ; $i++) { 
+            if ($i < count($FechaFin)-1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$FechaFin[$i]]-$FlujoEpa[$FechaFin[$i+1]];
+              }
+          }
+          $BombasOperativas[count($FechaFin)-1]["Flujo"]=0;
           $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
@@ -658,7 +691,7 @@ class VinaLuisFelipeController extends Controller{
             $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
             $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
+            // $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
             $Fila[$i]["NumeroDeBomba"][2] =0;
@@ -699,17 +732,16 @@ class VinaLuisFelipeController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
+
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
         }
-        unset($Fila[count($Fila)-1]);
-        for ($i=0; $i <count($Fila) ; $i++) { 
-          if ($Fila[$i]["Flujo"]<0) {
-            unset($Fila[$i]);
-          }
+
+        for ($i=0; $i < count($valores); $i++) { 
+          $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
 
         return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila]);
@@ -720,8 +752,8 @@ class VinaLuisFelipeController extends Controller{
 
 
     
-    $FechaInicio_=$_POST["FechaInicio"];
-    $FechaFin_=$_POST["FechaFin"];
+    $FechaInicio______=$_POST["FechaInicio"];
+    $FechaFin______=$_POST["FechaFin"];
 
 
     $datos= DB::connection("telemetria")
@@ -729,7 +761,7 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
-                                                                 AND mt_time BETWEEN '$FechaInicio_' AND '$FechaFin_'
+                                                                 AND mt_time BETWEEN '$FechaInicio______' AND '$FechaFin______'
                                                                  ORDER BY mt_name ASC, mt_time ASC");
        $j=0;
        $k=0;
@@ -770,31 +802,48 @@ class VinaLuisFelipeController extends Controller{
 
 
 
+
+
        if (isset($BombaActiva)) {
          
           for ($i=0; $i <count($BombaActiva); $i++) { 
               $FechaInicio[$i]                          =  reset($Tiempo[$i]);
+              $FechaFin[$i]["date"]  =  end($Tiempo[$i]);
               $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  array_pop($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaPenultima"]   =  end($Tiempo[$i]);
+              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
               $BombasOperativas[$i]["MinutosOperativa"] =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
               $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
               $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];
-
-              if ($i>=1) {
-                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$BombasOperativas[$i]["FechaFin"]]-$FlujoEpa[$BombasOperativas[$i-1]["FechaFin"]];
-                if ($BombasOperativas[$i]["Flujo"]<"0") {
-                }
-              }
-
+              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];  
 
 
           }
 
 
 
-          $BombasOperativas[0]["Flujo"]=0;
+          $columns = array_column($FechaFin, 'date');
+          array_multisort($columns, SORT_DESC, $FechaFin);
+
+
+          for ($i=0; $i <count($FechaFin); $i++) { 
+            $FechaFin__[$i]=$FechaFin[$i]["date"];
+          }
+          unset($FechaFin);
+          $FechaFin__=array_count_values($FechaFin__);
+
+          $i=0;
+          foreach ($FechaFin__ as $key => $value) {
+           $FechaFin[$i]=$key;
+           $i++;
+          }
+
+
+          for ($i=0; $i <count($FechaFin) ; $i++) { 
+            if ($i < count($FechaFin)-1) {
+                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$FechaFin[$i]]-$FlujoEpa[$FechaFin[$i+1]];
+              }
+          }
+          $BombasOperativas[count($FechaFin)-1]["Flujo"]=0;
           $valores = array_count_values($FechaInicio);
           $FechaInicio_=array_unique($FechaInicio);
 
@@ -816,7 +865,7 @@ class VinaLuisFelipeController extends Controller{
             $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
             $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
             $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
+            // $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
             
             $Fila[$i]["NumeroDeBomba"][1] =0;
             $Fila[$i]["NumeroDeBomba"][2] =0;
@@ -857,22 +906,21 @@ class VinaLuisFelipeController extends Controller{
 
         }
         if (isset($MasDeUnaBomba)) {
+
           $columns = array_column($Fila, 'FechaInicio');
           array_multisort($columns, SORT_DESC, $Fila);
 
         } else{
           $Fila=null;
         }
-        unset($Fila[count($Fila)-1]);
-        for ($i=0; $i <count($Fila) ; $i++) { 
-          if ($Fila[$i]["Flujo"]<0) {
-            unset($Fila[$i]);
-          }
+
+        for ($i=0; $i < count($valores); $i++) { 
+          $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
 
 
 
-          return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila, "FechaInicio"=> $FechaInicio_, "FechaFin"=> $FechaFin_]);
+          return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila, "FechaInicio"=> $FechaInicio______, "FechaFin"=> $FechaFin______]);
 
 
 
