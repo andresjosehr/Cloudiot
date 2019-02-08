@@ -28,13 +28,13 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">Instalaciones Asignadas</li>
-                        @if ($Usuario->rol==1)
-                        <li>
+                    <li>
                             <a href="panel-de-control" class=" waves-effect waves-block">
                                 <i class="material-icons">home</i>
                                 <span>Panel de control</span>
                             </a>
                         </li>
+                        @if ($Usuario->rol==1)
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">person_pin</i>

@@ -79,5 +79,7 @@ Route::post('PlantaLicanController','PlantaLicanController@index')->middleware("
 Route::get('ExcelFlujosDiarios', "ExcelController@ExcelFlujosDiarios")->middleware("verificar_login");
 
 Route::get('Cuenta', function(){
-	return view("usuarios.cuenta");
-})->middleware("verificar_login", ["Usuario" =>  Auth::user()]);
+	return view("usuarios.cuenta", ["Usuario" =>  Auth::user()]);
+})->middleware("verificar_login");
+
+Route::post('CambiarContrasena', 'UsuariosController@CambiarContrasena')->middleware("verificar_login");
