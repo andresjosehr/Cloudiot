@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Auth;
 use Log;
 
 class VinaLuisFelipeController extends Controller{
@@ -30,6 +31,12 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
                                                                  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
                                                                  ORDER BY mt_name ASC, mt_time ASC");
+          $Determinante="No hay nada papa";
+
+          
+
+
+                        
        $j=0;
        $k=0;
        $h=0;
@@ -44,6 +51,7 @@ class VinaLuisFelipeController extends Controller{
               $BombaActiva[$k][$j]["value"]   =   $datos[$i]->mt_value;
               $BombaActiva[$k][$j]["mt_time"] =   $datos[$i]->mt_time;
               $Tiempo[$k][$j]                 =   $datos[$i]->mt_time;
+
               $j++;
               $h++;
 
@@ -67,8 +75,9 @@ class VinaLuisFelipeController extends Controller{
     
     } 
 
-
-
+    
+    if ($h!=0) {
+      
 
 
        if (isset($BombaActiva)) {
@@ -185,6 +194,11 @@ class VinaLuisFelipeController extends Controller{
           $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
         }
         unset($Fila[count($Fila)-1]);
+        $ImprimirBombas=true;
+    } else{
+      $ImprimirBombas=false;
+      $Fila=null;
+    }
 
 
         $PrimerosDatosBarras = DB::connection("telemetria")
@@ -234,7 +248,7 @@ class VinaLuisFelipeController extends Controller{
                                                                             GROUP BY mt_name");
 
 
-        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros]);
+        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros, "Usuario" => Auth::user(), "ImprimirBombas" => $ImprimirBombas]);
     }
 
     public static function Calculos(Request $Request){
@@ -629,7 +643,7 @@ class VinaLuisFelipeController extends Controller{
 
 
 
-
+if ($h!=0) {
 
        if (isset($BombaActiva)) {
          
@@ -747,7 +761,13 @@ class VinaLuisFelipeController extends Controller{
 
         unset($Fila[count($Fila)-1]);
 
-        return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila]);
+        $ImprimirBombas=true;
+    } else{
+      $ImprimirBombas=false;
+      $Fila=null;
+    }
+
+        return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila, "ImprimirBombas" => $ImprimirBombas, "Horas12" => true]);
      
    }
 
@@ -805,7 +825,7 @@ class VinaLuisFelipeController extends Controller{
 
 
 
-
+if ($h!=0) {
 
        if (isset($BombaActiva)) {
          
@@ -923,9 +943,15 @@ class VinaLuisFelipeController extends Controller{
 
        unset($Fila[count($Fila)-1]);
 
+        $ImprimirBombas=true;
+    } else{
+      $ImprimirBombas=false;
+      $Fila=null;
+    }
 
 
-          return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila, "FechaInicio"=> $FechaInicio______, "FechaFin"=> $FechaFin______]);
+
+          return view("modals.VinaLuisFelipe.Bombas", ["Bombas" => $Fila, "FechaInicio"=> $FechaInicio______, "FechaFin"=> $FechaFin______,"ImprimirBombas" => $ImprimirBombas, "Horas12" => false]);
 
 
 

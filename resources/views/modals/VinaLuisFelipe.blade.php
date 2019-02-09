@@ -44,7 +44,7 @@
                                  <th style="text-align: center;">Bombas</th>
                                  </tr>
                                  </thead>
-                                 @if ($Bombas!=null)
+                                 @if ($ImprimirBombas==true)
                                     <tbody align="center">
                                        @php
                                        $i=0;
@@ -82,7 +82,7 @@
                                     </tbody>
                                  @endif
                                  </table>
-                                 @if ($Bombas==null)
+                                 @if ($ImprimirBombas==false)
                                     <div>
                                        <p>Sin datos de Bombas activas en las ultimas 3 horas</p>
                                        <p>Haga click para obetener datos en una fecha de mayor rango</p>
@@ -368,13 +368,17 @@
                      Tiempo de Riego
                   </div>
                   <div class="col-md-6" style="text-align: center;">
-                     <div id="Riego" class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="Riego" @if ($Usuario->rol==3)
+                                       disabled='true'
+                                    @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div style="padding-top: 10px">
                         <-----<b id="RiegoValor"></b><b> Minutos</b>----->
                      </div>
                   </div>
                   <div class="col-md-4">
+                     @if ($Usuario->rol!=3)
                      <button onclick="RegistarRiego()" style="margin-top: -6px;" class="btn btn-primary btn-block boton1">Registrar</button>
+                     @endif
                      <div class="loadingg loadingg1"></div>
                   </div>
                </div>
@@ -383,13 +387,17 @@
                      Tiempo de Reposo
                   </div>
                   <div class="col-md-6" style="text-align: center;">
-                     <div id="Reposo" class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="Reposo" @if ($Usuario->rol==3)
+                        disabled='true'
+                     @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div style="padding-top: 10px">
                         <-----<b id="ReposoValor"></b><b> Minutos</b>----->
                      </div>
                   </div>
                   <div class="col-md-4">
+                     @if ($Usuario->rol!=3)
                      <button onclick="RegistarReposo()" style="margin-top: -6px;" class="btn btn-primary btn-block boton2">Registrar</button>
+                     @endif
                      <div class="loadingg loadingg2"></div>
                   </div>
                </div>
@@ -398,13 +406,17 @@
                      Rango de PH
                   </div>
                   <div class="col-md-6" style="text-align: center;">
-                     <div id="slider" class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="slider" @if ($Usuario->rol==3)
+                        disabled='true'
+                     @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div style="padding-top: 10px">
                         <b id="BajoPH"></b><----------><b id="AltoPH"></b>
                      </div>
                   </div>
                   <div class="col-md-4">
-                     <button  onclick="RegistarRangoPH()" style="margin-top: -6px;" class="btn btn-primary btn-block boton3">Registrar</button>
+                     @if ($Usuario->rol!=3)
+                     <button onclick="RegistarRangoPH()" style="margin-top: -6px;" class="btn btn-primary btn-block boton3">Registrar</button>
+                     @endif
                      <div class="loadingg loadingg3"></div>
                   </div>
                </div>
@@ -820,7 +832,8 @@
              slider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
                  nodes[handle].innerHTML = values[handle];
              });
-   
+
+
    
              var riego = document.getElementById('Riego');
    

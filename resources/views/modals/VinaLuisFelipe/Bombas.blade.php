@@ -40,7 +40,7 @@
                                              <th style="text-align: center;">Bombas</th>
                                              </tr>
                                              </thead>
-                                             @if ($Bombas!=null)
+                                             @if ($ImprimirBombas==true)
                                                 <tbody align="center">
                                                    @php
                                                    $i=0;
@@ -78,6 +78,18 @@
                                                 </tbody>
                                              @endif
                                     </table>
+                                    @if ($ImprimirBombas==false && $Horas12==true)
+                                                <div>
+                                                   <p>Sin datos de Bombas activas en las ultimas 12 horas</p>
+                                                   <p>Selecciona una fecha personalizada para obetener datos</p>
+                                                </div>
+                                             @endif
+                                             @if ($ImprimirBombas==false && $Horas12==false)
+                                                <div>
+                                                   <p>Sin datos de Bombas activas en el rango seleccionado</p>
+                                                   <p>Selecciona otra fecha personalizada para obetener datos</p>
+                                                </div>
+                                             @endif
                                  </div>
                         </div>
                         <div class="modal-footer">
