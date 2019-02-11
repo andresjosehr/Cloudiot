@@ -29,7 +29,7 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
-                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
+                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1' OR mt_name='Biofiltro02--Consumo.EstadoBomba2' OR mt_name='Biofiltro02--Consumo.EstadoBomba3') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
                                                                  ORDER BY mt_name ASC, mt_time ASC");
           $Determinante="No hay nada papa";
 
@@ -602,7 +602,7 @@ class VinaLuisFelipeController extends Controller{
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
-                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.EstadoBomba1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
+                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1' OR mt_name='Biofiltro02--Consumo.EstadoBomba2' OR mt_name='Biofiltro02--Consumo.EstadoBomba3') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 12 HOUR)
                                                                  ORDER BY mt_name ASC, mt_time ASC");
        $j=0;
        $k=0;
