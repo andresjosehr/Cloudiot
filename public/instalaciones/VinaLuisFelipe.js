@@ -6,18 +6,8 @@ function RPM(tipo, valor, id, gaugecanvas, rango, dato, valor_real) {
         var colores= [
                 {
                   "from": 0,
-                  "to": 30,
-                  "color": "rgba(100, 255, 100, .2)"
-                },
-                {
-                  "from": 30,
-                  "to": 70,
-                  "color": "rgba(220, 200, 0, .75)"
-                },
-                {
-                    "from": 70,
-                    "to": 100,
-                    "color": "rgba(200, 50, 50, .75)"
+                  "to": 100,
+                  "color": "#fff"
                 }
             ];
     } else{

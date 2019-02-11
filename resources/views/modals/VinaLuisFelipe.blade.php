@@ -21,6 +21,7 @@
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
                <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel de control</a></li>
                <li role="presentation"><a href="#flujos" data-toggle="tab">Vista de Flujos</a></li>
+               <li role="presentation" id="GraficarPHDiario"><a href="#PHDiarios" data-toggle="tab">Vista de PH diarios</a></li>
                <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros de Configuracion</a></li>
             </ul>
             <!-- Tab panes -->
@@ -422,6 +423,14 @@
                </div>
                </p>
             </div>
+            <div role="tabpanel" class="tab-pane fade" id="PHDiarios">
+               <div id="PHDiarioContenedor"></div>
+               <div class="loadingPH"></div>
+               <canvas id="ph-bar-chart" width="400" height="70"></canvas>
+               <div style="text-align: center;padding-top: 20px; display: none" class="BotonExportarPHDiarios">
+                  <a onclick="DescargarExcelPHDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
+                </div>
+            </div>
             <div role="tabpanel" class="tab-pane fade" id="flujos">
                <div id="contenedorFlujos"></div>
               <div class="row">
@@ -490,6 +499,21 @@
    -webkit-animation:loading 1.2s linear infinite;
    z-index: 1;
    display: none;
+   }
+
+   .loadingPH{
+   width: 35px;
+   height: 35px;
+   border-radius:150px;
+   border:6px solid #797979;
+   border-top-color:rgba(0,0,0,0.3);
+   box-sizing:border-box;
+   position:absolute;
+   top: 90%;
+   left: 50%;
+   animation:loading 1.2s linear infinite;
+   -webkit-animation:loading 1.2s linear infinite;
+   z-index: 1;
    }
    @keyframes loading{
    0%{transform:rotate(0deg)}
@@ -645,6 +669,13 @@
        }
    });
 
+   $("#GraficarPHDiario").click(function() {
+      if (document.getElementById("ph-bar-chart").height==70) {
+         var url = "<?php echo Request::root() ?>/CalculosLuisFelipe7";
+         $("#PHDiarioContenedor").load(url, {dato: "Epa"});
+      }
+   });
+
    $("#ListarBombas").click(function() {
       $(".loader-insta").css("display", "block");
       var url = "<?php echo Request::root() ?>/CalculosLuisFelipe5";
@@ -702,10 +733,9 @@
    @endforeach
 
    function DescargarExcelFlujosDiarios() {
-
        window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos, '_blank' )
    }
-   
+
    
    var ctx = document.getElementById("flujo-bar-chart").getContext('2d');
    var myChart = new Chart(ctx, {
@@ -759,6 +789,69 @@
          }
      }
    });
+
+
+function GraficarPHDiarioJS(mt_time, mt_value) {
+         var ctx = document.getElementById("ph-bar-chart").getContext('2d');
+         var myChart = new Chart(ctx, {
+           type: 'bar',
+           data: {
+               labels: mt_time,
+               datasets: [{
+                   data: mt_value,
+                   backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                   borderColor: 'rgba(255,99,132,1)',
+                   borderWidth: 1
+               }]
+           },
+           options: {
+            legend: {
+               display: false
+            },
+            "animation": {
+               "duration": 1,
+               "onComplete": function() {
+                 var chartInstance = this.chart,
+                   ctx = chartInstance.ctx;
+
+                 ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                 ctx.textAlign = 'center';
+                 ctx.textBaseline = 'bottom';
+
+                 this.data.datasets.forEach(function(dataset, i) {
+                   var meta = chartInstance.controller.getDatasetMeta(i);
+                   meta.data.forEach(function(bar, index) {
+                     var data = dataset.data[index];
+                     ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                   });
+                 });
+               }
+            },
+               scales: {
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero:true,
+                           padding: 100
+                       }
+                   }], xAxes: [{
+                           padding: 50,
+                           lineHeight: 3,
+                       ticks: {
+                           padding: 50,
+                           lineHeight: 3
+                       }
+                   }]
+               }
+           }
+         });
+
+       let mt_time_ph=mt_time;
+       let mt_value_ph=mt_value;
+
+      $(".loadingPH").css("display", "none");
+      $(".BotonExportarPHDiarios").css("display", "block");
+}
+
 
 
    $("#parametros").click(function () {

@@ -19,7 +19,7 @@ class ExcelController extends Controller
 
     public function ExcelFlujosDiarios(Request $Request){
 
-  	   return Excel::download(new UsersExport, 'FlujosDiarios.xlsx');
+  	   return Excel::download(new UsersExport, 'Datos.xlsx');
 
   	   ?><script>window.close();</script><?php
 

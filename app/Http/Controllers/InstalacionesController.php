@@ -35,6 +35,15 @@ class InstalacionesController extends Controller{
                     ->get();
       }
 
+
+      if ($usuario->rol==4) {
+        $instalaciones = DB::table('instalaciones')
+                    ->where("id", "1")
+                    ->get();
+      }
+
+
+
     	return view("home", ["Instalaciones" => $instalaciones, "Usuario" => $usuario]);			
 
     }

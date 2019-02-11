@@ -73,6 +73,7 @@ Route::post('CalculosLuisFelipe3','VinaLuisFelipeController@GraficarRelojesFecha
 Route::post('CalculosLuisFelipe4','VinaLuisFelipeController@GraficarFlujoFechaPersonalizado')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe5','VinaLuisFelipeController@ListarBombas')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe6','VinaLuisFelipeController@BombasPersonalizadas')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe7','VinaLuisFelipeController@GraficarPHDiario')->middleware("verificar_login");
 Route::post('PlantaLicanController','PlantaLicanController@index')->middleware("verificar_login");
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
@@ -288,11 +288,11 @@ class VinaLuisFelipeController extends Controller{
 
           var rango_conductividad = [];
           rango_conductividad[0]  ="0";
-          rango_conductividad[1]  ="20";
-          rango_conductividad[2]  ="40";
-          rango_conductividad[3]  ="60";
-          rango_conductividad[4]  ="80";
-          rango_conductividad[5]  ="100";
+          rango_conductividad[1]  ="2000";
+          rango_conductividad[2]  ="4000";
+          rango_conductividad[3]  ="6000";
+          rango_conductividad[4]  ="8000";
+          rango_conductividad[5]  ="10000";
 
 
           var PHEntrada  =("<?php echo $datos[4]->mt_value ?>"*10)/14;
@@ -310,14 +310,17 @@ class VinaLuisFelipeController extends Controller{
           var ORPEntrada =("<?php echo $datos[2]->mt_value+1000 ?>")/20;
           var ORPSalida  =("<?php echo $datos[3]->mt_value+1000 ?>")/20;
 
+          var ConductividadEntrada="<?php echo $datos[0]->mt_value/100; ?>";
+          var ConductividadSalida="<?php echo $datos[1]->mt_value/100; ?>";
+
 
           
           RPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH", ValorReal_PHEntrada);
           RPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal", ValorReal_ORPEntrada);
-          RPM("Conductividad", "<?php echo $datos[0]->mt_value ?>", "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value ?>");
+          RPM("Conductividad", ConductividadEntrada, "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value ?>");
           RPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH", ValorReal_PHSalida);
           RPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal", ValorReal_ORPSalida);
-          RPM("Conductividad", "<?php echo $datos[1]->mt_value ?>", "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value ?>");
+          RPM("Conductividad", ConductividadSalida, "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value ?>");
 
 
         </script><?php
@@ -593,6 +596,47 @@ class VinaLuisFelipeController extends Controller{
 
      echo $FechaInicio."<br>";
      echo $FechaFin;
+   }
+
+   public function GraficarPHDiario(){
+     $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' 
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                             GROUP BY DAY(mt_time) 
+                                               ORDER BY mt_time ASC");
+
+        $NumeroRegistros = DB::connection("telemetria")
+                            ->select("SELECT mt_time ,COUNT(*) Registros
+                                        FROM log_biofil02 WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Entrada'
+                                        GROUP BY day(mt_time)
+                                        ORDER BY mt_time ASC");
+
+          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            $mt_time[$i]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+            $mt_value[$i]=number_format(($DatosDiarios[$i]->mt_value/$NumeroRegistros[$i]->Registros)/100, 2);
+          }
+
+
+            ?><script>
+                var mt_value = '<?php echo json_encode($mt_value); ?>';
+                mt_value=JSON.parse(mt_value);
+
+                var mt_time = '<?php echo json_encode($mt_time); ?>';
+                mt_time=JSON.parse(mt_time);
+
+                function DescargarExcelPHDiarios() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time+'&mt_value='+mt_value, '_blank' )
+                 }
+
+            </script><?php
+
+        ?><script>
+          GraficarPHDiarioJS(mt_time, mt_value);</script><?php
    }
 
    public function ListarBombas(){
