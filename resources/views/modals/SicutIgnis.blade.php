@@ -1,5 +1,6 @@
+  <script src="instalaciones/SicutIgnis.js"></script>
    <button type="button" class="btn btn-default waves-effect m-r-20 display-modal" data-toggle="modal" data-target="#largeModal" style="display: none"></button>
-
+  
    <!-- Large Size -->
             <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document" style="width: 95%;">
@@ -108,11 +109,9 @@
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-1-5" align="center"><canvas id="myChart0" height="150"></canvas></div>
-                                <div class="col-1-5" align="center"><canvas id="myChart1" height="150"></canvas></div>
-                                <div class="col-1-5" align="center"><canvas id="myChart2" height="150"></canvas></div>
-                                <div class="col-1-5" align="center"><canvas id="myChart3" height="150"></canvas></div>
-                                <div class="col-1-5" align="center"><canvas id="myChart4" height="150"></canvas></div>
+                                <div class="col-md-12" align="center">
+                                  <canvas id="myChart0" height="25"></canvas>
+                                </div>
                           </div>
                             <div class="row" align="center" style="padding-top: 30px">
                               <div class="col-md-4">
@@ -199,10 +198,9 @@
                             </div>
                         </div>
                         <div class="row" align="center" style="margin-right: 20px;margin-left: 20px;">
-                          <div class="col-md-3"><canvas id="myChart5"  height="150"></div>
-                          <div class="col-md-3"><canvas id="myChart6"  height="150"></div>
-                          <div class="col-md-3"><canvas id="myChart7"  height="150"></div>
-                          <div class="col-md-3"><canvas id="myChart8"  height="150"></div>
+                          <div class="col-md-12">
+                            <canvas id="myChart1"  height="25">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
@@ -254,47 +252,7 @@
                   }
 
             </style>
-
-            <script>
-                $( ".display-modal" ).click();
-                      for (var i = 0; i <= 8; i++) {
-                      var ctx = document.getElementById("myChart"+i).getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: [],
-                            datasets: [{
-                                label: '',
-                                data: [12, 19, 3, 5, 2, 3],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                    }
-                    $(".loader-insta").css("display", "none");
-            </script>
+  <script>
+    GraficosIgnis("myChart0");
+  GraficosIgnis("myChart1");
+  </script>
