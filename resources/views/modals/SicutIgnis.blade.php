@@ -109,8 +109,17 @@
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12" align="center">
-                                  <canvas id="myChart0" height="25"></canvas>
+                                <div class="col-md-3" align="center">
+                                  <canvas id="myChart0" height="100"></canvas>
+                                </div>
+                                <div class="col-md-3" align="center">
+                                  <canvas id="myChart1" height="100"></canvas>
+                                </div>
+                                <div class="col-md-3" align="center">
+                                  <canvas id="myChart2" height="100"></canvas>
+                                </div>
+                                <div class="col-md-3" align="center">
+                                  <canvas id="myChart3" height="100"></canvas>
                                 </div>
                           </div>
                             <div class="row" align="center" style="padding-top: 30px">
@@ -198,8 +207,14 @@
                             </div>
                         </div>
                         <div class="row" align="center" style="margin-right: 20px;margin-left: 20px;">
-                          <div class="col-md-12">
-                            <canvas id="myChart1"  height="25">
+                          <div class="col-md-4">
+                            <canvas id="myChart4"  height="100">
+                            </div>
+                            <div class="col-md-4">
+                            <canvas id="myChart5"  height="100">
+                            </div>
+                            <div class="col-md-4">
+                            <canvas id="myChart6"  height="100">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -253,6 +268,12 @@
 
             </style>
   <script>
-    GraficosIgnis("myChart0");
-  GraficosIgnis("myChart1");
+    GraficosIgnisArriba("myChart0");
+  GraficosIgnisArriba("myChart1");
+  GraficosIgnisArriba("myChart2");
+  GraficosIgnisArriba("myChart3");
+
+  GraficosIgnisAbajo("myChart4");
+  GraficosIgnisAbajo("myChart5");
+  GraficosIgnisAbajo("myChart6");
   </script>

@@ -52,7 +52,7 @@
                                        @endphp
                                        @foreach ($Bombas as $Bomba)
                                        <tr>
-                                          <td><?php echo date_format(date_create($Bomba["FechaInicio"]), 'm-d H:i:s'); ?></td>
+                                          <td><?php echo date_format(date_create($Bomba["FechaInicio"]), 'm-d H:i'); ?></td>
                                           <td>{{ $Bomba["MinutosOperativa"] }}</td>
                                           <td>{{ $Bomba["Flujo"] }}</td>
                                           <td>
