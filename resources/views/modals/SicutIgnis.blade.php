@@ -30,6 +30,7 @@
                         </div>
                         <hr style=" color: black">  
                         <div class="modal-body">
+                          <div id="SicutContenedor"></div>
                             <div class="row" align="center">
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
@@ -111,15 +112,19 @@
                             <div class="row">
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart0" height="100"></canvas>
+                                  <div class="loading"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart1" height="100"></canvas>
+                                  <div class="loading"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart2" height="100"></canvas>
+                                  <div class="loading"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart3" height="100"></canvas>
+                                  <div class="loading"></div>
                                 </div>
                           </div>
                             <div class="row" align="center" style="padding-top: 30px">
@@ -208,13 +213,16 @@
                         </div>
                         <div class="row" align="center" style="margin-right: 20px;margin-left: 20px;">
                           <div class="col-md-4">
-                            <canvas id="myChart4"  height="100">
+                            <canvas id="myChart4"  height="100"></canvas>
+                              <div class="loading"></div>
                             </div>
                             <div class="col-md-4">
-                            <canvas id="myChart5"  height="100">
+                            <canvas id="myChart5"  height="100"></canvas>
+                              <div class="loading"></div>
                             </div>
                             <div class="col-md-4">
-                            <canvas id="myChart6"  height="100">
+                            <canvas id="myChart6"  height="100"></canvas>
+                              <div class="loading"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -265,15 +273,48 @@
                     padding-right: 15px;
                     padding-left: 15px;
                   }
+                  .loading{
+                     width: 35px;
+                     height: 35px;
+                     border-radius:150px;
+                     border:6px solid #797979;
+                     border-top-color:rgba(0,0,0,0.3);
+                     box-sizing:border-box;
+                     position:absolute;
+                     top: 100px;
+                     left: 64%;
+                     margin-top:-80px;
+                     margin-left:-80px;
+                     animation:loading 1.2s linear infinite;
+                     -webkit-animation:loading 1.2s linear infinite;
+                     z-index: 1;
+                  }
+                  @keyframes loading{
+                   0%{transform:rotate(0deg)}
+                   100%{transform:rotate(360deg)}
+                   }
+                   @-webkit-keyframes loading{
+                   0%{-webkit-transform:rotate(0deg)}
+                   100%{-webkit-transform:rotate(360deg)}
+                   }
 
             </style>
   <script>
-    GraficosIgnisArriba("myChart0");
-  GraficosIgnisArriba("myChart1");
-  GraficosIgnisArriba("myChart2");
-  GraficosIgnisArriba("myChart3");
 
-  GraficosIgnisAbajo("myChart4");
-  GraficosIgnisAbajo("myChart5");
-  GraficosIgnisAbajo("myChart6");
+    $.ajaxSetup({
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       }
+   });
+    var url = "<?php echo Request::root() ?>/CalculosSigutIgnis";
+    $("#SicutContenedor").load(url, {dato: "Epa"});
+
+  // GraficosIgnisArriba("myChart0");
+  // GraficosIgnisArriba("myChart1");
+  // GraficosIgnisArriba("myChart2");
+  // GraficosIgnisArriba("myChart3");
+  
+  // GraficosIgnisAbajo("myChart4");
+  // GraficosIgnisAbajo("myChart5");
+  // GraficosIgnisAbajo("myChart6");
   </script>

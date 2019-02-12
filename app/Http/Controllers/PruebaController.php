@@ -17,175 +17,30 @@ class PruebaController extends Controller{
     public function index(){
 
 
-       $datos= DB::connection("telemetria")
-                        ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
-                                                                 OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
-                                                                 AND mt_time BETWEEN '2019-02-07 00:00:00' AND '2019-02-07 23:59:59'
-                                                                 ORDER BY mt_name ASC, mt_time ASC");
-       $j=0;
-       $k=0;
-       $h=0;
-       $g=0;
-       for ($i=0; $i <count($datos); $i++) {
+       $datos = DB::connection('telemetria')
+                                    ->select("SELECT * FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny'
+                                                                        OR mt_name='AASA--ION8650.EnerActRet'
+                                                                        OR mt_name='AASA--ION8650.EnerReactIny'
+                                                                        OR mt_name='AASA--ION8650.EnerReactRet'
+                                                                        OR mt_name='AASA--ION8650.Voltajea'
+                                                                        OR mt_name='AASA--ION8650.VoltajeLineaab'
+                                                                        OR mt_name='AASA--ION8650.VoltajeLineabc'
+                                                                        OR mt_name='AASA--ION8650.VotajeLineaca'
+                                                                        OR mt_name='AASA--ION8650.Voltajea'
+                                                                        OR mt_name='AASA--ION8650.Voltajeb'
+                                                                        OR mt_name='AASA--ION8650.Voltajec'
+                                                                        OR mt_name='AASA--ION8650.VoltajePromedio'
+                                                                        OR mt_name='AASA--ION8650.FactorPotenciaa'
+                                                                        OR mt_name='AASA--ION8650.FactorPotenciab'
+                                                                        OR mt_name='AASA--ION8650.FactorPotenciac'
+                                                                        OR mt_name='AASA--ION8650.FactorPotenciaTotal')
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        ORDER BY mt_name, mt_time DESC ");
 
-        if ($datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba1" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba2" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba3") {
+        var_dump($datos);
 
-            if ($datos[$i]->mt_value!="0") {
-
-              $BombaActiva[$k][$j]["mt_name"] =   $datos[$i]->mt_name;
-              $BombaActiva[$k][$j]["value"]   =   $datos[$i]->mt_value;
-              $BombaActiva[$k][$j]["mt_time"] =   $datos[$i]->mt_time;
-              $Tiempo[$k][$j]                 =   $datos[$i]->mt_time;
-              $j++;
-              $h++;
-
-            }
-            if ($datos[$i]->mt_value=="0") {
-              $j=0;
-            }
-            if ($i!=0) {
-              if ($datos[$i]->mt_value=="0" && $datos[$i-1]->mt_value=="1") {
-                $k++;
-              } 
-            }   
-       }  else{
-        $Flujo[$g]["mt_name"]=$datos[$i]->mt_name;
-        $Flujo[$g]["mt_time"]=$datos[$i]->mt_time;
-        $Flujo[$g]["mt_value"]=$datos[$i]->mt_value;
-
-        $FlujoEpa[$datos[$i]->mt_time]=$datos[$i]->mt_value;
-        $g++;
-      }
-    
-    } 
-
-
-
-
-
-       if (isset($BombaActiva)) {
-         
-          for ($i=0; $i <count($BombaActiva); $i++) { 
-              $FechaInicio[$i]                          =  reset($Tiempo[$i]);
-              $FechaFin[$i]["date"]  =  end($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaInicio"]      =  reset($Tiempo[$i]);
-              $BombasOperativas[$i]["FechaFin"]         =  end($Tiempo[$i]);
-              $BombasOperativas[$i]["MinutosOperativa"] =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
-              $BombasOperativas[$i]["Bomba"]            =  $BombaActiva[$i][0]["mt_name"];
-              $MinutosOperativa[$i]                     =  count(array_map("unserialize", array_unique(array_map("serialize", $BombaActiva[$i]))));
-              $Bomba[$i]                                =  $BombaActiva[$i][0]["mt_name"];  
-
-
-          }
-
-
-
-          $columns = array_column($FechaFin, 'date');
-          array_multisort($columns, SORT_DESC, $FechaFin);
-
-
-          for ($i=0; $i <count($FechaFin); $i++) { 
-            $FechaFin__[$i]=$FechaFin[$i]["date"];
-          }
-          unset($FechaFin);
-          $FechaFin__=array_count_values($FechaFin__);
-
-          $i=0;
-          foreach ($FechaFin__ as $key => $value) {
-           $FechaFin[$i]=$key;
-           $i++;
-          }
-
-
-          for ($i=0; $i <count($FechaFin) ; $i++) { 
-            if ($i < count($FechaFin)-1) {
-                $BombasOperativas[$i]["Flujo"]=$FlujoEpa[$FechaFin[$i]]-$FlujoEpa[$FechaFin[$i+1]];
-              }
-          }
-          $BombasOperativas[count($FechaFin)-1]["Flujo"]=0;
-          $valores = array_count_values($FechaInicio);
-          $FechaInicio_=array_unique($FechaInicio);
-
-
-          $k=0;
-          for ($i=0; $i < count($FechaInicio); $i++) { 
-
-            if (array_key_exists($i, $FechaInicio_)) {
-
-              $Fecha_Inicio[$k]=$FechaInicio_[$i];
-              $Minutos_Operativa[$k]=$MinutosOperativa[$i];
-              $k++;
-            }
-          }
-
-          $k=0;
-          for ($i=0; $i < count($valores); $i++) { 
-            
-            $Fila[$i]["FechaInicio"]      =$Fecha_Inicio[$i];
-            $Fila[$i]["MinutosOperativa"] =$Minutos_Operativa[$i];
-            $Fila[$i]["Bombas"]           =$valores[$FechaInicio[$i]];
-            // $Fila[$i]["Flujo"]      =$BombasOperativas[$i]["Flujo"];
-            
-            $Fila[$i]["NumeroDeBomba"][1] =0;
-            $Fila[$i]["NumeroDeBomba"][2] =0;
-            $Fila[$i]["NumeroDeBomba"][3] =0;
-
-            if ($Fila[$i]["Bombas"]==1) {
-
-              $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
-
-            }  
-            if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
-
-              $MasDeUnaBomba[$k]=$i;
-              $k++;
-
-            }
-
-          }
-
-       }
-
-       if (isset($MasDeUnaBomba)) {
-        for ($i=0; $i <count($MasDeUnaBomba) ; $i++) { 
-          foreach ($BombasOperativas as $key => $val) {
-                if ($val['FechaInicio'] === $Fila[$MasDeUnaBomba[$i]]["FechaInicio"]) {
-                      if ($val["Bomba"][32]==1) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][1]=1;
-                      }
-                      if ($val["Bomba"][32]==2) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][2]=1;
-                      }
-                      if ($val["Bomba"][32]==3) {
-                         $Fila[$MasDeUnaBomba[$i]]["NumeroDeBomba"][3]=1;
-                      }
-               }
-           }
-        }
-
-        }
-        if (isset($MasDeUnaBomba)) {
-
-          $columns = array_column($Fila, 'FechaInicio');
-          array_multisort($columns, SORT_DESC, $Fila);
-
-        } else{
-          $Fila=null;
-        }
-
-        for ($i=0; $i < count($valores); $i++) { 
-          $Fila[$i]["Flujo"]=$BombasOperativas[$i]["Flujo"];
-        }
-
-
-        return $Fila;
-     
-   }
-
+  }
 }
-
 
 class UsersExport implements FromCollection, WithHeadings
 {

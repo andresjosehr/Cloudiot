@@ -1,17 +1,17 @@
 $( ".display-modal" ).click();
 $(".loader-insta").css("display", "none");
 
-function GraficosIgnisArriba(id) {
+function GraficosIgnisArriba(id, mt_value1, mt_time1, mt_value2, mt_time2) {
 
                 
                     var ctx = document.getElementById(id).getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: [1, 2, 3, 4, 5, 6],
+                            labels: mt_time1,
                             datasets: [{
                                 label: '',
-                                data: [12, 19, 3, 5, 2, 3],
+                                data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -19,7 +19,7 @@ function GraficosIgnisArriba(id) {
                             },
                             {
                                 label: '',
-                                data: [8, 5, 1, 10, 6, 8],
+                                data: mt_value2,
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor: 'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
