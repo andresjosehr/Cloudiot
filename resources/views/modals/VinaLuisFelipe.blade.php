@@ -8,17 +8,17 @@
             <p id="contenedorLFE"></p>
             <div class="row">
                <div class="col-md-4">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
+                  <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                </div>
                <div class="col-md-4">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Última Mendición {{ $UltimaMedicion->mt_time }}</h4>
+                  <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">Última Mendición {{ $UltimaMedicion->mt_time }}</h4>
                </div>
             </div>
          </div>
          <div class="body">
          </div>
          <hr class="vina-hr">
-         <div class="modal-body table-custom">
+         <div class="modal-body vina-table-custom">
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
                <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel de control</a></li>
                <li role="presentation"><a href="#flujos" data-toggle="tab">Vista de Flujos</a></li>
@@ -35,7 +35,7 @@
                               <div class="col-md-6 vina-listar-bombas" id="ListarBombas">
                                  <h4 align="left" class="vina-title-table">Flujos</h4>
                                  <div class="body table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table vina-table table-striped">
                                        <thead>
                                           <tr>
                                              <th class="vina-th1">Fecha
@@ -58,22 +58,22 @@
                                           <td>{{ $Bomba["Flujo"] }}</td>
                                           <td>
                                           @if ($Bomba["NumeroDeBomba"][1]==1)
-                                             <i class="material-icons btn-bomba">add_circle</i>
+                                             <i class="material-icons vina-btn-bomba">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][1]==0)
-                                             <i class="material-icons btn-bomba vina-bomb-desc">add_circle</i>
+                                             <i class="material-icons vina-btn-bomba vina-bomb-desc">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][2]==1)
-                                             <i class="material-icons btn-bomba">add_circle</i>
+                                             <i class="material-icons vina-btn-bomba">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][2]==0)
-                                             <i class="material-icons btn-bomba vina-bomb-desc">add_circle</i>
+                                             <i class="material-icons vina-btn-bomba vina-bomb-desc">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][3]==1)
-                                             <i class="material-icons btn-bomba">add_circle</i>
+                                             <i class="material-icons vina-btn-bomba">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][3]==0)
-                                             <i class="material-icons btn-bomba vina-bomb-desc">add_circle</i>
+                                             <i class="material-icons vina-btn-bomba vina-bomb-desc">add_circle</i>
                                           @endif
                                           </td>
                                        </tr>
@@ -115,13 +115,13 @@
                            </div>
                            <div class="col-md-6" align="center">
                               <div class="vina-loading-bomba"></div>
-                              <div class="cargando bombas-cargando">
+                              <div class="vina-cargando  bombas-cargando">
                                  <div class="row">
                                     <div class="col-md-4">
                                        Bomba 1
                                     </div>
                                     <div class="col-md-1">
-                                       <button type="button" class="btncasc0 btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
+                                       <button type="button" class="btncasc0 btn bg-green btn-circle waves-effect waves-circle waves-float vina-circle-custom">
                                        <i class="material-icons bomba0-op-btn">check</i>
                                        </button>
                                        <br>
@@ -130,8 +130,8 @@
                                        <span class="badge bg-red bomba0-op">No Op.</span>
                                     </div>
                                     <div class="col-md-3">
-                                       <button type="button" class="btn-bomba-error0 btn bg-red waves-effect btn_error_custom">
-                                       <span class="custom-error texto-error0">Error</span>
+                                       <button type="button" class="vina-btn-bomba-error0 btn bg-red waves-effect vina-btn_error_custom">
+                                       <span class="vina-custom-error texto-error0">Error</span>
                                        </button>
                                     </div>
                                  </div>
@@ -140,7 +140,7 @@
                                        Bomba 2
                                     </div>
                                     <div class="col-md-1">
-                                       <button type="button" class="btncasc1 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                       <button type="button" class="btncasc1 btn bg-red btn-circle waves-effect waves-circle waves-float vina-circle-custom">
                                        <i class="material-icons bomba1-op-btn">error_outline</i>
                                        </button>
                                        <br>
@@ -149,8 +149,8 @@
                                        <span class="badge bg-green bomba1-op">Operativa</span>
                                     </div>
                                     <div class="col-md-3">
-                                       <button type="button" class="btn-bomba-error1 btn bg-red waves-effect btn_error_custom">
-                                       <span class="custom-error texto-error1">Error</span>
+                                       <button type="button" class="vina-btn-bomba-error1 btn bg-red waves-effect vina-btn_error_custom">
+                                       <span class="vina-custom-error texto-error1">Error</span>
                                        </button>
                                     </div>
                                  </div>
@@ -159,7 +159,7 @@
                                        Bomba 3
                                     </div>
                                     <div class="col-md-1">
-                                       <button type="button" class="btncasc2 btn bg-green btn-circle waves-effect waves-circle waves-float circle-custom">
+                                       <button type="button" class="btncasc2 btn bg-green btn-circle waves-effect waves-circle waves-float vina-circle-custom">
                                        <i class="material-icons bomba2-op-btn">check</i>
                                        </button>
                                        <br>
@@ -168,8 +168,8 @@
                                        <span class="badge bg-red bomba2-op">No Op.</span>
                                     </div>
                                     <div class="col-md-3">
-                                       <button type="button" class="btn-bomba-error2 btn bg-red waves-effect btn_error_custom">
-                                       <span class="custom-error texto-error2">Error</span>
+                                       <button type="button" class="vina-btn-bomba-error2 btn bg-red waves-effect vina-btn_error_custom">
+                                       <span class="vina-custom-error texto-error2">Error</span>
                                        </button>
                                     </div>
                                  </div>
@@ -178,7 +178,7 @@
                                        Bomba 4
                                     </div>
                                     <div class="col-md-1">
-                                       <button type="button" class="btncasc3 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                       <button type="button" class="btncasc3 btn bg-red btn-circle waves-effect waves-circle waves-float vina-circle-custom">
                                        <i class="material-icons bomba3-op-btn">error_outline</i>
                                        </button>
                                        <br>
@@ -187,8 +187,8 @@
                                        <span class="badge bg-green bomba3-op">Operativa</span>
                                     </div>
                                     <div class="col-md-3">
-                                       <button type="button" class="btn-bomba-error3 btn bg-red waves-effect btn_error_custom">
-                                       <span class="custom-error texto-error3">Error</span>
+                                       <button type="button" class="vina-btn-bomba-error3 btn bg-red waves-effect vina-btn_error_custom">
+                                       <span class="vina-custom-error texto-error3">Error</span>
                                        </button>
                                     </div>
                                  </div>
@@ -197,7 +197,7 @@
                                        Bomba 5
                                     </div>
                                     <div class="col-md-1">
-                                       <button type="button" class="btncasc4 btn bg-red btn-circle waves-effect waves-circle waves-float circle-custom">
+                                       <button type="button" class="btncasc4 btn bg-red btn-circle waves-effect waves-circle waves-float vina-circle-custom">
                                        <i class="material-icons bomba4-op-btn">error_outline</i>
                                        </button>
                                        <br>
@@ -206,8 +206,8 @@
                                        <span class="badge bg-green bomba4-op">Operativa</span>
                                     </div>
                                     <div class="col-md-3">
-                                       <button type="button" class="btn-bomba-error4 btn bg-red waves-effect btn_error_custom">
-                                       <span class="custom-error texto-error4">Error</span>
+                                       <button type="button" class="vina-btn-bomba-error4 btn bg-red waves-effect vina-btn_error_custom">
+                                       <span class="vina-custom-error texto-error4">Error</span>
                                        </button>
                                     </div>
                                  </div>
@@ -225,7 +225,7 @@
                                  <p align="center"><b>PH</b></p>
                                  <div class="col-md-12" id="rpm-0">
                                     <div class="vina-loading"></div>
-                                    <b class="vertical">Entrada</b>
+                                    <b class="vina-vertical">Entrada</b>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
                                        <canvas id="gauge0"></canvas>
@@ -233,7 +233,7 @@
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe1">
                                     <div class="vina-loading"></div>
-                                    <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                    <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart1" height="140"></canvas>
                                  </div>
                               </div>
@@ -250,7 +250,7 @@
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe2">
                                     <div class="vina-loading"></div>
-                                    <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                    <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart2" height="140"></canvas>
                                  </div>
                               </div>
@@ -267,7 +267,7 @@
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe3">
                                     <div class="vina-loading"></div>
-                                    <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                    <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart3" height="140"></canvas>
                                  </div>
                               </div>
@@ -277,7 +277,7 @@
                            <div class="col-md-4">
                               <div class="row">
                                  <div class="col-md-12" id="rpm-3">
-                                    <b class="vertical">Salida</b>
+                                    <b class="vina-vertical">Salida</b>
                                     <div class="vina-loading"></div>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
@@ -286,7 +286,7 @@
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe4">
                                     <div class="vina-loading"></div>
-                                    <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                    <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart4" height="140"></canvas>
                                  </div>
                               </div>
@@ -302,7 +302,7 @@
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe5">
                                     <div class="vina-loading"></div>
-                                    <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                    <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart5" height="140"></canvas>
                                  </div>
                               </div>
@@ -318,7 +318,7 @@
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe6">
                                     <div class="vina-loading"></div>
-                                    <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                    <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart6" height="140"></canvas>
                                  </div>
                               </div>
@@ -516,7 +516,7 @@
    .img-chart-lfe{
    width: 95%;
    }
-   .cargando{
+   .vina-cargando{
    filter: blur(4px);
    }
    #rpm-0 canvas, #rpm-1 canvas, #rpm-2 canvas, #rpm-3 canvas, #rpm-4 canvas, #rpm-5 canvas, #myChart1, #myChart2, #myChart3, #myChart4, #myChart5, #myChart6{
@@ -528,41 +528,41 @@
    .img-rpm-lfe{
    margin-bottom: -12px;
    }
-   .btn_error_custom{
+   .vina-btn_error_custom{
    padding: 2px 12px;
    }
-   .ico_error_custom{
+   .vina-ico_error_custom{
    font-size: 15px;
    }
-   .custom-error{
+   .vina-custom-error{
    font-size: 10px;
    }
-   .circle-custom{
+   .vina-circle-custom{
    width: 20px;
    height: 20px;
    }
-   .circle-custom i{
+   .vina-circle-custom i{
    font-size: 13px !important;
    left: -6.5px !important;
    top: -2px !important;
    }
-   .vertical {
-   writing-mode: vertical-lr;
+   .vina-vertical {
+   writing-mode: vina-vertical-lr;
    transform: rotate(180deg);
    position: absolute;
    }
    .chart-lfe{
    margin-top: -30px;
    }
-   .btn-bomba{
+   .vina-btn-bomba{
    color: #2b982b;
    font-size: 13px;
    }
-   .boton-bombas{
+   .vina-boton-bombas{
    width: 9px;
    height: 16px;
    }           
-   .tabla-titulo{
+   .vina-tabla-titulo{
    background: #cccccc;
    border: 1px solid #cccccc;
    border-bottom: 0;
@@ -574,36 +574,29 @@
    border-top-left-radius: 10px;
    border-top-right-radius: 10px;
    }
-   .nombre-instalacion{
+   .vina-nombre-instalacion{
    text-align: left;
    }
-   .modal-table1 tbody tr th{
+   .vina-modal-table1 tbody tr th{
    padding-top: 0px !important;
    padding-bottom: 0px !important;
    padding-right: 0px !important;
    padding-left: 10px !important;
    text-align: left;
    }
-   .modal-table1 tbody tr td{
+   .vina-modal-table1 tbody tr td{
    text-align: center;
    padding: 0px !important;
    }
-   .table-bordered tbody tr td, .table-bordered tbody tr th {
+   .vina-table-bordered tbody tr td, .vina-table-bordered tbody tr th {
    font-size: 13px;
    border-color: #cccccc;
    }
-   .col-1-5{
-   width: 20%;
-   float: left;
-   position: relative;
-   min-height: 1px;
-   padding-right: 15px;
-   padding-left: 15px;
-   }
-   .table tbody tr td, .table tbody tr th {
+
+   .vina-table tbody tr td, .vina-table tbody tr th {
    padding: 5px;
    }
-   .table-custom table{
+   .vina-table-custom table{
    font-size: 13px;
    }
    .vina-loading{
