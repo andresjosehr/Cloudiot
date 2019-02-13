@@ -593,21 +593,3 @@ class SicutIgnisController extends Controller{
  //                                                                        OR mt_name='AASA--ION8650.FactorPotenciaTotal')
  //                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
  //                                                                        ORDER BY mt_name, mt_time DESC ");
- //    for ($i=0; $i <count($datos) ; $i++) { 
- //      if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciaa') {
- //        $FactorPotenciaa_mt_value[$i]=$datos[$i]->mt_value;
- //        $FactorPotenciaa_mt_time[$i]=$datos[$i]->mt_time;
- //      }
- //      if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciab') {
- //        $FactorPotenciab_mt_value[$i]=$datos[$i]->mt_value;
- //        $FactorPotenciab_mt_time[$i]=$datos[$i]->mt_time;
- //      }
- //      if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciac') {
- //        $FactorPotenciac_mt_value[$i]=$datos[$i]->mt_value;
- //        $FactorPotenciac_mt_time[$i]=$datos[$i]->mt_time;
- //      }
- //      if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciaTotal') {
- //        $FactorPotenciaTotal_mt_value[$i]=$datos[$i]->mt_value;
- //        $FactorPotenciaTotal_mt_time[$i]=$datos[$i]->mt_time;
- //      }
- //    }

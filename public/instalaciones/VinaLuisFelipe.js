@@ -64,7 +64,7 @@ $("p").css("display", "block");
 
         $("#"+gaugecanvas+" canvas").css("display", "block");
         $("#"+gaugecanvas+" img").css("display", "none");
-        $("#"+gaugecanvas+" .loading").css("display", "none");
+        $("#"+gaugecanvas+" .vina-loading").css("display", "none");
 
 
 }
@@ -111,7 +111,7 @@ function Graficos(divcanvas, chartcanvas, mt_value, mt_time) {
                         }
                     });
 
-                    $("#"+divcanvas+" .loading").css("display", "none");
+                    $("#"+divcanvas+" .vina-loading").css("display", "none");
                     $("#"+divcanvas+" img").css("display", "none");
                     $("#"+chartcanvas).css("display", "block");
 }
@@ -154,7 +154,7 @@ function Bombas(Operativa, ErrorBomba) {
 
     $( ".bombas-cargando" ).removeClass("cargando");
 
-    $( ".loading-bomba" ).css("display", "none");
+    $( ".vina-loading-bomba" ).css("display", "none");
 
     
 }

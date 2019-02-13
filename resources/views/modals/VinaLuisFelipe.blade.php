@@ -1,7 +1,8 @@
-<button type="button" class="btn btn-default waves-effect m-r-20 display-modal" data-toggle="modal" data-target="#largeModal" style="display: none"></button>
+
+<button type="button" class="btn btn-default waves-effect m-r-20 display-modal vina-modal" data-toggle="modal" data-target="#largeModal"></button>
 <!-- Large Size -->
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-   <div class="modal-dialog modal-lg" role="document" style="width: 95%;margin-top: 2%;">
+   <div class="modal-dialog modal-lg vina-modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
             <p id="contenedorLFE"></p>
@@ -16,7 +17,7 @@
          </div>
          <div class="body">
          </div>
-         <hr style=" color: black">
+         <hr class="vina-hr">
          <div class="modal-body table-custom">
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
                <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel de control</a></li>
@@ -31,18 +32,18 @@
                      <div class="row">
                         <div class="col-md-6">
                            <div class="row">
-                              <div class="col-md-6" style="cursor: pointer;" id="ListarBombas">
-                                 <h4 align="left" style="color:black;padding-left: 3%;">Flujos</h4>
+                              <div class="col-md-6 vina-listar-bombas" id="ListarBombas">
+                                 <h4 align="left" class="vina-title-table">Flujos</h4>
                                  <div class="body table-responsive">
                                     <table class="table table-striped">
                                        <thead>
                                           <tr>
-                                             <th style="text-align: center;">Fecha
+                                             <th class="vina-th1">Fecha
                                  </div>
                                  </th>
-                                 <th style="text-align: center;">Min&nbsp;Op.</th>
-                                 <th style="text-align: center;">m3</th>
-                                 <th style="text-align: center;">Bombas</th>
+                                 <th class="vina-th1">Min&nbsp;Op.</th>
+                                 <th class="vina-th1">m3</th>
+                                 <th class="vina-th1">Bombas</th>
                                  </tr>
                                  </thead>
                                  @if ($ImprimirBombas==true)
@@ -60,19 +61,19 @@
                                              <i class="material-icons btn-bomba">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][1]==0)
-                                             <i class="material-icons btn-bomba" style="color: #a0a0a0 !important;">add_circle</i>
+                                             <i class="material-icons btn-bomba vina-bomb-desc">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][2]==1)
                                              <i class="material-icons btn-bomba">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][2]==0)
-                                             <i class="material-icons btn-bomba" style="color: #a0a0a0 !important;">add_circle</i>
+                                             <i class="material-icons btn-bomba vina-bomb-desc">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][3]==1)
                                              <i class="material-icons btn-bomba">add_circle</i>
                                           @endif
                                           @if ($Bomba["NumeroDeBomba"][3]==0)
-                                             <i class="material-icons btn-bomba" style="color: #a0a0a0 !important;">add_circle</i>
+                                             <i class="material-icons btn-bomba vina-bomb-desc">add_circle</i>
                                           @endif
                                           </td>
                                        </tr>
@@ -92,7 +93,7 @@
                               </div>
                            </div>
                            <div class="col-md-6">
-                              <h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
+                              <h4 align="left" class="vina-alarmas-title">Alarmas</h4>
                               <div class="body table-responsive">
                                  <table class="table table-striped">
                                     <thead>
@@ -102,52 +103,18 @@
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
-                                       <tr>
-                                          <td></td>
-                                          <td></td>
-                                       </tr>
+                                       @for ($i = 0; $i < 10 ; $i++)
+                                          <tr>
+                                             <td></td>
+                                             <td></td>
+                                          </tr>
+                                       @endfor
                                     </tbody>
                                  </table>
                               </div>
                            </div>
                            <div class="col-md-6" align="center">
-                              <div class="loading-bomba"></div>
+                              <div class="vina-loading-bomba"></div>
                               <div class="cargando bombas-cargando">
                                  <div class="row">
                                     <div class="col-md-4">
@@ -257,7 +224,7 @@
                               <div class="row">
                                  <p align="center"><b>PH</b></p>
                                  <div class="col-md-12" id="rpm-0">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <b class="vertical">Entrada</b>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
@@ -265,7 +232,7 @@
                                     </div>
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe1">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart1" height="140"></canvas>
                                  </div>
@@ -275,14 +242,14 @@
                               <div class="row">
                                  <p><b align="center">ORP</b></p>
                                  <div class="col-md-12" id="rpm-1">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
                                        <canvas id="gauge1"></canvas>
                                     </div>
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe2">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart2" height="140"></canvas>
                                  </div>
@@ -292,33 +259,33 @@
                               <div class="row">
                                  <p align="center"><b>Conductividad</b></p>
                                  <div class="col-md-12" id="rpm-2">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
                                        <canvas id="gauge2"></canvas>
                                     </div>
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe3">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart3" height="140"></canvas>
                                  </div>
                               </div>
                            </div>
                         </div>
-                        <div class="row" style="padding-top: 20px;">
+                        <div class="row vina-row-rpm">
                            <div class="col-md-4">
                               <div class="row">
                                  <div class="col-md-12" id="rpm-3">
                                     <b class="vertical">Salida</b>
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
                                        <canvas id="gauge3"></canvas>
                                     </div>
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe4">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart4" height="140"></canvas>
                                  </div>
@@ -327,14 +294,14 @@
                            <div class="col-md-4">
                               <div class="row">
                                  <div class="col-md-12" id="rpm-4">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
                                        <canvas id="gauge4"></canvas>
                                     </div>
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe5">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart5" height="140"></canvas>
                                  </div>
@@ -343,14 +310,14 @@
                            <div class="col-md-4">
                               <div class="row">
                                  <div class="col-md-12" id="rpm-5">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <div>
                                        <img src="images/rpm.png" class="img-rpm-lfe">
                                        <canvas id="gauge5"></canvas>
                                     </div>
                                  </div>
                                  <div class="col-md-12 chart-lfe" id="chart-lfe6">
-                                    <div class="loading"></div>
+                                    <div class="vina-loading"></div>
                                     <img class="cargando img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
                                     <canvas id="myChart6" height="140"></canvas>
                                  </div>
@@ -368,57 +335,57 @@
                   <div class="col-md-2">
                      Tiempo de Riego
                   </div>
-                  <div class="col-md-6" style="text-align: center;">
+                  <div class="col-md-6 vina-parametro-unidad">
                      <div id="Riego" @if ($Usuario->rol==3)
                                        disabled='true'
                                     @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
-                     <div style="padding-top: 10px">
+                     <div class='vina-parametro-info'>
                         <-----<b id="RiegoValor"></b><b> Minutos</b>----->
                      </div>
                   </div>
                   <div class="col-md-4">
                      @if ($Usuario->rol!=3)
-                     <button onclick="RegistarRiego()" style="margin-top: -6px;" class="btn btn-primary btn-block boton1">Registrar</button>
+                     <button onclick="RegistarRiego()" class="btn btn-primary btn-block boton1 vina-btn-parametro">Registrar</button>
                      @endif
-                     <div class="loadingg loadingg1"></div>
+                     <div class="vina-vina-loadingg vina-vina-loadingg1"></div>
                   </div>
                </div>
                <div class="row clearfix">
                   <div class="col-md-2">
                      Tiempo de Reposo
                   </div>
-                  <div class="col-md-6" style="text-align: center;">
+                  <div class="col-md-6 vina-parametro-unidad">
                      <div id="Reposo" @if ($Usuario->rol==3)
                         disabled='true'
                      @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
-                     <div style="padding-top: 10px">
+                     <div class='vina-parametro-info'>
                         <-----<b id="ReposoValor"></b><b> Minutos</b>----->
                      </div>
                   </div>
                   <div class="col-md-4">
                      @if ($Usuario->rol!=3)
-                     <button onclick="RegistarReposo()" style="margin-top: -6px;" class="btn btn-primary btn-block boton2">Registrar</button>
+                     <button onclick="RegistarReposo()" class="btn btn-primary btn-block boton2 vina-btn-parametro">Registrar</button>
                      @endif
-                     <div class="loadingg loadingg2"></div>
+                     <div class="vina-vina-loadingg vina-vina-loadingg2"></div>
                   </div>
                </div>
                <div class="row clearfix">
                   <div class="col-md-2">
                      Rango de PH
                   </div>
-                  <div class="col-md-6" style="text-align: center;">
+                  <div class="col-md-6 vina-parametro-unidad">
                      <div id="slider" @if ($Usuario->rol==3)
                         disabled='true'
                      @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
-                     <div style="padding-top: 10px">
+                     <div class='vina-parametro-info'>
                         <b id="BajoPH"></b><----------><b id="AltoPH"></b>
                      </div>
                   </div>
                   <div class="col-md-4">
                      @if ($Usuario->rol!=3)
-                     <button onclick="RegistarRangoPH()" style="margin-top: -6px;" class="btn btn-primary btn-block boton3">Registrar</button>
+                     <button onclick="RegistarRangoPH()" class="btn btn-primary btn-block boton3 vina-btn-parametro">Registrar</button>
                      @endif
-                     <div class="loadingg loadingg3"></div>
+                     <div class="vina-vina-loadingg vina-vina-loadingg3"></div>
                   </div>
                </div>
                </p>
@@ -450,11 +417,11 @@
                     <button onclick="GraficarphPersonalizado();" type="button" class="btn btn-primary waves-effect">→</button>
                   </div>
               </div>
-               <div class="loadingPH"></div>
+               <div class="vina-vina-loadingPH"></div>
                <div id="ph-bar-chart-div">
                   <canvas id="ph-bar-chart" width="400" height="70"></canvas>
                </div>
-               <div style="text-align: center;padding-top: 20px; display: none" class="BotonExportarPHDiarios">
+               <div class="BotonExportarPHDiarios vina-BotonExportarPHDiarios">
                   <a onclick="DescargarExcelPHDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
                 </div>
             </div>
@@ -486,8 +453,10 @@
                   </div>
               </div>
               <div class="col-md-12">
+               <div id="flujo-bar-chart-div">
                 <canvas id="flujo-bar-chart" width="400" height="70"></canvas>
-                <div style="text-align: center;padding-top: 20px;">
+               </div>
+                <div class="vina-DescargarExcelFlujosDiarios-padre">
                   <a onclick="DescargarExcelFlujosDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
                 </div>
               </div>
@@ -501,16 +470,7 @@
 </div>
 </div>
 <style>
-   .dtp{
-   z-index: 999999999;
-   }
-   .swal-overlay{
-   z-index: 99999999999;
-   }
-   .noUi-base{
-   margin-top: 6px;
-   }
-   .loadingg{
+   .vina-vina-loadingg{
    width: 35px;
    height: 35px;
    border-radius:150px;
@@ -522,13 +482,13 @@
    left: 64%;
    margin-top:-80px;
    margin-left:-80px;
-   animation:loading 1.2s linear infinite;
-   -webkit-animation:loading 1.2s linear infinite;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
    z-index: 1;
    display: none;
    }
 
-   .loadingPH{
+   .vina-vina-loadingPH{
    width: 35px;
    height: 35px;
    border-radius:150px;
@@ -538,15 +498,15 @@
    position:absolute;
    top: 90%;
    left: 50%;
-   animation:loading 1.2s linear infinite;
-   -webkit-animation:loading 1.2s linear infinite;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
    z-index: 1;
    }
-   @keyframes loading{
+   @keyframes vina-loading{
    0%{transform:rotate(0deg)}
    100%{transform:rotate(360deg)}
    }
-   @-webkit-keyframes loading{
+   @-webkit-keyframes vina-loading{
    0%{-webkit-transform:rotate(0deg)}
    100%{-webkit-transform:rotate(360deg)}
    }
@@ -594,8 +554,8 @@
    .chart-lfe{
    margin-top: -30px;
    }
-   div .btn-bomba{
-   color: #2b982b !important;
+   .btn-bomba{
+   color: #2b982b;
    font-size: 13px;
    }
    .boton-bombas{
@@ -646,7 +606,7 @@
    .table-custom table{
    font-size: 13px;
    }
-   .loading{
+   .vina-loading{
    width: 35px;
    height: 35px;
    border-radius:150px;
@@ -658,11 +618,11 @@
    left: 76%;
    margin-top:-80px;
    margin-left:-80px;
-   animation:loading 1.2s linear infinite;
-   -webkit-animation:loading 1.2s linear infinite;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
    z-index: 1;
    }
-   .loading-bomba{
+   .vina-loading-bomba{
    width: 35px;
    height: 35px;
    border-radius:150px;
@@ -674,15 +634,15 @@
    left: 54%;
    margin-top:-80px;
    margin-left:-80px;
-   animation:loading 1.2s linear infinite;
-   -webkit-animation:loading 1.2s linear infinite;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
    z-index: 1;
    }
-   @keyframes loading{
+   @keyframes vina-loading{
    0%{transform:rotate(0deg)}
    100%{transform:rotate(360deg)}
    }
-   @-webkit-keyframes loading{
+   @-webkit-keyframes vina-loading{
    0%{-webkit-transform:rotate(0deg)}
    100%{-webkit-transform:rotate(360deg)}
    }
@@ -719,6 +679,8 @@
    });
 
    function GraficarFlujoPersonalizado() {
+
+      $(".loader-insta").css("display", "block");
 
       var FechaInicio = document.getElementById('fecha_flujo_inicio').value;
       var FechaFin = document.getElementById('fecha_flujo_fin').value;
@@ -787,16 +749,17 @@
 
      mt_time_flujos[i] = "{{$Barra->mt_time}}";
      mt_value_flujos = mt_value;
-
-     labels.push(['Fecha: {{ date_format(date_create($Barra->mt_time), 'm-j') }}','Flujo: {{$Barra->mt_value}}']);
      i++;
    @endforeach
+
+   GraficarFlujo(mt_time, mt_value);
 
    function DescargarExcelFlujosDiarios() {
        window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos, '_blank' )
    }
 
-   
+
+function GraficarFlujo(mt_time, mt_value) {
    var ctx = document.getElementById("flujo-bar-chart").getContext('2d');
    var myChart = new Chart(ctx, {
      type: 'bar',
@@ -849,6 +812,7 @@
          }
      }
    });
+}
 
 
 function GraficarPHDiarioJS(mt_time, mt_value) {
@@ -908,7 +872,7 @@ function GraficarPHDiarioJS(mt_time, mt_value) {
        let mt_time_ph=mt_time;
        let mt_value_ph=mt_value;
 
-      $(".loadingPH").css("display", "none");
+      $(".vina-vina-loadingPH").css("display", "none");
       $(".BotonExportarPHDiarios").css("display", "block");
 }
 
@@ -922,7 +886,7 @@ function GraficarPHDiarioJS(mt_time, mt_value) {
    
        function RegistarRiego() {
          $(".boton1").css("display", "none");
-         $(".loadingg1").css("display", "block");
+         $(".vina-vina-loadingg1").css("display", "block");
         var MinutosRiego = $("#RiegoValor").text();
    
    
@@ -934,7 +898,7 @@ function GraficarPHDiarioJS(mt_time, mt_value) {
    
        function RegistarReposo() {
          $(".boton2").css("display", "none");
-         $(".loadingg2").css("display", "block");
+         $(".vina-vina-loadingg2").css("display", "block");
         var MinutosReposo = $("#ReposoValor").text();
    
    
@@ -948,7 +912,7 @@ function GraficarPHDiarioJS(mt_time, mt_value) {
        function RegistarRangoPH() {
    
          $(".boton3").css("display", "none");
-         $(".loadingg3").css("display", "block");
+         $(".vina-vina-loadingg3").css("display", "block");
    
         var RangoPH_Inicio = $("#BajoPH").text();
         var RangoPH_Fin = $("#AltoPH").text();

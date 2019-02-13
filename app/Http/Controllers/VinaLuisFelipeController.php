@@ -675,6 +675,75 @@ class VinaLuisFelipeController extends Controller{
           </script><?php
    }
 
+   public function GraficarFlujoFechaPersonalizado(Request $Request){
+
+    $FechaInicio = $_POST["FechaInicio"];
+    $FechaFin    = $_POST["FechaFin"];
+
+    $date= $FechaFin; 
+       $newDate = strtotime ( '+1 day' , strtotime ($date) ) ; 
+       $newDate = date ( 'Y-m-j' , $newDate); 
+
+     $PrimerosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil02 
+                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
+                                                      AND mt_time>=date('$FechaInicio') AND mt_time <= date('$newDate')
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
+
+
+        $SegundosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil02 
+                                                  WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
+                                                        AND mt_time>=date('$FechaInicio') AND mt_time <= date('$newDate')
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        $j=0;
+        for ($i=0; $i <count($SegundosDatosBarras) ; $i++) { 
+          $mt_time[$i]=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j');
+
+          if (date_format(date_create($PrimerosDatosBarras[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j')) {
+            $mt_value[$j]=0;
+            $j++;
+          } else{
+            $mt_value[$j]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $j++;
+            $k++;
+          }
+        }
+
+        ?><script>var i=0;</script><?php
+          ?><script>
+            var mt_value_ = '<?php echo json_encode($mt_value); ?>';
+            mt_value_=JSON.parse(mt_value_);
+
+            var mt_time_ = '<?php echo json_encode($mt_time); ?>';
+            mt_time_=JSON.parse(mt_time_);
+          </script><?php
+        ?><script>
+          $(".loader-insta").css("display", "none");
+          $("#flujo-bar-chart").remove();
+          $("#flujo-bar-chart-div").html('<canvas id="flujo-bar-chart" width="400" height="70"></canvas>');
+
+          GraficarFlujo(mt_time_, mt_value_);
+
+          function DescargarExcelFlujosDiarios() {
+               window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_+'&mt_value='+mt_value_, '_blank' )
+           }
+           
+          </script><?php
+   }
+
    public function ListarBombas(){
 
     $datos= DB::connection("telemetria")

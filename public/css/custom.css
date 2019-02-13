@@ -297,6 +297,80 @@
   width: 103%;
 }
 
+.vina-modal {
+  display: none;
+}
+
+.vina-modal-dialog {
+  width: 95%;
+  margin-top: 2%;
+}
+
+.vina-hr {
+  color: black;
+}
+
+.vina-listar-bombas {
+  cursor: pointer;
+}
+
+.vina-title-table {
+  color: black;
+  padding-left: 3%;
+}
+
+.vina-th1 {
+  text-align: center;
+}
+
+.vina-bomb-desc {
+  color: #a0a0a0 !important;
+}
+
+.vina-alarmas-title {
+  color: black;
+  padding-left: 3%;
+}
+
+.vina-row-rpm {
+  padding-top: 20px;
+}
+
+.vina-parametro-unidad {
+  text-align: center;
+}
+
+.vina-parametro-unidad {
+  padding-top: 10px;
+}
+
+.vina-btn-parametro {
+  margin-top: -6px;
+}
+
+.vina-BotonExportarPHDiarios {
+  text-align: center;
+  padding-top: 20px;
+  display: none;
+}
+
+.vina-DescargarExcelFlujosDiarios-padre {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.dtp {
+  z-index: 999999999;
+}
+
+.swal-overlay {
+  z-index: 99999999999;
+}
+
+.noUi-base {
+  margin-top: 6px;
+}
+
 .sicut-tabla-titulo {
   background: #cccccc;
   border: 1px solid #cccccc;
