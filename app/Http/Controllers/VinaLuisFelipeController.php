@@ -590,12 +590,50 @@ class VinaLuisFelipeController extends Controller{
      </script><?php
    }
 
-   public function GraficarFlujoFechaPersonalizado(Request $Request){
+   public function GraficarPHFechaPersonalizado(Request $Request){
      $FechaInicio = $_POST["FechaInicio"];
      $FechaFin    = $_POST["FechaFin"];
 
-     echo $FechaInicio."<br>";
-     echo $FechaFin;
+     $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' 
+                                           AND DATE(mt_time)>='$FechaInicio' AND DATE(mt_time)<='$FechaFin'
+                                             GROUP BY DAY(mt_time) 
+                                               ORDER BY mt_time ASC");
+
+        $NumeroRegistros = DB::connection("telemetria")
+                            ->select("SELECT mt_time ,COUNT(*) Registros
+                                        FROM log_biofil02 WHERE 
+                                        DATE(mt_time)>='$FechaInicio' AND DATE(mt_time)<='$FechaFin' 
+                                        AND mt_name='Biofiltro02--Consumo.PH_Entrada'
+                                        GROUP BY day(mt_time)
+                                        ORDER BY mt_time ASC");
+
+        for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            $mt_time[$i]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+            $mt_value[$i]=number_format(($DatosDiarios[$i]->mt_value/$NumeroRegistros[$i]->Registros)/100, 2);
+          }
+
+
+            ?><script>
+                var mt_value = '<?php echo json_encode($mt_value); ?>';
+                mt_value=JSON.parse(mt_value);
+
+                var mt_time = '<?php echo json_encode($mt_time); ?>';
+                mt_time=JSON.parse(mt_time);
+
+                function DescargarExcelPHDiarios() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time+'&mt_value='+mt_value, '_blank' )
+                 }
+          $(".loader-insta").css("display", "none");
+          $("#ph-bar-chart").remove();
+          $("#ph-bar-chart-div").html('<canvas id="ph-bar-chart" width="400" height="70"></canvas>');
+          GraficarPHDiarioJS(mt_time, mt_value);
+          </script><?php
    }
 
    public function GraficarPHDiario(){
@@ -633,10 +671,8 @@ class VinaLuisFelipeController extends Controller{
                     window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time+'&mt_value='+mt_value, '_blank' )
                  }
 
-            </script><?php
-
-        ?><script>
-          GraficarPHDiarioJS(mt_time, mt_value);</script><?php
+          GraficarPHDiarioJS(mt_time, mt_value);
+          </script><?php
    }
 
    public function ListarBombas(){

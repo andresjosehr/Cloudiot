@@ -425,8 +425,35 @@
             </div>
             <div role="tabpanel" class="tab-pane fade" id="PHDiarios">
                <div id="PHDiarioContenedor"></div>
+               <div class="row">
+                <div id="contenedorLFE2"></div>
+                  <div class="col-md-2">
+                      <p class="modal-title" id="defaultModalLabel">Flujos</p>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                       <div class="form-line">
+                           <input type="text" id="fecha_ph_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                       <div class="form-line">
+                           <input type="text" id="fecha_ph_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <button onclick="GraficarphPersonalizado();" type="button" class="btn btn-primary waves-effect">→</button>
+                  </div>
+              </div>
                <div class="loadingPH"></div>
-               <canvas id="ph-bar-chart" width="400" height="70"></canvas>
+               <div id="ph-bar-chart-div">
+                  <canvas id="ph-bar-chart" width="400" height="70"></canvas>
+               </div>
                <div style="text-align: center;padding-top: 20px; display: none" class="BotonExportarPHDiarios">
                   <a onclick="DescargarExcelPHDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
                 </div>
@@ -669,6 +696,15 @@
        }
    });
 
+   function GraficarphPersonalizado() {
+     var fecha_ph_inicio = document.getElementById("fecha_ph_inicio").value;
+     var fecha_ph_fin = document.getElementById("fecha_ph_fin").value;
+     $(".loader-insta").css("display", "block");
+     var url = "<?php echo Request::root() ?>/CalculosLuisFelipe8";
+     $("#PHDiarioContenedor").load(url, {FechaInicio: fecha_ph_inicio, FechaFin: fecha_ph_fin});
+   }
+
+
    $("#GraficarPHDiario").click(function() {
       if (document.getElementById("ph-bar-chart").height==70) {
          var url = "<?php echo Request::root() ?>/CalculosLuisFelipe7";
@@ -694,22 +730,46 @@
 
    $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
     ({
-      format: 'YYYY-MM-DD HH:mm',
+      format: 'YYYY-MM-DD',
       lang: 'fr',
       weekStart: 1, 
       cancelText : 'ANNULER',
       nowButton : true,
-      switchOnClick : true
+      switchOnClick : true,
+      time: false
     });
 
     $('#fecha_flujo_fin').bootstrapMaterialDatePicker
     ({
-      format: 'YYYY-MM-DD HH:mm',
+      format: 'YYYY-MM-DD',
       lang: 'fr',
       weekStart: 1, 
       cancelText : 'ANNULER',
       nowButton : true,
-      switchOnClick : true
+      switchOnClick : true,
+      time: false
+    });
+
+    $('#fecha_ph_inicio').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
+    $('#fecha_ph_fin').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
     });
 
 
