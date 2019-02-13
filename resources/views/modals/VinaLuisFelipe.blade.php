@@ -547,7 +547,7 @@
    top: -2px !important;
    }
    .vina-vertical {
-   writing-mode: vina-vertical-lr;
+   writing-mode: vertical-lr;
    transform: rotate(180deg);
    position: absolute;
    }

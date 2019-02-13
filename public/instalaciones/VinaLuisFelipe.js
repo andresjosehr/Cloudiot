@@ -152,7 +152,7 @@ function Bombas(Operativa, ErrorBomba) {
 
     }
 
-    $( ".bombas-cargando" ).removeClass("cargando");
+    $( ".bombas-cargando" ).removeClass("vina-cargando");
 
     $( ".vina-loading-bomba" ).css("display", "none");
 
