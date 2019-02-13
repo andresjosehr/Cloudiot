@@ -44,6 +44,12 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <!-- Jquery Core Js -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <script src='js/custom.js'></script>
+    <link rel="stylesheet" href="css/custom.css">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 

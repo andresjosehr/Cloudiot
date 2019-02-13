@@ -1,7 +1,10 @@
-$( ".display-modal" ).click();
-$(".loader-insta").css("display", "none");
 
-function GraficosIgnisArriba(id, mt_value1, mt_time1, mt_value2, mt_time2) {
+window.SicutScriptDefault = function() {
+    $( ".display-modal" ).click();
+    $(".loader-insta").css("display", "none");
+}
+
+window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2, label1, label2, loading) {
 
                 
                     var ctx = document.getElementById(id).getContext('2d');
@@ -10,7 +13,7 @@ function GraficosIgnisArriba(id, mt_value1, mt_time1, mt_value2, mt_time2) {
                         data: {
                             labels: mt_time1,
                             datasets: [{
-                                label: '',
+                                label: label1,
                                 data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -18,7 +21,7 @@ function GraficosIgnisArriba(id, mt_value1, mt_time1, mt_value2, mt_time2) {
                                 radius: 0
                             },
                             {
-                                label: '',
+                                label: label2,
                                 data: mt_value2,
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor: 'rgba(66, 134, 244, 1)',
@@ -27,15 +30,30 @@ function GraficosIgnisArriba(id, mt_value1, mt_time1, mt_value2, mt_time2) {
                             }]
                         },
                         options: {
+                            legend: {
+                                display: true
+                             },
+                            tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
                             scales: {
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero:true
                                     }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
+                                    }
                                 }]
                             }
                         }
                     });
+
+                    $("#sicut-loading"+loading).css("display", "none");
 
 }
 
@@ -43,41 +61,41 @@ function GraficosIgnisArriba(id, mt_value1, mt_time1, mt_value2, mt_time2) {
 
 
 
-function GraficosIgnisAbajo(id) {
+window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_value3, mt_value4, label1, label2, label3, label4, loading) {
 
                 
                     var ctx = document.getElementById(id).getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: [1, 2, 3, 4, 5, 6],
+                            labels: mt_time1,
                             datasets: [{
-                                label: '',
-                                data: [12, 19, 3, 5, 2, 3],
+                                label: label1,
+                                data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             },
                             {
-                                label: '',
-                                data: [8, 5, 1, 10, 6, 8],
+                                label: label2,
+                                data: mt_value2,
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor: 'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             },
                             {
-                                label: '',
-                                data: [1, 7, 15, 9, 1, 4],
+                                label: label3,
+                                data: mt_value3,
                                 backgroundColor: 'rgba(242, 255, 0, 0.2)',
                                 borderColor: 'rgba(242, 255, 0, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             },
                             {
-                                label: '',
-                                data: [3, 1, 8, 5, 10, 15],
+                                label: label4,
+                                data: mt_value4,
                                 backgroundColor: 'rgba(8, 255, 0, 0.2)',
                                 borderColor: 'rgba(8, 255, 0, 1)',
                                 borderWidth: 1,
@@ -85,15 +103,39 @@ function GraficosIgnisAbajo(id) {
                             }]
                         },
                         options: {
+                            legend: {
+                                display: true
+                             },
+                            tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
                             scales: {
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
                                     }
                                 }]
                             }
                         }
                     });
 
+                    $("#sicut-loading"+loading).css("display", "none");
+
+}
+
+window.GraficarTodo=function(url){
+
+    $("#SicutContenedor1").load(url+"/GraficoSigutIgnis1", {dato: "Epa"});
+    $("#SicutContenedor2").load(url+"/GraficoSigutIgnis2", {dato: "Epa2"});
+    $("#SicutContenedor3").load(url+"/GraficoSigutIgnis3", {dato: "Epa3"});
+    $("#SicutContenedor4").load(url+"/GraficoSigutIgnis4", {dato: "Epa4"});
+    $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
 }
                     

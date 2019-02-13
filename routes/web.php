@@ -77,7 +77,11 @@ Route::post('CalculosLuisFelipe7','VinaLuisFelipeController@GraficarPHDiario')->
 
 
 
-Route::post('CalculosSigutIgnis','SicutIgnisController@Calculos')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis1','SicutIgnisController@Grafico1')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis2','SicutIgnisController@Grafico2')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis3','SicutIgnisController@Grafico3')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis4','SicutIgnisController@Grafico4')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis5','SicutIgnisController@Grafico5')->middleware("verificar_login");
 
 
 

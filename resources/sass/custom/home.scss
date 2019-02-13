@@ -1,3 +1,12 @@
+.HomePage{
+	overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.cerrar_sesion:hover{
+    color:white;
+}
+
 @keyframes anima1 {
   0%   { top: 0;                 left: 0;                 }
   25%  { top: 0;                 left: calc(100% - 20px); }
@@ -63,3 +72,28 @@
   right: 0;
   animation: anima4 2s ease infinite;
 }
+
+    .loader-insta{
+      display: none;
+    }
+    .loader-insta-sub{
+      position: absolute;z-index: 999999999999999;
+      top: 22%;
+      left: 50%;
+    }
+    .loader-back {
+      background: #0000009c;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 99999999999999;
+    }
+
+    .contenedor-home{
+      position: absolute;
+      z-index: 999999999;
+    }
+
+    .map{
+      width: 103%;
+    }

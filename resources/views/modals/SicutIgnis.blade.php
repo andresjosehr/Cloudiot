@@ -1,17 +1,16 @@
-  <script src="instalaciones/SicutIgnis.js"></script>
-   <button type="button" class="btn btn-default waves-effect m-r-20 display-modal" data-toggle="modal" data-target="#largeModal" style="display: none"></button>
+   <button type="button" class="btn btn-default waves-effect m-r-20 display-modal sitcut-btn-modal" data-toggle="modal" data-target="#largeModal"></button>
   
-   <!-- Large Size -->
+         <!-- Large Size -->
             <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document" style="width: 95%;">
+                <div class="modal-dialog modal-lg sicut-modal" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                           <div class="row">
                             <div class="col-md-2">
-                              <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
+                              <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                             </div>
                             <div class="col-md-3">
-                              <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >Ultima dato: {{ $Datos["UltimaMedicion"] }}</h4> 
+                              <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >Ultima dato: {{ $Datos["UltimaMedicion"] }}</h4> 
                             </div>
                             <div class="col-md-3">
                               <div class="form-line">
@@ -28,23 +27,27 @@
                             </div>
                           </div>
                         </div>
-                        <hr style=" color: black">  
+                        <hr class="sicut-hr">  
                         <div class="modal-body">
-                          <div id="SicutContenedor"></div>
+                          <div id="SicutContenedor1"></div>
+                          <div id="SicutContenedor2"></div>
+                          <div id="SicutContenedor3"></div>
+                          <div id="SicutContenedor4"></div>
+                          <div id="SicutContenedor5"></div>
                             <div class="row" align="center">
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
-                                          <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                          <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="tabla-titulo">Energia Activa</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">Energia Activa</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Inyectada</th>
+                                                    <th class="sicut-th">Inyectada</th>
                                                     <td>{{ $Datos["EnergiaActivaInyectada"] }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Retirada</th>
+                                                    <th class="sicut-th">Retirada</th>
                                                     <td>{{ $Datos["EnergiaActivaRetirada"] }}</td>
                                                 </tr>
                                             </tbody>
@@ -53,17 +56,17 @@
                                     </div>
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
-                                          <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                          <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="tabla-titulo">Energia Reactiva</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">Energia Reactiva</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Inyectada</th>
+                                                    <th class="sicut-th">Inyectada</th>
                                                     <td>{{ $Datos["EnergíaReactivaInyectada"] }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Retirada</th>
+                                                    <th class="sicut-th">Retirada</th>
                                                     <td>{{ $Datos["EnergíaReactivaRetirada"] }}</td>
                                                 </tr>
                                             </tbody>
@@ -72,17 +75,17 @@
                                     </div>
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
-                                          <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                          <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="tabla-titulo">Potencia Ractiva</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">Potencia Ractiva</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Inyectada</th>
+                                                    <th class="sicut-th">Inyectada</th>
                                                     <td>No definido</td>
                                                 </tr>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Retirada</th>
+                                                    <th class="sicut-th">Retirada</th>
                                                     <td>No definido</td>
                                                 </tr>
                                             </tbody>
@@ -91,17 +94,17 @@
                                     </div>
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
-                                          <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                          <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="tabla-titulo">Potencia Aparente</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">Potencia Aparente</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Inyectada</th>
+                                                    <th class="sicut-th">Inyectada</th>
                                                     <td>No definido</td>
                                                 </tr>
                                                 <tr>
-                                                    <th style="font-weight: 300;">Retirada</th>
+                                                    <th class="sicut-th">Retirada</th>
                                                     <td>No definido</td>
                                                 </tr>
                                             </tbody>
@@ -112,43 +115,41 @@
                             <div class="row">
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart0" height="100"></canvas>
-                                  <div class="loading"></div>
+                                  <div class="sicut-loading" id="sicut-loading1"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart1" height="100"></canvas>
-                                  <div class="loading"></div>
+                                  <div class="sicut-loading" id="sicut-loading2"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart2" height="100"></canvas>
-                                  <div class="loading"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart3" height="100"></canvas>
-                                  <div class="loading"></div>
                                 </div>
                           </div>
-                            <div class="row" align="center" style="padding-top: 30px">
+                            <div class="row sicut-row2" align="center">
                               <div class="col-md-4">
                                 <div class="body table-responsive">
-                                    <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                    <table class="table sicut-table-bordered sicut-modal-table1">
                                       <thead>
-                                          <caption scope="row" class="tabla-titulo">Voltaje de Lineas</caption>
+                                          <caption scope="row" class="sicut-tabla-titulo">Voltaje de Lineas</caption>
                                       </thead>
                                       <tbody>
                                           <tr>
-                                              <th style="font-weight: 300;">VL ab</th>
+                                              <th class="sicut-th">VL ab</th>
                                               <td>{{ $Datos["VoltajeDeLineaAB"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">VL bc</th>
+                                              <th class="sicut-th">VL bc</th>
                                               <td>{{ $Datos["VoltajeDeLineaBC"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">VL ca</th>
+                                              <th class="sicut-th">VL ca</th>
                                               <td>{{ $Datos["VoltajeDeLineaCA"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">Promedio</th>
+                                              <th class="sicut-th">Promedio</th>
                                               <td>{{ $Datos["VoltajeDeLineaPromedio"] }}</td>
                                           </tr>
                                       </tbody>
@@ -157,25 +158,25 @@
                               </div>
                               <div class="col-md-4">
                                 <div class="body table-responsive">
-                                    <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                    <table class="table sicut-table-bordered sicut-modal-table1">
                                       <thead>
-                                          <caption scope="row" class="tabla-titulo">Voltaje de Fases</caption>
+                                          <caption scope="row" class="sicut-tabla-titulo">Voltaje de Fases</caption>
                                       </thead>
                                       <tbody>
                                           <tr>
-                                              <th style="font-weight: 300;">Voltaje A</th>
+                                              <th class="sicut-th">Voltaje A</th>
                                               <td>{{ $Datos["VoltajeA"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">Voltaje B</th>
+                                              <th class="sicut-th">Voltaje B</th>
                                               <td>{{ $Datos["VoltajeB"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">Voltaje C</th>
+                                              <th class="sicut-th">Voltaje C</th>
                                               <td>{{ $Datos["VoltajeC"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">Promedio</th>
+                                              <th class="sicut-th">Promedio</th>
                                               <td>{{ $Datos["VoltajePromedio"] }}</td>
                                           </tr>
                                       </tbody>
@@ -184,25 +185,25 @@
                               </div>
                               <div class="col-md-4">
                                 <div class="body table-responsive">
-                                    <table class="table table-bordered modal-table1" style="border: #5a5a5a">
+                                    <table class="table sicut-table-bordered sicut-modal-table1">
                                       <thead>
-                                          <caption scope="row" class="tabla-titulo">Factor de potencia</caption>
+                                          <caption scope="row" class="sicut-tabla-titulo">Factor de potencia</caption>
                                       </thead>
                                       <tbody>
                                           <tr>
-                                              <th style="font-weight: 300;">F. Potencia A</th>
+                                              <th class="sicut-th">F. Potencia A</th>
                                               <td>{{ $Datos["FactorPotenciaA"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">F. Potencia B</th>
+                                              <th class="sicut-th">F. Potencia B</th>
                                               <td>{{ $Datos["FactorPotenciaB"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">F. Potencia C</th>
+                                              <th class="sicut-th">F. Potencia C</th>
                                               <td>{{ $Datos["FactorPotenciaC"] }}</td>
                                           </tr>
                                           <tr>
-                                              <th style="font-weight: 300;">Total</th>
+                                              <th class="sicut-th">Total</th>
                                               <td>{{ $Datos["FactorPotenciaTotal"] }}</td>
                                           </tr>
                                       </tbody>
@@ -211,18 +212,18 @@
                               </div>
                             </div>
                         </div>
-                        <div class="row" align="center" style="margin-right: 20px;margin-left: 20px;">
+                        <div class="row" align="center" class="sicut-row-chart-2">
                           <div class="col-md-4">
                             <canvas id="myChart4"  height="100"></canvas>
-                              <div class="loading"></div>
+                              <div class="sicut-loading" id="sicut-loading3"></div>
                             </div>
                             <div class="col-md-4">
                             <canvas id="myChart5"  height="100"></canvas>
-                              <div class="loading"></div>
+                              <div class="sicut-loading" id="sicut-loading4"></div>
                             </div>
                             <div class="col-md-4">
                             <canvas id="myChart6"  height="100"></canvas>
-                              <div class="loading"></div>
+                              <div class="sicut-loading" id="sicut-loading5"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -231,83 +232,12 @@
                     </div>
                 </div>
             </div>
-
-            <style>
-
-                .tabla-titulo{
-                      background: #cccccc;
-                  border: 1px solid #cccccc;
-                  border-bottom: 0;
-                  text-align: center; 
-                  font-weight: 600; 
-                  color: black;
-                  padding-top: 4px;
-                  padding-bottom: 4px;
-                      border-top-left-radius: 10px;
-             border-top-right-radius: 10px;
-                }
-                .nombre-instalacion{
-                    text-align: left;
-                }
-                .modal-table1 tbody tr th{
-                  padding-top: 0px !important;
-                  padding-bottom: 0px !important;
-                  padding-right: 0px !important;
-                  padding-left: 10px !important;
-                  text-align: left;
-                }
-                .modal-table1 tbody tr td{
-                  text-align: center;
-                  padding: 0px !important;
-                }
-                .table-bordered tbody tr td, .table-bordered tbody tr th {
-                  font-size: 13px;
-                  border-color: #cccccc;
-                }
-
-                  .col-1-5{
-                    width: 20%;
-                    float: left;
-                    position: relative;
-                    min-height: 1px;
-                    padding-right: 15px;
-                    padding-left: 15px;
-                  }
-                  .loading{
-                     width: 35px;
-                     height: 35px;
-                     border-radius:150px;
-                     border:6px solid #797979;
-                     border-top-color:rgba(0,0,0,0.3);
-                     box-sizing:border-box;
-                     position:absolute;
-                     top: 100px;
-                     left: 64%;
-                     margin-top:-80px;
-                     margin-left:-80px;
-                     animation:loading 1.2s linear infinite;
-                     -webkit-animation:loading 1.2s linear infinite;
-                     z-index: 1;
-                  }
-                  @keyframes loading{
-                   0%{transform:rotate(0deg)}
-                   100%{transform:rotate(360deg)}
-                   }
-                   @-webkit-keyframes loading{
-                   0%{-webkit-transform:rotate(0deg)}
-                   100%{-webkit-transform:rotate(360deg)}
-                   }
-
-            </style>
   <script>
 
-    $.ajaxSetup({
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-       }
-   });
-    var url = "<?php echo Request::root() ?>/CalculosSigutIgnis";
-    $("#SicutContenedor").load(url, {dato: "Epa"});
+    var url_ = "<?php echo Request::root() ?>";
+
+    SicutScriptDefault();
+    GraficarTodo(url_);
 
   // GraficosIgnisArriba("myChart0");
   // GraficosIgnisArriba("myChart1");
