@@ -122,7 +122,7 @@ function Bombas(Operativa, ErrorBomba) {
 
         $( ".bomba"+i+"-op" ).removeClass("bg-green");
         $( ".bomba"+i+"-op" ).removeClass("bg-red");
-        $( ".btn-bomba-error"+i ).removeClass("bg-red");
+        $( ".vina-btn-bomba-error"+i ).removeClass("bg-red");
         $( ".btncasc"+i ).removeClass("bg-green");
         $( ".btncasc"+i ).removeClass("bg-red");
         $( ".bomba"+i+"-op" ).empty();
@@ -142,10 +142,10 @@ function Bombas(Operativa, ErrorBomba) {
         }
 
         if (ErrorBomba[i]=="Error") {
-            $( ".btn-bomba-error"+i ).addClass("bg-red");
+            $( ".vina-btn-bomba-error"+i ).addClass("bg-red");
             $( ".texto-error"+i ).text("Error");
         } else{
-            $( ".btn-bomba-error"+i ).addClass("bg-green");
+            $( ".vina-btn-bomba-error"+i ).addClass("bg-green");
             $( ".texto-error"+i ).text("Sin Error");
         }
         
@@ -160,5 +160,5 @@ function Bombas(Operativa, ErrorBomba) {
 }
 
 
-                 $( ".display-modal" ).click();
+                 $( ".vina-modal" ).click();
                  $(".loader-insta").css("display", "none");
