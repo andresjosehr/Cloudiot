@@ -27,7 +27,9 @@
                <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel de control</a></li>
                <li role="presentation"><a href="#flujos" data-toggle="tab">Vista de Flujos</a></li>
                <li role="presentation" id="GraficarPHDiario"><a href="#PHDiarios" data-toggle="tab">Vista de PH diarios</a></li>
+               @if ($Usuario->rol!=5)
                <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros de Configuracion</a></li>
+               @endif
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
