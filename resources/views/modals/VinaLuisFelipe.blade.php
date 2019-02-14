@@ -4,6 +4,10 @@
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
    <div class="modal-dialog modal-lg vina-modal-dialog" role="document">
       <div class="modal-content">
+         <p id="contenedorLFE1"></p>
+         <p id="contenedorLFE2"></p>
+         <p id="contenedorLFE3"></p>
+         <p id="contenedorLFE4"></p>
          <div class="modal-header">
             <p id="contenedorLFE"></p>
             <div class="row">
@@ -336,18 +340,16 @@
                      Tiempo de Riego
                   </div>
                   <div class="col-md-6 vina-parametro-unidad">
-                     <div id="Riego" @if ($Usuario->rol==3)
-                                       disabled='true'
-                                    @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="Riego" @if ($Usuario->rol==3) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div class='vina-parametro-info'>
                         <-----<b id="RiegoValor"></b><b> Minutos</b>----->
                      </div>
                   </div>
                   <div class="col-md-4">
                      @if ($Usuario->rol!=3)
-                     <button onclick="RegistarRiego()" class="btn btn-primary btn-block boton1 vina-btn-parametro">Registrar</button>
+                     <button onclick="RegistarRiego('<?php echo Request::root() ?>/InsertarParametroRiego')" class="btn btn-primary btn-block boton1 vina-btn-parametro">Registrar</button>
                      @endif
-                     <div class="vina-vina-loadingg vina-vina-loadingg1"></div>
+                     <div class="vina-vina-loadingg vina-loadingg1"></div>
                   </div>
                </div>
                <div class="row clearfix">
@@ -355,18 +357,16 @@
                      Tiempo de Reposo
                   </div>
                   <div class="col-md-6 vina-parametro-unidad">
-                     <div id="Reposo" @if ($Usuario->rol==3)
-                        disabled='true'
-                     @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="Reposo" @if ($Usuario->rol==3) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div class='vina-parametro-info'>
                         <-----<b id="ReposoValor"></b><b> Minutos</b>----->
                      </div>
                   </div>
                   <div class="col-md-4">
                      @if ($Usuario->rol!=3)
-                     <button onclick="RegistarReposo()" class="btn btn-primary btn-block boton2 vina-btn-parametro">Registrar</button>
+                     <button onclick='RegistarReposo("<?php echo Request::root() ?>/InsertarParametroReposo")' class="btn btn-primary btn-block boton2 vina-btn-parametro">Registrar</button>
                      @endif
-                     <div class="vina-vina-loadingg vina-vina-loadingg2"></div>
+                     <div class="vina-vina-loadingg vina-loadingg2"></div>
                   </div>
                </div>
                <div class="row clearfix">
@@ -374,18 +374,16 @@
                      Rango de PH
                   </div>
                   <div class="col-md-6 vina-parametro-unidad">
-                     <div id="slider" @if ($Usuario->rol==3)
-                        disabled='true'
-                     @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="slider" @if ($Usuario->rol==3) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div class='vina-parametro-info'>
                         <b id="BajoPH"></b><----------><b id="AltoPH"></b>
                      </div>
                   </div>
                   <div class="col-md-4">
                      @if ($Usuario->rol!=3)
-                     <button onclick="RegistarRangoPH()" class="btn btn-primary btn-block boton3 vina-btn-parametro">Registrar</button>
+                     <button onclick="RegistarRangoPH('<?php echo Request::root() ?>/InsertarParametroRangoPH')" class="btn btn-primary btn-block boton3 vina-btn-parametro">Registrar</button>
                      @endif
-                     <div class="vina-vina-loadingg vina-vina-loadingg3"></div>
+                     <div class="vina-vina-loadingg vina-loadingg3"></div>
                   </div>
                </div>
                </p>
@@ -414,7 +412,7 @@
                     </div>
                   </div>
                   <div class="col-md-1">
-                    <button onclick="GraficarphPersonalizado();" type="button" class="btn btn-primary waves-effect">→</button>
+                    <button onclick="GraficarphPersonalizado('<?php echo Request::root() ?>/CalculosLuisFelipe8');" type="button" class="btn btn-primary waves-effect">→</button>
                   </div>
               </div>
                <div class="vina-vina-loadingPH"></div>
@@ -449,7 +447,7 @@
                     </div>
                   </div>
                   <div class="col-md-1">
-                    <button onclick="GraficarFlujoPersonalizado();" type="button" class="btn btn-primary waves-effect">→</button>
+                    <button onclick="GraficarFlujoPersonalizado('<?php echo Request::root() ?>/CalculosLuisFelipe4');" type="button" class="btn btn-primary waves-effect">→</button>
                   </div>
               </div>
               <div class="col-md-12">
@@ -469,265 +467,19 @@
    </div>
 </div>
 </div>
-<style>
-   .vina-vina-loadingg{
-   width: 35px;
-   height: 35px;
-   border-radius:150px;
-   border:6px solid #797979;
-   border-top-color:rgba(0,0,0,0.3);
-   box-sizing:border-box;
-   position:absolute;
-   top: 72px;
-   left: 64%;
-   margin-top:-80px;
-   margin-left:-80px;
-   animation:vina-loading 1.2s linear infinite;
-   -webkit-animation:vina-loading 1.2s linear infinite;
-   z-index: 1;
-   display: none;
-   }
 
-   .vina-vina-loadingPH{
-   width: 35px;
-   height: 35px;
-   border-radius:150px;
-   border:6px solid #797979;
-   border-top-color:rgba(0,0,0,0.3);
-   box-sizing:border-box;
-   position:absolute;
-   top: 90%;
-   left: 50%;
-   animation:vina-loading 1.2s linear infinite;
-   -webkit-animation:vina-loading 1.2s linear infinite;
-   z-index: 1;
-   }
-   @keyframes vina-loading{
-   0%{transform:rotate(0deg)}
-   100%{transform:rotate(360deg)}
-   }
-   @-webkit-keyframes vina-loading{
-   0%{-webkit-transform:rotate(0deg)}
-   100%{-webkit-transform:rotate(360deg)}
-   }
-   .btncasc3, .btncasc4{
-   display: none;
-   }
-   .img-chart-lfe{
-   width: 95%;
-   }
-   .vina-cargando{
-   filter: blur(4px);
-   }
-   #rpm-0 canvas, #rpm-1 canvas, #rpm-2 canvas, #rpm-3 canvas, #rpm-4 canvas, #rpm-5 canvas, #myChart1, #myChart2, #myChart3, #myChart4, #myChart5, #myChart6{
-   display: none;
-   }
-   #gauge0, #gauge1, #gauge2, #gauge3, #gauge4, #gauge5{
-   cursor: pointer;
-   }
-   .img-rpm-lfe{
-   margin-bottom: -12px;
-   }
-   .vina-btn_error_custom{
-   padding: 2px 12px;
-   }
-   .vina-ico_error_custom{
-   font-size: 15px;
-   }
-   .vina-custom-error{
-   font-size: 10px;
-   }
-   .vina-circle-custom{
-   width: 20px;
-   height: 20px;
-   }
-   .vina-circle-custom i{
-   font-size: 13px !important;
-   left: -6.5px !important;
-   top: -2px !important;
-   }
-   .vina-vertical {
-   writing-mode: vertical-lr;
-   transform: rotate(180deg);
-   position: absolute;
-   }
-   .chart-lfe{
-   margin-top: -30px;
-   }
-   .vina-btn-bomba{
-   color: #2b982b;
-   font-size: 13px;
-   }
-   .vina-boton-bombas{
-   width: 9px;
-   height: 16px;
-   }           
-   .vina-tabla-titulo{
-   background: #cccccc;
-   border: 1px solid #cccccc;
-   border-bottom: 0;
-   text-align: center; 
-   font-weight: 600; 
-   color: black;
-   padding-top: 4px;
-   padding-bottom: 4px;
-   border-top-left-radius: 10px;
-   border-top-right-radius: 10px;
-   }
-   .vina-nombre-instalacion{
-   text-align: left;
-   }
-   .vina-modal-table1 tbody tr th{
-   padding-top: 0px !important;
-   padding-bottom: 0px !important;
-   padding-right: 0px !important;
-   padding-left: 10px !important;
-   text-align: left;
-   }
-   .vina-modal-table1 tbody tr td{
-   text-align: center;
-   padding: 0px !important;
-   }
-   .vina-table-bordered tbody tr td, .vina-table-bordered tbody tr th {
-   font-size: 13px;
-   border-color: #cccccc;
-   }
-
-   .vina-table tbody tr td, .vina-table tbody tr th {
-   padding: 5px;
-   }
-   .vina-table-custom table{
-   font-size: 13px;
-   }
-   .vina-loading{
-   width: 35px;
-   height: 35px;
-   border-radius:150px;
-   border:6px solid #797979;
-   border-top-color:rgba(0,0,0,0.3);
-   box-sizing:border-box;
-   position:absolute;
-   top: 99%;
-   left: 76%;
-   margin-top:-80px;
-   margin-left:-80px;
-   animation:vina-loading 1.2s linear infinite;
-   -webkit-animation:vina-loading 1.2s linear infinite;
-   z-index: 1;
-   }
-   .vina-loading-bomba{
-   width: 35px;
-   height: 35px;
-   border-radius:150px;
-   border:6px solid #797979;
-   border-top-color:rgba(0,0,0,0.3);
-   box-sizing:border-box;
-   position:absolute;
-   top: 89%;
-   left: 54%;
-   margin-top:-80px;
-   margin-left:-80px;
-   animation:vina-loading 1.2s linear infinite;
-   -webkit-animation:vina-loading 1.2s linear infinite;
-   z-index: 1;
-   }
-   @keyframes vina-loading{
-   0%{transform:rotate(0deg)}
-   100%{transform:rotate(360deg)}
-   }
-   @-webkit-keyframes vina-loading{
-   0%{-webkit-transform:rotate(0deg)}
-   100%{-webkit-transform:rotate(360deg)}
-   }
-</style>
 <script  src="instalaciones/VinaLuisFelipe.js"></script>
 <script>
 
-   $.ajaxSetup({
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-       }
-   });
-
-   function GraficarphPersonalizado() {
-     var fecha_ph_inicio = document.getElementById("fecha_ph_inicio").value;
-     var fecha_ph_fin = document.getElementById("fecha_ph_fin").value;
-     $(".loader-insta").css("display", "block");
-     var url = "<?php echo Request::root() ?>/CalculosLuisFelipe8";
-     $("#PHDiarioContenedor").load(url, {FechaInicio: fecha_ph_inicio, FechaFin: fecha_ph_fin});
-   }
-
+   VinaScriptDefault("<?php echo Request::root() ?>/CalculosLuisFelipe", <?php echo json_encode($Instalacion); ?>);
 
    $("#GraficarPHDiario").click(function() {
-      if (document.getElementById("ph-bar-chart").height==70) {
-         var url = "<?php echo Request::root() ?>/CalculosLuisFelipe7";
-         $("#PHDiarioContenedor").load(url, {dato: "Epa"});
-      }
+      GraficarPHDiario("<?php echo Request::root() ?>/CalculosLuisFelipe7");
    });
 
    $("#ListarBombas").click(function() {
-      $(".loader-insta").css("display", "block");
-      var url = "<?php echo Request::root() ?>/CalculosLuisFelipe5";
-      $("#contenedorLFE").load(url, {dato: "Epa"});
+       ListarBombas("<?php echo Request::root() ?>/CalculosLuisFelipe5");
    });
-
-   function GraficarFlujoPersonalizado() {
-
-      $(".loader-insta").css("display", "block");
-
-      var FechaInicio = document.getElementById('fecha_flujo_inicio').value;
-      var FechaFin = document.getElementById('fecha_flujo_fin').value;
-
-      var url = "<?php echo Request::root() ?>/CalculosLuisFelipe4";
-       $("#contenedorFlujos").load(url, {FechaInicio: FechaInicio, FechaFin: FechaFin});
-   }
-   
-
-   $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
-    ({
-      format: 'YYYY-MM-DD',
-      lang: 'fr',
-      weekStart: 1, 
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true,
-      time: false
-    });
-
-    $('#fecha_flujo_fin').bootstrapMaterialDatePicker
-    ({
-      format: 'YYYY-MM-DD',
-      lang: 'fr',
-      weekStart: 1, 
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true,
-      time: false
-    });
-
-    $('#fecha_ph_inicio').bootstrapMaterialDatePicker
-    ({
-      format: 'YYYY-MM-DD',
-      lang: 'fr',
-      weekStart: 1, 
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true,
-      time: false
-    });
-
-    $('#fecha_ph_fin').bootstrapMaterialDatePicker
-    ({
-      format: 'YYYY-MM-DD',
-      lang: 'fr',
-      weekStart: 1, 
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true,
-      time: false
-    });
-
-
 
    var i=0;
    var mt_time = [];
@@ -735,7 +487,6 @@
 
    var mt_time_flujos = [];
    var mt_value_flujos = [];
-   var labels= [];
    @foreach ($GraficoBarras as $Barra)
      mt_time[i]='{{ date_format(date_create($Barra->mt_time), 'm-j') }}';
      mt_value[i]='{{$Barra->mt_value}}';
@@ -751,262 +502,25 @@
        window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos, '_blank' )
    }
 
-
-function GraficarFlujo(mt_time, mt_value) {
-   var ctx = document.getElementById("flujo-bar-chart").getContext('2d');
-   var myChart = new Chart(ctx, {
-     type: 'bar',
-     data: {
-         labels: mt_time,
-         datasets: [{
-             data: mt_value,
-             backgroundColor: 'rgba(255, 99, 132, 0.8)',
-             borderColor: 'rgba(255,99,132,1)',
-             borderWidth: 1
-         }]
-     },
-     options: {
-      legend: {
-         display: false
-      },
-      "animation": {
-         "duration": 1,
-         "onComplete": function() {
-           var chartInstance = this.chart,
-             ctx = chartInstance.ctx;
-
-           ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-           ctx.textAlign = 'center';
-           ctx.textBaseline = 'bottom';
-
-           this.data.datasets.forEach(function(dataset, i) {
-             var meta = chartInstance.controller.getDatasetMeta(i);
-             meta.data.forEach(function(bar, index) {
-               var data = dataset.data[index];
-               ctx.fillText(data, bar._model.x, bar._model.y - 5);
-             });
-           });
-         }
-      },
-         scales: {
-             yAxes: [{
-                 ticks: {
-                     beginAtZero:true,
-                     padding: 100
-                 }
-             }], xAxes: [{
-                     padding: 50,
-                     lineHeight: 3,
-                 ticks: {
-                     padding: 50,
-                     lineHeight: 3
-                 }
-             }]
-         }
-     }
-   });
-}
-
-
-function GraficarPHDiarioJS(mt_time, mt_value) {
-         var ctx = document.getElementById("ph-bar-chart").getContext('2d');
-         var myChart = new Chart(ctx, {
-           type: 'bar',
-           data: {
-               labels: mt_time,
-               datasets: [{
-                   data: mt_value,
-                   backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                   borderColor: 'rgba(255,99,132,1)',
-                   borderWidth: 1
-               }]
-           },
-           options: {
-            legend: {
-               display: false
-            },
-            "animation": {
-               "duration": 1,
-               "onComplete": function() {
-                 var chartInstance = this.chart,
-                   ctx = chartInstance.ctx;
-
-                 ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                 ctx.textAlign = 'center';
-                 ctx.textBaseline = 'bottom';
-
-                 this.data.datasets.forEach(function(dataset, i) {
-                   var meta = chartInstance.controller.getDatasetMeta(i);
-                   meta.data.forEach(function(bar, index) {
-                     var data = dataset.data[index];
-                     ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                   });
-                 });
-               }
-            },
-               scales: {
-                   yAxes: [{
-                       ticks: {
-                           beginAtZero:true,
-                           padding: 100
-                       }
-                   }], xAxes: [{
-                           padding: 50,
-                           lineHeight: 3,
-                       ticks: {
-                           padding: 50,
-                           lineHeight: 3
-                       }
-                   }]
-               }
-           }
-         });
-
-       let mt_time_ph=mt_time;
-       let mt_value_ph=mt_value;
-
-      $(".vina-vina-loadingPH").css("display", "none");
-      $(".BotonExportarPHDiarios").css("display", "block");
-}
-
-
+   @foreach ($Parametros as $Parametro)
+    @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Bajo")
+      var vina_param_bajo="<?php echo $Parametro->mt_value/100 ?>";
+     @endif 
+     @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Alto")
+       var vina_param_alto="<?php echo $Parametro->mt_value/100 ?>";
+      @endif
+      @if($Parametro->mt_name=="Biofiltro02--Consumo.TiempoRiego")
+       var TiempoRiego="<?php echo $Parametro->mt_value ?>";
+      @endif 
+      @if($Parametro->mt_name=="Biofiltro02--Consumo.TiempoReposo")
+       var TiempoReposo="<?php echo $Parametro->mt_value ?>";
+      @endif  
+   @endforeach
 
    $("#parametros").click(function () {
-     CompilarRango();
+     CompilarRango(vina_param_alto, vina_param_bajo, TiempoRiego, TiempoReposo);
    });
-   
-   
-   
-       function RegistarRiego() {
-         $(".boton1").css("display", "none");
-         $(".vina-vina-loadingg1").css("display", "block");
-        var MinutosRiego = $("#RiegoValor").text();
-   
-   
-                 var url = "<?php echo Request::root() ?>/InsertarParametroRiego";
-                 $("#parametros-ejecucion").load(url, {Riego: MinutosRiego});
-   
-   
-       }
-   
-       function RegistarReposo() {
-         $(".boton2").css("display", "none");
-         $(".vina-vina-loadingg2").css("display", "block");
-        var MinutosReposo = $("#ReposoValor").text();
-   
-   
-        var url = "<?php echo Request::root() ?>/InsertarParametroReposo";
-        $("#parametros-ejecucion").load(url, {Reposo: MinutosReposo});
-   
-   
-       }
-   
-   
-       function RegistarRangoPH() {
-   
-         $(".boton3").css("display", "none");
-         $(".vina-vina-loadingg3").css("display", "block");
-   
-        var RangoPH_Inicio = $("#BajoPH").text();
-        var RangoPH_Fin = $("#AltoPH").text();
-         var url = "<?php echo Request::root() ?>/InsertarParametroRangoPH";
-         $("#parametros-ejecucion").load(url, {RangoPH_Ini: RangoPH_Inicio, RangoPH_Fini: RangoPH_Fin});
-   
-       }
-   
-   
-   function CompilarRango() {
-   
-         var slider = document.getElementById('slider');
-      
-             noUiSlider.create(slider, {
-                 start: [@foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Bajo") "<?php echo $Parametro->mt_value/100 ?>" @endif  @endforeach, @foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Alto") "<?php echo $Parametro->mt_value/100 ?>" @endif  @endforeach],
-                 step: 0.1,
-                 connect: true,
-                 range: {
-                     'min': 0,
-                     'max': 14
-                 },
-                 format: wNumb({
-                     decimals: 1
-                 })
-             });
-   
-             var nodes = [
-                 document.getElementById("BajoPH"), // 0
-                 document.getElementById('AltoPH')  // 1
-             ];
-   
-             // Display the slider value and how far the handle moved
-             // from the left edge of the slider.
-             slider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
-                 nodes[handle].innerHTML = values[handle];
-             });
 
-
-   
-             var riego = document.getElementById('Riego');
-   
-             noUiSlider.create(riego, {
-                 start: @foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.TiempoRiego") "<?php echo $Parametro->mt_value ?>" @endif  @endforeach,
-   
-                 // Disable animation on value-setting,
-                 // so the sliders respond immediately.
-                 animate: false,
-                 step: 1,
-                 decimals: 0,
-                 range: {
-                     min: 0,
-                     max: 100
-                 },
-                 format: wNumb({
-                     decimals: 0,
-                     thousand: '.',
-                 })
-             });
-   
-             riego.noUiSlider.on('update', function (values, handle) {
-                document.getElementById('RiegoValor').innerHTML = values[handle];
-             });
-   
-   
-             var reposo = document.getElementById('Reposo');
-   
-             noUiSlider.create(reposo, {
-                 start: @foreach ($Parametros as $Parametro) @if($Parametro->mt_name=="Biofiltro02--Consumo.TiempoReposo") "<?php echo $Parametro->mt_value ?>" @endif  @endforeach,
-   
-                 // Disable animation on value-setting,
-                 // so the sliders respond immediately.
-                 animate: false,
-                 step: 1,
-                 decimals: 0,
-                 range: {
-                     min: 0,
-                     max: 100
-                 },
-                 format: wNumb({
-                     decimals: 0,
-                     thousand: '.',
-                 })
-             });
-   
-             reposo.noUiSlider.on('update', function (values, handle) {
-                document.getElementById('ReposoValor').innerHTML = values[handle];
-             });
-   }  
-   
-   
-   
-   
-   var instalacion_info=<?php echo json_encode($Instalacion); ?>;
-   
-   var url = "<?php echo Request::root() ?>/CalculosLuisFelipe";  
-   
-    $("#contenedorLFE").load(url, {instalacion: instalacion_info});
-   
-   
-   
-   
    
      $("#gauge0").click(function() {
        var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";
@@ -1043,16 +557,5 @@ function GraficarPHDiarioJS(mt_time, mt_value) {
        $("#contenedorLFE").load(url, {dato: "5"});
        $(".loader-insta").css("display", "block");
      });
-   
-   
-     $('#datetime').bootstrapMaterialDatePicker
-         ({
-           format: 'DD/MM/YYYY HH:mm',
-           lang: 'fr',
-           weekStart: 1, 
-           cancelText : 'ANNULER',
-           nowButton : true,
-           switchOnClick : true
-         });
    
 </script>

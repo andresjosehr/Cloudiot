@@ -68,3 +68,173 @@
    .noUi-base{
    margin-top: 6px;
    }
+
+   .vina-vina-loadingg{
+   width: 35px;
+   height: 35px;
+   border-radius:150px;
+   border:6px solid #797979;
+   border-top-color:rgba(0,0,0,0.3);
+   box-sizing:border-box;
+   position:absolute;
+   top: 72px;
+   left: 64%;
+   margin-top:-80px;
+   margin-left:-80px;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
+   z-index: 1;
+   display: none;
+   }
+
+   .vina-vina-loadingPH{
+   width: 35px;
+   height: 35px;
+   border-radius:150px;
+   border:6px solid #797979;
+   border-top-color:rgba(0,0,0,0.3);
+   box-sizing:border-box;
+   position:absolute;
+   top: 90%;
+   left: 50%;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
+   z-index: 1;
+   }
+   @keyframes vina-loading{
+   0%{transform:rotate(0deg)}
+   100%{transform:rotate(360deg)}
+   }
+   @-webkit-keyframes vina-loading{
+   0%{-webkit-transform:rotate(0deg)}
+   100%{-webkit-transform:rotate(360deg)}
+   }
+   .btncasc3, .btncasc4{
+   display: none;
+   }
+   .img-chart-lfe{
+   width: 95%;
+   }
+   .vina-cargando{
+   filter: blur(4px);
+   }
+   #rpm-0 canvas, #rpm-1 canvas, #rpm-2 canvas, #rpm-3 canvas, #rpm-4 canvas, #rpm-5 canvas, #myChart1, #myChart2, #myChart3, #myChart4, #myChart5, #myChart6{
+   display: none;
+   }
+   #gauge0, #gauge1, #gauge2, #gauge3, #gauge4, #gauge5{
+   cursor: pointer;
+   }
+   .img-rpm-lfe{
+   margin-bottom: -12px;
+   }
+   .vina-btn_error_custom{
+   padding: 2px 12px;
+   }
+   .vina-ico_error_custom{
+   font-size: 15px;
+   }
+   .vina-custom-error{
+   font-size: 10px;
+   }
+   .vina-circle-custom{
+   width: 20px;
+   height: 20px;
+   }
+   .vina-circle-custom i{
+   font-size: 13px !important;
+   left: -6.5px !important;
+   top: -11px !important;
+   }
+   .vina-vertical {
+   writing-mode: vertical-lr;
+   transform: rotate(180deg);
+   position: absolute;
+   }
+   .chart-lfe{
+   margin-top: -30px;
+   }
+   .vina-btn-bomba{
+   color: #2b982b;
+   font-size: 13px;
+   }
+   .vina-boton-bombas{
+   width: 9px;
+   height: 16px;
+   }           
+   .vina-tabla-titulo{
+   background: #cccccc;
+   border: 1px solid #cccccc;
+   border-bottom: 0;
+   text-align: center; 
+   font-weight: 600; 
+   color: black;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   }
+   .vina-nombre-instalacion{
+   text-align: left;
+   }
+   .vina-modal-table1 tbody tr th{
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+   padding-right: 0px !important;
+   padding-left: 10px !important;
+   text-align: left;
+   }
+   .vina-modal-table1 tbody tr td{
+   text-align: center;
+   padding: 0px !important;
+   }
+   .vina-table-bordered tbody tr td, .vina-table-bordered tbody tr th {
+   font-size: 13px;
+   border-color: #cccccc;
+   }
+
+   .vina-table tbody tr td, .vina-table tbody tr th {
+   padding: 5px;
+   }
+   .vina-table-custom table{
+   font-size: 13px;
+   }
+   .vina-loading{
+   width: 35px;
+   height: 35px;
+   border-radius:150px;
+   border:6px solid #797979;
+   border-top-color:rgba(0,0,0,0.3);
+   box-sizing:border-box;
+   position:absolute;
+   top: 99%;
+   left: 76%;
+   margin-top:-80px;
+   margin-left:-80px;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
+   z-index: 1;
+   }
+   .vina-loading-bomba{
+   width: 35px;
+   height: 35px;
+   border-radius:150px;
+   border:6px solid #797979;
+   border-top-color:rgba(0,0,0,0.3);
+   box-sizing:border-box;
+   position:absolute;
+   top: 89%;
+   left: 54%;
+   margin-top:-80px;
+   margin-left:-80px;
+   animation:vina-loading 1.2s linear infinite;
+   -webkit-animation:vina-loading 1.2s linear infinite;
+   z-index: 1;
+   }
+   @keyframes vina-loading{
+   0%{transform:rotate(0deg)}
+   100%{transform:rotate(360deg)}
+   }
+   @-webkit-keyframes vina-loading{
+   0%{-webkit-transform:rotate(0deg)}
+   100%{-webkit-transform:rotate(360deg)}
+   }

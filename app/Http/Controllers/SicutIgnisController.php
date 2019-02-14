@@ -358,7 +358,7 @@ class SicutIgnisController extends Controller{
       $datos = DB::connection('telemetria')
                                     ->select("SELECT * FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny'
                                                                         OR mt_name='AASA--ION8650.EnerReactRet')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
                                                                         ORDER BY mt_name, mt_time DESC ");
 
         $j=0;
@@ -406,8 +406,8 @@ class SicutIgnisController extends Controller{
                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
                                                                          OR mt_name='AASA--ION8650.VotajeLineaca'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.VotajeLineaca') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC ");
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        ORDER BY mt_name, mt_time DESC");
                   $j=0;
                   $k=0;                  
                   $h=0;
@@ -444,7 +444,7 @@ class SicutIgnisController extends Controller{
           var VoltajeLineabc_mt_value = '<?php echo json_encode($VoltajeLineabc_mt_value); ?>';
           VoltajeLineabc_mt_value = JSON.parse(VoltajeLineabc_mt_value)
 
-          var VoltajeLineaca_mt_value = '<?php echo json_encode($VoltajeLineaca_mt_value); ?>';
+          var VoltajeLineaca_mt_value = '0';
           VoltajeLineaca_mt_value = JSON.parse(VoltajeLineaca_mt_value)
 
           var VoltajeLineaPromedio_mt_value = '<?php echo json_encode($VoltajeLineaPromedio_mt_value); ?>';
@@ -462,7 +462,7 @@ class SicutIgnisController extends Controller{
                                                                         OR mt_name='AASA--ION8650.Voltajeb'
                                                                         OR mt_name='AASA--ION8650.Voltajec'
                                                                         OR mt_name='AASA--ION8650.VoltajePromedio')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.VotajeLineaca') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
                                                                         ORDER BY mt_name, mt_time DESC ");
                   $j=0;
                   $k=0;                  
@@ -518,7 +518,7 @@ class SicutIgnisController extends Controller{
                                                                         OR mt_name='AASA--ION8650.FactorPotenciab'
                                                                         OR mt_name='AASA--ION8650.FactorPotenciac'
                                                                         OR mt_name='AASA--ION8650.FactorPotenciaTotal')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.VotajeLineaca') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.FactorPotenciaa') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
                                                                         ORDER BY mt_name, mt_time DESC ");
                   $j=0;
                   $k=0;                  

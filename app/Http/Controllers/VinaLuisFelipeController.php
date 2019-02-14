@@ -315,12 +315,12 @@ class VinaLuisFelipeController extends Controller{
 
 
           
-          RPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH", ValorReal_PHEntrada);
-          RPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal", ValorReal_ORPEntrada);
-          RPM("Conductividad", ConductividadEntrada, "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value ?>");
-          RPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH", ValorReal_PHSalida);
-          RPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal", ValorReal_ORPSalida);
-          RPM("Conductividad", ConductividadSalida, "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value ?>");
+          VinaRPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH", ValorReal_PHEntrada);
+          VinaRPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal", ValorReal_ORPEntrada);
+          VinaRPM("Conductividad", ConductividadEntrada, "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value ?>");
+          VinaRPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH", ValorReal_PHSalida);
+          VinaRPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal", ValorReal_ORPSalida);
+          VinaRPM("Conductividad", ConductividadSalida, "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value ?>");
 
 
         </script><?php
@@ -347,7 +347,7 @@ class VinaLuisFelipeController extends Controller{
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
 
-         Graficos("chart-lfe1","myChart1", mt_value, mt_time);
+         VinaGraficos("chart-lfe1","myChart1", mt_value, mt_time);
        </script><?php
 
 
@@ -371,7 +371,7 @@ class VinaLuisFelipeController extends Controller{
 
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
-         Graficos("chart-lfe2","myChart2", mt_value, mt_time);
+         VinaGraficos("chart-lfe2","myChart2", mt_value, mt_time);
        </script><?php
 
 
@@ -394,7 +394,7 @@ class VinaLuisFelipeController extends Controller{
 
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
-         Graficos("chart-lfe3","myChart3", mt_value, mt_value);
+         VinaGraficos("chart-lfe3","myChart3", mt_value, mt_value);
        </script><?php
 
 
@@ -420,7 +420,7 @@ class VinaLuisFelipeController extends Controller{
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
 
-         Graficos("chart-lfe4","myChart4", mt_value, mt_time);
+         VinaGraficos("chart-lfe4","myChart4", mt_value, mt_time);
        </script><?php
 
 
@@ -447,7 +447,7 @@ class VinaLuisFelipeController extends Controller{
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
 
-         Graficos("chart-lfe5","myChart5", mt_value, mt_time);
+         VinaGraficos("chart-lfe5","myChart5", mt_value, mt_time);
        </script><?php
 
 
@@ -472,7 +472,7 @@ class VinaLuisFelipeController extends Controller{
 
          var mt_time = '<?php echo json_encode($mt_time); ?>';
          mt_time=JSON.parse(mt_time);
-         Graficos("chart-lfe6","myChart6", mt_value, mt_time);
+         VinaGraficos("chart-lfe6","myChart6", mt_value, mt_time);
        </script><?php
 
 
@@ -510,7 +510,7 @@ class VinaLuisFelipeController extends Controller{
         }
 
         ?><script>
-          Bombas("<?php $Operativa ?>","<?php $ErrorBomba ?>")
+          VinaBombas("<?php $Operativa ?>","<?php $ErrorBomba ?>")
         </script><?php
     
    }
