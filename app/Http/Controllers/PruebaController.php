@@ -18,26 +18,51 @@ class PruebaController extends Controller{
 
 
        $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny'
-                                                                        OR mt_name='AASA--ION8650.EnerActRet'
-                                                                        OR mt_name='AASA--ION8650.EnerReactIny'
-                                                                        OR mt_name='AASA--ION8650.EnerReactRet'
-                                                                        OR mt_name='AASA--ION8650.Voltajea'
-                                                                        OR mt_name='AASA--ION8650.VoltajeLineaab'
+                                    ->select("SELECT * FROM mt_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
-                                                                        OR mt_name='AASA--ION8650.VotajeLineaca'
-                                                                        OR mt_name='AASA--ION8650.Voltajea'
-                                                                        OR mt_name='AASA--ION8650.Voltajeb'
-                                                                        OR mt_name='AASA--ION8650.Voltajec'
-                                                                        OR mt_name='AASA--ION8650.VoltajePromedio'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciaa'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciab'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciac'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciaTotal')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC ");
+                                                                         OR mt_name='AASA--ION8650.VotajeLineaca'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        ORDER BY mt_name, mt_time ASC");
+                  $j=0;
+                  $k=0;                  
+                  $h=0;
+                  $g=0;
+                for ($i=0; $i <count($datos) ; $i++) { 
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaab") {
+                    $VoltajeLineaab_mt_value[$j]=$datos[$i]->mt_value;
+                    $VoltajeLineaab_mt_time[$j]=$datos[$i]->mt_time;
+                    $j++;
+                  }
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineabc") {
+                    $VoltajeLineabc_mt_value[$k]=$datos[$i]->mt_value;
+                    $VoltajeLineabc_mt_time[$k]=$datos[$i]->mt_time;
+                    $k++;
+                  }
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VotajeLineaca") {
+                    $VoltajeLineaca_mt_value[$h]=$datos[$i]->mt_value;
+                    $VoltajeLineaca_mt_time[$h]=$datos[$i]->mt_time;
+                    $h++;
+                  }
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaPromedio") {
+                    $VoltajeLineaPromedio_mt_value[$g]=$datos[$i]->mt_value;
+                    $VoltajeLineaPromedio_mt_time[$g]=$datos[$i]->mt_time;
+                    $g++;
+                  }
+                }
 
-        var_dump($datos);
+                for ($i=0; $i < count($VoltajeLineaab_mt_value) ; $i++) { 
+                    echo $VoltajeLineaab_mt_time[$i];
+                    echo "<br>";
+                    echo $VoltajeLineaab_mt_value[$i]."---------------------------------AASA--ION8650.VoltajeLineaab";
+                    echo "<br>";
+                    echo $VoltajeLineabc_mt_value[$i]."---------------------------------AASA--ION8650.VoltajeLineabc";
+                    echo "<br>";
+                    echo $VoltajeLineaPromedio_mt_value[$i]."---------------------------------AASA--ION8650.VoltajeLineaPromedio";
+                    echo "<br>";
+                    echo "<br>";
+
+                }
 
   }
 }

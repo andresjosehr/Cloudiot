@@ -223,7 +223,7 @@
                             </div>
                             <div class="col-md-4">
                             <canvas id="myChart6"  height="100"></canvas>
-                              <div class="sicut-loading" id="sicut-loading5"></div>
+                              {{-- <div class="sicut-loading" id="sicut-loading5"></div> --}}
                             </div>
                         </div>
                         <div class="modal-footer">
