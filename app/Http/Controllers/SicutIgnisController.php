@@ -319,7 +319,7 @@ class SicutIgnisController extends Controller{
                                     ->select("SELECT * FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny'
                                                                         OR mt_name='AASA--ION8650.EnerActRet')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC ");
+                                                                        ORDER BY mt_name, mt_time ASC ");
         $j=0;
         $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
@@ -359,7 +359,7 @@ class SicutIgnisController extends Controller{
                                     ->select("SELECT * FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny'
                                                                         OR mt_name='AASA--ION8650.EnerReactRet')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC ");
+                                                                        ORDER BY mt_name, mt_time ASC ");
 
         $j=0;
         $k=0;
@@ -407,7 +407,7 @@ class SicutIgnisController extends Controller{
                                                                          OR mt_name='AASA--ION8650.VotajeLineaca'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC");
+                                                                        ORDER BY mt_name, mt_time ASC");
                   $j=0;
                   $k=0;                  
                   $h=0;
@@ -463,7 +463,7 @@ class SicutIgnisController extends Controller{
                                                                         OR mt_name='AASA--ION8650.Voltajec'
                                                                         OR mt_name='AASA--ION8650.VoltajePromedio')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC ");
+                                                                        ORDER BY mt_name, mt_time ASC ");
                   $j=0;
                   $k=0;                  
                   $h=0;
@@ -519,7 +519,7 @@ class SicutIgnisController extends Controller{
                                                                         OR mt_name='AASA--ION8650.FactorPotenciac'
                                                                         OR mt_name='AASA--ION8650.FactorPotenciaTotal')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM mt_aasa WHERE (mt_name='AASA--ION8650.FactorPotenciaa') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time DESC ");
+                                                                        ORDER BY mt_name, mt_time ASC ");
                   $j=0;
                   $k=0;                  
                   $h=0;
