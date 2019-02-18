@@ -259,7 +259,7 @@ class VinaLuisFelipeController extends Controller{
     
 
               $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM (SELECT * FROM $instalaciones[tabla_asociada] ORDER BY mt_time DESC) T1
+                                  ->select("SELECT * FROM (SELECT * FROM $instalaciones[tabla_asociada] ORDER BY mt_time DESC LIMIT 100) T1
                                                                        WHERE  (mt_name='Biofiltro02--Consumo.PH_Entrada'
                                                                             OR mt_name='Biofiltro02--Consumo.ORP_Entrada'
                                                                             OR mt_name='Biofiltro02--Consumo.Conductividad_Entrada'

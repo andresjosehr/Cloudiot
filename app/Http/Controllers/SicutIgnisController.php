@@ -46,188 +46,188 @@ class SicutIgnisController extends Controller{
 
 
 
-                      $dato = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActIny' ORDER BY mt_time DESC LIMIT 2");
+                      // $dato = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActIny' ORDER BY mt_time DESC LIMIT 2");
 
-                      $EnergiaActivaInyectada = $dato[0]->mt_value-$dato[1]->mt_value;
-
-
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActRet' ORDER BY mt_time DESC LIMIT 3");
-
-                      $EnergiaActivarRetirada = $dato[0]->mt_value-$dato[1]->mt_value;
+                      // $EnergiaActivaInyectada = $dato[0]->mt_value-$dato[1]->mt_value;
 
 
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerReactIny' ORDER BY mt_time DESC LIMIT 1");
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerActRet' ORDER BY mt_time DESC LIMIT 3");
 
-                                $date= $fecha[0]->mt_time; 
-                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                      $EnergíaReactivaInyectada = DB::connection('telemetria')
-                                                 ->table("mt_aasa")
-                                                 ->where("mt_name", "AASA--ION8650.EnerReactIny")
-                                                 ->where("mt_time", ">", $newDate)
-                                                 ->orderBy("mt_time", "desc")
-                                                 ->get();
+                      // $EnergiaActivarRetirada = $dato[0]->mt_value-$dato[1]->mt_value;
 
 
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerReactIny' ORDER BY mt_time DESC LIMIT 1");
 
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerReactRet' ORDER BY mt_time DESC LIMIT 1");
+                      //           $date= $fecha[0]->mt_time; 
+                      //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
-                                $date= $fecha[0]->mt_time; 
-                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                      $EnergíaReactivaRetirada = DB::connection('telemetria')
-                                                 ->table("mt_aasa")
-                                                 ->where("mt_name", "AASA--ION8650.EnerReactRet")
-                                                 ->where("mt_time", ">", $newDate)
-                                                 ->orderBy("mt_time", "desc")
-                                                 ->get();
-
-
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.Voltajea' ORDER BY mt_time DESC LIMIT 1");
-
-                                $date= $fecha[0]->mt_time; 
-                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                      $VoltajeA = DB::connection('telemetria')
-                                                 ->table("mt_aasa")
-                                                 ->where("mt_name", "AASA--ION8650.Voltajea")
-                                                 ->where("mt_time", ">", $newDate)
-                                                 ->orderBy("mt_time", "desc")
-                                                 ->get();
-
-
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.Voltajeb' ORDER BY mt_time DESC LIMIT 1");
-
-                                $date= $fecha[0]->mt_time; 
-                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                      $VoltajeB = DB::connection('telemetria')
-                                                 ->table("mt_aasa")
-                                                 ->where("mt_name", "AASA--ION8650.Voltajeb")
-                                                 ->where("mt_time", ">", $newDate)
-                                                 ->orderBy("mt_time", "desc")
-                                                 ->get();
+                      // $EnergíaReactivaInyectada = DB::connection('telemetria')
+                      //                            ->table("mt_aasa")
+                      //                            ->where("mt_name", "AASA--ION8650.EnerReactIny")
+                      //                            ->where("mt_time", ">", $newDate)
+                      //                            ->orderBy("mt_time", "desc")
+                      //                            ->get();
 
 
 
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.EnerReactRet' ORDER BY mt_time DESC LIMIT 1");
+
+                      //           $date= $fecha[0]->mt_time; 
+                      //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                      // $EnergíaReactivaRetirada = DB::connection('telemetria')
+                      //                            ->table("mt_aasa")
+                      //                            ->where("mt_name", "AASA--ION8650.EnerReactRet")
+                      //                            ->where("mt_time", ">", $newDate)
+                      //                            ->orderBy("mt_time", "desc")
+                      //                            ->get();
 
 
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.Voltajea' ORDER BY mt_time DESC LIMIT 1");
 
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.Voltajec' ORDER BY mt_time DESC LIMIT 1");
+                      //           $date= $fecha[0]->mt_time; 
+                      //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
-                                $date= $fecha[0]->mt_time; 
-                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+                      // $VoltajeA = DB::connection('telemetria')
+                      //                            ->table("mt_aasa")
+                      //                            ->where("mt_name", "AASA--ION8650.Voltajea")
+                      //                            ->where("mt_time", ">", $newDate)
+                      //                            ->orderBy("mt_time", "desc")
+                      //                            ->get();
 
-                      $VoltajeC = DB::connection('telemetria')
-                                                 ->table("mt_aasa")
-                                                 ->where("mt_name", "AASA--ION8650.Voltajec")
-                                                 ->where("mt_time", ">", $newDate)
-                                                 ->orderBy("mt_time", "desc")
-                                                 ->get();
+
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.Voltajeb' ORDER BY mt_time DESC LIMIT 1");
+
+                      //           $date= $fecha[0]->mt_time; 
+                      //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                      // $VoltajeB = DB::connection('telemetria')
+                      //                            ->table("mt_aasa")
+                      //                            ->where("mt_name", "AASA--ION8650.Voltajeb")
+                      //                            ->where("mt_time", ">", $newDate)
+                      //                            ->orderBy("mt_time", "desc")
+                      //                            ->get();
 
 
 
 
 
-                      $fecha = DB::connection('telemetria')
-                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajePromedio' ORDER BY mt_time DESC LIMIT 1");
 
-                                $date= $fecha[0]->mt_time; 
-                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.Voltajec' ORDER BY mt_time DESC LIMIT 1");
 
-                      $VoltajePromedio = DB::connection('telemetria')
-                                                 ->table("mt_aasa")
-                                                 ->where("mt_name", "AASA--ION8650.VoltajePromedio")
-                                                 ->where("mt_time", ">", $newDate)
-                                                 ->orderBy("mt_time", "desc")
-                                                 ->get();
+                      //           $date= $fecha[0]->mt_time; 
+                      //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
-
-
-                                    $fecha = DB::connection('telemetria')
-                                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciaa' ORDER BY mt_time DESC LIMIT 1");
-
-                                                $date= $fecha[0]->mt_time; 
-                                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                                      $FactorPotenciaA = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.FactorPotenciaa")
-                                                                 ->where("mt_time", ">", $newDate)
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->get();
-
-
-                                    $fecha = DB::connection('telemetria')
-                                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciab' ORDER BY mt_time DESC LIMIT 1");
-
-                                                $date= $fecha[0]->mt_time; 
-                                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
-
-                                      $FactorPotenciaB = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.FactorPotenciab")
-                                                                 ->where("mt_time", ">", $newDate)
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->get();
+                      // $VoltajeC = DB::connection('telemetria')
+                      //                            ->table("mt_aasa")
+                      //                            ->where("mt_name", "AASA--ION8650.Voltajec")
+                      //                            ->where("mt_time", ">", $newDate)
+                      //                            ->orderBy("mt_time", "desc")
+                      //                            ->get();
 
 
 
 
-                                    $fecha = DB::connection('telemetria')
-                                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciac' ORDER BY mt_time DESC LIMIT 1");
 
-                                                $date= $fecha[0]->mt_time; 
-                                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+                      // $fecha = DB::connection('telemetria')
+                      //               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.VoltajePromedio' ORDER BY mt_time DESC LIMIT 1");
 
-                                      $FactorPotenciaC = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.FactorPotenciac")
-                                                                 ->where("mt_time", ">", $newDate)
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->get();
+                      //           $date= $fecha[0]->mt_time; 
+                      //           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                      // $VoltajePromedio = DB::connection('telemetria')
+                      //                            ->table("mt_aasa")
+                      //                            ->where("mt_name", "AASA--ION8650.VoltajePromedio")
+                      //                            ->where("mt_time", ">", $newDate)
+                      //                            ->orderBy("mt_time", "desc")
+                      //                            ->get();
+
+
+
+                      //               $fecha = DB::connection('telemetria')
+                      //                               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciaa' ORDER BY mt_time DESC LIMIT 1");
+
+                      //                           $date= $fecha[0]->mt_time; 
+                      //                           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //                           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                      //                 $FactorPotenciaA = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.FactorPotenciaa")
+                      //                                            ->where("mt_time", ">", $newDate)
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->get();
+
+
+                      //               $fecha = DB::connection('telemetria')
+                      //                               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciab' ORDER BY mt_time DESC LIMIT 1");
+
+                      //                           $date= $fecha[0]->mt_time; 
+                      //                           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //                           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                      //                 $FactorPotenciaB = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.FactorPotenciab")
+                      //                                            ->where("mt_time", ">", $newDate)
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->get();
 
 
 
 
-                                    $fecha = DB::connection('telemetria')
-                                                    ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciaTotal' ORDER BY mt_time DESC LIMIT 1");
+                      //               $fecha = DB::connection('telemetria')
+                      //                               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciac' ORDER BY mt_time DESC LIMIT 1");
 
-                                                $date= $fecha[0]->mt_time; 
-                                                $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
-                                                $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+                      //                           $date= $fecha[0]->mt_time; 
+                      //                           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //                           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
 
-                                      $FactorPotenciaTotal = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.FactorPotenciaTotal")
-                                                                 ->where("mt_time", ">", $newDate)
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->get();
+                      //                 $FactorPotenciaC = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.FactorPotenciac")
+                      //                                            ->where("mt_time", ">", $newDate)
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->get();
+
+
+
+
+                      //               $fecha = DB::connection('telemetria')
+                      //                               ->select("SELECT * FROM mt_aasa WHERE mt_name='AASA--ION8650.FactorPotenciaTotal' ORDER BY mt_time DESC LIMIT 1");
+
+                      //                           $date= $fecha[0]->mt_time; 
+                      //                           $newDate = strtotime ( '-15 minute' , strtotime ($date) ) ; 
+                      //                           $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+
+                      //                 $FactorPotenciaTotal = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.FactorPotenciaTotal")
+                      //                                            ->where("mt_time", ">", $newDate)
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->get();
 
                                       
 
 
 
-                                      $UltimaMedicion = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
+                      //                 $UltimaMedicion = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->first();
 
 
 
@@ -237,56 +237,83 @@ class SicutIgnisController extends Controller{
 
 
 
-                                      $VoltajeDeLineaAB = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.VoltajeLineaab")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
+                      //                 $VoltajeDeLineaAB = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.VoltajeLineaab")
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->first();
                                       
 
                                       
-                                      $VoltajeDeLineaBC = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.VoltajeLineabc")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
+                      //                 $VoltajeDeLineaBC = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.VoltajeLineabc")
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->first();
                                       
 
                                       
-                                      $VoltajeDeLineaCA = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.VotajeLineaca")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
+                      //                 $VoltajeDeLineaCA = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.VotajeLineaca")
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->first();
 
 
-                                      $VoltajeDeLineaPromedio = DB::connection('telemetria')
-                                                                 ->table("mt_aasa")
-                                                                 ->where("mt_name", "AASA--ION8650.VoltajeLineaPromedio")
-                                                                 ->orderBy("mt_time", "desc")
-                                                                 ->first();
+                      //                 $VoltajeDeLineaPromedio = DB::connection('telemetria')
+                      //                                            ->table("mt_aasa")
+                      //                                            ->where("mt_name", "AASA--ION8650.VoltajeLineaPromedio")
+                      //                                            ->orderBy("mt_time", "desc")
+                      //                                            ->first();
 
 
+                      $Info= DB::connection("telemetria")
+                                  ->select("(SELECT mt_name, mt_value, MAX(mt_time) AS mt_time FROM mt_aasa 
+                                                                     WHERE (mt_name='AASA--ION8650.EnerActIny'
+                                                                         OR mt_name='AASA--ION8650.EnerActRet'
+                                                                         OR mt_name='AASA--ION8650.EnerReactIny'
+                                                                         OR mt_name='AASA--ION8650.EnerReactRet'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaab'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaca'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaPromedio'
+                                                                         OR mt_name='AASA--ION8650.Voltajea'
+                                                                         OR mt_name='AASA--ION8650.Voltajeb'
+                                                                         OR mt_name='AASA--ION8650.Voltajec'
+                                                                         OR mt_name='AASA--ION8650.VoltajePromedio'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciaa'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciab'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciac'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciaTotal')
+                                                                         GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 32) ORDER BY mt_name, mt_time");
+                                  
 
-                                     $Datos["UltimaMedicion"] = $UltimaMedicion->mt_time;
-                                      $Datos["VoltajeDeLineaAB"]       = $VoltajeDeLineaAB->mt_value;
-                                      $Datos["VoltajeDeLineaBC"]       = $VoltajeDeLineaBC->mt_value;
-                                      $Datos["VoltajeDeLineaCA"]       = $VoltajeDeLineaCA->mt_value;
-                                      $Datos["VoltajeDeLineaPromedio"] = $VoltajeDeLineaPromedio->mt_value;
                                     
 
-                                     $Datos["EnergiaActivaInyectada"]    =   $EnergiaActivaInyectada;
-                                     $Datos["EnergiaActivaRetirada"]    =    $EnergiaActivarRetirada;
-                                     $Datos["EnergíaReactivaInyectada"]  =   abs($EnergíaReactivaInyectada[0]->mt_value - $EnergíaReactivaInyectada[count($EnergíaReactivaInyectada)-1]->mt_value);
-                                     $Datos["EnergíaReactivaRetirada"]   =   abs($EnergíaReactivaRetirada[0]->mt_value - $EnergíaReactivaRetirada[count($EnergíaReactivaRetirada)-1]->mt_value);
-                                     $Datos["VoltajeA"]                  =   abs($VoltajeA[0]->mt_value - $VoltajeA[count($VoltajeA)-1]->mt_value);
-                                     $Datos["VoltajeB"]                  =   abs($VoltajeB[0]->mt_value - $VoltajeB[count($VoltajeB)-1]->mt_value);
-                                     $Datos["VoltajeC"]                  =   abs($VoltajeC[0]->mt_value - $VoltajeC[count($VoltajeC)-1]->mt_value);
-                                     $Datos["VoltajePromedio"]           =   abs($VoltajePromedio[0]->mt_value - $VoltajePromedio[count($VoltajePromedio)-1]->mt_value);
-                                     $Datos["FactorPotenciaA"]           =   abs($FactorPotenciaA[0]->mt_value - $FactorPotenciaA[count($FactorPotenciaA)-1]->mt_value);
-                                     $Datos["FactorPotenciaB"]           =   abs($FactorPotenciaB[0]->mt_value - $FactorPotenciaB[count($FactorPotenciaB)-1]->mt_value);
-                                     $Datos["FactorPotenciaC"]           =   abs($FactorPotenciaC[0]->mt_value - $FactorPotenciaC[count($FactorPotenciaC)-1]->mt_value);
-                                     $Datos["FactorPotenciaTotal"]       =   abs($FactorPotenciaTotal[0]->mt_value - $FactorPotenciaTotal[count($FactorPotenciaTotal)-1]->mt_value);
+                                     $Datos["EnergiaActivaInyectada"]   =   $Info[1]->mt_value-$Info[0]->mt_value;
+                                     $Datos["EnergiaActivaRetirada"]    =   $Info[3]->mt_value-$Info[2]->mt_value;
+
+                                     $Datos["EnergíaReactivaInyectada"] =   $Info[5]->mt_value-$Info[4]->mt_value;
+                                     $Datos["EnergíaReactivaRetirada"]  =   $Info[7]->mt_value-$Info[6]->mt_value;
+
+                                     $Datos["FactorPotenciaA"]          =   $Info[9]->mt_value-$Info[8]->mt_value;
+                                     $Datos["FactorPotenciaB"]          =   $Info[11]->mt_value-$Info[10]->mt_value;
+                                     $Datos["FactorPotenciaC"]          =   $Info[13]->mt_value-$Info[12]->mt_value;
+                                     $Datos["FactorPotenciaTotal"]      =   $Info[15]->mt_value-$Info[14]->mt_value;
+
+                                     $Datos["VoltajeA"]                 =   $Info[17]->mt_value;
+                                     $Datos["VoltajeB"]                 =   $Info[19]->mt_value;
+                                     $Datos["VoltajeC"]                 =   $Info[21]->mt_value;
+
+
+                                     $Datos["VoltajeDeLineaAB"]         =   $Info[23]->mt_value;
+                                     $Datos["VoltajeDeLineaBC"]         =   $Info[25]->mt_value;
+                                     $Datos["VoltajeDeLineaCA"]         =   $Info[27]->mt_value;
+                                     $Datos["VoltajeDeLineaPromedio"]   =   $Info[29]->mt_value;
+                                    
+                                     $Datos["VoltajePromedio"]          =   $Info[31]->mt_value;
+
+                                     $Datos["UltimaMedicion"]           =   $Info[31]->mt_time;
 
                                      return view("modals.SicutIgnis", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
     }
