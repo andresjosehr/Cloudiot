@@ -13,40 +13,19 @@ class InstalacionesController extends Controller{
     	$usuario =  Auth::user();
     	
 
-      if ($usuario->rol==1) {
-        $instalaciones = DB::table('instalaciones')->get();
-      }
-
-      if ($usuario->rol==2) {
-        if ($usuario->id==2) {
-          $instalaciones = DB::table('instalaciones')
-                  ->where("id", "2")
-                  ->get();
-        } else{
-          $instalaciones = DB::table('instalaciones')
-                  ->where("id", "<>", "1")
-                  ->get();
-          }
-      }
-
-      if ($usuario->rol==3) {
-        $instalaciones = DB::table('instalaciones')
-                    ->where("id", "<>", "1")
-                    ->get();
-      }
-
-
-      if ($usuario->rol==4) {
-        $instalaciones = DB::table('instalaciones')
-                    ->where("id", "1")
-                    ->get();
-      }
-
-      if ($usuario->rol==5) {
-        $instalaciones = DB::table('instalaciones')
-                    ->where("id", "2")
-                    ->get();
-      }
+      $instalaciones= DB::select("SELECT instalaciones.id,
+                                         instalaciones.nombre,
+                                         instalaciones.tabla_asociada,
+                                         instalaciones.controlador,
+                                         instalaciones.latitud,
+                                         instalaciones.longitud,
+                                         instalaciones_asignadas.rol
+                                  FROM users 
+                                  INNER JOIN instalaciones_asignadas 
+                                  ON users.id = instalaciones_asignadas.id_usuario 
+                                  INNER JOIN instalaciones 
+                                  ON instalaciones_asignadas.id_instalacion = instalaciones.id
+                                  WHERE users.id='".Auth::user()->id."' ");
 
 
 

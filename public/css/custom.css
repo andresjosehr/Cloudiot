@@ -619,6 +619,14 @@
   }
 }
 
+.vina-noUi-handle {
+  left: 97% !important;
+}
+
+.vina-noUi-connect {
+  display: none !important;
+}
+
 .sicut-tabla-titulo {
   background: #cccccc;
   border: 1px solid #cccccc;

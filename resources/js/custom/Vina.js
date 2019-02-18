@@ -376,11 +376,6 @@ window.GraficarPHDiarioJS = function(mt_time, mt_value) {
 
 
 window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
-
-      console.log(alto)
-      console.log(bajo)
-      console.log(tiemporiego)
-      console.log(tiemporeposo)
    
          var slider = document.getElementById('slider');
       
@@ -458,6 +453,9 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
              reposo.noUiSlider.on('update', function (values, handle) {
                 document.getElementById('ReposoValor').innerHTML = values[handle];
              });
+
+             $(".noUi-handle").addClass("vina-noUi-handle");
+             $(".noUi-connect").addClass("vina-noUi-connect");
    }  
 
 

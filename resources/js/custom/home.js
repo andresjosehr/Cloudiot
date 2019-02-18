@@ -6,11 +6,11 @@ $.ajaxSetup({
 
 
 
-window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_) {
+window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
 
 (function(){
 
-  function Marcador(lon, lat, id, controlador) {
+  function Marcador(lon, lat, id, controlador, rol_) {
     var vectorSource = new ol.source.Vector({
       //create empty vector
     });
@@ -22,6 +22,7 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
           ol.geom.Point([lon, lat]),
           name: id,
           controlador: controlador,
+          rol: rol_,
           population: 4000,
           rainfall: 500
         });
@@ -53,7 +54,7 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
 
     var Instalaciones = [];
     for (var i = 0 ; i < longitud.length ; i++) {
-      Instalaciones[i]=Marcador(longitud[i], latitud[i], id[i], controlador[i]);
+      Instalaciones[i]=Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i]);
 
     }
 
@@ -99,10 +100,11 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
                 $(".loader-insta").css("display", "block");
                 var id             = feature.values_.name;
                 var controlador    = feature.values_.controlador;
+                var rol            = feature.values_.rol;
                 var url            = urlroot+controlador;
                 var datos          = $('#consulta-form').serialize();
 
-                $("#contenedor").load(url, {id: id, tabla_asociada: tabla_instalacion_asociada});
+                $("#contenedor").load(url, {id: id, tabla_asociada: tabla_instalacion_asociada, rol: rol});
 
 
             })

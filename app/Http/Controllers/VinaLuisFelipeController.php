@@ -248,7 +248,7 @@ class VinaLuisFelipeController extends Controller{
                                                                             GROUP BY mt_name");
 
 
-        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros, "Usuario" => Auth::user(), "ImprimirBombas" => $ImprimirBombas]);
+        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros, "Usuario" => Auth::user(), "ImprimirBombas" => $ImprimirBombas, "Rol" => $_POST['rol']]);
     }
 
     public static function Calculos(Request $Request){

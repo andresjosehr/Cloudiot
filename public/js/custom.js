@@ -622,10 +622,6 @@ window.GraficarPHDiarioJS = function (mt_time, mt_value) {
 };
 
 window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
-  console.log(alto);
-  console.log(bajo);
-  console.log(tiemporiego);
-  console.log(tiemporeposo);
   var slider = document.getElementById('slider');
   noUiSlider.create(slider, {
     start: [bajo, alto],
@@ -687,6 +683,8 @@ window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
   reposo.noUiSlider.on('update', function (values, handle) {
     document.getElementById('ReposoValor').innerHTML = values[handle];
   });
+  $(".noUi-handle").addClass("vina-noUi-handle");
+  $(".noUi-connect").addClass("vina-noUi-connect");
 };
 
 window.RegistarRangoPH = function (url_) {
@@ -736,9 +734,9 @@ $.ajaxSetup({
   }
 });
 
-window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_) {
+window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
   (function () {
-    function Marcador(lon, lat, id, controlador) {
+    function Marcador(lon, lat, id, controlador, rol_) {
       var vectorSource = new ol.source.Vector({//create empty vector
       }); //create a bunch of icons and add to source vector
 
@@ -746,6 +744,7 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
         geometry: new ol.geom.Point([lon, lat]),
         name: id,
         controlador: controlador,
+        rol: rol_,
         population: 4000,
         rainfall: 500
       });
@@ -775,7 +774,7 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
     var Instalaciones = [];
 
     for (var i = 0; i < longitud.length; i++) {
-      Instalaciones[i] = Marcador(longitud[i], latitud[i], id[i], controlador[i]);
+      Instalaciones[i] = Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i]);
     }
 
     var map = new ol.Map({
@@ -815,11 +814,13 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
         $(".loader-insta").css("display", "block");
         var id = feature.values_.name;
         var controlador = feature.values_.controlador;
+        var rol = feature.values_.rol;
         var url = urlroot + controlador;
         var datos = $('#consulta-form').serialize();
         $("#contenedor").load(url, {
           id: id,
-          tabla_asociada: tabla_instalacion_asociada
+          tabla_asociada: tabla_instalacion_asociada,
+          rol: rol
         });
       });
     });
