@@ -296,10 +296,9 @@ class SicutIgnisController extends Controller{
                                      $Datos["EnergíaReactivaInyectada"] =   $Info[5]->mt_value-$Info[4]->mt_value;
                                      $Datos["EnergíaReactivaRetirada"]  =   $Info[7]->mt_value-$Info[6]->mt_value;
 
-                                     $Datos["FactorPotenciaA"]          =   $Info[9]->mt_value-$Info[8]->mt_value;
-                                     $Datos["FactorPotenciaB"]          =   $Info[11]->mt_value-$Info[10]->mt_value;
-                                     $Datos["FactorPotenciaC"]          =   $Info[13]->mt_value-$Info[12]->mt_value;
-                                     $Datos["FactorPotenciaTotal"]      =   $Info[15]->mt_value-$Info[14]->mt_value;
+                                     $Datos["FactorPotenciaA"]          =   $Info[9]->mt_value;                                     $Datos["FactorPotenciaB"]          =   $Info[11]->mt_value;
+                                     $Datos["FactorPotenciaC"]          =   $Info[13]->mt_value;
+                                     $Datos["FactorPotenciaTotal"]      =   $Info[15]->mt_value;
 
                                      $Datos["VoltajeA"]                 =   $Info[17]->mt_value;
                                      $Datos["VoltajeB"]                 =   $Info[19]->mt_value;
