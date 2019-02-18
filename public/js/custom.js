@@ -271,7 +271,10 @@ window.GraficarTodo = function (url) {
   });
   $("#SicutContenedor4").load(url + "/GraficoSigutIgnis4", {
     dato: "Epa4"
-  }); // $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
+  });
+  $("#SicutContenedor5").load(url + "/GraficoSigutIgnis5", {
+    dato: "Epa5"
+  });
 };
 
 /***/ }),

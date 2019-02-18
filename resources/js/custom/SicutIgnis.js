@@ -190,6 +190,6 @@ window.GraficarTodo=function(url){
     $("#SicutContenedor2").load(url+"/GraficoSigutIgnis2", {dato: "Epa2"});
     $("#SicutContenedor3").load(url+"/GraficoSigutIgnis3", {dato: "Epa3"});
     $("#SicutContenedor4").load(url+"/GraficoSigutIgnis4", {dato: "Epa4"});
-    // $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
+    $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
 }
                     
