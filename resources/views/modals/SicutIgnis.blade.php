@@ -34,6 +34,8 @@
                           <div id="SicutContenedor3"></div>
                           <div id="SicutContenedor4"></div>
                           <div id="SicutContenedor5"></div>
+                          <div id="SicutContenedor6"></div>
+                          <div id="SicutContenedor7"></div>
                             <div class="row" align="center">
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
@@ -74,42 +76,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                      <div class="body table-responsive">
-                                          <table class="table sicut-table-bordered sicut-modal-table1">
-                                            <thead>
-                                                <caption scope="row" class="sicut-tabla-titulo">Potencia Ractiva</caption>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th class="sicut-th">Inyectada</th>
-                                                    <td>No definido</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="sicut-th">Retirada</th>
-                                                    <td>No definido</td>
-                                                </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
+                                      <canvas id="sicut-pie-chart" height="170"></canvas>
                                     </div>
                                     <div class="col-md-3">
-                                      <div class="body table-responsive">
-                                          <table class="table sicut-table-bordered sicut-modal-table1">
-                                            <thead>
-                                                <caption scope="row" class="sicut-tabla-titulo">Potencia Aparente</caption>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th class="sicut-th">Inyectada</th>
-                                                    <td>No definido</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="sicut-th">Retirada</th>
-                                                    <td>No definido</td>
-                                                </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
+                                      <canvas id="sicut-myChart3" height="170"></canvas>
                                     </div>
                             </div>
                             <div class="row">
@@ -120,12 +90,6 @@
                                 <div class="col-md-3" align="center">
                                   <canvas id="myChart1" height="100"></canvas>
                                   <div class="sicut-loading" id="sicut-loading2"></div>
-                                </div>
-                                <div class="col-md-3" align="center">
-                                  <canvas id="myChart2" height="100"></canvas>
-                                </div>
-                                <div class="col-md-3" align="center">
-                                  <canvas id="myChart3" height="100"></canvas>
                                 </div>
                           </div>
                             <div class="row sicut-row2" align="center">

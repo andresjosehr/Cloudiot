@@ -259,7 +259,69 @@ window.GraficoIgnisArribaDerecha = function (id, mt_value1, mt_time1, mt_value2,
   $("#sicut-loading" + loading).css("display", "none");
 };
 
+window.SicutPieChart = function () {
+  var ctx = document.getElementById("sicut-pie-chart").getContext('2d');
+  var pieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ["Dato 1", "Dato 2", "Dato 3"],
+      datasets: [{
+        data: [133.3, 86.2, 52.2],
+        backgroundColor: ["#FF6384", "#63FF84", "#84FF63"]
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: 'Potencia Generada'
+      }
+    }
+  });
+};
+
+window.PotGenerada = function () {
+  var ctx = document.getElementById("sicut-myChart3").getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+        borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: 'Potencia Generada'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+};
+
 window.GraficarTodo = function (url) {
+  $("#SicutContenedor6").load(url + "/GraficoSigutIgnis6", {
+    dato: "Epa5"
+  });
+  $("#SicutContenedor7").load(url + "/GraficoSigutIgnis7", {
+    dato: "Epa5"
+  });
   $("#SicutContenedor1").load(url + "/GraficoSigutIgnis1", {
     dato: "Epa"
   });
@@ -806,7 +868,9 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
       } else {
         map.getTarget().style.cursor = '';
       }
-    });
+    }); // var lonlat = new OpenLayers.LonLat(-71.148302, -33.578780);
+    // map.panTo(lonlat);
+
     map.on("click", function (e) {
       map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
         $.ajaxSetup({
@@ -840,6 +904,8 @@ $(document).ready(function () {
 window.AsignarIDHome = function () {
   $("body").addClass("HomePage");
 };
+
+window.CentrarMapa = function (longitud, latitud) {};
 
 /***/ }),
 

@@ -731,3 +731,12 @@
   margin-left: 20px;
 }
 
+#sicut-pie-chart {
+  position: absolute;
+}
+
+#sicut-myChart3 {
+  position: absolute;
+  margin-left: -4%;
+}
+

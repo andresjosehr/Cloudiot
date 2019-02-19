@@ -80,7 +80,7 @@
 
                         @if (Request::segment(1)=="panel-de-control")
                                 @foreach($Instalaciones as $Instalacion)
-                                <a href="javascript:void(0);" >
+                                <a onclick="CentrarMapa('{{ $Instalacion->longitud }}', '{{ $Instalacion->latitud }}')" >
                                   <span>{{ $Instalacion->nombre }}</span>
                                 </a>
                             @endforeach

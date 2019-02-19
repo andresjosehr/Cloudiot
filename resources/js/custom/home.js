@@ -88,6 +88,10 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
         }
     });
 
+
+        // var lonlat = new OpenLayers.LonLat(-71.148302, -33.578780);
+        // map.panTo(lonlat);
+
         map.on("click", function(e) {
             map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 
@@ -123,6 +127,11 @@ $( document ).ready(function() {
 window.AsignarIDHome=function(){
 
   $("body").addClass("HomePage");
+
+}
+
+window.CentrarMapa = function (longitud, latitud){
+
 
 }
 
