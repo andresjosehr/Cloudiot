@@ -150,7 +150,7 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
   $("#sicut-loading" + loading).css("display", "none");
 };
 
-window.GraficosIgnisAbajo = function (id, mt_value1, mt_time1, mt_value2, mt_value3, mt_value4, min_dato, max_dato, label1, label2, label3, label4, loading) {
+window.GraficosIgnisAbajo = function (id, mt_value1, mt_time1, mt_value2, mt_value3, mt_value4, min_dato, max_dato, label1, label2, label3, label4, loading, oculto) {
   console.log(min_dato);
   console.log(max_dato);
   var ctx = document.getElementById(id).getContext('2d');
@@ -178,7 +178,8 @@ window.GraficosIgnisAbajo = function (id, mt_value1, mt_time1, mt_value2, mt_val
         backgroundColor: 'rgba(242, 255, 0, 0.2)',
         borderColor: 'rgba(242, 255, 0, 1)',
         borderWidth: 1,
-        radius: 0
+        radius: 0,
+        hidden: oculto
       }, {
         label: label4,
         data: mt_value4,

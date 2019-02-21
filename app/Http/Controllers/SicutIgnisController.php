@@ -49,10 +49,10 @@ class SicutIgnisController extends Controller{
                                      $Datos["EnergíaReactivaInyectada"] =   $Info[5]->mt_value-$Info[4]->mt_value;
                                      $Datos["EnergíaReactivaRetirada"]  =   $Info[7]->mt_value-$Info[6]->mt_value;
 
-                                     $Datos["FactorPotenciaA"]          =   $Info[9]->mt_value/1000; 
-                                     $Datos["FactorPotenciaB"]          =   $Info[11]->mt_value/1000;
-                                     $Datos["FactorPotenciaC"]          =   $Info[13]->mt_value/1000;
-                                     $Datos["FactorPotenciaTotal"]      =   $Info[15]->mt_value/1000;
+                                     $Datos["FactorPotenciaA"]          =   number_format($Info[9]->mt_value/10000, 2, ",", "");
+                                     $Datos["FactorPotenciaB"]          =   number_format($Info[11]->mt_value/10000, 2, ",", "");
+                                     $Datos["FactorPotenciaC"]          =   number_format($Info[13]->mt_value/10000, 2, ",", "");
+                                     $Datos["FactorPotenciaTotal"]      =   number_format($Info[15]->mt_value/10000, 2, ",", "");
 
                                      $Datos["VoltajeA"]                 =   $Info[17]->mt_value;
                                      $Datos["VoltajeB"]                 =   $Info[19]->mt_value;
@@ -284,7 +284,7 @@ class SicutIgnisController extends Controller{
           var VoltajeLineaPromedio_mt_value = '<?php echo json_encode($VoltajeLineaPromedio_mt_value); ?>';
           VoltajeLineaPromedio_mt_value = JSON.parse(VoltajeLineaPromedio_mt_value)
 
-          GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3);
+          GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, true);
       </script><?php
      
     }
@@ -353,7 +353,7 @@ class SicutIgnisController extends Controller{
           VoltajePromedio_mt_value = JSON.parse(VoltajePromedio_mt_value)
 
 
-          GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_mt_time, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "Voltaje A", "Voltaje B", "Voltaje C", "Voltaje Promedio", 4);
+          GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_mt_time, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
       </script><?php
      
     }
@@ -372,22 +372,22 @@ class SicutIgnisController extends Controller{
                   $g=0;
                 for ($i=0; $i <count($datos) ; $i++) { 
                   if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciaa') {
-                    $FactorPotenciaa_mt_value[$j]=$datos[$i]->mt_value/1000;
+                    $FactorPotenciaa_mt_value[$j]= $datos[$i]->mt_value/10000;
                     $FactorPotenciaa_mt_time[$j]=$datos[$i]->mt_time;
                     $j++;
                   }
                   if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciab') {
-                    $FactorPotenciab_mt_value[$k]=$datos[$i]->mt_value/1000;
+                    $FactorPotenciab_mt_value[$k]= $datos[$i]->mt_value/10000;
                     $FactorPotenciab_mt_time[$k]=$datos[$i]->mt_time;
                     $k++;
                   }
                   if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciac') {
-                    $FactorPotenciac_mt_value[$h]=$datos[$i]->mt_value/1000;
+                    $FactorPotenciac_mt_value[$h]= $datos[$i]->mt_value/10000;
                     $FactorPotenciac_mt_time[$h]=$datos[$i]->mt_time;
                     $h++;
                   }
                   if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciaTotal') {
-                    $FactorPotenciaTotal_mt_value[$g]=$datos[$i]->mt_value/1000;
+                    $FactorPotenciaTotal_mt_value[$g]= $datos[$i]->mt_value/10000;
                     $FactorPotenciaTotal_mt_time[$g]=$datos[$i]->mt_time;
                     $g++;
                   }
@@ -395,11 +395,11 @@ class SicutIgnisController extends Controller{
                     $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
                     $MaxDato=0;
                   } else{
-                    if ($MinDato>$datos[$i]->mt_value/1000 && $datos[$i]->mt_value!=0) {
-                      $MinDato=$datos[$i]->mt_value/1000;
+                    if ($MinDato>$datos[$i]->mt_value/10000 && $datos[$i]->mt_value!=0) {
+                      $MinDato=$datos[$i]->mt_value/10000;
                     }
-                    if ($MaxDato<$datos[$i]->mt_value/1000) {
-                      $MaxDato=$datos[$i]->mt_value/1000;
+                    if ($MaxDato<$datos[$i]->mt_value/10000) {
+                      $MaxDato=$datos[$i]->mt_value/10000;
                     }
                   }
                 }
@@ -424,7 +424,7 @@ class SicutIgnisController extends Controller{
           FactorPotenciaTotal_mt_value = JSON.parse(FactorPotenciaTotal_mt_value)
 
 
-          GraficosIgnisAbajo("myChart6", FactorPotenciaa_mt_value, FactorPotenciaa_mt_time, FactorPotenciab_mt_value, FactorPotenciac_mt_value, FactorPotenciaTotal_mt_value, MinDato, MaxDato, "Factor Potencia A", "Factor Potencia B", "Factor Potencia C", "Factor Potencia Total", 5);
+          GraficosIgnisAbajo("myChart6", FactorPotenciaa_mt_value, FactorPotenciaa_mt_time, FactorPotenciab_mt_value, FactorPotenciac_mt_value, FactorPotenciaTotal_mt_value, MinDato, MaxDato, "Factor Potencia A", "Factor Potencia B", "Factor Potencia C", "Factor Potencia Total", 5, false);
       </script><?php
      
      
