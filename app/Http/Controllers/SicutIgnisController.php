@@ -222,7 +222,7 @@ class SicutIgnisController extends Controller{
             $datos = DB::connection('telemetria')
                                     ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
-                                                                         OR mt_name='AASA--ION8650.VotajeLineaca'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaca'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
                                                                         ORDER BY mt_name, mt_time ASC");
@@ -241,7 +241,7 @@ class SicutIgnisController extends Controller{
                     $VoltajeLineabc_mt_time[$k]=$datos[$i]->mt_time;
                     $k++;
                   }
-                  if ($datos[$i]->mt_name=="AASA--ION8650.VotajeLineaca") {
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaca") {
                     $VoltajeLineaca_mt_value[$h]=$datos[$i]->mt_value;
                     $VoltajeLineaca_mt_time[$h]=$datos[$i]->mt_time;
                     $h++;
@@ -278,13 +278,15 @@ class SicutIgnisController extends Controller{
           var VoltajeLineabc_mt_value = '<?php echo json_encode($VoltajeLineabc_mt_value); ?>';
           VoltajeLineabc_mt_value = JSON.parse(VoltajeLineabc_mt_value)
 
-          var VoltajeLineaca_mt_value = '0';
+          var VoltajeLineaca_mt_value = '<?php echo json_encode($VoltajeLineaca_mt_value); ?>';
           VoltajeLineaca_mt_value = JSON.parse(VoltajeLineaca_mt_value)
 
           var VoltajeLineaPromedio_mt_value = '<?php echo json_encode($VoltajeLineaPromedio_mt_value); ?>';
           VoltajeLineaPromedio_mt_value = JSON.parse(VoltajeLineaPromedio_mt_value)
 
-          GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, true);
+          console
+
+          GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
       </script><?php
      
     }

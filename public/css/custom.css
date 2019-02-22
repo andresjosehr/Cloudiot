@@ -301,6 +301,10 @@
   width: 103%;
 }
 
+.instalaciones-boton {
+  display: none;
+}
+
 .vina-modal {
   display: none;
 }

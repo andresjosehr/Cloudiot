@@ -132,6 +132,10 @@ window.AsignarIDHome=function(){
 
 window.CentrarMapa = function (longitud, latitud){
 
-
+map.setView(new ol.View({
+      center: [-71.148302, -34.078780],
+      zoom: 15,
+      projection: 'EPSG:4326'
+    }));
 }
 
