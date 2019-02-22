@@ -17,6 +17,7 @@
     </section>
 
 <script>
+  
   $(document).ready(function () {
       var longitud_    = [];
       var latitud_     = [];
@@ -34,10 +35,18 @@
       @endforeach
       urlroot_="<?php echo Request::root() ?>/";
       var tabla_instalacion_asociada_ = "<?php echo $Instalacion->tabla_asociada ?>";
-      RenderizarMapa(latitud_, longitud_, id_, controlador_, urlroot_, tabla_instalacion_asociada_, rol_);
+
+      var Vista = RenderizarMapa(latitud_, longitud_, id_, controlador_, urlroot_, tabla_instalacion_asociada_, rol_);
+      
+      <?php $i=0; ?>
+      @foreach ($Instalaciones as $Instalacion)
+      $("#EsteEsMiID_<?php echo $i; ?>").on("click", function(){ flyTo(Vista, [{{ $Instalacion->longitud }}, {{ $Instalacion->latitud }}], function() {}); });
+      <?php $i++; ?>
+      @endforeach
   });
 
   AsignarIDHome();
-    </script>
+</script>
+
 
     @include("footer");

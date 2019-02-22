@@ -6,14 +6,14 @@ $.ajaxSetup({
 
 
 
-window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
+function RenderizarMapa(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
 
-(function(){
 
   function Marcador(lon, lat, id, controlador, rol_) {
-    var vectorSource = new ol.source.Vector({
-      //create empty vector
-    });
+
+      var vectorSource = new ol.source.Vector({
+        //create empty vector
+      });
 
       //create a bunch of icons and add to source vector
         
@@ -27,20 +27,20 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
           rainfall: 500
         });
 
-          vectorSource.addFeature(iconFeature);
+        vectorSource.addFeature(iconFeature);
 
-    //create the style
-    var iconStyle = new ol.style.Style({
-      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-        anchor: [0.5, 46],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        cursor: "pointer",
-        opacity: 0.75,
-        src: 'images/marcador.png',
-        id: "1"
-      }))
-    });
+        //create the style
+        var iconStyle = new ol.style.Style({
+          image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            cursor: "pointer",
+            opacity: 0.75,
+            src: 'images/marcador.png',
+            id: "1"
+          }))
+        });
 
       //add the feature vector to the layer vector, and apply a style to whole layer
       var vectorLayer = new ol.layer.Vector({
@@ -50,31 +50,29 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
 
       return vectorLayer
 
-    }
+  }
 
     var Instalaciones = [];
     for (var i = 0 ; i < longitud.length ; i++) {
       Instalaciones[i]=Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i]);
-
     }
 
-
+    var vista = new ol.View({
+      center: [-71.148302, -34.078780],
+      zoom: 8,
+      projection: 'EPSG:4326'
+    })
     
 
     var map = new ol.Map({
       layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
       target: document.getElementById('map'),
-      view: new ol.View({
-      center: [-71.148302, -34.078780],
-      zoom: 8,
-      projection: 'EPSG:4326'
-      })
+      view: vista
     });
 
     for (var i = 0; i < Instalaciones.length; i++) {
       map.addLayer(Instalaciones[i]);
     }
-
 
 
     map.on("pointermove", function (evt) {
@@ -88,9 +86,6 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
         }
     });
 
-
-        // var lonlat = new OpenLayers.LonLat(-71.148302, -33.578780);
-        // map.panTo(lonlat);
 
         map.on("click", function(e) {
             map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
@@ -114,11 +109,43 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
             })
         });
 
-  })();
 
   var tabla_instalacion_asociada = tabla_instalacion_asociada_;
-
+  return vista;
 }
+
+function flyTo(vistamo ,location, done) {
+        var duration = 2000;
+        var zoom = 10;
+        var parts = 2;
+        var called = false;
+        function callback(complete) {
+          --parts;
+          if (called) {
+            return;
+          }
+          if (parts === 0 || !complete) {
+            called = true;
+            done(complete);
+          }
+        }
+        vistamo.animate({
+          center: location,
+          projection: 'EPSG:4326',
+          duration: duration
+        }, callback);
+        vistamo.animate({
+          zoom: zoom - 1,
+          duration: duration / 2
+        }, {
+          zoom: zoom,
+          duration: duration / 2
+        }, callback);
+      }
+
+
+
+
 $( document ).ready(function() {
   $( ".content" ).addClass( "mapa-content" );
   $( "canvas" ).addClass( "mapa-canvas" );
@@ -129,13 +156,3 @@ window.AsignarIDHome=function(){
   $("body").addClass("HomePage");
 
 }
-
-window.CentrarMapa = function (longitud, latitud){
-
-map.setView(new ol.View({
-      center: [-71.148302, -34.078780],
-      zoom: 15,
-      projection: 'EPSG:4326'
-    }));
-}
-

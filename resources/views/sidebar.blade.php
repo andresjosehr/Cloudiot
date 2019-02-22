@@ -79,10 +79,12 @@
                         @endif
 
                         @if (Request::segment(1)=="panel-de-control")
+                        <?php $i=0; ?>
                             @foreach($Instalaciones as $Instalacion)
-                                <a onclick="CentrarMapa('{{ $Instalacion->longitud }}', '{{ $Instalacion->latitud }}')" >
+                                <a id="EsteEsMiID_<?php echo $i; ?>" >
                                   <span>{{ $Instalacion->nombre }}</span>
                                 </a>
+                                <?php $i++; ?>
                             @endforeach
                             <div class="instalaciones-boton">
                                 <?php $i=0; ?>

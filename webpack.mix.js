@@ -12,9 +12,11 @@ const mix = require('laravel-mix');
  */
 
 
-mix.js('resources/js/custom/home.js', 'public/js/custom.js')
-	.js('resources/js/custom/SicutIgnis.js', 'public/js/custom.js')
-	.js('resources/js/custom/Vina.js', 'public/js/custom.js')
+ mix.scripts([
+	    'resources/js/custom/home.js',
+	    'resources/js/custom/SicutIgnis.js',
+	    'resources/js/custom/Vina.js'
+	], 'public/js/custom.js')
     .sass('resources/sass/general.scss', 'public/css/custom.css')
     .styles([
 	    'resources/sass/default/bootstrap.css',
