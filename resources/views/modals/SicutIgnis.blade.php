@@ -36,6 +36,7 @@
                           <div id="SicutContenedor5"></div>
                           <div id="SicutContenedor6"></div>
                           <div id="SicutContenedor7"></div>
+                          <div id="SicutContenedorExcel"></div>
                             <div class="row" align="center">
                                     <div class="col-md-3">
                                       <div class="body table-responsive">
@@ -191,16 +192,68 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                          <div align="center">
+                            <button class="btn btn-primary" id="SicutExportarExcel" disabled>Exportar a Excel</button>
+                          </div>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <form id="TheForm" method="post" action="<?php echo Request::root() ?>/ExportarSicutExcel" target="TheWindow">
+              @csrf 
+              
+           </form>
+
+
   <script>
-
+    var FuncionesCompletas=0;
     var url_ = "<?php echo Request::root() ?>";
-
     SicutScriptDefault();
     GraficarTodo(url_);
-    
+    var SicutFormLimit=0;
+
+    function FuncionExportacion(final) {
+      if (final==7) {
+        var script = document.createElement( "script" );
+        script.type = "text/javascript";
+        script.text = function ExportarSicutExcel() { SubirDatos(); };
+        document.getElementsByTagName('head')[0].appendChild(script);
+        $("#SicutExportarExcel").on("click", function(){ ExportarSicutExcel(); });
+        $("#SicutExportarExcel").removeAttr("disabled");
+      }
+    }
+
+    function SubirDatos(){
+        if (SicutFormLimit==0) {
+          $( "#TheForm" ).append( "<input type='hidden' name='EnergiaActivaInyectada_mt_time' value='"+EnergiaActivaInyectada_mt_time+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='EnergiaActivaInyectada_mt_value' value='"+EnergiaActivaInyectada_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='EnergiaActivaRetirada_mt_value' value='"+EnergiaActivaRetirada_mt_value+"'>" );
+
+          $( "#TheForm" ).append( "<input type='hidden' name='EnergiaReactivaInyectada_mt_time' value='"+EnergiaReactivaInyectada_mt_time+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='EnergiaReactivaInyectada_mt_value' value='"+EnergiaReactivaInyectada_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='EnergiaReactivaRetirada_mt_value' value='"+EnergiaReactivaRetirada_mt_value+"'>" );
+
+          $( "#TheForm" ).append( "<input type='hidden' name='VoltajeLineaab_mt_time' value='"+VoltajeLineaab_mt_time+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='VoltajeLineaab_mt_value' value='"+VoltajeLineaab_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='VoltajeLineabc_mt_value' value='"+VoltajeLineabc_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='VoltajeLineaca_mt_value' value='"+VoltajeLineaca_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='VoltajeLineaPromedio_mt_value' value='"+VoltajeLineaPromedio_mt_value+"'>" );
+
+          $( "#TheForm" ).append( "<input type='hidden' name='Voltajea_mt_time' value='"+Voltajea_mt_time+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='Voltajea_mt_value' value='"+Voltajea_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='Voltajeb_mt_value' value='"+Voltajeb_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='Voltajec_mt_value' value='"+Voltajec_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='VoltajePromedio_mt_value' value='"+VoltajePromedio_mt_value+"'>" );
+
+          $( "#TheForm" ).append( "<input type='hidden' name='FactorPotenciaa_mt_time' value='"+FactorPotenciaa_mt_time+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='FactorPotenciaa_mt_value' value='"+FactorPotenciaa_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='FactorPotenciab_mt_value' value='"+FactorPotenciab_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='FactorPotenciac_mt_value' value='"+FactorPotenciac_mt_value+"'>" );
+          $( "#TheForm" ).append( "<input type='hidden' name='FactorPotenciaTotal_mt_value' value='"+FactorPotenciaTotal_mt_value+"'>" );
+        }
+        SicutFormLimit++;
+        window.open('', 'TheWindow'); document.getElementById('TheForm').submit();
+      }  
   </script>

@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
+
 use DB;
 
 class SicutIgnisController extends Controller{
@@ -132,7 +139,8 @@ class SicutIgnisController extends Controller{
           EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
 
           GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_mt_time, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_mt_time, MinDato, MaxDato, "Inyectada", "Retirada" , 1);
-
+          FuncionesCompletas++;
+          FuncionExportacion(FuncionesCompletas);
         </script><?php
      
     }
@@ -211,6 +219,9 @@ class SicutIgnisController extends Controller{
           EnergiaReactivaRetirada_mt_time = JSON.parse(EnergiaReactivaRetirada_mt_time)
 
           GraficoIgnisArribaDerecha("myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_mt_time, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_mt_time, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2);
+
+          FuncionesCompletas++;
+          FuncionExportacion(FuncionesCompletas);
       </script><?php
      
     }
@@ -284,9 +295,10 @@ class SicutIgnisController extends Controller{
           var VoltajeLineaPromedio_mt_value = '<?php echo json_encode($VoltajeLineaPromedio_mt_value); ?>';
           VoltajeLineaPromedio_mt_value = JSON.parse(VoltajeLineaPromedio_mt_value)
 
-          console
-
           GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
+
+          FuncionesCompletas++;
+          FuncionExportacion(FuncionesCompletas);
       </script><?php
      
     }
@@ -356,6 +368,9 @@ class SicutIgnisController extends Controller{
 
 
           GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_mt_time, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
+
+          FuncionesCompletas++;
+          FuncionExportacion(FuncionesCompletas);
       </script><?php
      
     }
@@ -427,6 +442,9 @@ class SicutIgnisController extends Controller{
 
 
           GraficosIgnisAbajo("myChart6", FactorPotenciaa_mt_value, FactorPotenciaa_mt_time, FactorPotenciab_mt_value, FactorPotenciac_mt_value, FactorPotenciaTotal_mt_value, MinDato, MaxDato, "Factor Potencia A", "Factor Potencia B", "Factor Potencia C", "Factor Potencia Total", 5, false);
+
+          FuncionesCompletas++;
+          FuncionExportacion(FuncionesCompletas);
       </script><?php
      
      
@@ -436,6 +454,8 @@ class SicutIgnisController extends Controller{
     public function Grafico6(Request $Request){
       ?><script>
         SicutPieChart();
+        FuncionesCompletas++;
+        FuncionExportacion(FuncionesCompletas);
       </script><?php
      
      
@@ -444,32 +464,133 @@ class SicutIgnisController extends Controller{
     public function Grafico7(Request $Request){
       ?><script>
         PotGenerada();
+        FuncionesCompletas++;
+        FuncionExportacion(FuncionesCompletas);
       </script><?php
      
      
     }
 
 
+    public function ExportarSicutExcel(Request $Request){
+
+
+        return Excel::download(new UsersExport, "Datos.xlsx");
+   }
 }
 
 
 
- // $datos = DB::connection('telemetria')
- //                                    ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny'
- //                                                                        OR mt_name='AASA--ION8650.EnerActRet'
- //                                                                        OR mt_name='AASA--ION8650.EnerReactIny'
- //                                                                        OR mt_name='AASA--ION8650.EnerReactRet'
- //                                                                        OR mt_name='AASA--ION8650.VoltajeLineaab'
- //                                                                        OR mt_name='AASA--ION8650.VoltajeLineabc'
- //                                                                        OR mt_name='AASA--ION8650.VotajeLineaca'
- //                                                                        OR mt_name='AASA--ION8650.VoltajeLineaPromedio'
- //                                                                        OR mt_name='AASA--ION8650.Voltajea'
- //                                                                        OR mt_name='AASA--ION8650.Voltajeb'
- //                                                                        OR mt_name='AASA--ION8650.Voltajec'
- //                                                                        OR mt_name='AASA--ION8650.VoltajePromedio'
- //                                                                        OR mt_name='AASA--ION8650.FactorPotenciaa'
- //                                                                        OR mt_name='AASA--ION8650.FactorPotenciab'
- //                                                                        OR mt_name='AASA--ION8650.FactorPotenciac'
- //                                                                        OR mt_name='AASA--ION8650.FactorPotenciaTotal')
- //                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
- //                                                                        ORDER BY mt_name, mt_time DESC ");
+
+class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    use Exportable;
+
+
+    public function collection(){
+
+
+      $EnergiaActivaInyectada_mt_time    = explode(",", $_POST['EnergiaActivaInyectada_mt_time']);
+      $EnergiaActivaInyectada_mt_value   = explode(",", $_POST['EnergiaActivaInyectada_mt_value']);
+      $EnergiaActivaRetirada_mt_value    = explode(",", $_POST['EnergiaActivaRetirada_mt_value']);
+
+      $EnergiaReactivaInyectada_mt_time  = explode(",", $_POST['EnergiaReactivaInyectada_mt_time']);
+      $EnergiaReactivaInyectada_mt_value = explode(",", $_POST['EnergiaReactivaInyectada_mt_value']);
+      $EnergiaReactivaRetirada_mt_value  = explode(",", $_POST['EnergiaReactivaRetirada_mt_value']);
+
+      $VoltajeLineaab_mt_time            = explode(",", $_POST['VoltajeLineaab_mt_time']);
+      $VoltajeLineaab_mt_value           = explode(",", $_POST['VoltajeLineaab_mt_value']);
+      $VoltajeLineabc_mt_value           = explode(",", $_POST['VoltajeLineabc_mt_value']);
+      $VoltajeLineaca_mt_value           = explode(",", $_POST['VoltajeLineaca_mt_value']);
+      $VoltajeLineaPromedio_mt_value     = explode(",", $_POST['VoltajeLineaPromedio_mt_value']);
+
+      $Voltajea_mt_time                  = explode(",", $_POST['Voltajea_mt_time']);
+      $Voltajea_mt_value                 = explode(",", $_POST['Voltajea_mt_value']);
+      $Voltajeb_mt_value                 = explode(",", $_POST['Voltajeb_mt_value']);
+      $Voltajec_mt_value                 = explode(",", $_POST['Voltajec_mt_value']);
+      $VoltajePromedio_mt_value          = explode(",", $_POST['VoltajePromedio_mt_value']);
+
+      $FactorPotenciaa_mt_time           = explode(",", $_POST['FactorPotenciaa_mt_time']);
+      $FactorPotenciaa_mt_value          = explode(",", $_POST['FactorPotenciaa_mt_value']);
+      $FactorPotenciab_mt_value          = explode(",", $_POST['FactorPotenciab_mt_value']);
+      $FactorPotenciac_mt_value          = explode(",", $_POST['FactorPotenciac_mt_value']);
+      $FactorPotenciaTotal_mt_value      = explode(",", $_POST['FactorPotenciaTotal_mt_value']);
+
+
+    
+
+      for ($i=0; $i <count($EnergiaActivaInyectada_mt_time); $i++) { 
+         for ($k=0; $k < 3 ; $k++) { 
+           $Datos[$i]["EnergiaActivaInyectada_mt_time"]=$EnergiaActivaInyectada_mt_time[$i];
+           $Datos[$i]["EnergiaActivaInyectada_mt_value"]=$EnergiaActivaInyectada_mt_value[$i];
+           $Datos[$i]["EnergiaActivaRetirada_mt_value"]=$EnergiaActivaRetirada_mt_value[$i];
+         }
+       }
+
+       for ($i=0; $i <count($EnergiaReactivaInyectada_mt_time); $i++) { 
+         for ($k=0; $k < 3 ; $k++) { 
+           $Datos[$i]["EnergiaReactivaInyectada_mt_value"]=$EnergiaReactivaInyectada_mt_value[$i];
+           $Datos[$i]["EnergiaReactivaRetirada_mt_value"]=$EnergiaReactivaRetirada_mt_value[$i];
+         }
+       }
+
+       for ($i=0; $i <count($VoltajeLineaab_mt_time); $i++) { 
+         for ($k=0; $k < 6 ; $k++) { 
+           $Datos[$i]["VoltajeLineaab_mt_value"]=$VoltajeLineaab_mt_value[$i];
+           $Datos[$i]["VoltajeLineabc_mt_value"]=$VoltajeLineabc_mt_value[$i];
+           $Datos[$i]["VoltajeLineaca_mt_value"]=$VoltajeLineaca_mt_value[$i];
+           $Datos[$i]["VoltajeLineaPromedio_mt_value"]=$VoltajeLineaPromedio_mt_value[$i];
+         }
+       }
+
+       for ($i=0; $i <count($VoltajeLineaab_mt_time); $i++) { 
+         for ($k=0; $k < 6 ; $k++) { 
+           $Datos[$i]["Voltajea_mt_value"]=$Voltajea_mt_value[$i];
+           $Datos[$i]["Voltajeb_mt_value"]=$Voltajeb_mt_value[$i];
+           $Datos[$i]["Voltajec_mt_value"]=$Voltajec_mt_value[$i];
+           $Datos[$i]["VoltajePromedio_mt_value"]=$VoltajePromedio_mt_value[$i];
+         }
+       }
+
+       for ($i=0; $i <count($VoltajeLineaab_mt_time); $i++) { 
+         for ($k=0; $k < 6 ; $k++) { 
+           $Datos[$i]["FactorPotenciaa_mt_value"]=$FactorPotenciaa_mt_value[$i];
+           $Datos[$i]["FactorPotenciab_mt_value"]=$FactorPotenciab_mt_value[$i];
+           $Datos[$i]["FactorPotenciac_mt_value"]=$FactorPotenciac_mt_value[$i];
+           $Datos[$i]["FactorPotenciaTotal_mt_value"]=$FactorPotenciaTotal_mt_value[$i];
+         }
+       }
+
+
+
+       return collect($Datos);
+
+
+
+       
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Fecha',
+            'Ene Act Inyectada',
+            'Ene Act Retirada',
+            'Ene React Inyectada',
+            'Ene React Retirada',
+            'VL AB',
+            'VL BC',
+            'VL CA',
+            'VL Promedio',
+            'V A',
+            'V B',
+            'V C',
+            'V Promedio',
+            'FP A',
+            'FP B',
+            'FP C',
+            'FP Total'
+        ];
+    }
+
+}

@@ -95,6 +95,10 @@ Route::post('PlantaLicanController','PlantaLicanController@index')->middleware("
 
 Route::get('ExcelFlujosDiarios', "ExcelController@ExcelFlujosDiarios")->middleware("verificar_login");
 
+
+Route::post('ExportarSicutExcel', "SicutIgnisController@ExportarSicutExcel")->middleware("verificar_login");
+
+
 Route::get('Cuenta', function(){
 	return view("usuarios.cuenta", ["Usuario" =>  Auth::user()]);
 })->middleware("verificar_login");
