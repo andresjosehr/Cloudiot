@@ -613,30 +613,61 @@ class VinaLuisFelipeController extends Controller{
                                         GROUP BY day(mt_time)
                                         ORDER BY mt_time ASC");
 
+
+        $DatosDiariosSalida = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
+                                           AND DATE(mt_time)>='$FechaInicio' AND DATE(mt_time)<='$FechaFin'
+                                             GROUP BY DAY(mt_time) 
+                                               ORDER BY mt_time ASC");
+
+        $NumeroRegistrosSalida = DB::connection("telemetria")
+                            ->select("SELECT mt_time ,COUNT(*) Registros
+                                        FROM log_biofil02 WHERE 
+                                        DATE(mt_time)>='$FechaInicio' AND DATE(mt_time)<='$FechaFin' 
+                                        AND mt_name='Biofiltro02--Consumo.PH_Salida'
+                                        GROUP BY day(mt_time)
+                                        ORDER BY mt_time ASC");
+
+
         for ($i=0; $i <count($DatosDiarios) ; $i++) { 
             $mt_time[$i]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
             $mt_value[$i]=number_format(($DatosDiarios[$i]->mt_value/$NumeroRegistros[$i]->Registros)/100, 2);
+
+            $mt_value_salida[$i]=number_format(($DatosDiariosSalida[$i]->mt_value/$NumeroRegistrosSalida[$i]->Registros)/100, 2);
           }
 
 
             ?><script>
                 var mt_value = '<?php echo json_encode($mt_value); ?>';
                 mt_value=JSON.parse(mt_value);
+                mt_value_ph=mt_value;
 
                 var mt_time = '<?php echo json_encode($mt_time); ?>';
                 mt_time=JSON.parse(mt_time);
+                mt_time_ph=mt_time;
 
-                function DescargarExcelPHDiarios() {
-                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time+'&mt_value='+mt_value, '_blank' )
+                var mt_value_salida = '<?php echo json_encode($mt_value_salida); ?>';
+                mt_value_salida=JSON.parse(mt_value_salida);
+                mt_value_salida_ph = mt_value_salida
+
+                function DescargarExcelPH() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_ph+'&mt_value='+mt_value_ph+'&mt_value_salida='+mt_value_salida_ph+"&n1=PH Entrada&n2=PH Salida", '_blank' )
                  }
           $(".loader-insta").css("display", "none");
           $("#ph-bar-chart").remove();
           $("#ph-bar-chart-div").html('<canvas id="ph-bar-chart" width="400" height="70"></canvas>');
-          GraficarPHDiarioJS(mt_time, mt_value);
+          GraficarPHDiarioJS(mt_time, mt_value, mt_value_salida);
           </script><?php
    }
 
    public function GraficarPHDiario(){
+
+
      $DatosDiarios = DB::connection("telemetria")
                       ->select("SELECT
                                   mt_name,
@@ -654,24 +685,53 @@ class VinaLuisFelipeController extends Controller{
                                         GROUP BY day(mt_time)
                                         ORDER BY mt_time ASC");
 
+        $DatosDiariosSalida = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                             GROUP BY DAY(mt_time) 
+                                               ORDER BY mt_time ASC");
+
+        $NumeroRegistrosSalida = DB::connection("telemetria")
+                            ->select("SELECT mt_time ,COUNT(*) Registros
+                                        FROM log_biofil02 WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Salida'
+                                        GROUP BY day(mt_time)
+                                        ORDER BY mt_time ASC");
+
           for ($i=0; $i <count($DatosDiarios) ; $i++) { 
             $mt_time[$i]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
             $mt_value[$i]=number_format(($DatosDiarios[$i]->mt_value/$NumeroRegistros[$i]->Registros)/100, 2);
+
+            $mt_time_salida[$i]=date_format(date_create($DatosDiariosSalida[$i]->mt_time), 'm-d');
+            $mt_value_salida[$i]=number_format(($DatosDiariosSalida[$i]->mt_value/$NumeroRegistrosSalida[$i]->Registros)/100, 2);
           }
 
 
             ?><script>
                 var mt_value = '<?php echo json_encode($mt_value); ?>';
                 mt_value=JSON.parse(mt_value);
+                mt_value_ph=mt_value;
 
                 var mt_time = '<?php echo json_encode($mt_time); ?>';
                 mt_time=JSON.parse(mt_time);
+                mt_time_ph=mt_time;
 
-                function DescargarExcelPHDiarios() {
-                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time+'&mt_value='+mt_value, '_blank' )
+                var mt_value_salida = '<?php echo json_encode($mt_value_salida); ?>';
+                mt_value_salida=JSON.parse(mt_value_salida);
+                mt_value_salida_ph = mt_value_salida
+
+                var mt_time_salida = '<?php echo json_encode($mt_time_salida); ?>';
+                mt_time_salida=JSON.parse(mt_time_salida);
+
+                function DescargarExcelPH() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_ph+'&mt_value='+mt_value_ph+'&mt_value_salida='+mt_value_salida_ph+"&n1=PH Entrada&n2=PH Salida", '_blank' )
                  }
 
-          GraficarPHDiarioJS(mt_time, mt_value);
+          GraficarPHDiarioJS(mt_time, mt_value, mt_value_salida);
           </script><?php
    }
 
@@ -737,8 +797,8 @@ class VinaLuisFelipeController extends Controller{
 
           GraficarFlujo(mt_time_, mt_value_);
 
-          function DescargarExcelFlujosDiarios() {
-               window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_+'&mt_value='+mt_value_, '_blank' )
+          function DescargarExcelFlujos() {
+               window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_+'&mt_value='+mt_value_+"&n1=Flujo&n2=.", '_blank' )
            }
            
           </script><?php
@@ -1105,5 +1165,249 @@ if ($h!=0) {
 
 
    }
+
+   public function GraficarORPDiario(){
+          $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE (mt_name='Biofiltro02--Consumo.ORP_Entrada' OR mt_name='Biofiltro02--Consumo.ORP_Salida')
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                             GROUP BY mt_name, DAY(mt_time)
+                                               ORDER BY mt_name, mt_time ASC");
+
+        
+          $k=0;
+          $j=0;
+          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            
+            
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.ORP_Entrada") {
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 2);
+              $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+              $k++;
+            }
+
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.ORP_Salida") {
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 2);
+              $j++;
+            }
+
+          }
+
+
+            ?><script>
+
+                var mt_timeORP = '<?php echo json_encode($mt_time); ?>';
+                mt_timeORP=JSON.parse(mt_timeORP);
+                mt_timeORPORP =mt_timeORP
+
+
+                var mt_value_ORPentrada = '<?php echo json_encode($mt_value_entrada); ?>';
+                mt_value_ORPentrada=JSON.parse(mt_value_ORPentrada);
+                mt_valueORPORP =mt_value_ORPentrada
+
+
+                var mt_value_ORPsalida = '<?php echo json_encode($mt_value_salida); ?>';
+                mt_value_ORPsalida=JSON.parse(mt_value_ORPsalida);
+                mt_valueORPORP =mt_value_ORPsalida
+
+
+
+
+
+                function DescargarExcelORP() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_timeORPORP+'&mt_value='+mt_valueORPORP+'&mt_value_salida='+mt_valueORPORP+"&n1=ORP Entrada&n2=ORP Salida", '_blank' )
+                 }
+
+          GraficarORPDiarioJS(mt_timeORP, mt_value_ORPentrada, mt_value_ORPsalida);
+          </script><?php
+   }
+
+
+
+
+   public function GraficarORPPersonalizado(Request $Request){
+
+          $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE (mt_name='Biofiltro02--Consumo.ORP_Entrada' OR mt_name='Biofiltro02--Consumo.ORP_Salida')
+                                           AND DATE(mt_time)>='".Request()->FechaInicio."' AND DATE(mt_time)<='".Request()->FechaFin."'
+                                             GROUP BY mt_name, DAY(mt_time)
+                                               ORDER BY mt_name, mt_time ASC");
+
+        
+          $k=0;
+          $j=0;
+          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            
+            
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.ORP_Entrada") {
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 2);
+              $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+              $k++;
+            }
+
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.ORP_Salida") {
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 2);
+              $j++;
+            }
+
+          }
+
+
+            ?><script>
+
+                var mt_timeORP = '<?php echo json_encode($mt_time); ?>';
+                mt_timeORP=JSON.parse(mt_timeORP);
+                mt_timeORPORP =mt_timeORP
+
+                var mt_value_ORPentrada = '<?php echo json_encode($mt_value_entrada); ?>';
+                mt_value_ORPentrada=JSON.parse(mt_value_ORPentrada);
+                mt_valueORPORP =mt_value_ORPentrada
+
+                var mt_value_ORPsalida = '<?php echo json_encode($mt_value_salida); ?>';
+                mt_value_ORPsalida=JSON.parse(mt_value_ORPsalida);
+                mt_valueORPORP =mt_value_ORPsalida
+
+                function DescargarExcelORP() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_timeORPORP+'&mt_value='+mt_valueORPORP+'&mt_value_salida='+mt_valueORPORP+"&n1=ORP Entrada&n2=ORP Salida", '_blank' )
+                 }
+          $(".loader-insta").css("display", "none");
+          $("#orp-bar-chart").remove();
+          $("#orp-bar-chart-div").html('<canvas id="orp-bar-chart" width="400" height="70"></canvas>');
+          GraficarORPDiarioJS(mt_timeORP, mt_value_ORPentrada, mt_value_ORPsalida);
+          </script><?php
+   }
+
+
+
+
+      public function GraficarConductividadDiario(){
+
+          $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                             GROUP BY mt_name, DAY(mt_time)
+                                               ORDER BY mt_name, mt_time ASC");
+
+        
+          $k=0;
+          $j=0;
+          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            
+            
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+              $k++;
+            }
+
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $j++;
+            }
+
+          }
+
+
+            ?><script>
+
+                var mt_timeORP = '<?php echo json_encode($mt_time); ?>';
+                mt_timeORP=JSON.parse(mt_timeORP);
+                mt_time_conductividad= mt_timeORP
+
+                var mt_value_ORPentrada = '<?php echo json_encode($mt_value_entrada); ?>';
+                mt_value_ORPentrada=JSON.parse(mt_value_ORPentrada);
+                mt_value_conductividad= mt_value_ORPentrada
+
+                var mt_value_ORPsalida = '<?php echo json_encode($mt_value_salida); ?>';
+                mt_value_ORPsalida=JSON.parse(mt_value_ORPsalida);
+                mt_value_salida_conductividad= mt_value_ORPsalida
+
+
+
+
+                function DescargarExcelConductividad() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_conductividad+'&mt_value='+mt_value_conductividad+'&mt_value_salida='+mt_value_salida_conductividad+"&n1=Conductividad Entrada&n2=Conductividad Salida", '_blank' )
+                 }
+
+
+          GraficarConductividadDiarioJS(mt_timeORP, mt_value_ORPentrada, mt_value_ORPsalida);
+          </script><?php
+   }
+
+
+   public function GraficarConductividadPersonalizado(Request $Request){
+
+          $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
+                                           AND DATE(mt_time)>='".Request()->FechaInicio."' AND DATE(mt_time)<='".Request()->FechaFin."'
+                                             GROUP BY mt_name, DAY(mt_time)
+                                               ORDER BY mt_name, mt_time ASC");
+
+        
+          $k=0;
+          $j=0;
+          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            
+            
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+              $k++;
+            }
+
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $j++;
+            }
+
+          }
+
+
+            ?><script>
+
+                var mt_timeORP = '<?php echo json_encode($mt_time); ?>';
+                mt_timeORP=JSON.parse(mt_timeORP);
+                mt_time_conductividad= mt_timeORP
+
+                var mt_value_ORPentrada = '<?php echo json_encode($mt_value_entrada); ?>';
+                mt_value_ORPentrada=JSON.parse(mt_value_ORPentrada);
+                mt_value_conductividad= mt_value_ORPentrada
+
+                var mt_value_ORPsalida = '<?php echo json_encode($mt_value_salida); ?>';
+                mt_value_ORPsalida=JSON.parse(mt_value_ORPsalida);
+                mt_value_salida_conductividad= mt_value_ORPsalida
+
+                function DescargarExcelConductividad() {
+                    window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_conductividad+'&mt_value='+mt_value_conductividad+'&mt_value_salida='+mt_value_salida_conductividad+"&n1=ORP Entrada&n2=ORP Salida", '_blank' )
+                 }
+          $(".loader-insta").css("display", "none");
+          $("#conductividad-bar-chart").remove();
+          $("#conductividad-bar-chart-div").html('<canvas id="conductividad-bar-chart" width="400" height="70"></canvas>');
+          GraficarConductividadDiarioJS(mt_timeORP, mt_value_ORPentrada, mt_value_ORPsalida);
+          </script><?php
+   }
+
+
+
+
 
 }

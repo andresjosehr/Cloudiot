@@ -27,6 +27,8 @@
                <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel de control</a></li>
                <li role="presentation"><a href="#flujos" data-toggle="tab">Vista de Flujos</a></li>
                <li role="presentation" id="GraficarPHDiario"><a href="#PHDiarios" data-toggle="tab">Vista de PH diarios</a></li>
+               <li role="presentation" id="GraficarORPDiario"><a href="#ORPDiarios" data-toggle="tab">Vista de ORP diarios</a></li>
+               <li role="presentation" id="GraficarConductividadDiario"><a href="#ConductividadDiarios" data-toggle="tab">Vista de Conductividad Diarios</a></li>
                @if ($Rol!=5)
                <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros de Configuracion</a></li>
                @endif
@@ -395,7 +397,7 @@
                <div class="row">
                 <div id="contenedorLFE2"></div>
                   <div class="col-md-2">
-                      <p class="modal-title" id="defaultModalLabel">Flujos</p>
+                      {{-- <p class="modal-title" id="defaultModalLabel">Flujos</p> --}}
                   </div>
                   <div class="col-md-3">
                   </div>
@@ -422,15 +424,86 @@
                   <canvas id="ph-bar-chart" width="400" height="70"></canvas>
                </div>
                <div class="BotonExportarPHDiarios vina-BotonExportarPHDiarios">
-                  <a onclick="DescargarExcelPHDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
+                  <a onclick="DescargarExcelPH()" class="btn btn-primary" >Exportar datos a Excel</a>
                 </div>
             </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="ORPDiarios">
+               <div id="ORPDiarioContenedor"></div>
+               <div class="row">
+                <div id="contenedorLFE2"></div>
+                  <div class="col-md-2">
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                       <div class="form-line">
+                           <input type="text" id="fecha_orp_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                       <div class="form-line">
+                           <input type="text" id="fecha_orp_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <button onclick="GraficarORPPersonalizado('<?php echo Request::root() ?>/CalculosLuisFelipe10');" type="button" class="btn btn-primary waves-effect">→</button>
+                  </div>
+              </div>
+               <div class="vina-loadingORP"></div>
+               <div id="orp-bar-chart-div">
+                  <canvas id="orp-bar-chart" width="400" height="70"></canvas>
+               </div>
+               <div class="BotonExportarORPDiarios vina-BotonExportarORPDiarios">
+                  <a onclick="DescargarExcelORP()" class="btn btn-primary" >Exportar datos a Excel</a>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="ConductividadDiarios">
+               <div id="ConductividadDiarioContenedor"></div>
+               <div class="row">
+                <div id="contenedorLFE2"></div>
+                  <div class="col-md-2">
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                       <div class="form-line">
+                           <input type="text" id="fecha_conductividad_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                       <div class="form-line">
+                           <input type="text" id="fecha_conductividad_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                       </div>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <button onclick="GraficarConductividadPersonalizado('<?php echo Request::root() ?>/CalculosLuisFelipe12');" type="button" class="btn btn-primary waves-effect">→</button>
+                  </div>
+              </div>
+               <div class="vina-loadingConductividad"></div>
+               <div id="conductividad-bar-chart-div">
+                  <canvas id="conductividad-bar-chart" width="400" height="70"></canvas>
+               </div>
+               <div class="BotonExportarConductividadDiarios vina-BotonExportarConductividadDiarios">
+                  <a onclick="DescargarExcelConductividad()" class="btn btn-primary" >Exportar datos a Excel</a>
+                </div>
+            </div>
+
             <div role="tabpanel" class="tab-pane fade" id="flujos">
                <div id="contenedorFlujos"></div>
               <div class="row">
                 <div id="contenedorLFE2"></div>
                   <div class="col-md-2">
-                      <p class="modal-title" id="defaultModalLabel">Flujos</p>
+                      {{-- <p class="modal-title" id="defaultModalLabel">Flujos</p> --}}
                   </div>
                   <div class="col-md-3">
                   </div>
@@ -457,7 +530,7 @@
                 <canvas id="flujo-bar-chart" width="400" height="70"></canvas>
                </div>
                 <div class="vina-DescargarExcelFlujosDiarios-padre">
-                  <a onclick="DescargarExcelFlujosDiarios()" class="btn btn-primary" >Exportar datos a Excel</a>
+                  <a onclick="DescargarExcelFlujos()" class="btn btn-primary" >Exportar datos a Excel</a>
                 </div>
               </div>
             </div>
@@ -473,11 +546,10 @@
 <script  src="instalaciones/VinaLuisFelipe.js"></script>
 <script>
 
-   VinaScriptDefault("<?php echo Request::root() ?>/CalculosLuisFelipe", <?php echo json_encode($Instalacion); ?>);
-
-   $("#GraficarPHDiario").click(function() {
+      VinaScriptDefault("<?php echo Request::root() ?>/CalculosLuisFelipe", <?php echo json_encode($Instalacion); ?>);
       GraficarPHDiario("<?php echo Request::root() ?>/CalculosLuisFelipe7");
-   });
+      GraficarORPDiario("<?php echo Request::root() ?>/CalculosLuisFelipe9");
+      GraficarConductividadDiario("<?php echo Request::root() ?>/CalculosLuisFelipe11");
 
    $("#ListarBombas").click(function() {
        ListarBombas("<?php echo Request::root() ?>/CalculosLuisFelipe5");
@@ -500,8 +572,8 @@
 
    GraficarFlujo(mt_time, mt_value);
 
-   function DescargarExcelFlujosDiarios() {
-       window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos, '_blank' )
+   function DescargarExcelFlujos() {
+       window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos+"&n1=Flujo&n2=.", '_blank' )
    }
 
    @foreach ($Parametros as $Parametro)

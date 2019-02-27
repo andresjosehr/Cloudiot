@@ -210,6 +210,51 @@ window.VinaScriptDefault = function(url_, instalacion_info){
       time: false
     });
 
+    $('#fecha_orp_inicio').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
+
+    $('#fecha_ph_fin').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
+    $('#fecha_conductividad_inicio').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
+    $('#fecha_conductividad_fin').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
     $('#datetime').bootstrapMaterialDatePicker
          ({
            format: 'DD/MM/YYYY HH:mm',
@@ -240,6 +285,23 @@ window.GraficarFlujoPersonalizado = function(url_) {
        $("#contenedorFlujos").load(url, {FechaInicio: FechaInicio, FechaFin: FechaFin});
    }
 
+   window.GraficarORPPersonalizado = function(url_) {
+     var fecha_orp_inicio = document.getElementById("fecha_orp_inicio").value;
+     var fecha_orp_fin = document.getElementById("fecha_orp_fin").value;
+     $(".loader-insta").css("display", "block");
+     var url = url_;
+     $("#ORPDiarioContenedor").load(url, {FechaInicio: fecha_orp_inicio, FechaFin: fecha_orp_fin});
+}
+
+
+window.GraficarConductividadPersonalizado = function(url_) {
+     var fecha_conductividad_inicio = document.getElementById("fecha_conductividad_inicio").value;
+     var fecha_conductividad_fin = document.getElementById("fecha_conductividad_fin").value;
+     $(".loader-insta").css("display", "block");
+     var url = url_;
+     $("#ConductividadDiarioContenedor").load(url, {FechaInicio: fecha_conductividad_inicio, FechaFin: fecha_conductividad_fin});
+}
+
 
 
 window.GraficarPHDiario = function (url_) {
@@ -249,11 +311,25 @@ window.GraficarPHDiario = function (url_) {
       }
 }
 
+window.GraficarORPDiario = function (url_) {
+    if (document.getElementById("orp-bar-chart").height==70) {
+         var url = url_;
+         $("#ORPDiarioContenedor").load(url, {dato: "Epa"});
+      }
+}
 
-window.ListarBombas=function(){
+window.GraficarConductividadDiario = function (url_) {
+    if (document.getElementById("conductividad-bar-chart").height==70) {
+         var url = url_;
+         $("#ConductividadDiarioContenedor").load(url, {dato: "Epa"});
+      }
+}
+
+
+window.ListarBombas=function(url_){
 
       $(".loader-insta").css("display", "block");
-      var url = "<?php echo Request::root() ?>/CalculosLuisFelipe5";
+      var url = url_;
       $("#contenedorLFE").load(url, {dato: "Epa"});
 }
 
@@ -312,22 +388,30 @@ window.GraficarFlujo = function (mt_time, mt_value) {
    });
 }
 
-window.GraficarPHDiarioJS = function(mt_time, mt_value) {
+window.GraficarPHDiarioJS = function(mt_time, mt_value, mt_value_salida) {
          var ctx = document.getElementById("ph-bar-chart").getContext('2d');
          var myChart = new Chart(ctx, {
            type: 'bar',
            data: {
                labels: mt_time,
                datasets: [{
+                   label: 'PH Entrada',
                    data: mt_value,
                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
                    borderColor: 'rgba(255,99,132,1)',
+                   borderWidth: 1
+               },
+               {
+                   label: 'PH Salida',
+                   data: mt_value_salida,
+                   backgroundColor: 'rgba(66, 134, 244, 0.8)',
+                   borderColor: 'rgba(66, 134, 244,1)',
                    borderWidth: 1
                }]
            },
            options: {
             legend: {
-               display: false
+               display: true
             },
             "animation": {
                "duration": 1,
@@ -371,6 +455,147 @@ window.GraficarPHDiarioJS = function(mt_time, mt_value) {
 
       $(".vina-vina-loadingPH").css("display", "none");
       $(".BotonExportarPHDiarios").css("display", "block");
+}
+
+
+window.GraficarORPDiarioJS = function(mt_time, mt_value, mt_value_salida) {
+
+
+         var ctx = document.getElementById("orp-bar-chart").getContext('2d');
+         var myChart = new Chart(ctx, {
+           type: 'bar',
+           data: {
+               labels: mt_time,
+               datasets: [{
+                   label: 'ORP Entrada',
+                   data: mt_value,
+                   backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                   borderColor: 'rgba(255,99,132,1)',
+                   borderWidth: 1
+               },
+               {
+                   label: 'ORP Salida',
+                   data: mt_value_salida,
+                   backgroundColor: 'rgba(66, 134, 244, 0.8)',
+                   borderColor: 'rgba(66, 134, 244,1)',
+                   borderWidth: 1
+               }]
+           },
+           options: {
+            legend: {
+               display: true
+            },
+            "animation": {
+               "duration": 1,
+               "onComplete": function() {
+                 var chartInstance = this.chart,
+                   ctx = chartInstance.ctx;
+
+                 ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                 ctx.textAlign = 'center';
+                 ctx.textBaseline = 'bottom';
+
+                 this.data.datasets.forEach(function(dataset, i) {
+                   var meta = chartInstance.controller.getDatasetMeta(i);
+                   meta.data.forEach(function(bar, index) {
+                     var data = dataset.data[index];
+                     ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                   });
+                 });
+               }
+            },
+               scales: {
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero:true,
+                           padding: 100
+                       }
+                   }], xAxes: [{
+                           padding: 50,
+                           lineHeight: 3,
+                       ticks: {
+                           padding: 50,
+                           lineHeight: 3
+                       }
+                   }]
+               }
+           }
+         });
+
+      $(".vina-loadingORP").css("display", "none");
+      $(".BotonExportarORPDiarios").css("display", "block");
+}
+
+window.GraficarConductividadDiarioJS = function(mt_time, mt_value, mt_value_salida) {
+
+                console.log(mt_time)
+                 console.log(mt_value)
+                 console.log(mt_value_salida)
+
+
+         var ctx = document.getElementById("conductividad-bar-chart").getContext('2d');
+         var myChart = new Chart(ctx, {
+           type: 'bar',
+           data: {
+               labels: mt_time,
+               datasets: [{
+                   label: 'ORP Entrada',
+                   data: mt_value,
+                   backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                   borderColor: 'rgba(255,99,132,1)',
+                   borderWidth: 1
+               },
+               {
+                   label: 'ORP Salida',
+                   data: mt_value_salida,
+                   backgroundColor: 'rgba(66, 134, 244, 0.8)',
+                   borderColor: 'rgba(66, 134, 244,1)',
+                   borderWidth: 1
+               }]
+           },
+           options: {
+            legend: {
+               display: true
+            },
+            "animation": {
+               "duration": 1,
+               "onComplete": function() {
+                 var chartInstance = this.chart,
+                   ctx = chartInstance.ctx;
+
+                 ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                 ctx.textAlign = 'center';
+                 ctx.textBaseline = 'bottom';
+
+                 this.data.datasets.forEach(function(dataset, i) {
+                   var meta = chartInstance.controller.getDatasetMeta(i);
+                   meta.data.forEach(function(bar, index) {
+                     var data = dataset.data[index];
+                     ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                   });
+                 });
+               }
+            },
+               scales: {
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero:true,
+                           padding: 100
+                       }
+                   }], xAxes: [{
+                           padding: 50,
+                           lineHeight: 3,
+                       ticks: {
+                           padding: 50,
+                           lineHeight: 3
+                       }
+                   }]
+               }
+           }
+         });
+
+      $(".vina-loadingConductividad").css("display", "none");
+      $(".BotonExportarConductividadDiarios").css("display", "block");
 }
 
 

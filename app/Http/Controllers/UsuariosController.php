@@ -24,4 +24,8 @@ class UsuariosController extends Controller
             </script><?php
 
             }
+
+    public function PreRegistro($Request Request){
+        return $Request;
+    }
 }

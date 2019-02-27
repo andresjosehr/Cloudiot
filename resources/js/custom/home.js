@@ -6,7 +6,7 @@ $.ajaxSetup({
 
 
 
-function RenderizarMapa(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
+window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
 
 
   function Marcador(lon, lat, id, controlador, rol_) {
@@ -114,7 +114,7 @@ function RenderizarMapa(latitud, longitud, id, controlador, urlroot, tabla_insta
   return vista;
 }
 
-function flyTo(vistamo ,location, done) {
+window.flyTo=function(vistamo ,location, done) {
         var duration = 2000;
         var zoom = 10;
         var parts = 2;

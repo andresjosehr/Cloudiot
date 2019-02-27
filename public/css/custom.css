@@ -362,6 +362,18 @@
   display: none;
 }
 
+.vina-BotonExportarORPDiarios {
+  text-align: center;
+  padding-top: 20px;
+  display: none;
+}
+
+.vina-BotonExportarConductividadDiarios {
+  text-align: center;
+  padding-top: 20px;
+  display: none;
+}
+
 .vina-DescargarExcelFlujosDiarios-padre {
   text-align: center;
   padding-top: 20px;
@@ -398,6 +410,36 @@
 }
 
 .vina-vina-loadingPH {
+  width: 35px;
+  height: 35px;
+  border-radius: 150px;
+  border: 6px solid #797979;
+  border-top-color: rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  animation: vina-loading 1.2s linear infinite;
+  -webkit-animation: vina-loading 1.2s linear infinite;
+  z-index: 1;
+}
+
+.vina-loadingORP {
+  width: 35px;
+  height: 35px;
+  border-radius: 150px;
+  border: 6px solid #797979;
+  border-top-color: rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  animation: vina-loading 1.2s linear infinite;
+  -webkit-animation: vina-loading 1.2s linear infinite;
+  z-index: 1;
+}
+
+.vina-loadingConductividad {
   width: 35px;
   height: 35px;
   border-radius: 150px;

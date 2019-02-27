@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,8 +11,9 @@ const mix = require('laravel-mix');
  */
 
 
- mix.scripts([
+ mix.js([
 	    'resources/js/custom/home.js',
+	    'resources/js/custom/RegistrarUsuarios.js',
 	    'resources/js/custom/SicutIgnis.js',
 	    'resources/js/custom/Vina.js'
 	], 'public/js/custom.js')
@@ -33,3 +33,4 @@ const mix = require('laravel-mix');
 	.scripts([
 	    'resources/js/default/openlayer_4_5_6.js'
 	], 'public/js/default.js');
+
