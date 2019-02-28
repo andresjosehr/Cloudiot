@@ -865,13 +865,13 @@ window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_sal
     data: {
       labels: mt_time,
       datasets: [{
-        label: 'ORP Entrada',
+        label: 'Conductividad Entrada',
         data: mt_value,
         backgroundColor: 'rgba(255, 99, 132, 0.8)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1
       }, {
-        label: 'ORP Salida',
+        label: 'Conductividad Salida',
         data: mt_value_salida,
         backgroundColor: 'rgba(66, 134, 244, 0.8)',
         borderColor: 'rgba(66, 134, 244,1)',
