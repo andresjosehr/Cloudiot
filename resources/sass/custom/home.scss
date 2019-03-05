@@ -105,3 +105,12 @@
     .instalaciones-boton{
      display: none;
     }
+
+    .reg_usr_multiselect .show-tick{
+      width: 100% !important;
+    }
+
+    .reg_usr_multiselect .show-tick .dropdown-menu li.selected a {
+        background-color: #f44336 !important;
+        color: #fff !important;
+    }

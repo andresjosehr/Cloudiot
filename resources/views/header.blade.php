@@ -18,6 +18,9 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <!-- Multi Select Css -->
+    <link href="{{ asset('plugins/multi-select/css/multi-select.css') }}" rel="stylesheet">
+
     <!-- Jquery Core Js -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 

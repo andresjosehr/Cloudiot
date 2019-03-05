@@ -288,11 +288,11 @@ class VinaLuisFelipeController extends Controller{
 
           var rango_conductividad = [];
           rango_conductividad[0]  ="0";
-          rango_conductividad[1]  ="2000";
-          rango_conductividad[2]  ="4000";
-          rango_conductividad[3]  ="6000";
-          rango_conductividad[4]  ="8000";
-          rango_conductividad[5]  ="10000";
+          rango_conductividad[1]  ="20";
+          rango_conductividad[2]  ="40";
+          rango_conductividad[3]  ="60";
+          rango_conductividad[4]  ="80";
+          rango_conductividad[5]  ="100";
 
 
           var PHEntrada  =("<?php echo $datos[4]->mt_value ?>"*10)/14;
@@ -317,10 +317,10 @@ class VinaLuisFelipeController extends Controller{
           
           VinaRPM("PH", PHEntrada, "gauge0", "rpm-0", rango_ph, "PH", ValorReal_PHEntrada);
           VinaRPM("ORP", ORPEntrada, "gauge1", "rpm-1", rango_orp, "Normal", ValorReal_ORPEntrada);
-          VinaRPM("Conductividad", ConductividadEntrada, "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value ?>");
+          VinaRPM("Conductividad", ConductividadEntrada, "gauge2", "rpm-2", rango_conductividad, "Normal", "<?php echo $datos[0]->mt_value/100 ?>");
           VinaRPM("PH", PHSalida, "gauge3", "rpm-3", rango_ph, "PH", ValorReal_PHSalida);
           VinaRPM("ORP", ORPSalida, "gauge4", "rpm-4", rango_orp, "Normal", ValorReal_ORPSalida);
-          VinaRPM("Conductividad", ConductividadSalida, "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value ?>");
+          VinaRPM("Conductividad", ConductividadSalida, "gauge5", "rpm-5", rango_conductividad, "Normal", "<?php echo $datos[1]->mt_value/100 ?>");
 
 
         </script><?php
@@ -380,7 +380,7 @@ class VinaLuisFelipeController extends Controller{
 
                                   ->select("(SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Entrada' ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
         for ($i=0; $i < count($datos); $i++) { 
-            $mt_value[$i] =  $datos[$i]->mt_value;
+            $mt_value[$i] =  $datos[$i]->mt_value/100;
 
             $date=  $datos[$i]->mt_time; 
             $newDate = date_format(date_create($date), 'j H:i:s'); 
@@ -458,7 +458,7 @@ class VinaLuisFelipeController extends Controller{
                                                    ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time ASC");
 
         for ($i=0; $i < count($datos); $i++) { 
-            $mt_value[$i] =  $datos[$i]->mt_value;
+            $mt_value[$i] =  $datos[$i]->mt_value/100;
 
             $date=  $datos[$i]->mt_time; 
             $newDate = date_format(date_create($date), 'j H:i:s'); 
@@ -1309,13 +1309,13 @@ if ($h!=0) {
             
             
             if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
-              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
               $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
               $k++;
             }
 
             if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
-              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
               $j++;
             }
 
@@ -1369,13 +1369,13 @@ if ($h!=0) {
             
             
             if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
-              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
               $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
               $k++;
             }
 
             if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
-              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros), 0, "", "");
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
               $j++;
             }
 

@@ -17,9 +17,7 @@ Auth::routes();
 
 Route::get('panel-de-control','InstalacionesController@index')->middleware("verificar_login");
 
-Route::get('registrar-usuario', function (){
-	return view("usuarios.registrar", ["Usuario" => Auth::user()]);
-})->middleware("verificar_login");
+Route::get('registrar-usuario', 'UsuariosController@index')->middleware("verificar_login");
 
 Route::post('ConsultaInstalacion','InstalacionesController@ConsultaModal')->middleware("verificar_login");
 
@@ -92,6 +90,7 @@ Route::post('GraficoSigutIgnis7','SicutIgnisController@Grafico7')->middleware("v
 
 
 Route::post('PreRegistro','UsuariosController@PreRegistro')->middleware("verificar_login");
+Route::post('BorrarPreRegistro','UsuariosController@BorrarPreRegistro')->middleware("verificar_login");
 
 
 

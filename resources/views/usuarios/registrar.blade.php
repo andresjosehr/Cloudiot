@@ -31,12 +31,25 @@
                         </div>
                         <div class="body">
                             <div class="row clearfix">
-                                <div class="col-sm-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <input type="email" class="form-control"  placeholder="Escribe el email del Usuario a registrar" id="email_user" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-line reg_usr_multiselect">
+                                           <select class="selectpicker" id="instalaciones_asignadas" multiple>
+                                            @foreach($Instalaciones as $Instalacion)
+                                              <option value="{{$Instalacion->id}}">{{$Instalacion->nombre}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <button type="button" class="btn bg-red btn-block btn-lg waves-effect btn-block" onclick="RegistrarUsuario('<?php echo Request::root() ?>/PreRegistro');">Registrar usuario</button>
@@ -46,21 +59,20 @@
                             </div>
                             Usuarios sin haber completado su registro:
                             <div class="body table-responsive">
-                            <table class="table">
+                            <table class="table" id="pending_user">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
                                         <th>Email</th>
                                         <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-{{--                                     <tr>
-                                        <th scope="row">5</th>
-                                        <td>Larry</td>
-                                        <td>Kikat</td>
-                                        <td>@lakitkat</td>
-                                    </tr> --}}
+                                    @foreach($UsuariosTemp as $UsuarioTemp)
+                                    <tr id="{{$UsuarioTemp->key}}">
+                                        <td id='email_temp'>{{$UsuarioTemp->email}}</td>
+                                        <td><button class='btn btn-danger' onclick="EliminarUserTemp('<?php echo $UsuarioTemp->email ?>', '{{$UsuarioTemp->key}}', '<?php echo Request::root() ?>/BorrarPreRegistro')">Eliminar</button></td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -71,6 +83,5 @@
             <!-- #END# Input -->
         </div>
     </section>
-
 
 	@include("footer");

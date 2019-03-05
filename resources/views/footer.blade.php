@@ -16,6 +16,9 @@
     <!-- Waves Effect Plugin Js -->
     <script src="{{asset('plugins/node-waves/waves.js')}}"></script>
 
+    <!-- Multi Select Plugin Js -->
+    <script src="{{asset('plugins/multi-select/js/jquery.multi-select.js')}}"></script>
+
     <!-- Custom Js -->
     <script src="{{asset('js_plantilla/admin.js')}}"></script>
 
