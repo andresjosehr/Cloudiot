@@ -403,6 +403,8 @@ window.GraficarTodo = function (url) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 window.VinaRPM = function (tipo, valor, id, gaugecanvas, rango, dato, valor_real) {
   if (dato == "Normal") {
     var colores = [{
@@ -712,8 +714,10 @@ window.ListarBombas = function (url_) {
   });
 };
 
-window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
-  var ctx = document.getElementById(id).getContext('2d');
+window.GraficarFlujo = function (mt_time, mt_value, id, titulo, intra) {
+  $("#flujo-bar-chart-div" + intra).empty();
+  $("#flujo-bar-chart-div" + intra).html('<canvas id="flujo-bar-chart' + intra + '" width="400" height="40"></canvas>');
+  var ctx = document.getElementById("flujo-bar-chart" + intra).getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -725,13 +729,23 @@ window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
         borderWidth: 1
       }]
     },
-    options: {
+    options: _defineProperty({
       title: {
         display: true,
         text: titulo
       },
       legend: {
         display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false,
+            min: 160,
+            max: 0,
+            steps: 20
+          }
+        }]
       },
       "animation": {
         "duration": 1,
@@ -749,24 +763,23 @@ window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
             });
           });
         }
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            padding: 100
-          }
-        }],
-        xAxes: [{
-          padding: 50,
-          lineHeight: 3,
-          ticks: {
-            padding: 50,
-            lineHeight: 3
-          }
-        }]
       }
-    }
+    }, "scales", {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          padding: 100
+        }
+      }],
+      xAxes: [{
+        padding: 50,
+        lineHeight: 3,
+        ticks: {
+          padding: 50,
+          lineHeight: 3
+        }
+      }]
+    })
   });
 };
 

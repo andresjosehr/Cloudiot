@@ -338,8 +338,13 @@ window.ListarBombas=function(url_){
       $("#contenedorLFE").load(url, {dato: "Epa"});
 }
 
-window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
-   var ctx = document.getElementById(id).getContext('2d');
+window.GraficarFlujo = function (mt_time, mt_value, id, titulo, intra) {
+
+$("#flujo-bar-chart-div"+intra).empty();
+$("#flujo-bar-chart-div"+intra).html('<canvas id="flujo-bar-chart'+intra+'" width="400" height="40"></canvas>');
+
+
+   var ctx = document.getElementById("flujo-bar-chart"+intra).getContext('2d');
    var myChart = new Chart(ctx, {
      type: 'bar',
      data: {
@@ -352,6 +357,7 @@ window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
          }]
      },
      options: {
+
       title: {
             display: true,
             text: titulo
@@ -359,6 +365,16 @@ window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
       legend: {
          display: false
       },
+      scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false,
+                                        min: 160,
+                                        max: 0,
+                                        steps: 20
+                                    }
+                                }]
+                            },
       "animation": {
          "duration": 1,
          "onComplete": function() {
@@ -395,6 +411,7 @@ window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
          }
      }
    });
+
 }
 
 window.GraficarPHDiarioJS = function(mt_time, mt_value, mt_value_salida) {

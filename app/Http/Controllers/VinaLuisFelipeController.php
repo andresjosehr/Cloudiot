@@ -757,7 +757,7 @@ class VinaLuisFelipeController extends Controller{
           <?php } ?>
 
 
-          GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego");
+          GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego", "1");
 
           function DescargarExcelFlujos() {
              window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos+"&n1=Flujo&n2=.", '_blank' )
@@ -795,12 +795,13 @@ class VinaLuisFelipeController extends Controller{
           if (date_format(date_create($PrimerosDatosBarras2[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras2[$i]->mt_time), 'm-j')) {
             $GraficoBarras2[$i]["mt_value"]=0;
           } else{
-            $GraficoBarras2[$i]["mt_value"]=$SegundosDatosBarras2[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $GraficoBarras2[$i]["mt_value"]=$SegundosDatosBarras2[$i]->mt_value-$PrimerosDatosBarras2[$k]->mt_value;
             $k++;
           }
-          if ($GraficoBarras2[$i]["mt_value"]<0) {
-            $GraficoBarras2[$i]["mt_value"]=0;
-          }
+
+          // if ($GraficoBarras2[$i]["mt_value"]<0) {
+          //   $GraficoBarras2[$i]["mt_value"]=0;
+          // }
         }
 
 
@@ -824,7 +825,7 @@ class VinaLuisFelipeController extends Controller{
           <?php } ?>
 
 
-          GraficarFlujo(mt_time2, mt_value2, "flujo-bar-chart2", "Flujo de Rebalse");
+          GraficarFlujo(mt_time2, mt_value2, "flujo-bar-chart2", "Flujo de Rebalse", "2");
 
         </script><?php
 
@@ -890,13 +891,78 @@ class VinaLuisFelipeController extends Controller{
           $("#flujo-bar-chart").remove();
           $("#flujo-bar-chart-div").html('<canvas id="flujo-bar-chart" width="400" height="70"></canvas>');
 
-          GraficarFlujo(mt_time_, mt_value_);
+          GraficarFlujo(mt_time_, mt_value_, "flujo-bar-chart2", "Flujo de Rebalse", "1");
 
           function DescargarExcelFlujos() {
                window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_+'&mt_value='+mt_value_+"&n1=Flujo&n2=.", '_blank' )
            }
            
           </script><?php
+
+           $PrimerosDatosBarras2 = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil02 
+                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor2' 
+                                                      AND mt_time>=date('$FechaInicio') AND mt_time <= date('$newDate')
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
+
+
+        $SegundosDatosBarras2 = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil02 
+                                                  WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor2' 
+                                                        AND mt_time>=date('$FechaInicio') AND mt_time <= date('$newDate')
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        for ($i=0; $i <count($SegundosDatosBarras2) ; $i++) { 
+
+          $GraficoBarras2[$i]["mt_time"]=$SegundosDatosBarras2[$i]->mt_time;
+
+          if (date_format(date_create($PrimerosDatosBarras2[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras2[$i]->mt_time), 'm-j')) {
+            $GraficoBarras2[$i]["mt_value"]=0;
+          } else{
+            $GraficoBarras2[$i]["mt_value"]=$SegundosDatosBarras2[$i]->mt_value-$PrimerosDatosBarras2[$k]->mt_value;
+            $k++;
+          }
+
+          // if ($GraficoBarras2[$i]["mt_value"]<0) {
+          //   $GraficoBarras2[$i]["mt_value"]=0;
+          // }
+        }
+
+
+        ?><script>
+          var i=0;
+           var mt_time2 = [];
+           var mt_value2 = [];
+
+           var mt_time_flujos2 = [];
+           var mt_value_flujos2 = [];
+          <?php for($i=0; $i<count($GraficoBarras2); $i++){ ?>
+
+             mt_time2[i]='<?php echo date_format(date_create($GraficoBarras2[$i]['mt_time']), 'm-j') ?>';
+             mt_value2[i]='<?php echo $GraficoBarras2[$i]['mt_value'] ?>';
+
+             mt_time_flujos2[i] = "<?php echo $GraficoBarras2[$i]['mt_time'] ?>";
+             mt_value_flujos2 = mt_value2;
+             i++;
+
+
+          <?php } ?>
+
+
+          GraficarFlujo(mt_time2, mt_value2, "flujo-bar-chart2", "Flujo de Rebalse", "2");
+
+        </script><?php
    }
 
    public function ListarBombas(){

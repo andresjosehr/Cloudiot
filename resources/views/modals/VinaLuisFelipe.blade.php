@@ -525,12 +525,12 @@
                   </div>
               </div>
               <div class="col-md-12">
-               <div id="flujo-bar-chart-div">
-                <canvas id="flujo-bar-chart" width="400" height="70"></canvas>
+               <div id="flujo-bar-chart-div1">
+                <canvas id="flujo-bar-chart1" width="400" height="40"></canvas>
                </div>
-               <div class="col-md-12">
+               <div class="col-md-12" style="padding-top: 50px">
                <div id="flujo-bar-chart-div2">
-                <canvas id="flujo-bar-chart2" width="400" height="70"></canvas>
+                <canvas id="flujo-bar-chart2" width="400" height="40"></canvas>
                </div>
                 <div class="vina-DescargarExcelFlujosDiarios-padre">
                   <a onclick="DescargarExcelFlujos()" class="btn btn-primary" >Exportar datos a Excel</a>
