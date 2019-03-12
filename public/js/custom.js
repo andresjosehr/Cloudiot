@@ -648,6 +648,13 @@ window.GraficarFlujoPersonalizado = function (url_) {
   });
 };
 
+window.GraficarFlujos = function (url_) {
+  var url = url_;
+  $("#contenedorFlujos").load(url, {
+    FechaInicio: "Prueba"
+  });
+};
+
 window.GraficarORPPersonalizado = function (url_) {
   var fecha_orp_inicio = document.getElementById("fecha_orp_inicio").value;
   var fecha_orp_fin = document.getElementById("fecha_orp_fin").value;
@@ -705,8 +712,8 @@ window.ListarBombas = function (url_) {
   });
 };
 
-window.GraficarFlujo = function (mt_time, mt_value) {
-  var ctx = document.getElementById("flujo-bar-chart").getContext('2d');
+window.GraficarFlujo = function (mt_time, mt_value, id, titulo) {
+  var ctx = document.getElementById(id).getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -719,6 +726,10 @@ window.GraficarFlujo = function (mt_time, mt_value) {
       }]
     },
     options: {
+      title: {
+        display: true,
+        text: titulo
+      },
       legend: {
         display: false
       },
@@ -888,9 +899,6 @@ window.GraficarORPDiarioJS = function (mt_time, mt_value, mt_value_salida) {
 };
 
 window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_salida) {
-  console.log(mt_time);
-  console.log(mt_value);
-  console.log(mt_value_salida);
   var ctx = document.getElementById("conductividad-bar-chart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',

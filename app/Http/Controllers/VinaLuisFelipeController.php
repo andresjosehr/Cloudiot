@@ -201,43 +201,6 @@ class VinaLuisFelipeController extends Controller{
     }
 
 
-        $PrimerosDatosBarras = DB::connection("telemetria")
-                                  ->select("SELECT
-                                             mt_name,
-                                             MIN(mt_value) AS mt_value,
-                                             MIN(mt_time) AS mt_time
-                                              FROM log_biofil02 
-                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
-                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
-                                                      AND mt_value<>0
-                                                        GROUP BY DAY(mt_time) 
-                                                          ORDER BY mt_time ASC");
-
-
-        $SegundosDatosBarras = DB::connection("telemetria")
-                                  ->select("SELECT
-                                               mt_name,
-                                               MAX(mt_value) AS mt_value,
-                                               MAX(mt_time) AS mt_time
-                                                FROM log_biofil02 
-                                                  WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
-                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
-                                                          GROUP BY DAY(mt_time) 
-                                                            ORDER BY mt_time ASC");
-        $k=0;
-        for ($i=0; $i <count($SegundosDatosBarras) ; $i++) { 
-          $GraficoBarras[$i]["mt_time"]=$SegundosDatosBarras[$i]->mt_time;
-
-          if (date_format(date_create($PrimerosDatosBarras[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j')) {
-            $GraficoBarras[$i]["mt_value"]=0;
-          } else{
-            $GraficoBarras[$i]["mt_value"]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
-            $k++;
-          }
-        }
-
-        $GraficoBarras = json_decode(json_encode($GraficoBarras));
-
 
       $Parametros= DB::connection("telemetria")
                                     ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC) T1
@@ -248,7 +211,7 @@ class VinaLuisFelipeController extends Controller{
                                                                             GROUP BY mt_name");
 
 
-        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "GraficoBarras" => $GraficoBarras, "Parametros" => $Parametros, "Usuario" => Auth::user(), "ImprimirBombas" => $ImprimirBombas, "Rol" => $_POST['rol']]);
+        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Bombas" => $Fila, "Parametros" => $Parametros, "Usuario" => Auth::user(), "ImprimirBombas" => $ImprimirBombas, "Rol" => $_POST['rol']]);
     }
 
     public static function Calculos(Request $Request){
@@ -733,6 +696,138 @@ class VinaLuisFelipeController extends Controller{
 
           GraficarPHDiarioJS(mt_time, mt_value, mt_value_salida);
           </script><?php
+   }
+
+   public function GraficarFlujo(Request $Request){
+
+
+    $PrimerosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil02 
+                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
+
+
+        $SegundosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil02 
+                                                  WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
+                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        for ($i=0; $i <count($SegundosDatosBarras) ; $i++) { 
+          $GraficoBarras[$i]["mt_time"]=$SegundosDatosBarras[$i]->mt_time;
+
+          if (date_format(date_create($PrimerosDatosBarras[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j')) {
+            $GraficoBarras[$i]["mt_value"]=0;
+          } else{
+            $GraficoBarras[$i]["mt_value"]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $k++;
+          }
+        }
+
+
+        ?><script>
+          var i=0;
+           var mt_time = [];
+           var mt_value = [];
+
+           var mt_time_flujos = [];
+           var mt_value_flujos = [];
+          <?php for($i=0; $i<count($GraficoBarras); $i++){ ?>
+
+             mt_time[i]='<?php echo date_format(date_create($GraficoBarras[$i]['mt_time']), 'm-j') ?>';
+             mt_value[i]='<?php echo $GraficoBarras[$i]['mt_value'] ?>';
+
+             mt_time_flujos[i] = "<?php echo $GraficoBarras[$i]['mt_time'] ?>";
+             mt_value_flujos = mt_value;
+             i++;
+
+
+          <?php } ?>
+
+
+          GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego");
+
+          function DescargarExcelFlujos() {
+             window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos+"&n1=Flujo&n2=.", '_blank' )
+         }
+        </script><?php
+
+        $PrimerosDatosBarras2 = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil02 
+                                                WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor2' 
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor2' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
+
+
+        $SegundosDatosBarras2 = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil02 
+                                                  WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor2' 
+                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor2' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        for ($i=0; $i <count($SegundosDatosBarras2) ; $i++) { 
+
+          $GraficoBarras2[$i]["mt_time"]=$SegundosDatosBarras2[$i]->mt_time;
+
+          if (date_format(date_create($PrimerosDatosBarras2[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras2[$i]->mt_time), 'm-j')) {
+            $GraficoBarras2[$i]["mt_value"]=0;
+          } else{
+            $GraficoBarras2[$i]["mt_value"]=$SegundosDatosBarras2[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $k++;
+          }
+          if ($GraficoBarras2[$i]["mt_value"]<0) {
+            $GraficoBarras2[$i]["mt_value"]=0;
+          }
+        }
+
+
+        ?><script>
+          var i=0;
+           var mt_time2 = [];
+           var mt_value2 = [];
+
+           var mt_time_flujos2 = [];
+           var mt_value_flujos2 = [];
+          <?php for($i=0; $i<count($GraficoBarras2); $i++){ ?>
+
+             mt_time2[i]='<?php echo date_format(date_create($GraficoBarras2[$i]['mt_time']), 'm-j') ?>';
+             mt_value2[i]='<?php echo $GraficoBarras2[$i]['mt_value'] ?>';
+
+             mt_time_flujos2[i] = "<?php echo $GraficoBarras2[$i]['mt_time'] ?>";
+             mt_value_flujos2 = mt_value2;
+             i++;
+
+
+          <?php } ?>
+
+
+          GraficarFlujo(mt_time2, mt_value2, "flujo-bar-chart2", "Flujo de Rebalse");
+
+        </script><?php
+
    }
 
    public function GraficarFlujoFechaPersonalizado(Request $Request){

@@ -397,7 +397,6 @@
                <div class="row">
                 <div id="contenedorLFE2"></div>
                   <div class="col-md-2">
-                      {{-- <p class="modal-title" id="defaultModalLabel">Flujos</p> --}}
                   </div>
                   <div class="col-md-3">
                   </div>
@@ -529,6 +528,10 @@
                <div id="flujo-bar-chart-div">
                 <canvas id="flujo-bar-chart" width="400" height="70"></canvas>
                </div>
+               <div class="col-md-12">
+               <div id="flujo-bar-chart-div2">
+                <canvas id="flujo-bar-chart2" width="400" height="70"></canvas>
+               </div>
                 <div class="vina-DescargarExcelFlujosDiarios-padre">
                   <a onclick="DescargarExcelFlujos()" class="btn btn-primary" >Exportar datos a Excel</a>
                 </div>
@@ -550,31 +553,11 @@
       GraficarPHDiario("<?php echo Request::root() ?>/CalculosLuisFelipe7");
       GraficarORPDiario("<?php echo Request::root() ?>/CalculosLuisFelipe9");
       GraficarConductividadDiario("<?php echo Request::root() ?>/CalculosLuisFelipe11");
+      GraficarFlujos("<?php echo Request::root() ?>/CalculosLuisFelipe13")
 
    $("#ListarBombas").click(function() {
        ListarBombas("<?php echo Request::root() ?>/CalculosLuisFelipe5");
    });
-
-   var i=0;
-   var mt_time = [];
-   var mt_value = [];
-
-   var mt_time_flujos = [];
-   var mt_value_flujos = [];
-   @foreach ($GraficoBarras as $Barra)
-     mt_time[i]='{{ date_format(date_create($Barra->mt_time), 'm-j') }}';
-     mt_value[i]='{{$Barra->mt_value}}';
-
-     mt_time_flujos[i] = "{{$Barra->mt_time}}";
-     mt_value_flujos = mt_value;
-     i++;
-   @endforeach
-
-   GraficarFlujo(mt_time, mt_value);
-
-   function DescargarExcelFlujos() {
-       window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_flujos+'&mt_value='+mt_value_flujos+"&n1=Flujo&n2=.", '_blank' )
-   }
 
    @foreach ($Parametros as $Parametro)
     @if($Parametro->mt_name=="Biofiltro02--Consumo.LimitePH_Bajo")

@@ -77,6 +77,7 @@ Route::post('CalculosLuisFelipe9','VinaLuisFelipeController@GraficarORPDiario')-
 Route::post('CalculosLuisFelipe10','VinaLuisFelipeController@GraficarORPPersonalizado')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe11','VinaLuisFelipeController@GraficarConductividadDiario')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe12','VinaLuisFelipeController@GraficarConductividadPersonalizado')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe13','VinaLuisFelipeController@GraficarFlujo')->middleware("verificar_login");
 
 
 
