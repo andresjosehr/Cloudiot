@@ -80,10 +80,16 @@ class SicutIgnisController extends Controller{
 
     public function Grafico1(Request $Request){
 
+      if (isset($Request->HorasTotales)) {
+        $Horas=$Request->HorasTotales;
+      } else{
+        $Horas=24;
+      }
+
        $datos = DB::connection('telemetria')
                                     ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny'
                                                                         OR mt_name='AASA--ION8650.EnerActRet')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
+                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)
                                                                         ORDER BY mt_name, mt_time ASC ");
         $j=0;
         $k=0;
@@ -137,10 +143,15 @@ class SicutIgnisController extends Controller{
           EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
           var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
           EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
+          var mt_mt=EnergiaActivaRetirada_mt_time;
 
           GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_mt_time, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_mt_time, MinDato, MaxDato, "Inyectada", "Retirada" , 1);
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
+          FP++;
+          if (FP==2) {
+            GraficarGra5(mt_mt, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, EnergiaReactivaInyectada_mt_value, EnergiaReactivaRetirada_mt_value);
+          }
         </script><?php
      
     }
@@ -208,7 +219,7 @@ class SicutIgnisController extends Controller{
           var MaxDato_b=parseInt('<?php echo $MaxDato_b; ?>', 10);
 
 
-         var EnergiaReactivaInyectada_mt_value = '<?php echo json_encode($EnergiaReactivaInyectada_mt_value); ?>';
+          var EnergiaReactivaInyectada_mt_value = '<?php echo json_encode($EnergiaReactivaInyectada_mt_value); ?>';
           EnergiaReactivaInyectada_mt_value = JSON.parse(EnergiaReactivaInyectada_mt_value)
           var EnergiaReactivaInyectada_mt_time = '<?php echo json_encode($EnergiaReactivaInyectada_mt_time); ?>';
           EnergiaReactivaInyectada_mt_time = JSON.parse(EnergiaReactivaInyectada_mt_time)
@@ -222,6 +233,10 @@ class SicutIgnisController extends Controller{
 
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
+          FP++;
+          if (FP==2) {
+            GraficarGra5(mt_mt, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, EnergiaReactivaInyectada_mt_value, EnergiaReactivaRetirada_mt_value);
+          }
       </script><?php
      
     }
@@ -376,75 +391,30 @@ class SicutIgnisController extends Controller{
     }
     public function Grafico5(Request $Request){
 
-      $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.FactorPotenciaa'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciab'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciac'
-                                                                        OR mt_name='AASA--ION8650.FactorPotenciaTotal')
-                                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.FactorPotenciaa') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR)
-                                                                        ORDER BY mt_name, mt_time ASC ");
-                  $j=0;
-                  $k=0;                  
-                  $h=0;
-                  $g=0;
-                for ($i=0; $i <count($datos) ; $i++) { 
-                  if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciaa') {
-                    $FactorPotenciaa_mt_value[$j]= $datos[$i]->mt_value/10000;
-                    $FactorPotenciaa_mt_time[$j]=$datos[$i]->mt_time;
-                    $j++;
-                  }
-                  if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciab') {
-                    $FactorPotenciab_mt_value[$k]= $datos[$i]->mt_value/10000;
-                    $FactorPotenciab_mt_time[$k]=$datos[$i]->mt_time;
-                    $k++;
-                  }
-                  if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciac') {
-                    $FactorPotenciac_mt_value[$h]= $datos[$i]->mt_value/10000;
-                    $FactorPotenciac_mt_time[$h]=$datos[$i]->mt_time;
-                    $h++;
-                  }
-                  if ($datos[$i]->mt_name=='AASA--ION8650.FactorPotenciaTotal') {
-                    $FactorPotenciaTotal_mt_value[$g]= $datos[$i]->mt_value/10000;
-                    $FactorPotenciaTotal_mt_time[$g]=$datos[$i]->mt_time;
-                    $g++;
-                  }
-                  if ($i==0) {
-                    $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
-                    $MaxDato=0;
-                  } else{
-                    if ($MinDato>$datos[$i]->mt_value/10000 && $datos[$i]->mt_value!=0) {
-                      $MinDato=$datos[$i]->mt_value/10000;
-                    }
-                    if ($MaxDato<$datos[$i]->mt_value/10000) {
-                      $MaxDato=$datos[$i]->mt_value/10000;
-                    }
-                  }
-                }
+      for ($i=0; $i <count($Request->EnergiaActivaInyectada) ; $i++) { 
+        if ($Request->EnergiaReactivaRetirada[$i]!=0) {
+          $FPiny[$i]=cos(atan($Request->EnergiaActivaRetirada[$i]/$Request->EnergiaReactivaRetirada[$i]));
+        } else{
+          $FPiny[$i]=0;
+        }
+        if ($Request->EnergiaReactivaInyectada[$i]!=0) {
+           $FPret[$i]=cos(atan($Request->EnergiaActivaInyectada[$i]/$Request->EnergiaReactivaInyectada[$i]));
+        } else{
+           $FPret[$i]=0;
+        }
+
+      }
 
       ?><script>
+        var FPret = '<?php echo json_encode($FPret); ?>';
+          FPret = JSON.parse(FPret)
 
-         var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
-          var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
+          var FPiny = '<?php echo json_encode($FPiny); ?>';
+          FPiny = JSON.parse(FPiny)
 
-          var FactorPotenciaa_mt_value = '<?php echo json_encode($FactorPotenciaa_mt_value); ?>';
-          FactorPotenciaa_mt_value = JSON.parse(FactorPotenciaa_mt_value)
-          var FactorPotenciaa_mt_time = '<?php echo json_encode($FactorPotenciaa_mt_time); ?>';
-          FactorPotenciaa_mt_time = JSON.parse(FactorPotenciaa_mt_time)
-
-          var FactorPotenciab_mt_value = '<?php echo json_encode($FactorPotenciab_mt_value); ?>';
-          FactorPotenciab_mt_value = JSON.parse(FactorPotenciab_mt_value)
-
-          var FactorPotenciac_mt_value = '<?php echo json_encode($FactorPotenciac_mt_value); ?>';
-          FactorPotenciac_mt_value = JSON.parse(FactorPotenciac_mt_value)
-
-          var FactorPotenciaTotal_mt_value = '<?php echo json_encode($FactorPotenciaTotal_mt_value); ?>';
-          FactorPotenciaTotal_mt_value = JSON.parse(FactorPotenciaTotal_mt_value)
-
-
-          GraficosIgnisAbajo("myChart6", FactorPotenciaa_mt_value, FactorPotenciaa_mt_time, FactorPotenciab_mt_value, FactorPotenciac_mt_value, FactorPotenciaTotal_mt_value, MinDato, MaxDato, "Factor Potencia A", "Factor Potencia B", "Factor Potencia C", "Factor Potencia Total", 5, false);
-
-          FuncionesCompletas++;
-          FuncionExportacion(FuncionesCompletas);
+          var mt_time = '<?php echo json_encode($Request->mt_time); ?>';
+          mt_time = JSON.parse(mt_time)
+        GraficosIgnisArriba("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
       </script><?php
      
      
@@ -574,10 +544,10 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
     {
         return [
             'Fecha',
-            'Ene Act Inyectada',
-            'Ene Act Retirada',
-            'Ene React Inyectada',
-            'Ene React Retirada',
+            'Ene Act Inyectada (kWh)',
+            'Ene Act Retirada (kWh)',
+            'Ene React Inyectada (kVARh)',
+            'Ene React Retirada (kVARh)',
             'VL AB',
             'VL BC',
             'VL CA',

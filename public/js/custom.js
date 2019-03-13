@@ -150,6 +150,24 @@ window.EliminarUserTemp = function (email, key, url) {
 window.SicutScriptDefault = function () {
   $(".display-modal").click();
   $(".loader-insta").css("display", "none");
+  $('#datetimesubmodal').bootstrapMaterialDatePicker({
+    format: 'DD-MM-YYYY',
+    lang: 'es',
+    weekStart: 1,
+    cancelText: 'ANNULER',
+    nowButton: true,
+    switchOnClick: true,
+    time: false
+  });
+  $('#datetimesubmodal2').bootstrapMaterialDatePicker({
+    format: 'DD-MM-YYYY',
+    lang: 'es',
+    weekStart: 1,
+    cancelText: 'ANNULER',
+    nowButton: true,
+    switchOnClick: true,
+    time: false
+  });
 };
 
 window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato, max_dato, label1, label2, loading) {
@@ -205,8 +223,6 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
 };
 
 window.GraficosIgnisAbajo = function (id, mt_value1, mt_time1, mt_value2, mt_value3, mt_value4, min_dato, max_dato, label1, label2, label3, label4, loading, oculto) {
-  console.log(min_dato);
-  console.log(max_dato);
   var ctx = document.getElementById(id).getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'line',
@@ -389,8 +405,15 @@ window.GraficarTodo = function (url) {
   $("#SicutContenedor4").load(url + "/GraficoSigutIgnis4", {
     dato: "Epa4"
   });
-  $("#SicutContenedor5").load(url + "/GraficoSigutIgnis5", {
-    dato: "Epa5"
+};
+
+window.GraficarGra5 = function (mt_time_, EnergiaActivaInyectada_, EnergiaActivaRetirada_, EnergiaReactivaInyectada_, EnergiaReactivaRetirada_) {
+  $("#SicutContenedor5").load("/GraficoSigutIgnis5", {
+    mt_time: mt_time_,
+    EnergiaActivaInyectada: EnergiaActivaInyectada_,
+    EnergiaActivaRetirada: EnergiaActivaRetirada_,
+    EnergiaReactivaInyectada: EnergiaReactivaInyectada_,
+    EnergiaReactivaRetirada: EnergiaReactivaRetirada_
   });
 };
 

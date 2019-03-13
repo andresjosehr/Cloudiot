@@ -1,3 +1,6 @@
+<script>
+   var FP=0;
+</script>
    <button type="button" class="btn btn-default waves-effect m-r-20 display-modal sitcut-btn-modal" data-toggle="modal" data-target="#largeModal"></button>
   
          <!-- Large Size -->
@@ -6,24 +9,56 @@
                     <div class="modal-content">
                         <div class="modal-header">
                           <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                               <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                               <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >Ultima dato: {{ $Datos["UltimaMedicion"] }}</h4> 
                             </div>
-                            <div class="col-md-3">
-                              <div class="form-line">
-                                <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                            <div class="col-md-2">
+                              <div class="form-group InputFecha">
+                                 <div class="form-line">
+                                     <input type="text" id="datetimesubmodal" class="datetimepicker form-control" placeholder="Fecha Fin">
+                                 </div>
                               </div>
                             </div>
-                            <div class="col-md-3">
-                              <div class="form-line">
-                                <input type="text" class="datetimepicker form-control" placeholder="Please choose date & time...">
+                            <div class="col-md-2">
+                              <div class="form-group InputFecha">
+                                 <div class="form-line">
+                                     <input type="text" id="datetimesubmodal2" class="datetimepicker form-control" placeholder="Fecha Fin">
+                                 </div>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                 <div class="form-line">
+                                     <select id="FechaEscoger" class="form-control show-tick">
+                                        <option value="0">-- Periodo --</option>
+                                        <option value="24">Ultimas 24Hrs</option>
+                                        <option value="168">Ultima Semana</option>
+                                        <option value="360">Ultimos 15 dias</option>
+                                        <option value="744">Ultim Mes </option>
+                                        <option value="Personalizado">Personalizado</option>
+                                    </select>
+                                 </div>
+                              </div>
+                            </div>
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                 <div class="form-line">
+                                     <select id="DatoEscoger" class="form-control show-tick">
+                                        <option value="0">-- Datos a Graficar --</option>
+                                        <option value="1">Energia Activa</option>
+                                        <option value="2">Energia Reactiva</option>
+                                        <option value="3">Voltaje de lineas</option>
+                                        <option value="4">Voltaje de Fases</option>
+                                        <option value="5">Factor potencia</option>
+                                    </select>
+                                 </div>
                               </div>
                             </div>
                             <div class="col-md-1">
-                              <button type="button" class="btn btn-primary waves-effect">→</button>
+                              <button onclick="GraficarSicutPersonalizado('<?php echo Request::root(); ?>')" type="button" class="btn btn-primary waves-effect">→</button>
                             </div>
                           </div>
                         </div>
@@ -85,11 +120,15 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3" align="center">
-                                  <canvas id="myChart0" height="100"></canvas>
+                                  <div class="div-chart1">
+                                    <canvas id="myChart0" height="100"></canvas>
+                                  </div>
                                   <div class="sicut-loading" id="sicut-loading1"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
-                                  <canvas id="myChart1" height="100"></canvas>
+                                  <div class="div-chart2">
+                                    <canvas id="myChart1" height="100"></canvas>
+                                  </div>
                                   <div class="sicut-loading" id="sicut-loading2"></div>
                                 </div>
                           </div>
@@ -179,15 +218,21 @@
                         </div>
                         <div class="row" align="center" class="sicut-row-chart-2">
                           <div class="col-md-4">
-                            <canvas id="myChart4"  height="100"></canvas>
+                            <div class="div-chart3">
+                                <canvas id="myChart4" height="100"></canvas>
+                            </div>
                               <div class="sicut-loading" id="sicut-loading3"></div>
                             </div>
                             <div class="col-md-4">
-                            <canvas id="myChart5"  height="100"></canvas>
+                              <div class="div-chart4">
+                                  <canvas id="myChart5" height="100"></canvas>
+                              </div>
                               <div class="sicut-loading" id="sicut-loading4"></div>
                             </div>
                             <div class="col-md-4">
-                            <canvas id="myChart6"  height="100"></canvas>
+                              <div class="div-chart5">
+                                    <canvas id="myChart6" height="100"></canvas>
+                                </div>
                               <div class="sicut-loading" id="sicut-loading5"></div>
                             </div>
                         </div>
@@ -206,8 +251,74 @@
               
            </form>
 
-
   <script>
+
+    function restaFechas(f1,f2){
+       var aFecha1 = f1.split('-');
+       var aFecha2 = f2.split('-');
+       var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+       var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+       var dif = fFecha2 - fFecha1;
+       var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+       return dias;
+   }
+
+    function GraficarSicutPersonalizado(url) {
+
+      var val=0;
+      if ($("#FechaEscoger").val()=="0") {
+        alert("Debes escoger un periodo de tiempo a graficar");
+        val++;
+      }
+
+      if ($("#FechaEscoger").val()=="Personalizado") {
+          if ($("#datetimesubmodal").val()>$("#datetimesubmodal2").val() || $("#datetimesubmodal").val()==0 || $("#datetimesubmodal2").val()==0) {
+            alert("Debes Escoger una feca valida");
+            val++;
+          } else{
+            var Horas = ((restaFechas($("#datetimesubmodal").val(), $("#datetimesubmodal2").val()))+1)*24;
+          }
+        }
+
+      if ($("#FechaEscoger").val()!="Personalizado") {
+        var Horas = $("#FechaEscoger").val();
+      } 
+
+      if ($("#DatoEscoger").val()=="0") {
+          alert("Debes escoger un dato a graficar");
+          val++;
+        } 
+
+        if (val==0) {
+          var dat=parseInt($("#DatoEscoger").val())-1;
+          $("#sicut-loading"+$("#DatoEscoger").val()).css("display", "block");
+
+          $(".div-chart"+$("#DatoEscoger").val()).empty();
+          $(".div-chart"+$("#DatoEscoger").val()).html('<canvas id="myChart'+dat+'"  height="100"></canvas>');
+
+
+          $("#SicutContenedor"+$("#DatoEscoger").val()).load(url+"/GraficoSigutIgnis"+$("#DatoEscoger").val(),{
+              HorasTotales: Horas
+          })
+        }
+
+    }
+
+    $( "#FechaEscoger" )
+  .change(function () {
+    var str = "";
+    $( "#FechaEscoger option:selected" ).each(function() {
+      str += $( this ).text();
+    });
+    if (str=="Personalizado") {
+      $(".InputFecha").css("display", "block");
+    } else {
+      $(".InputFecha").css("display", "none");      
+    }
+  })
+  .change();
+
+
     var FuncionesCompletas=0;
     var url_ = "<?php echo Request::root() ?>";
     SicutScriptDefault();

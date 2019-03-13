@@ -24,6 +24,9 @@
     <!-- Jquery Core Js -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
+
     
     <link rel="stylesheet" href="{{ asset('css/default.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
