@@ -291,6 +291,9 @@
 
         if (val==0) {
           var dat=parseInt($("#DatoEscoger").val())-1;
+          if (parseInt($("#DatoEscoger").val())>=3) {
+            dat=dat+2;
+          }
           $("#sicut-loading"+$("#DatoEscoger").val()).css("display", "block");
 
           $(".div-chart"+$("#DatoEscoger").val()).empty();

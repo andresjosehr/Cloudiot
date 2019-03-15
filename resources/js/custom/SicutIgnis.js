@@ -161,7 +161,6 @@ window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_valu
 }
 
 window.GraficoIgnisArribaDerecha=function(id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato_a, max_dato_a, min_dato_b, max_dato_b, label1, label2, loading) {
-
                 
                     var ctx = document.getElementById(id).getContext('2d');
                     var myChart = new Chart(ctx, {
