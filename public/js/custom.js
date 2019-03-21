@@ -672,6 +672,71 @@ window.VinaScriptDefault = function (url_, instalacion_info) {
   });
 };
 
+window.MostrarEntrada1 = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarEntrada2 = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarEntrada3 = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarSalida1 = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarSalida2 = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarSalida3 = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarRelojes = function (url_, info) {
+  $("#MostrarRelojes").load(url_, {
+    instalacion: info
+  });
+};
+
+window.MostrarBombas = function (url_) {
+  $("#MostrarBombas").load(url_, {
+    dato: "ejemplo"
+  });
+};
+
+window.ConsultarParametros = function (url_) {
+  $("#parametros-index").load(url_, {
+    dato: "ejemplo"
+  });
+};
+
+window.GraficarphPersonalizado = function (url_) {
+  var fecha_ph_inicio = document.getElementById("fecha_ph_inicio").value;
+  var fecha_ph_fin = document.getElementById("fecha_ph_fin").value;
+  $(".loader-insta").css("display", "block");
+  var url = url_;
+  $("#PHDiarioContenedor").load(url, {
+    FechaInicio: fecha_ph_inicio,
+    FechaFin: fecha_ph_fin
+  });
+};
+
 window.GraficarphPersonalizado = function (url_) {
   var fecha_ph_inicio = document.getElementById("fecha_ph_inicio").value;
   var fecha_ph_fin = document.getElementById("fecha_ph_fin").value;

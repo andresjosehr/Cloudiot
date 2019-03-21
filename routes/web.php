@@ -79,6 +79,20 @@ Route::post('CalculosLuisFelipe11','VinaLuisFelipeController@GraficarConductivid
 Route::post('CalculosLuisFelipe12','VinaLuisFelipeController@GraficarConductividadPersonalizado')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe13','VinaLuisFelipeController@GraficarFlujo')->middleware("verificar_login");
 
+Route::post('CalculosLuisFelipe14','VinaLuisFelipeController@ConsultarParametros')->middleware("verificar_login");
+
+Route::post('CalculosLuisFelipe15','VinaLuisFelipeController@MostrarBombas')->middleware("verificar_login");
+
+Route::post('CalculosLuisFelipe16','VinaLuisFelipeController@MostrarRelojes')->middleware("verificar_login");
+
+Route::post('CalculosLuisFelipe17','VinaLuisFelipeController@Entrada1')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe18','VinaLuisFelipeController@Entrada2')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe19','VinaLuisFelipeController@Entrada3')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe20','VinaLuisFelipeController@Salida1')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe21','VinaLuisFelipeController@Salida2')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe22','VinaLuisFelipeController@Salida3')->middleware("verificar_login");
+
+
 
 
 Route::post('GraficoSigutIgnis1','SicutIgnisController@Grafico1')->middleware("verificar_login");
