@@ -470,14 +470,13 @@ class VinaLuisFelipeController extends Controller{
 
     public function Calculos(Request $Request){
 
-      $instalaciones = $_POST["instalacion"];
-
+      $instalaciones = $_POST["instalacion"]
   
 
   
 
        $datos = DB::connection('telemetria')
-                                  ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC) T1
+                                  ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC LIMIT 100) T1
                                                                        WHERE  (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                             OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                             OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
