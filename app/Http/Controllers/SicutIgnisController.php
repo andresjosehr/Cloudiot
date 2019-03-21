@@ -92,8 +92,7 @@ class SicutIgnisController extends Controller{
                                                                         OR mt_name='AASA--ION8650.EnerActRet')
                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)
                                                                         ORDER BY mt_name, mt_time ASC ");
-        $j=0;
-        $k=0;
+        $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
 
             if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
@@ -159,10 +158,6 @@ class SicutIgnisController extends Controller{
           GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_mt_time, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_mt_time, MinDato, MaxDato, "Inyectada", "Retirada" , 1);
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
-          FP++;
-          if (FP==2) {
-            GraficarGra5(mt_mt, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, EnergiaReactivaInyectada_mt_value, EnergiaReactivaRetirada_mt_value);
-          }
         </script><?php
      
     }
@@ -262,10 +257,6 @@ class SicutIgnisController extends Controller{
 
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
-          FP++;
-          if (FP==2) {
-            GraficarGra5(mt_mt, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, EnergiaReactivaInyectada_mt_value, EnergiaReactivaRetirada_mt_value);
-          }
       </script><?php
      
     }
@@ -434,49 +425,176 @@ class SicutIgnisController extends Controller{
     }
     public function Grafico5(Request $Request){
 
-      for ($i=0; $i <count($Request->EnergiaActivaInyectada) ; $i++) { 
-        if ($Request->EnergiaReactivaRetirada[$i]!=0) {
-          $FPiny[$i]=cos(atan($Request->EnergiaActivaRetirada[$i]/$Request->EnergiaReactivaRetirada[$i]));
-        } else{
-          $FPiny[$i]=0;
-        }
-        if ($Request->EnergiaReactivaInyectada[$i]!=0) {
-           $FPret[$i]=cos(atan($Request->EnergiaActivaInyectada[$i]/$Request->EnergiaReactivaInyectada[$i]));
-        } else{
-           $FPret[$i]=0;
-        }
-
+      if (isset($Request->HorasTotales)) {
+        $Horas=$Request->HorasTotales;
+      } else{
+        $Horas=24;
       }
 
+      $datos = DB::connection('telemetria')
+                                    ->select("SELECT * FROM log_aasa  
+                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
+                                                OR mt_name='AASA--ION8650.EnerActRet' 
+                                                OR mt_name='AASA--ION8650.EnerReactIny' 
+                                                OR mt_name='AASA--ION8650.EnerReactRet')
+                                                AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR) 
+                                                ORDER BY mt_name, mt_time DESC;");
+
+
+                $j=0; $k=0; $h=0; $g=0;
+                for ($i=0; $i <count($datos) ; $i++) { 
+                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny') {
+                      $EnerActIny_value[$j]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                      $EnerActIny_time[$j]=$datos[$i]->mt_time;
+                      $j++;
+                    }
+                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+                      $EnerActRet_value[$k]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                      $k++;
+                    }
+                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny') {
+                      $EnerReactIny_mt_value[$h]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                      $h++;
+                    }
+                    if ($i!=count($datos)-1) {
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet') {
+                        $EnerReactRet_mt_value[$g]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                        $g++;
+                      }
+                  } 
+
+                }
+
+                for ($i=0; $i <count($EnerActIny_time)-1 ; $i++) { 
+                  if ($EnerReactIny_mt_value[$i]==0) {
+                    $FPiny[$i]=0;
+                  } else{
+                    $FPiny[$i]=$EnerActIny_value[$i]/$EnerReactIny_mt_value[$i];
+                    $FPiny[$i]=cos(atan($FPiny[$i]));
+                  }
+                  if ($EnerReactRet_mt_value[$i]==0) {
+                    $FPret[$i]=0;
+                  } else{
+                    $FPret[$i]=$EnerActRet_value[$i]/$EnerReactRet_mt_value[$i];
+                    $FPret[$i]=cos(atan($FPret[$i]));
+                  }
+
+                  if ($i==0) {
+                    $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
+                    $MaxDato=0;
+                  } else{
+                    if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
+                      $MinDato=$datos[$i]->mt_value;
+                    }
+                    if ($MaxDato<$datos[$i]->mt_value) {
+                      $MaxDato=$datos[$i]->mt_value;
+                    }
+                }
+
+                } 
+
+
+
       ?><script>
+
+        var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
+        var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
         var FPret = '<?php echo json_encode($FPret); ?>';
           FPret = JSON.parse(FPret)
 
           var FPiny = '<?php echo json_encode($FPiny); ?>';
           FPiny = JSON.parse(FPiny)
 
-          var mt_time = '<?php echo json_encode($Request->mt_time); ?>';
+          var mt_time = '<?php echo json_encode($EnerActIny_time); ?>';
           mt_time = JSON.parse(mt_time)
-        GraficosIgnisArriba("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
-      </script><?php
-     
-     
-    }
-
-
-    public function Grafico6(Request $Request){
-      ?><script>
-        SicutPieChart();
-        FuncionesCompletas++;
-        FuncionExportacion(FuncionesCompletas);
+          GraficosIgnisArriba("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
       </script><?php
      
      
     }
 
     public function Grafico7(Request $Request){
+
+      if (isset($Request->HorasTotales)) {
+        $Horas=$Request->HorasTotales;
+      } else{
+        $Horas=24;
+      }
+
+
+      $datos = DB::connection('telemetria')
+                                    ->select("SELECT * FROM log_aasa  
+                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
+                                                OR mt_name='AASA--ION8650.EnerActRet')
+                                                AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR) 
+                                                ORDER BY mt_name, mt_time DESC;");
+
+        $j=0; $k=0;
+        for ($i=0; $i <count($datos) ; $i++) { 
+
+            if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
+              if ($j==0) {
+                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
+                $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+              } else{
+                if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
+                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4);
+                  $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                }
+              }
+              $j++;
+            }
+            if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+              if ($k==0) {
+                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
+              } else{
+                if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
+                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4);
+                }
+              }
+              $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
+              $k++;
+            }
+
+            if ($i==0) {
+                    $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
+                    $MaxDato=0;
+                  } else{
+                    if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
+                      $MinDato=$datos[$i]->mt_value;
+                    }
+                    if ($MaxDato<$datos[$i]->mt_value) {
+                      $MaxDato=$datos[$i]->mt_value;
+                    }
+                  }
+
+        }
+
+
+
+
       ?><script>
-        PotGenerada();
+
+        var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
+        var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
+
+
+          var EnergiaActivaInyectada_mt_value = '<?php echo json_encode($EnergiaActivaInyectada_mt_value); ?>';
+          EnergiaActivaInyectada_mt_value = JSON.parse(EnergiaActivaInyectada_mt_value)
+          var EnergiaActivaInyectada_mt_time = '<?php echo json_encode($EnergiaActivaInyectada_mt_time); ?>';
+          EnergiaActivaInyectada_mt_time = JSON.parse(EnergiaActivaInyectada_mt_time)
+
+          var EnergiaActivaRetirada_mt_value = '<?php echo json_encode($EnergiaActivaRetirada_mt_value); ?>';
+          EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
+          var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
+          EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
+          var mt_mt=EnergiaActivaRetirada_mt_time;
+
+          EnergiaActivaInyectada_mt_time = Object.keys(EnergiaActivaInyectada_mt_time).map(i => EnergiaActivaInyectada_mt_time[i])
+          EnergiaActivaInyectada_mt_value = Object.keys(EnergiaActivaInyectada_mt_value).map(i => EnergiaActivaInyectada_mt_value[i])
+          EnergiaActivaRetirada_mt_value = Object.keys(EnergiaActivaRetirada_mt_value).map(i => EnergiaActivaRetirada_mt_value[i])
+
+        PotGenerada(EnergiaActivaInyectada_mt_time, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
         FuncionesCompletas++;
         FuncionExportacion(FuncionesCompletas);
       </script><?php

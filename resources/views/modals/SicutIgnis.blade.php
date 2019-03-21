@@ -111,11 +111,8 @@
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                      <canvas id="sicut-pie-chart" height="170"></canvas>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <canvas id="sicut-myChart3" height="170"></canvas>
+                                    <div class="col-md-6">
+                                      <canvas id="sicut-myChart3" height="80"></canvas>
                                     </div>
                             </div>
                             <div class="row">

@@ -229,67 +229,74 @@ window.SicutPieChart = function(){
         },
         options: {
         legend: {
-            display: false
+            display: true
          },
          title: {
             display: true,
             text: 'Potencia Generada'
+        },
+        tooltips: {
+                enabled: true,
+                intersect: false
+            },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    display: false, 
+                    maxTicksLimit: 10
+                }
+            }]
         }
       }
     });
 
 }
 
-window.PotGenerada = function (){
+window.PotGenerada = function (mt_time, mt_value1, mt_value2){
   var ctx = document.getElementById("sicut-myChart3").getContext('2d');
   var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          labels: mt_time,
           datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
+              label: 'Inyectada',
+              data: mt_value1,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor:'rgba(255,99,132,1)',
+              borderWidth: 1,
+              radius: 0
+          },{
+              label: 'Retirada',
+              data: mt_value2,
+              backgroundColor: 'rgba(66, 134, 244, 0.2)',
+              borderColor:'rgba(66, 134, 244, 1)',
+              borderWidth: 1,
+              radius: 0
           }]
       },
       options: {
-        legend: {
-            display: false
-         },
-         title: {
-            display: true,
-            text: 'Potencia Generada'
-        },
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true
-                  }
-              }]
-          }
-      }
+                            legend: {
+                                display: true
+                             },
+                            tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
+                                    }
+                                }]
+                            }
+                        }
   });
 }
 
 window.GraficarTodo=function(url){
 
-    $("#SicutContenedor6").load(url+"/GraficoSigutIgnis6", {dato: "Epa5"});
+    $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
     $("#SicutContenedor7").load(url+"/GraficoSigutIgnis7", {dato: "Epa5"});
     $("#SicutContenedor1").load(url+"/GraficoSigutIgnis1", {dato: "Epa"});
     $("#SicutContenedor2").load(url+"/GraficoSigutIgnis2", {dato: "Epa2"});

@@ -343,42 +343,63 @@ window.SicutPieChart = function () {
     },
     options: {
       legend: {
-        display: false
+        display: true
       },
       title: {
         display: true,
         text: 'Potencia Generada'
+      },
+      tooltips: {
+        enabled: true,
+        intersect: false
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            display: false,
+            maxTicksLimit: 10
+          }
+        }]
       }
     }
   });
 };
 
-window.PotGenerada = function () {
+window.PotGenerada = function (mt_time, mt_value1, mt_value2) {
   var ctx = document.getElementById("sicut-myChart3").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: mt_time,
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-        borderColor: ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-        borderWidth: 1
+        label: 'Inyectada',
+        data: mt_value1,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255,99,132,1)',
+        borderWidth: 1,
+        radius: 0
+      }, {
+        label: 'Retirada',
+        data: mt_value2,
+        backgroundColor: 'rgba(66, 134, 244, 0.2)',
+        borderColor: 'rgba(66, 134, 244, 1)',
+        borderWidth: 1,
+        radius: 0
       }]
     },
     options: {
       legend: {
-        display: false
+        display: true
       },
-      title: {
-        display: true,
-        text: 'Potencia Generada'
+      tooltips: {
+        enabled: true,
+        intersect: false
       },
       scales: {
-        yAxes: [{
+        xAxes: [{
           ticks: {
-            beginAtZero: true
+            display: false,
+            maxTicksLimit: 10
           }
         }]
       }
@@ -387,7 +408,7 @@ window.PotGenerada = function () {
 };
 
 window.GraficarTodo = function (url) {
-  $("#SicutContenedor6").load(url + "/GraficoSigutIgnis6", {
+  $("#SicutContenedor5").load(url + "/GraficoSigutIgnis5", {
     dato: "Epa5"
   });
   $("#SicutContenedor7").load(url + "/GraficoSigutIgnis7", {
@@ -1029,7 +1050,7 @@ window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
     decimals: 0,
     range: {
       min: 0,
-      max: 100
+      max: 3599
     },
     format: wNumb({
       decimals: 0,
@@ -1037,7 +1058,8 @@ window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
     })
   });
   riego.noUiSlider.on('update', function (values, handle) {
-    document.getElementById('RiegoValor').innerHTML = values[handle];
+    window.riego = values[handle];
+    document.getElementById('RiegoValor').innerHTML = myTime(values[handle].toString().replace('.', ''));
   });
   var reposo = document.getElementById('Reposo');
   noUiSlider.create(reposo, {
@@ -1049,7 +1071,7 @@ window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
     decimals: 0,
     range: {
       min: 0,
-      max: 100
+      max: 3599
     },
     format: wNumb({
       decimals: 0,
@@ -1057,10 +1079,26 @@ window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
     })
   });
   reposo.noUiSlider.on('update', function (values, handle) {
-    document.getElementById('ReposoValor').innerHTML = values[handle];
+    window.reposo = values[handle];
+    document.getElementById('ReposoValor').innerHTML = myTime(values[handle].toString().replace('.', ''));
   });
   $(".noUi-handle").addClass("vina-noUi-handle");
   $(".noUi-connect").addClass("vina-noUi-connect");
+};
+
+window.myTime = function (time) {
+  var hr = ~~(time / 3600);
+  var min = ~~(time % 3600 / 60);
+  var sec = time % 60;
+  var sec_min = "";
+
+  if (hr > 0) {
+    sec_min += "" + hrs + ":" + (min < 10 ? "0" : "");
+  }
+
+  sec_min += "" + min + ":" + (sec < 10 ? "0" : "");
+  sec_min += "" + sec;
+  return sec_min;
 };
 
 window.RegistarRangoPH = function (url_) {
@@ -1078,7 +1116,7 @@ window.RegistarRangoPH = function (url_) {
 window.RegistarRiego = function (url_) {
   $(".boton1").css("display", "none");
   $(".vina-vina-loadingg1").css("display", "block");
-  var MinutosRiego = $("#RiegoValor").text();
+  var MinutosRiego = window.riego;
   var url = url_;
   $("#parametros-ejecucion").load(url, {
     Riego: MinutosRiego
@@ -1088,7 +1126,7 @@ window.RegistarRiego = function (url_) {
 window.RegistarReposo = function (url_) {
   $(".boton2").css("display", "none");
   $(".vina-vina-loadingg2").css("display", "block");
-  var MinutosReposo = $("#ReposoValor").text();
+  var MinutosReposo = window.reposo;
   var url = url_;
   $("#parametros-ejecucion").load(url, {
     Reposo: MinutosReposo

@@ -664,7 +664,7 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
                  decimals: 0,
                  range: {
                      min: 0,
-                     max: 100
+                     max: 3599
                  },
                  format: wNumb({
                      decimals: 0,
@@ -673,7 +673,8 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
              });
    
              riego.noUiSlider.on('update', function (values, handle) {
-                document.getElementById('RiegoValor').innerHTML = values[handle];
+                window.riego=values[handle];
+                document.getElementById('RiegoValor').innerHTML = myTime(values[handle].toString().replace('.', ''));
              });
    
    
@@ -689,7 +690,7 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
                  decimals: 0,
                  range: {
                      min: 0,
-                     max: 100
+                     max: 3599
                  },
                  format: wNumb({
                      decimals: 0,
@@ -698,12 +699,26 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
              });
    
              reposo.noUiSlider.on('update', function (values, handle) {
-                document.getElementById('ReposoValor').innerHTML = values[handle];
+                window.reposo=values[handle];
+                document.getElementById('ReposoValor').innerHTML = myTime(values[handle].toString().replace('.', ''));
              });
 
              $(".noUi-handle").addClass("vina-noUi-handle");
              $(".noUi-connect").addClass("vina-noUi-connect");
    }  
+
+   window.myTime=function(time) {
+            var hr = ~~(time / 3600);
+            var min = ~~((time % 3600) / 60);
+            var sec = time % 60;
+            var sec_min = "";
+            if (hr > 0) {
+               sec_min += "" + hrs + ":" + (min < 10 ? "0" : "");
+            }
+            sec_min += "" + min + ":" + (sec < 10 ? "0" : "");
+            sec_min += "" + sec;
+            return sec_min;
+         }
 
 
  window.RegistarRangoPH = function(url_) {
@@ -722,7 +737,7 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
     window.RegistarRiego = function (url_) {
          $(".boton1").css("display", "none");
          $(".vina-vina-loadingg1").css("display", "block");
-        var MinutosRiego = $("#RiegoValor").text(); 
+        var MinutosRiego = window.riego; 
          var url = url_;
          $("#parametros-ejecucion").load(url, {Riego: MinutosRiego});
     }
@@ -730,7 +745,7 @@ window.CompilarRango = function(alto, bajo, tiemporiego, tiemporeposo) {
        window.RegistarReposo = function (url_) {
          $(".boton2").css("display", "none");
          $(".vina-vina-loadingg2").css("display", "block");
-        var MinutosReposo = $("#ReposoValor").text();
+        var MinutosReposo = window.reposo;
         var url = url_;
         $("#parametros-ejecucion").load(url, {Reposo: MinutosReposo});
    
