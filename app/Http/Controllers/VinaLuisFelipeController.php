@@ -470,7 +470,7 @@ class VinaLuisFelipeController extends Controller{
 
     public function Calculos(Request $Request){
 
-      $instalaciones = $_POST["instalacion"]
+      $instalaciones = $_POST["instalacion"];
   
 
   
