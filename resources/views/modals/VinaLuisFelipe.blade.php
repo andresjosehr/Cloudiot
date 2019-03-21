@@ -323,7 +323,6 @@
 
 <script src="instalaciones/VinaLuisFelipe.js"></script>
 <script>
-    VinaScriptDefault("<?php echo Request::root() ?>/CalculosLuisFelipe", <?php echo json_encode($Instalacion); ?>);
     GraficarPHDiario("<?php echo Request::root() ?>/CalculosLuisFelipe7");
     GraficarORPDiario("<?php echo Request::root() ?>/CalculosLuisFelipe9");
     GraficarConductividadDiario("<?php echo Request::root() ?>/CalculosLuisFelipe11");

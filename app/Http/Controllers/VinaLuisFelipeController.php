@@ -487,7 +487,9 @@ class VinaLuisFelipeController extends Controller{
                                                                             OR mt_name='Biofiltro02--Consumo.ErrorBomba3'
                                                                             OR mt_name='Biofiltro02--Consumo.ErrorBomba4'
                                                                             OR mt_name='Biofiltro02--Consumo.ErrorBomba5')
-                                                                            GROUP BY mt_name");
+                                                                            GROUP BY mt_name LIMIT 10");
+
+
 
         for ($i=0; $i <count($datos)/2 ; $i++) { 
 
@@ -498,17 +500,25 @@ class VinaLuisFelipeController extends Controller{
           }
         }
 
-        for ($i=5; $i <count($datos)/2 ; $i++) { 
+        $t=5;
+        for ($i=0; $i <count($datos)/2 ; $i++) { 
 
-          if ($datos[$i]->mt_value==0) {
-            $ErrorBomba[$i]="No hay Error";
+          if ($datos[$t]->mt_value==0) {
+            $ErrorBomba[$t]="No hay Error";
           } else{
-            $ErrorBomba[$i]="Error";
+            $ErrorBomba[$t]="Error";
           }
+          $t++;
         }
 
         ?><script>
-          VinaBombas("<?php $Operativa ?>","<?php $ErrorBomba ?>")
+
+           var Operativa = '<?php echo json_encode($Opertiva); ?>';
+           Operativa=JSON.parse(Operativa);
+
+          var ErrorBomba = '<?php echo json_encode($ErrorBomba); ?>';
+          ErrorBomba=JSON.parse(ErrorBomba);
+          VinaBombas(Operativa, ErrorBomba)
         </script><?php
     
    }

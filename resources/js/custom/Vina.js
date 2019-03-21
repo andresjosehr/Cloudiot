@@ -159,9 +159,9 @@ window.VinaBombas = function(Operativa, ErrorBomba) {
     
 }
 
-window.VinaScriptDefault = function(url_, instalacion_info){
+window.VinaScriptDefault = function(url_){
 
-    $("#contenedorLFE").load(url_, {instalacion: instalacion_info});
+    $("#contenedorLFE").load(url_, {instalacion: "epa"});
 
     $( ".vina-modal" ).click();
     $(".loader-insta").css("display", "none");
