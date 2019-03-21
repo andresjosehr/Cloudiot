@@ -1470,13 +1470,17 @@ if ($h!=0) {
             
             
             if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
-              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
+              $mt_value_entrada[$k]=$DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros;
+              $mt_value_entrada[$k]=number_format($mt_value_entrada[$k], 0, "", "");
+              $mt_value_entrada[$k]=$mt_value_entrada[$k]/100;
               $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
               $k++;
             }
 
             if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
-              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
+              $mt_value_salida[$j]=$DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros;
+              $mt_value_salida[$j]=number_format($mt_value_salida[$j], 0, "", "");
+              $mt_value_salida[$j]=$mt_value_salida[$j]/100;
               $j++;
             }
 
@@ -1499,6 +1503,9 @@ if ($h!=0) {
 
 
 
+                console.log(mt_time_conductividad)
+                console.log(mt_value_conductividad)
+                console.log(mt_value_salida_conductividad)
 
                 function DescargarExcelConductividad() {
                     window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_conductividad+'&mt_value='+mt_value_conductividad+'&mt_value_salida='+mt_value_salida_conductividad+"&n1=Conductividad Entrada&n2=Conductividad Salida", '_blank' )

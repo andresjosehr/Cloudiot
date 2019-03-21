@@ -17,54 +17,42 @@ class PruebaController extends Controller{
 
     public function index(){
 
-      $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa  
-                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
-                                                OR mt_name='AASA--ION8650.EnerActRet' 
-                                                OR mt_name='AASA--ION8650.EnerReactIny' 
-                                                OR mt_name='AASA--ION8650.EnerReactRet')
-                                                AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL 24 HOUR) 
-                                                ORDER BY mt_name, mt_time DESC;");
+      $DatosDiarios = DB::connection("telemetria")
+                      ->select("SELECT
+                                  mt_name,
+                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
+                                  mt_time
+                                   FROM log_biofil02 
+                                     WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                             GROUP BY mt_name, DAY(mt_time)
+                                               ORDER BY mt_name, mt_time ASC");
 
+        
+          $k=0;
+          $j=0;
+          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
+            
+            
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
+              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
+              $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+              echo $Epa = $DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros;
+              echo "<br>";
+              echo $Epa= number_format($Epa, 0, "", "");
+              echo "<br>";
+              echo $Epa=$Epa/100;
+              echo "<br>";
+              echo "<br>";
+              $k++;
+            }
 
-                $j=0; $k=0; $h=0; $g=0;
-                for ($i=0; $i <count($datos) ; $i++) { 
-                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny') {
-                      $EnerActIny_value[$j]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                      $EnerActIny_time[$j]=$datos[$i]->mt_time;
-                      $j++;
-                    }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
-                      $EnerActRet_value[$k]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                      $k++;
-                    }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny') {
-                      $EnerReactIny_mt_value[$h]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                      $h++;
-                    }
-                    if ($i!=count($datos)-1) {
-                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet') {
-                        $EnerReactRet_mt_value[$g]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                        $g++;
-                      }
-                  } 
+            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
+              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
+              $j++;
+            }
 
-                }
-
-                for ($i=0; $i <count($EnerActIny_time)-1 ; $i++) { 
-                  if ($EnerReactIny_mt_value[$i]==0) {
-                    $FPiny[$i]=0;
-                  } else{
-                    $FPiny[$i]=$EnerActIny_value[$i]/$EnerReactIny_mt_value[$i];
-                    $FPiny[$i]=cos(atan($FPiny[$i]));
-                  }
-                  if ($EnerReactRet_mt_value[$i]==0) {
-                    $FPret[$i]=0;
-                  } else{
-                    $FPret[$i]=$EnerActRet_value[$i]/$EnerReactRet_mt_value[$i];
-                    $FPret[$i]=cos(atan($FPret[$i]));
-                  }
-                }    
+          }   
 
   }
 }
