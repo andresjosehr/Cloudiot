@@ -468,7 +468,7 @@ class VinaLuisFelipeController extends Controller{
 
     }
 
-    public static function Calculos(Request $Request){
+    public function Calculos(Request $Request){
 
       $instalaciones = $_POST["instalacion"];
 
