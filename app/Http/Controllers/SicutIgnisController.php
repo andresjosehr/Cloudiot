@@ -527,7 +527,7 @@ class SicutIgnisController extends Controller{
                                                 WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                 OR mt_name='AASA--ION8650.EnerActRet')
                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR) 
-                                                ORDER BY mt_name, mt_time DESC;");
+                                                ORDER BY mt_name, mt_time ASC;");
 
         $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
