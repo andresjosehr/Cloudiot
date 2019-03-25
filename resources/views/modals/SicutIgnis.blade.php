@@ -9,55 +9,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                           <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-3">
                               <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >{{ $Instalacion->nombre }}</h4>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >Ultima dato: {{ $Datos["UltimaMedicion"] }}</h4> 
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group InputFecha">
-                                 <div class="form-line">
-                                     <input type="text" id="datetimesubmodal" class="datetimepicker form-control" placeholder="Fecha Fin">
-                                 </div>
-                              </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group InputFecha">
-                                 <div class="form-line">
-                                     <input type="text" id="datetimesubmodal2" class="datetimepicker form-control" placeholder="Fecha Fin">
-                                 </div>
-                              </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                 <div class="form-line">
-                                     <select id="FechaEscoger" class="form-control show-tick">
-                                        <option value="0">-- Periodo --</option>
-                                        <option value="24">Ultimas 24Hrs</option>
-                                        <option value="168">Ultima Semana</option>
-                                        <option value="360">Ultimos 15 dias</option>
-                                        <option value="744">Ultim Mes </option>
-                                        <option value="Personalizado">Personalizado</option>
-                                    </select>
-                                 </div>
-                              </div>
-                            </div>
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                 <div class="form-line">
-                                     <select id="DatoEscoger" class="form-control show-tick">
-                                        <option value="0">-- Datos a Graficar --</option>
-                                        <option value="1">Energia Activa</option>
-                                        <option value="2">Energia Reactiva</option>
-                                        <option value="3">Voltaje de lineas</option>
-                                        <option value="4">Voltaje de Fases</option>
-                                        <option value="5">Factor potencia</option>
-                                    </select>
-                                 </div>
-                              </div>
-                            </div>
-                            <div class="col-md-1">
+                            </div>                            
+                            <div class="col-md-6">
                               <button onclick="GraficarSicutPersonalizado('<?php echo Request::root(); ?>')" type="button" class="btn btn-primary waves-effect">→</button>
                             </div>
                           </div>
