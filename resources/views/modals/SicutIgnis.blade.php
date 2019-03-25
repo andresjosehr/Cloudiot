@@ -71,6 +71,7 @@
                           <div id="SicutContenedor5"></div>
                           <div id="SicutContenedor6"></div>
                           <div id="SicutContenedor7"></div>
+                          <div id="SicutSubModalContenedor"></div>
                           <div id="SicutContenedorExcel"></div>
                             <div class="row" align="center">
                                     <div class="col-md-3">
@@ -112,19 +113,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                      <canvas id="sicut-myChart3" height="80"></canvas>
+                                      <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '7')" id="sicut-myChart3" height="70" style="margin-top: 30px"></canvas>
                                     </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3" align="center">
                                   <div class="div-chart1">
-                                    <canvas id="myChart0" height="100"></canvas>
+                                    <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '1')" id="myChart0" height="100"></canvas>
                                   </div>
                                   <div class="sicut-loading" id="sicut-loading1"></div>
                                 </div>
                                 <div class="col-md-3" align="center">
                                   <div class="div-chart2">
-                                    <canvas id="myChart1" height="100"></canvas>
+                                    <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '2')" id="myChart1" height="100"></canvas>
                                   </div>
                                   <div class="sicut-loading" id="sicut-loading2"></div>
                                 </div>
@@ -216,19 +217,19 @@
                         <div class="row" align="center" class="sicut-row-chart-2">
                           <div class="col-md-4">
                             <div class="div-chart3">
-                                <canvas id="myChart4" height="100"></canvas>
+                                <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '3')" id="myChart4" height="100"></canvas>
                             </div>
                               <div class="sicut-loading" id="sicut-loading3"></div>
                             </div>
                             <div class="col-md-4">
                               <div class="div-chart4">
-                                  <canvas id="myChart5" height="100"></canvas>
+                                  <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '4')" id="myChart5" height="100"></canvas>
                               </div>
                               <div class="sicut-loading" id="sicut-loading4"></div>
                             </div>
                             <div class="col-md-4">
                               <div class="div-chart5">
-                                    <canvas id="myChart6" height="100"></canvas>
+                                    <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '5')" id="myChart6" height="100"></canvas>
                                 </div>
                               <div class="sicut-loading" id="sicut-loading5"></div>
                             </div>
@@ -247,6 +248,13 @@
               @csrf 
               
            </form>
+
+
+           <style>
+              canvas{
+                  cursor: pointer;
+              }
+          </style>
 
   <script>
 

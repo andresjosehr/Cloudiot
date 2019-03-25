@@ -104,6 +104,7 @@ Route::post('GraficoSigutIgnis6','SicutIgnisController@Grafico6')->middleware("v
 Route::post('GraficoSigutIgnis7','SicutIgnisController@Grafico7')->middleware("verificar_login");
 
 
+
 Route::post('PreRegistro','UsuariosController@PreRegistro')->middleware("verificar_login");
 Route::post('BorrarPreRegistro','UsuariosController@BorrarPreRegistro')->middleware("verificar_login");
 

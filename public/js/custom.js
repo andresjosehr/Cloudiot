@@ -395,6 +395,10 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2) {
         enabled: true,
         intersect: false
       },
+      title: {
+        display: true,
+        text: 'Potencia'
+      },
       scales: {
         xAxes: [{
           ticks: {
@@ -404,6 +408,14 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2) {
         }]
       }
     }
+  });
+};
+
+window.GraficarDefaultIgnis = function (url, param) {
+  $(".loader-insta").css("display", "block");
+  $("#SicutSubModalContenedor").load(url + "/GraficoSigutIgnis" + param, {
+    HorasTotales: "48",
+    Modal: true
   });
 };
 

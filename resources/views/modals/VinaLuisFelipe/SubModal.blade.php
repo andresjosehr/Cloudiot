@@ -1,5 +1,3 @@
-
-
 <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document" style="width: 70%;">
                     <div class="modal-content">
