@@ -210,7 +210,7 @@
                       alert("Debes Escoger una feca valida");
                       val++;
                     } else{
-                      var Horas = ((restaFechas($("#datetimesubmodalSicut").val(), $("#datetimesubmodal2Sicut").val()))+1)*24;
+                      var Horas = 24;
                     
                        $("#SicutSubModalContenedor").load("<?php echo Request::root() ?>/GraficoSigutIgnis"+grafper, {
                            HorasTotales: Horas,
