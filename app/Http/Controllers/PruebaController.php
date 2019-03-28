@@ -17,42 +17,9 @@ class PruebaController extends Controller{
 
     public function index(){
 
-      $DatosDiarios = DB::connection("telemetria")
-                      ->select("SELECT
-                                  mt_name,
-                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
-                                  mt_time
-                                   FROM log_biofil02 
-                                     WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
-                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
-                                             GROUP BY mt_name, DAY(mt_time)
-                                               ORDER BY mt_name, mt_time ASC");
+      define("HeadDefin", "Hola Mundo");
 
-        
-          $k=0;
-          $j=0;
-          for ($i=0; $i <count($DatosDiarios) ; $i++) { 
-            
-            
-            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Entrada") {
-              $mt_value_entrada[$k]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
-              $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
-              echo $Epa = $DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros;
-              echo "<br>";
-              echo $Epa= number_format($Epa, 0, "", "");
-              echo "<br>";
-              echo $Epa=$Epa/100;
-              echo "<br>";
-              echo "<br>";
-              $k++;
-            }
-
-            if ($DatosDiarios[$i]->mt_name=="Biofiltro02--Consumo.Conductividad_Salida") {
-              $mt_value_salida[$j]=number_format(($DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros)/100, 0, "", "");
-              $j++;
-            }
-
-          }   
+      return HeadDefin;
 
   }
 }

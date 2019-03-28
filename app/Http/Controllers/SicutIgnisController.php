@@ -170,6 +170,10 @@ class SicutIgnisController extends Controller{
               var Grac=1;
               var grafper=1;
 
+              var nombre_1 = "Fecha";
+              var nombre_2 = "Energia Activa Inyectada";
+              var nombre_3 = "Energia Activa Retirada";
+
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -288,6 +292,10 @@ class SicutIgnisController extends Controller{
               var Grac=1;
               var grafper=2;
 
+              var nombre_1 = "Fecha";
+              var nombre_2 = "Energia Reactiva Inyectada";
+              var nombre_3 = "Energia Reactiva Retirada";
+
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -396,6 +404,13 @@ class SicutIgnisController extends Controller{
               var mt_value_def4 = VoltajeLineaPromedio_mt_value;
               var Grac=2;
               var grafper=3;
+
+
+              var nombre_1 = "Fecha";
+              var nombre_2 = "Voltaje Linea A-B";
+              var nombre_3 = "Voltaje Linea B-C";
+              var nombre_4 = "Voltaje Linea C-A";
+              var nombre_5 = "Voltaje Linea Promedio";
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -498,6 +513,15 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
               var mt_value_def4 = VoltajePromedio_mt_value;
               var Grac=2;
               var grafper=4;
+
+
+              var nombre_1 = "Fecha";
+              var nombre_2 = "Voltaje A";
+              var nombre_3 = "Voltaje B";
+              var nombre_4 = "Voltaje C";
+              var nombre_5 = "Voltaje Promedio";
+
+
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -617,6 +641,10 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
               var mt_value_def2 = FPret;
               var Grac=1;
               var grafper=5;
+
+              var nombre_1 = "Fecha";
+              var nombre_2 = "Factor Potencia Inyectada";
+              var nombre_3 = "Factor Potencia Retirada";
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -729,6 +757,10 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
               var Grac=1;
               var grafper=7;
 
+              var nombre_1 = "Fecha";
+              var nombre_2 = "Potencia Inyectada";
+              var nombre_3 = "Potencia Retirada";
+
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -759,11 +791,169 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
 
 class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
+
+    public $hed;
     use Exportable;
 
 
     public function collection(){
 
+
+      if (isset($_POST['EnergiaActivaInyectada_mt_time'])) {
+        return collect(self::RecopDat());
+      }
+
+      if ($_POST["tipo"]==1) {
+        return collect(self::RecopDat2());
+      }
+
+      if ($_POST["tipo"]==2) {
+        return collect(self::RecopDat3());
+      }
+
+
+
+       
+    }
+
+    public function headings(): array
+    {
+      
+        return self::RecopHeader();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function RecopHeader()
+{
+
+  if ($_POST["tipo"]==1) {
+    $hed =[
+                      $_POST["nombre_1"],
+                      $_POST["nombre_2"],
+                      $_POST["nombre_3"],
+                    ];
+  }
+
+
+  if ($_POST["tipo"]==2) {
+    $hed =[
+                      $_POST["nombre_1"],
+                      $_POST["nombre_2"],
+                      $_POST["nombre_3"],
+                      $_POST["nombre_4"],
+                      $_POST["nombre_5"],
+                    ];
+  }
+
+  if (isset($_POST['EnergiaActivaInyectada_mt_time'])) {
+        $hed =[
+                      'Fecha',
+                      'Ene Act Inyectada (kWh)',
+                      'Ene Act Retirada (kWh)',
+                      'Ene React Inyectada (kVARh)',
+                      'Ene React Retirada (kVARh)',
+                      'VL AB',
+                      'VL BC',
+                      'VL CA',
+                      'VL Promedio',
+                      'V A',
+                      'V B',
+                      'V C',
+                      'V Promedio',
+                      'FP A',
+                      'FP B',
+                      'FP C',
+                      'FP Total'
+                    ];
+      }
+  return $hed;
+}
+
+
+
+
+public function RecopDat2(){
+
+
+            $m_time    = explode(",", $_POST['mt_time']);
+            $m_value_1   = explode(",", $_POST['mt_value_1']);
+            $m_value_2    = explode(",", $_POST['mt_value_2']);
+
+            for ($i=0; $i <count($m_value_2); $i++) { 
+               $Datos[$i]["m_time"]=$m_time[$i];
+               $Datos[$i]["m_value_1"]=$m_value_1[$i];
+               $Datos[$i]["m_value_2"]=$m_value_2[$i];
+           }
+
+
+           return $Datos;
+}
+
+
+
+public function RecopDat3(){
+            
+
+            $m_time    = explode(",", $_POST['mt_time']);
+            $m_value_1   = explode(",", $_POST['mt_value_1']);
+            $m_value_2    = explode(",", $_POST['mt_value_2']);
+            $m_value_3    = explode(",", $_POST['mt_value_3']);
+            $m_value_4    = explode(",", $_POST['mt_value_4']);
+
+            for ($i=0; $i <count($m_value_2); $i++) { 
+               $Datos[$i]["m_time"]=$m_time[$i];
+               $Datos[$i]["m_value_1"]=$m_value_1[$i];
+               $Datos[$i]["m_value_2"]=$m_value_2[$i];
+               $Datos[$i]["m_value_3"]=$m_value_3[$i];
+               $Datos[$i]["m_value_4"]=$m_value_4[$i];
+           }
+
+
+           return $Datos;
+}
+
+
+
+
+
+
+
+
+      public function RecopDat(){
+
+              $hed =[
+                      'Fecha',
+                      'Ene Act Inyectada (kWh)',
+                      'Ene Act Retirada (kWh)',
+                      'Ene React Inyectada (kVARh)',
+                      'Ene React Retirada (kVARh)',
+                      'VL AB',
+                      'VL BC',
+                      'VL CA',
+                      'VL Promedio',
+                      'V A',
+                      'V B',
+                      'V C',
+                      'V Promedio',
+                      'FP A',
+                      'FP B',
+                      'FP C',
+                      'FP Total'
+                    ];
+
+      define("HeadDefin", $hed);
 
       $EnergiaActivaInyectada_mt_time    = explode(",", $_POST['EnergiaActivaInyectada_mt_time']);
       $EnergiaActivaInyectada_mt_value   = explode(",", $_POST['EnergiaActivaInyectada_mt_value']);
@@ -836,36 +1026,7 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
          }
        }
 
-
-
-       return collect($Datos);
-
-
-
-       
-    }
-
-    public function headings(): array
-    {
-        return [
-            'Fecha',
-            'Ene Act Inyectada (kWh)',
-            'Ene Act Retirada (kWh)',
-            'Ene React Inyectada (kVARh)',
-            'Ene React Retirada (kVARh)',
-            'VL AB',
-            'VL BC',
-            'VL CA',
-            'VL Promedio',
-            'V A',
-            'V B',
-            'V C',
-            'V Promedio',
-            'FP A',
-            'FP B',
-            'FP C',
-            'FP Total'
-        ];
+       return $Datos;
     }
 
 }

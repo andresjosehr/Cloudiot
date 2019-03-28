@@ -15,9 +15,6 @@
                             <div class="col-md-3">
                               <h4 class="modal-title sicut-nombre-instalacion" id="largeModalLabel" >Ultima dato: {{ $Datos["UltimaMedicion"] }}</h4> 
                             </div>                            
-                            <div class="col-md-6">
-                              <button onclick="GraficarSicutPersonalizado('<?php echo Request::root(); ?>')" type="button" class="btn btn-primary waves-effect">→</button>
-                            </div>
                           </div>
                         </div>
                         <hr class="sicut-hr">  
@@ -215,74 +212,6 @@
           </style>
 
   <script>
-
-    function restaFechas(f1,f2){
-       var aFecha1 = f1.split('-');
-       var aFecha2 = f2.split('-');
-       var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
-       var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
-       var dif = fFecha2 - fFecha1;
-       var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
-       return dias;
-   }
-
-    function GraficarSicutPersonalizado(url) {
-
-      var val=0;
-      if ($("#FechaEscoger").val()=="0") {
-        alert("Debes escoger un periodo de tiempo a graficar");
-        val++;
-      }
-
-      if ($("#FechaEscoger").val()=="Personalizado") {
-          if ($("#datetimesubmodal").val()>$("#datetimesubmodal2").val() || $("#datetimesubmodal").val()==0 || $("#datetimesubmodal2").val()==0) {
-            alert("Debes Escoger una feca valida");
-            val++;
-          } else{
-            var Horas = ((restaFechas($("#datetimesubmodal").val(), $("#datetimesubmodal2").val()))+1)*24;
-          }
-        }
-
-      if ($("#FechaEscoger").val()!="Personalizado") {
-        var Horas = $("#FechaEscoger").val();
-      } 
-
-      if ($("#DatoEscoger").val()=="0") {
-          alert("Debes escoger un dato a graficar");
-          val++;
-        } 
-
-        if (val==0) {
-          var dat=parseInt($("#DatoEscoger").val())-1;
-          if (parseInt($("#DatoEscoger").val())>=3) {
-            dat=dat+2;
-          }
-          $("#sicut-loading"+$("#DatoEscoger").val()).css("display", "block");
-
-          $(".div-chart"+$("#DatoEscoger").val()).empty();
-          $(".div-chart"+$("#DatoEscoger").val()).html('<canvas id="myChart'+dat+'"  height="100"></canvas>');
-
-
-          $("#SicutContenedor"+$("#DatoEscoger").val()).load(url+"/GraficoSigutIgnis"+$("#DatoEscoger").val(),{
-              HorasTotales: Horas
-          })
-        }
-
-    }
-
-    $( "#FechaEscoger" )
-  .change(function () {
-    var str = "";
-    $( "#FechaEscoger option:selected" ).each(function() {
-      str += $( this ).text();
-    });
-    if (str=="Personalizado") {
-      $(".InputFecha").css("display", "block");
-    } else {
-      $(".InputFecha").css("display", "none");      
-    }
-  })
-  .change();
 
 
     var FuncionesCompletas=0;

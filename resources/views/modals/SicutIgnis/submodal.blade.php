@@ -32,6 +32,13 @@
                             <canvas id="myChart0" height="50"></canvas>
                         </div>
                         <div class="modal-footer">
+                          <form id="TheFormSubModal" method="post" action="<?php echo Request::root() ?>/ExportarSicutExcel" target="TheWindow">
+                             @csrf 
+                             <div align="center">
+                                <button type="submit" class="btn btn-primary" id="SicutExportarExcelIndi">Exportar a Excel</button>
+                              </div>
+                              <button type="button" class="btn btn-primary" onclick="$('#defaultModalpar').modal('toggle');">Cerrar</button>
+                          </form>
                         </div>
                     </div>
                 </div>
@@ -191,8 +198,10 @@
 
                   if (Grac==1) {
                       GrafDef("myChart0", mt_value_def1, mt_time_def1, mt_value_def2, mt_time_def1, MinDato, MaxDato, "Inyectada", "Retirada");
+                      SubirDatos1();
                   } else{
                     GrafDef2("myChart0",mt_value_def1, mt_time_def1, mt_value_def2, mt_value_def3, mt_value_def4, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
+                    SubirDatos2();
                   }
 
 
@@ -217,4 +226,38 @@
 
                 $(".submodal").click();
                 $(".loader-insta").css("display", "none");
-            </script>
+
+
+
+
+
+
+
+
+      function SubirDatos1(){
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_time' value='"+mt_time_def1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_1' value='"+mt_value_def1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_2' value='"+mt_value_def2+"'>" );
+
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_1' value='"+nombre_1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_2' value='"+nombre_2+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_3' value='"+nombre_3+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='tipo' value='1'>" );
+      } 
+
+      function SubirDatos2(){
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_time' value='"+mt_time_def1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_1' value='"+mt_value_def1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_2' value='"+mt_value_def2+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_3' value='"+mt_value_def3+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_4' value='"+mt_value_def4+"'>" );
+
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_1' value='"+nombre_1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_2' value='"+nombre_2+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_3' value='"+nombre_3+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_4' value='"+nombre_4+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_5' value='"+nombre_5+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='tipo' value='2'>" );
+      } 
+
+    </script>
