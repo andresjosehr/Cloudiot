@@ -791,13 +791,9 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
 
 class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
-
-    public $hed;
     use Exportable;
 
-
     public function collection(){
-
 
       if (isset($_POST['EnergiaActivaInyectada_mt_time'])) {
         return collect(self::RecopDat());

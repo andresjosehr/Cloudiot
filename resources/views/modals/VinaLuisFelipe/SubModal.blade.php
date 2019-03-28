@@ -1,9 +1,8 @@
-<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="defaultModalVinasub" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document" style="width: 70%;">
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="row">
-                              <div id="contenedorLFE2"></div>
                                 <div class="col-md-2">
                                     <p class="modal-title" id="defaultModalLabel">{{ $Titulo }}</p>
                                 </div>
@@ -28,18 +27,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body submodalbody">
                             <canvas id="ChartSubModal" height="50"></canvas>
                         </div>
                         <div class="modal-footer">
+                          <form id="TheFormSubModal" method="post" action="<?php echo Request::root() ?>/CalculosLuisFelipe3" target="TheWindow">
+                             @csrf 
+                             <div align="center">
+                                <button type="submit" class="btn btn-primary" id="SicutExportarExcelIndi">Exportar a Excel</button>
+                              </div>
+                              <button type="button" class="btn btn-primary" onclick="$('#defaultModalpar').modal('toggle');">Cerrar</button>
+                          </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button style="display: none" type="button" class="btn btn-default waves-effect m-r-20 submodal" data-toggle="modal" data-target="#defaultModal" id="defaultModal">MODAL </button>
 
             <script>
+
+              $(".submodalbody").empty();
+              $(".submodalbody").append('<canvas id="ChartSubModal" height="50"></canvas>');
 
               let mt_name='<?php echo $mt_name; ?>';
 
@@ -48,8 +56,9 @@
                 var FechaInicio = document.getElementById('datetimesubmodal').value;
                 var FechaFin = document.getElementById('datetimesubmodal2').value;
 
-                var url = "<?php echo Request::root() ?>/CalculosLuisFelipe3";  
-                $("#contenedorLFE2").load(url, {FechaInicio: FechaInicio, FechaFin: FechaFin, mt_name: mt_name});
+                var url = "<?php echo Request::root() ?>/CalculosLuisFelipe2";  
+                $("#contenedorLFESub").load(url, {FechaInicio: FechaInicio, FechaFin: FechaFin, mt_name: mt_name, dato: '{{$Dato}}'});
+                $('#defaultModalVinasub').modal('toggle');
 
               }
 
@@ -116,7 +125,19 @@
                    mt_time=JSON.parse(mt_time);
                     ChartSubModal(mt_time, mt_value);
 
+                    function SubirDatos(){
+                        $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_time' value='"+mt_time+"'>" );
+                        $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_1' value='"+mt_value+"'>" );
 
-                $(".submodal").click();
+                        $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_1' value='Fecha'>" );
+                        $( "#TheFormSubModal" ).append( "<input type='hidden' name='nombre_2' value='"+titulo+"'>" );
+
+                        $( "#TheFormSubModal" ).append( "<input type='hidden' name='tipo' value='1'>" );
+                    } 
+
+                    SubirDatos();
+
+
+                $("#defaultModalVinasub").modal()
                 $(".loader-insta").css("display", "none");
             </script>

@@ -8,6 +8,13 @@ use DB;
 use Auth;
 use Log;
 
+
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
 class VinaLuisFelipeController extends Controller{
     public function index(){
 
@@ -524,7 +531,7 @@ class VinaLuisFelipeController extends Controller{
    }
 
 
-   public function GraficarRelojes(){
+   public function GraficarRelojes(Request $Request){
 
 
      $dato = $_POST["dato"];
@@ -553,16 +560,23 @@ class VinaLuisFelipeController extends Controller{
        $mt_name='Biofiltro02--Consumo.Conductividad_Salida';
        $titulo="PH Salida";
      }
+     ?><script>var titulo='<?php echo $titulo; ?>'</script><?php
 
-     $fecha = DB::connection('telemetria')
+     if (isset($_POST["FechaInicio"])) {
+       $newDate=$_POST["FechaInicio"];
+       $FechaFin="AND mt_time <= '$_POST[FechaFin]' ";
+     } else{
+      
+      $fecha = DB::connection('telemetria')
                                   ->select("SELECT mt_time FROM log_biofil02 WHERE mt_name='$mt_name' ORDER BY mt_time DESC LIMIT 1");
-
        $date= $fecha[0]->mt_time; 
        $newDate = strtotime ( '-24 hours' , strtotime ($date) ) ; 
        $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
+       $FechaFin="";
+     }
 
-        $Datos = DB::connection('telemetria')
-                                   ->select("(SELECT * FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$newDate' ORDER BY mt_time DESC) ORDER BY mt_time ASC");
+     $Datos = DB::connection('telemetria')
+                                   ->select("(SELECT * FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$newDate' $FechaFin ORDER BY mt_time DESC) ORDER BY mt_time ASC");
 
 
        $j=0;
@@ -574,7 +588,7 @@ class VinaLuisFelipeController extends Controller{
          }
        }
 
-       return view("modals.VinaLuisFelipe.SubModal", ["mt_time" => $mt_time, "mt_value" => $mt_value, "Titulo" => $titulo, "mt_name" => $mt_name]);
+       return view("modals.VinaLuisFelipe.SubModal", ["mt_time" => $mt_time, "mt_value" => $mt_value, "Titulo" => $titulo, "mt_name" => $mt_name, "Dato" => $dato]);
    }
 
 
@@ -1619,8 +1633,62 @@ if ($h!=0) {
           </script><?php
    }
 
+public function ExportarVinaExcel(Request $Request){
+
+
+        return Excel::download(new UsersExport, "Datos.xlsx");
+}
 
 
 
+}
+
+
+
+
+class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    use Exportable;
+
+    public function collection(){
+
+
+      if ($_POST["tipo"]==1) {
+        return collect(self::RecopDat());
+      }
+
+       
+    }
+
+    public function headings(): array
+    {
+      
+        return self::RecopHeader();
+    }
+
+    public function RecopHeader(){
+      
+      if ($_POST["tipo"]==1) {
+            $hed =[
+                              $_POST["nombre_1"],
+                              $_POST["nombre_2"],
+                            ];
+          }
+          return $hed;
+    }
+
+    public function RecopDat(){
+
+            $m_time    = explode(",", $_POST['mt_time']);
+            $m_value_1   = explode(",", $_POST['mt_value_1']);
+
+            for ($i=0; $i <count($m_value_1); $i++) { 
+               $Datos[$i]["m_time"]=$m_time[$i];
+               $Datos[$i]["m_value_1"]=$m_value_1[$i];
+           }
+
+
+           return $Datos;
+    }
 
 }

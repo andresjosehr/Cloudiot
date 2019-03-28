@@ -8,6 +8,7 @@
             <p id="contenedorLFE2"></p>
             <p id="contenedorLFE3"></p>
             <p id="contenedorLFE4"></p>
+            <div id="contenedorLFESub"></div>
             <div class="modal-header">
                 <p id="contenedorLFE"></p>
                 <div class="row">

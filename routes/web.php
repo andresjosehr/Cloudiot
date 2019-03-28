@@ -67,7 +67,7 @@ Route::post('SicutIgnisController','SicutIgnisController@index')->middleware("ve
 Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe','VinaLuisFelipeController@Calculos')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe2','VinaLuisFelipeController@GraficarRelojes')->middleware("verificar_login");
-Route::post('CalculosLuisFelipe3','VinaLuisFelipeController@GraficarRelojesFechaPersonalizada')->middleware("verificar_login");
+Route::post('CalculosLuisFelipe3','VinaLuisFelipeController@ExportarVinaExcel')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe4','VinaLuisFelipeController@GraficarFlujoFechaPersonalizado')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe5','VinaLuisFelipeController@ListarBombas')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe6','VinaLuisFelipeController@BombasPersonalizadas')->middleware("verificar_login");
