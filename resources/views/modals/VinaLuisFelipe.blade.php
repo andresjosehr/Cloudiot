@@ -37,9 +37,7 @@
                     <li role="presentation" id="GraficarPHDiario"><a href="#PHDiarios" data-toggle="tab">Vista de PH diarios</a></li>
                     <li role="presentation" id="GraficarORPDiario"><a href="#ORPDiarios" data-toggle="tab">Vista de ORP diarios</a></li>
                     <li role="presentation" id="GraficarConductividadDiario"><a href="#ConductividadDiarios" data-toggle="tab">Vista de Conductividad Diarios</a></li>
-                    @if ($Rol!=5)
                     <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros de Configuracion</a></li>
-                    @endif
                 </ul>
 
                 <!-- Tab panes -->

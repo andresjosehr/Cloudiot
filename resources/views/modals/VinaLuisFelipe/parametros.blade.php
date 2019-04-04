@@ -4,13 +4,13 @@
                         Tiempo de Riego
                      </div>
                      <div class="col-md-6 vina-parametro-unidad">
-                        <div id="Riego" @if ($Rol==2) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
+                        <div id="Riego" @if ($Rolito->rol==2) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                         <div class='vina-parametro-info'>
                            <-----<b id="RiegoValor"></b><b> Minutos</b>----->
                         </div>
                      </div>
                      <div class="col-md-4">
-                        @if ($Rol==1)
+                        @if ($Rolito->rol==1)
                         <button onclick="RegistarRiego('<?php echo Request::root() ?>/InsertarParametroRiego')" class="btn btn-primary btn-block boton1 vina-btn-parametro">Registrar</button>
                         @endif
                         <div class="vina-vina-loadingg vina-loadingg1"></div>
@@ -21,13 +21,13 @@
                      Tiempo de Reposo
                   </div>
                   <div class="col-md-6 vina-parametro-unidad">
-                     <div id="Reposo" @if ($Rol==2) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="Reposo" @if ($Rolito->rol==2) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div class='vina-parametro-info'>
                         <-----<b id="ReposoValor"></b><b> Minutos</b>-----> 
                      </div>
                   </div>
                   <div class="col-md-4">
-                     @if ($Rol==1)
+                     @if ($Rolito->rol==1)
                      <button onclick='RegistarReposo("<?php echo Request::root() ?>/InsertarParametroReposo")' class="btn btn-primary btn-block boton2 vina-btn-parametro">Registrar</button>
                      @endif
                      <div class="vina-vina-loadingg vina-loadingg2"></div>
@@ -38,13 +38,13 @@
                      Rango de PH
                   </div>
                   <div class="col-md-6 vina-parametro-unidad">
-                     <div id="slider" @if ($Rol==2) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
+                     <div id="slider" @if ($Rolito->rol==2) disabled='true' @endif class="noUi-target noUi-ltr noUi-horizontal"></div>
                      <div class='vina-parametro-info'>
                         <b id="BajoPH"></b><----------><b id="AltoPH"></b>
                      </div>
                   </div>
                   <div class="col-md-4">
-                     @if ($Rol==1)
+                     @if ($Rolito->rol==1)
                      <button onclick="RegistarRangoPH('<?php echo Request::root() ?>/InsertarParametroRangoPH')" class="btn btn-primary btn-block boton3 vina-btn-parametro">Registrar</button>
                      @endif
                      <div class="vina-vina-loadingg vina-loadingg3"></div>

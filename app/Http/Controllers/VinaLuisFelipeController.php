@@ -226,7 +226,7 @@ class VinaLuisFelipeController extends Controller{
                                                                             OR mt_name='Biofiltro02--Consumo.LimitePH_Alto')
                                                                             GROUP BY mt_name");
 
-    return view("modals.VinaLuisFelipe.parametros", ["Parametros" => $Parametros, "Rol" =>"1"]);
+    return view("modals.VinaLuisFelipe.parametros", ["Parametros" => $Parametros, "Rolito" => DB::table("instalaciones_asignadas")->select("rol")->where("id_usuario", Auth::user()->id)->where("id_instalacion", "2")->first()]);
     }
 
 
