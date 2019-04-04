@@ -81,32 +81,32 @@ class SicutIgnisController extends Controller{
     public function Grafico1(Request $Request){
 
 
-      if (isset($Request->Inicio) && isset($Request->Final)) {
+           if (isset($Request->Inicio) && isset($Request->Final)) {
         $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
 
+      $datos = DB::connection('telemetria')
+                                    ->select("SELECT * FROM log_aasa  
+                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
+                                                OR mt_name='AASA--ION8650.EnerActRet')
+                                                $Condition
+                                                ORDER BY mt_name, mt_time ASC;");
 
-
-       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActIny'
-                                                                        OR mt_name='AASA--ION8650.EnerActRet')
-                                                                        $Condition
-                                                                        ORDER BY mt_name, mt_time ASC ");
         $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
 
             if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
               if ($j==0) {
-                $EnergiaActivaInyectada_mt_value[$j]=$datos[$i]->mt_value-$datos[$i]->mt_value;
+                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value));
                 $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaInyectada_mt_value[$j]=$datos[$i]->mt_value-$datos[$i-1]->mt_value;
+                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value));
                   $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
                 }
               }
@@ -114,10 +114,10 @@ class SicutIgnisController extends Controller{
             }
             if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
               if ($k==0) {
-                $EnergiaActivaRetirada_mt_value[$k]=$datos[$i]->mt_value-$datos[$i]->mt_value;
+                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value));
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaRetirada_mt_value[$k]=$datos[$i]->mt_value-$datos[$i-1]->mt_value;
+                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value));
                 }
               }
               $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
@@ -768,6 +768,16 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
           } else{ 
 
             ?><script>
+              var last =  function(array, n) {
+                if (array == null) 
+                  return void 0;
+                if (n == null) 
+                   return array[array.length - 1];
+                return array.slice(Math.max(array.length - n, 0));  
+                };
+
+              $("#PoteIny").text(last(EnergiaActivaInyectada_mt_value));
+              $("#PoteRet").text(last(EnergiaActivaRetirada_mt_value));
             PotGenerada(EnergiaActivaInyectada_mt_time, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
             FuncionesCompletas++;
             FuncionExportacion(FuncionesCompletas);

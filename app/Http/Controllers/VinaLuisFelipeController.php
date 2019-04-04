@@ -219,7 +219,7 @@ class VinaLuisFelipeController extends Controller{
     public function ConsultarParametros()
     {
       $Parametros= DB::connection("telemetria")
-                                    ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC) T1
+                                    ->select("SELECT * FROM (SELECT * FROM log_biofil02 ORDER BY mt_time DESC limit 50) T1
                                                                        WHERE  (mt_name='Biofiltro02--Consumo.TiempoRiego'
                                                                             OR mt_name='Biofiltro02--Consumo.TiempoReposo'
                                                                             OR mt_name='Biofiltro02--Consumo.LimitePH_Bajo'
@@ -1514,7 +1514,7 @@ if ($h!=0) {
           $DatosDiarios = DB::connection("telemetria")
                       ->select("SELECT
                                   mt_name,
-                                  SUM(mt_value) AS mt_value, COUNT(*) Registros,
+                                  SUM(mt_value) AS mt_value, COUNT(*) Registros, MAX(mt_value) AS maximo, MIN(mt_value) AS minimo,
                                   mt_time
                                    FROM log_biofil02 
                                      WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
@@ -1533,6 +1533,8 @@ if ($h!=0) {
               $mt_value_entrada[$k]=number_format($mt_value_entrada[$k], 0, "", "");
               $mt_value_entrada[$k]=$mt_value_entrada[$k]/100;
               $mt_time[$k]=date_format(date_create($DatosDiarios[$i]->mt_time), 'm-d');
+              $MaximoEntrada[$k]=$DatosDiarios[$i]->maximo/10;
+              $MinimoEntrada[$k]=$DatosDiarios[$i]->minimo/100;
               $k++;
             }
 
@@ -1540,6 +1542,8 @@ if ($h!=0) {
               $mt_value_salida[$j]=$DatosDiarios[$i]->mt_value/$DatosDiarios[$i]->Registros;
               $mt_value_salida[$j]=number_format($mt_value_salida[$j], 0, "", "");
               $mt_value_salida[$j]=$mt_value_salida[$j]/100;
+              $MaximoSalida[$j]=$DatosDiarios[$i]->maximo/10;
+              $MinimoSalida[$j]=$DatosDiarios[$i]->minimo/100;
               $j++;
             }
 
@@ -1547,7 +1551,6 @@ if ($h!=0) {
 
 
             ?><script>
-
                 var mt_timeORP = '<?php echo json_encode($mt_time); ?>';
                 mt_timeORP=JSON.parse(mt_timeORP);
                 mt_time_conductividad= mt_timeORP
@@ -1560,18 +1563,27 @@ if ($h!=0) {
                 mt_value_ORPsalida=JSON.parse(mt_value_ORPsalida);
                 mt_value_salida_conductividad= mt_value_ORPsalida
 
+                var MaximoEntrada = '<?php echo json_encode($MaximoEntrada); ?>';
+                MaximoEntrada=JSON.parse(MaximoEntrada);
+
+                var MinimoEntrada = '<?php echo json_encode($MinimoEntrada); ?>';
+                MinimoEntrada=JSON.parse(MinimoEntrada);
 
 
-                console.log(mt_time_conductividad)
-                console.log(mt_value_conductividad)
-                console.log(mt_value_salida_conductividad)
+                var MaximoSalida = '<?php echo json_encode($MaximoSalida); ?>';
+                MaximoSalida=JSON.parse(MaximoSalida);
+
+                var MinimoSalida = '<?php echo json_encode($MinimoSalida); ?>';
+                MinimoSalida=JSON.parse(MinimoSalida);
+
+
 
                 function DescargarExcelConductividad() {
                     window.open('<?php echo Request::root() ?>/ExcelFlujosDiarios?mt_time='+mt_time_conductividad+'&mt_value='+mt_value_conductividad+'&mt_value_salida='+mt_value_salida_conductividad+"&n1=Conductividad Entrada&n2=Conductividad Salida", '_blank' )
                  }
 
 
-          GraficarConductividadDiarioJS(mt_timeORP, mt_value_ORPentrada, mt_value_ORPsalida);
+          GraficarConductividadDiarioJS(mt_timeORP, mt_value_ORPentrada, mt_value_ORPsalida, MaximoEntrada, MinimoEntrada, MaximoSalida, MinimoSalida);
           </script><?php
    }
 

@@ -36,7 +36,6 @@ window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                         data: {
                             labels: mt_time1,
                             datasets: [{
-                                yAxisID: 'A',
                                 label: label1,
                                 data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -45,7 +44,6 @@ window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                                 radius: 0
                             },
                             {   
-                                yAxisID: 'B',
                                 label: label2,
                                 data: mt_value2,
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
@@ -63,13 +61,6 @@ window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                                 intersect: false
                             },
                             scales: {
-                                yAxes: [{
-                                    id: 'A',
-                                    position: 'left'
-                                  }, {
-                                    id: 'B',
-                                    position: 'right'
-                                  }],
                                 xAxes: [{
                                     ticks: {
                                         display: false, 
@@ -283,8 +274,7 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2){
                                 intersect: false
                             },
                             title: {
-                                      display: true,
-                                      text: 'Potencia'
+                                      display: false,
                                   },
                             scales: {
                                 xAxes: [{

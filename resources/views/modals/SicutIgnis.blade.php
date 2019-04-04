@@ -29,7 +29,7 @@
                           <div id="SicutSubModalContenedor"></div>
                           <div id="SicutContenedorExcel"></div>
                             <div class="row" align="center">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                       <div class="body table-responsive">
                                           <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
@@ -48,7 +48,7 @@
                                         </table>
                                       </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                       <div class="body table-responsive">
                                           <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
@@ -67,22 +67,41 @@
                                           </table>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                      <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '7')" id="sicut-myChart3" height="70" style="margin-top: 30px"></canvas>
+                                    <div class="col-md-4">
+                                      <div class="body table-responsive">
+                                          <table class="table sicut-table-bordered sicut-modal-table1">
+                                            <thead>
+                                                <caption scope="row" class="sicut-tabla-titulo">Potencia</caption>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="sicut-th">Inyectada</th>
+                                                    <td id="PoteIny"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="sicut-th">Retirada</th>
+                                                    <td id="PoteRet"></td>
+                                                </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
                                     </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3" align="center">
+                                <div class="col-md-4" align="center">
                                   <div class="div-chart1">
                                     <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '1')" id="myChart0" height="100"></canvas>
                                   </div>
                                   <div class="sicut-loading" id="sicut-loading1"></div>
                                 </div>
-                                <div class="col-md-3" align="center">
+                                <div class="col-md-4" align="center">
                                   <div class="div-chart2">
                                     <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '2')" id="myChart1" height="100"></canvas>
                                   </div>
                                   <div class="sicut-loading" id="sicut-loading2"></div>
+                                </div>
+                                <div class="col-md-4">
+                                  <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '7')" id="sicut-myChart3" height="100"></canvas>
                                 </div>
                           </div>
                             <div class="row sicut-row2" align="center">

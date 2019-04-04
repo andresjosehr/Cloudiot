@@ -177,7 +177,6 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
     data: {
       labels: mt_time1,
       datasets: [{
-        yAxisID: 'A',
         label: label1,
         data: mt_value1,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -185,7 +184,6 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
         borderWidth: 1,
         radius: 0
       }, {
-        yAxisID: 'B',
         label: label2,
         data: mt_value2,
         backgroundColor: 'rgba(66, 134, 244, 0.2)',
@@ -203,13 +201,6 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
         intersect: false
       },
       scales: {
-        yAxes: [{
-          id: 'A',
-          position: 'left'
-        }, {
-          id: 'B',
-          position: 'right'
-        }],
         xAxes: [{
           ticks: {
             display: false,
@@ -396,8 +387,7 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2) {
         intersect: false
       },
       title: {
-        display: true,
-        text: 'Potencia'
+        display: false
       },
       scales: {
         xAxes: [{
@@ -1032,7 +1022,7 @@ window.GraficarORPDiarioJS = function (mt_time, mt_value, mt_value_salida) {
   $(".BotonExportarORPDiarios").css("display", "block");
 };
 
-window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_salida) {
+window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_salida, MaximoEntrada, MinimoEntrada, MaximoSalida, MinimoSalida) {
   var ctx = document.getElementById("conductividad-bar-chart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
@@ -1041,45 +1031,44 @@ window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_sal
       datasets: [{
         label: 'Conductividad Entrada',
         data: mt_value,
-        backgroundColor: 'rgba(255, 99, 132, 0.8)',
-        borderColor: 'rgba(255,99,132,1)',
+        stack: 'Entrada',
+        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+        borderColor: 'rgba(255,99,132,5)',
         borderWidth: 1
-      }, {
+      }, //  {
+      //     label: "Plan",
+      //     fill: false,
+      //     data: MaximoEntrada,
+      //     stack: 'Entrada',
+      //     backgroundColor: 'rgba(255, 99, 132, 0.8)',
+      //      borderColor: 'rgba(255,99,132,1)'
+      // },
+      {
         label: 'Conductividad Salida',
         data: mt_value_salida,
-        backgroundColor: 'rgba(66, 134, 244, 0.8)',
-        borderColor: 'rgba(66, 134, 244,1)',
-        borderWidth: 1
+        stack: 'Salida',
+        backgroundColor: 'rgba(66, 134, 244, 0.3)',
+        borderColor: 'rgba(66, 134, 244,5)',
+        borderWidth: 1 //,
+        //  {
+        //     label: "Plan",
+        //     data: MaximoSalida,
+        //     stack: 'Salida',
+        //     fill: false,
+        //     borderColor: "rgba(0,0,0,1)",
+        //     backgroundColor: 'rgba(66, 134, 244, 0.8)',
+        //     borderColor: 'rgba(66, 134, 244,1)',
+        // }
+
       }]
     },
     options: {
       legend: {
-        display: true
-      },
-      "animation": {
-        "duration": 1,
-        "onComplete": function onComplete() {
-          var chartInstance = this.chart,
-              ctx = chartInstance.ctx;
-          ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'bottom';
-          this.data.datasets.forEach(function (dataset, i) {
-            var meta = chartInstance.controller.getDatasetMeta(i);
-            meta.data.forEach(function (bar, index) {
-              var data = dataset.data[index];
-              ctx.fillText(data, bar._model.x, bar._model.y - 5);
-            });
-          });
-        }
+        display: true,
+        position: 'bottom'
       },
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            padding: 100
-          }
-        }],
+        yAxes: [{}],
         xAxes: [{
           padding: 50,
           lineHeight: 3,
