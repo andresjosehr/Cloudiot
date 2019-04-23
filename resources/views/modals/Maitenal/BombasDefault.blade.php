@@ -55,3 +55,7 @@
                               </div>
                            </div>
                         </div>
+
+                        <script>
+                        	$(".vina-loading-bomba").css("display", "none");
+                        </script>

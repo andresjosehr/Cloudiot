@@ -19,6 +19,7 @@
                             <div class="row" align="center">
                                     <div class="col-md-4">
                                       <div id="bombas_maitenal"></div>
+                                      <div class="vina-loading-bomba" style="display: block; margin-top: 90px"></div>
                                     </div>
                                     <div class="col-md-4">
                                     	<h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
