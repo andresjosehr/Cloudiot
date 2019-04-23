@@ -18,48 +18,7 @@
                         <div class="modal-body table-custom">
                             <div class="row" align="center">
                                     <div class="col-md-4">
-                                    	<h4 align="left" style="color:black;padding-left: 3%;">Flujos</h4>
-                                    	<div class="body table-responsive">
-						                            <table class="table table-striped">
-						                                <thead>
-						                                    <tr>
-						                                        <th style="text-align: center;">Fecha</div></th>
-						                                        <th style="text-align: center;">Hrs&nbsp;Op.</th>
-						                                        <th style="text-align: center;">m3</th>
-						                                        <th style="text-align: center;">Bombas</th>
-						                                    </tr>
-						                                </thead>
-						                                <tbody align="center">
-						                                    <tr>
-						                                        <td>01-10</td>
-						                                        <td>50</td>
-						                                        <td>1.245</td>
-						                                        <td>
-																										<i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-						                                        </td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>01-10</td>
-						                                        <td>50</td>
-						                                        <td>1.245</td>
-						                                        <td>
-							                                        <i class="material-icons btn-bomba">add_circle</i>
-                                                      <i class="material-icons btn-bomba">add_circle</i>
-										                              	</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>01-10</td>
-						                                        <td>50</td>
-						                                        <td>1.245</td>
-						                                        <td>
-						                                        <i class="material-icons btn-bomba">add_circle</i>
-                                                    <i class="material-icons btn-bomba">add_circle</i>
-						                                        </td>
-						                                    </tr>
-						                                </tbody>
-						                            </table>
-						                        	</div>
+                                      <div id="bombas_maitenal"></div>
                                     </div>
                                     <div class="col-md-4">
                                     	<h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
@@ -248,5 +207,9 @@
             <script>
 			$( ".display-modal" ).click();
 			$(".loader-insta").css("display", "none");
+
+      $(document).ready(function(){
+        $("#bombas_maitenal").load("<?php echo Request::root() ?>/MaitenalBombas");
+      })
             </script>
 

@@ -131,3 +131,5 @@ Route::post('CambiarContrasena', 'UsuariosController@CambiarContrasena')->middle
 
 
 Route::post('MaitenalController','MaitenalController@index')->middleware("verificar_login");
+
+Route::get('MaitenalBombas','MaitenalController@MostrarBombas')->middleware("verificar_login");
