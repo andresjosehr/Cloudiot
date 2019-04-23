@@ -1023,6 +1023,8 @@ window.GraficarORPDiarioJS = function (mt_time, mt_value, mt_value_salida) {
 };
 
 window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_salida, MaximoEntrada, MinimoEntrada, MaximoSalida, MinimoSalida) {
+  var _ref;
+
   var ctx = document.getElementById("conductividad-bar-chart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
@@ -1035,32 +1037,29 @@ window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_sal
         backgroundColor: 'rgba(255, 99, 132, 0.3)',
         borderColor: 'rgba(255,99,132,5)',
         borderWidth: 1
-      }, //  {
-      //     label: "Plan",
-      //     fill: false,
-      //     data: MaximoEntrada,
-      //     stack: 'Entrada',
-      //     backgroundColor: 'rgba(255, 99, 132, 0.8)',
-      //      borderColor: 'rgba(255,99,132,1)'
-      // },
-      {
+      }, {
+        label: "Plan",
+        fill: false,
+        data: MaximoEntrada,
+        stack: 'Entrada',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }, {
         label: 'Conductividad Salida',
         data: mt_value_salida,
         stack: 'Salida',
         backgroundColor: 'rgba(66, 134, 244, 0.3)',
         borderColor: 'rgba(66, 134, 244,5)',
-        borderWidth: 1 //,
-        //  {
-        //     label: "Plan",
-        //     data: MaximoSalida,
-        //     stack: 'Salida',
-        //     fill: false,
-        //     borderColor: "rgba(0,0,0,1)",
-        //     backgroundColor: 'rgba(66, 134, 244, 0.8)',
-        //     borderColor: 'rgba(66, 134, 244,1)',
-        // }
-
-      }]
+        borderWidth: 1
+      }, (_ref = {
+        label: "Plan",
+        data: MaximoSalida,
+        stack: 'Salida',
+        fill: false,
+        borderColor: "rgba(0,0,0,1)",
+        backgroundColor: 'rgba(0, 0, 0, 0)'
+      }, _defineProperty(_ref, "borderColor", 'rgba(66, 134, 244, 1)'), _defineProperty(_ref, "borderWidth", 1), _ref)]
     },
     options: {
       legend: {
@@ -1077,6 +1076,9 @@ window.GraficarConductividadDiarioJS = function (mt_time, mt_value, mt_value_sal
             lineHeight: 3
           }
         }]
+      },
+      elements: {
+        rectangle: {}
       }
     }
   });

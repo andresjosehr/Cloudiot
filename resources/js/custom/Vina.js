@@ -612,14 +612,16 @@ window.GraficarConductividadDiarioJS = function(mt_time, mt_value, mt_value_sali
                    borderWidth: 1,
 
                },
-              //  {
-              //     label: "Plan",
-              //     fill: false,
-              //     data: MaximoEntrada,
-              //     stack: 'Entrada',
-              //     backgroundColor: 'rgba(255, 99, 132, 0.8)',
-              //      borderColor: 'rgba(255,99,132,1)'
-              // },
+               {
+                  label: "Plan",
+                  fill: false,
+                  data: MaximoEntrada,
+                  stack: 'Entrada',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1,
+
+              },
               {
                    label: 'Conductividad Salida',
                    data: mt_value_salida,
@@ -627,16 +629,18 @@ window.GraficarConductividadDiarioJS = function(mt_time, mt_value, mt_value_sali
                    backgroundColor: 'rgba(66, 134, 244, 0.3)',
                    borderColor: 'rgba(66, 134, 244,5)',
                    borderWidth: 1,
-               }//,
-              //  {
-              //     label: "Plan",
-              //     data: MaximoSalida,
-              //     stack: 'Salida',
-              //     fill: false,
-              //     borderColor: "rgba(0,0,0,1)",
-              //     backgroundColor: 'rgba(66, 134, 244, 0.8)',
-              //     borderColor: 'rgba(66, 134, 244,1)',
-              // }
+               },
+                {
+                   label: "Plan",
+                   data: MaximoSalida,
+                   stack: 'Salida',
+                   fill: false,
+                   borderColor: "rgba(0,0,0,1)",
+                   backgroundColor: 'rgba(0, 0, 0, 0)',
+                   borderColor: 'rgba(66, 134, 244, 1)',
+                   borderWidth: 1,
+
+               }
               ]
 
            },
@@ -655,7 +659,12 @@ window.GraficarConductividadDiarioJS = function(mt_time, mt_value, mt_value_sali
                            lineHeight: 3
                        }
                    }]
-               }
+               },
+               elements: {
+                  rectangle: {
+
+                  }
+                }
            }
          });
 

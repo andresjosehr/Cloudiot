@@ -126,3 +126,8 @@ Route::get('Cuenta', function(){
 })->middleware("verificar_login");
 
 Route::post('CambiarContrasena', 'UsuariosController@CambiarContrasena')->middleware("verificar_login");
+
+
+
+
+Route::post('MaitenalController','MaitenalController@index')->middleware("verificar_login");

@@ -26,7 +26,7 @@ class VinaLuisFelipeController extends Controller{
                           ->first();
 
       $UltimaMedicion = DB::connection("telemetria")
-                              ->table($tabla_asociada)
+                              ->table("log_biofil02")
                                 ->orderBy("mt_time", "DESC")
                                   ->first();
 
