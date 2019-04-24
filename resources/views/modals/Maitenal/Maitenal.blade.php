@@ -22,34 +22,7 @@
                                       <div class="vina-loading-bomba" style="display: block; margin-top: 90px"></div>
                                     </div>
                                     <div class="col-md-4">
-                                    	<h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
-                                    	<div class="body table-responsive">
-						                            <table class="table table-striped">
-						                                <thead>
-						                                    <tr>
-						                                        <th>Fecha / Hora</th>
-						                                        <th>Litros</th>
-						                                    </tr>
-						                                </thead>
-						                                <tbody>
-						                                    <tr>
-						                                        <td>Flujo Promedio</td>
-						                                        <td>5000</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>Flujo minimo</td>
-						                                        <td>5000</td>
-						                                    </tr>
-						                                    <tr>
-						                                        <td>Flujo Maximo</td>
-						                                        <td>5000</td>
-						                                    </tr>
-						                                </tbody>
-						                            </table>
-						                        	</div>
-                                    </div>
-                                    <div class="col-md-4">
-									<div class="bombas-cargando" style="padding-top: 76px;">
+                  <div class="bombas-cargando" style="padding-top: 76px;">
                                  <div class="row">
                                     <div class="col-md-4">
                                        Bomba 1
@@ -91,6 +64,34 @@
                               </div>
                                     </div>
                             </div>
+                                    <div class="col-md-4">
+                                    	{{-- <h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
+                                    	<div class="body table-responsive">
+						                            <table class="table table-striped">
+						                                <thead>
+						                                    <tr>
+						                                        <th>Fecha / Hora</th>
+						                                        <th>Litros</th>
+						                                    </tr>
+						                                </thead>
+						                                <tbody>
+						                                    <tr>
+						                                        <td>Flujo Promedio</td>
+						                                        <td>5000</td>
+						                                    </tr>
+						                                    <tr>
+						                                        <td>Flujo minimo</td>
+						                                        <td>5000</td>
+						                                    </tr>
+						                                    <tr>
+						                                        <td>Flujo Maximo</td>
+						                                        <td>5000</td>
+						                                    </tr>
+						                                </tbody>
+						                            </table>
+						                        	</div> --}}
+                                    </div>
+                                    
                             <div class="row">
                                 <div class="col-md-8">
                                 	<canvas id="myChart" height="80"></canvas>
@@ -99,50 +100,13 @@
                         </div>
 
                         <div class="modal-footer">
+                          <div id="grafico_maitenal"></div>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
             </div>
-			<script>
-			var ctx = document.getElementById('myChart').getContext('2d');
-			var myChart = new Chart(ctx, {
-			    type: 'line',
-			    data: {
-			        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-			        datasets: [{
-			            label: '# of Votes',
-			            data: [12, 19, 3, 5, 2, 3],
-			            backgroundColor: [
-			                'rgba(255, 99, 132, 0.2)',
-			                'rgba(54, 162, 235, 0.2)',
-			                'rgba(255, 206, 86, 0.2)',
-			                'rgba(75, 192, 192, 0.2)',
-			                'rgba(153, 102, 255, 0.2)',
-			                'rgba(255, 159, 64, 0.2)'
-			            ],
-			            borderColor: [
-			                'rgba(255, 99, 132, 1)',
-			                'rgba(54, 162, 235, 1)',
-			                'rgba(255, 206, 86, 1)',
-			                'rgba(75, 192, 192, 1)',
-			                'rgba(153, 102, 255, 1)',
-			                'rgba(255, 159, 64, 1)'
-			            ],
-			            borderWidth: 1
-			        }]
-			    },
-			    options: {
-			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero: true
-			                }
-			            }]
-			        }
-			    }
-			});
-			</script>
+			
 
             <style>
 
@@ -211,6 +175,7 @@
 
       $(document).ready(function(){
         $("#bombas_maitenal").load("<?php echo Request::root() ?>/MaitenalBombas");
+        $("#grafico_maitenal").load("<?php echo Request::root() ?>/MaitenalGrafico");
       })
             </script>
 
