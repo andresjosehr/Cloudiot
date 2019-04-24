@@ -134,3 +134,4 @@ Route::post('MaitenalController','MaitenalController@index')->middleware("verifi
 
 Route::get('MaitenalBombas','MaitenalController@MostrarBombas')->middleware("verificar_login");
 Route::get('MaitenalGrafico','MaitenalController@MaitenalGrafico')->middleware("verificar_login");
+Route::get('MaitenalParametros','MaitenalController@MaitenalParametros')->middleware("verificar_login");

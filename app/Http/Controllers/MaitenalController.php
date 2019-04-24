@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class MaitenalController extends Controller
 {
     public function index(){
 
 
-    	return view("modals.Maitenal.Maitenal");
+    	return view("modals.Maitenal.Maitenal", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil04")->orderby("mt_time", "asc")->first()]);
     }
 
 
@@ -215,5 +216,16 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
             }
 
             return view("modals.Maitenal.GraficoFlujo", ["mt_value" => $DatoFlujo, "mt_time" => $FechaFlujo]);
+    }
+
+    public function MaitenalParametros(){
+      $Parametros= DB::connection("telemetria")
+                                    ->select("SELECT * FROM (SELECT * FROM log_biofil04 ORDER BY mt_time DESC limit 50) T1
+                                                                       WHERE  (mt_name='Biofiltro04--Consumo.TiempoRiego'
+                                                                            OR mt_name='Biofiltro04--Consumo.TiempoReposo')
+                                                                            GROUP BY mt_name");
+
+
+      return view("modals.Maitenal.Parametros", ["Parametros" => $Parametros, "Rolito" => DB::table("instalaciones_asignadas")->select("rol")->where("id_usuario", Auth::user()->id)->where("id_instalacion", "2")->first()]);
     }
 }
