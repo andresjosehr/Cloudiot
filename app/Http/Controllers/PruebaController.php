@@ -17,11 +17,30 @@ class PruebaController extends Controller{
 
     public function index(){
 
-          return $Parametros= DB::connection("telemetria")
-                                    ->select("SELECT * FROM (SELECT * FROM log_biofil04 ORDER BY mt_time DESC limit 50) T1
-                                                                       WHERE  (mt_name='Biofiltro04--Consumo.TiempoRiego'
-                                                                            OR mt_name='Biofiltro04--Consumo.TiempoReposo')
-                                                                            GROUP BY mt_name");
+      $Horas=24;
+        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.FactorPotenciaTotal') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+
+          $PotenciaTotal = DB::connection('telemetria')
+                                    ->select("SELECT mt_time, mt_value FROM log_aasa  
+                                                WHERE (mt_name='AASA--ION8650.FactorPotenciaTotal')
+                                                $Condition
+                                                ORDER BY mt_name, mt_time ASC;");
+
+          $i=0;
+            foreach ($PotenciaTotal as $key => $value) {
+              foreach ($value as $key2 => $value2) {
+                if ($key2=="mt_value") {
+                  if ($i!=0 && $i!=count($PotenciaTotal)-1) {
+                    $DatoPotenciaTotal[$i]=$value2-$PotenciaTotal[$i+1]->mt_value;
+                    $FechaPotenciaTotal[$i]=$PotenciaTotal[$i-1]->mt_time;
+                    $i++;
+                  }else{
+                    $i++;
+                  }
+                }
+              }
+            }
+            return $DatoPotenciaTotal;
   }
 }
 

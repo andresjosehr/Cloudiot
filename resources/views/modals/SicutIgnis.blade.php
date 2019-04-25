@@ -33,7 +33,7 @@
                                       <div class="body table-responsive">
                                           <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="sicut-tabla-titulo">Energia Activa</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">reg. kWh últ. 15 min.</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -52,7 +52,7 @@
                                       <div class="body table-responsive">
                                           <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="sicut-tabla-titulo">Energia Reactiva</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">reg. kVAR últ. 15 min</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -71,7 +71,7 @@
                                       <div class="body table-responsive">
                                           <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="sicut-tabla-titulo">Potencia</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">Potencia (kW)</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -166,7 +166,7 @@
                                           <caption scope="row" class="sicut-tabla-titulo">Factor de potencia</caption>
                                       </thead>
                                       <tbody>
-                                          <tr>
+{{--                                           <tr>
                                               <th class="sicut-th">F. Potencia A</th>
                                               <td>{{ $Datos["FactorPotenciaA"] }}</td>
                                           </tr>
@@ -177,7 +177,7 @@
                                           <tr>
                                               <th class="sicut-th">F. Potencia C</th>
                                               <td>{{ $Datos["FactorPotenciaC"] }}</td>
-                                          </tr>
+                                          </tr> --}}
                                           <tr>
                                               <th class="sicut-th">Total</th>
                                               <td>{{ $Datos["FactorPotenciaTotal"] }}</td>

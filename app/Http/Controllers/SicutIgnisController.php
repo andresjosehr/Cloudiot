@@ -56,10 +56,10 @@ class SicutIgnisController extends Controller{
                                      $Datos["EnergíaReactivaInyectada"] =   $Info[5]->mt_value-$Info[4]->mt_value;
                                      $Datos["EnergíaReactivaRetirada"]  =   $Info[7]->mt_value-$Info[6]->mt_value;
 
-                                     $Datos["FactorPotenciaA"]          =   number_format($Info[9]->mt_value/10000, 2, ",", "");
-                                     $Datos["FactorPotenciaB"]          =   number_format($Info[11]->mt_value/10000, 2, ",", "");
-                                     $Datos["FactorPotenciaC"]          =   number_format($Info[13]->mt_value/10000, 2, ",", "");
-                                     $Datos["FactorPotenciaTotal"]      =   number_format($Info[15]->mt_value/10000, 2, ",", "");
+                                     $Datos["FactorPotenciaA"]          =   $Info[9]->mt_value/10000;
+                                     $Datos["FactorPotenciaB"]          =   $Info[11]->mt_value/10000;
+                                     $Datos["FactorPotenciaC"]          =   $Info[13]->mt_value/10000;
+                                     $Datos["FactorPotenciaTotal"]      =   number_format($Datos["FactorPotenciaA"]+$Datos["FactorPotenciaB"]+$Datos["FactorPotenciaC"], 2, ",", "");
 
                                      $Datos["VoltajeA"]                 =   $Info[17]->mt_value;
                                      $Datos["VoltajeB"]                 =   $Info[19]->mt_value;
@@ -652,7 +652,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
           } else{ 
 
             ?><script>
-            GraficosIgnisArriba("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
+            GraficosPotenciaINY("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
             </script><?php
 
           } 
