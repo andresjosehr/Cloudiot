@@ -6,10 +6,10 @@
          <div class="modal-header">
             <div class="row">
                <div class="col-md-2">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >Finning</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >El Maitenal</h4>
                </div>
                <div class="col-md-5">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion: {{--  {{$UltimaMedicion->mt_time}} --}}</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion: {{$UltimaMedicion->mt_time}}</h4>
                </div>
             </div>
          </div>
@@ -24,192 +24,88 @@
                <!-- Tab panes -->
                <div class="tab-content">
                   <div role="tabpanel" class="tab-pane fade in active" id="home">
-                     <div class="col-md-4">
-                       <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
-                             <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Pozo nave 4</caption>
-                             <tbody>
-                                 <tr>
-                                     <th class="sicut-th">Nivel Bajo</th>
-                                     <td>13134</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel alto pozo</th>
-                                     <td>13328</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel alto</th>
-                                     <td>13084</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel alto TK</th>
-                                     <td>13182</td>
-                                 </tr>
-                             </tbody>
-                         </table>
-                       </div>
+                     <div class="row" align="center">
+                        <div class="col-md-4">
+                           <div id="bombas_maitenal"></div>
+                           <div class="vina-loading-bomba" style="display: block; margin-top: 90px"></div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="bombas-cargando" style="padding-top: 76px;">
+                              <div class="row">
+                                 <div class="col-md-4">
+                                    Bomba 1
+                                 </div>
+                                 <div class="col-md-1">
+                                    <button type="button" class="btncasc0 btn btn-circle waves-effect waves-circle waves-float vina-circle-custom bg-green">
+                                    <i class="material-icons bomba0-op-btn">check</i>
+                                    </button>
+                                    <br>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <span class="badge bomba0-op bg-red">No Op.</span>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <button type="button" class="vina-btn-bomba-error0 btn waves-effect vina-btn_error_custom bg-green">
+                                    <span class="vina-custom-error texto-error0">Sin Error</span>
+                                    </button>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-4">
+                                    Bomba 2
+                                 </div>
+                                 <div class="col-md-1">
+                                    <button type="button" class="btncasc1 btn btn-circle waves-effect waves-circle waves-float vina-circle-custom bg-green">
+                                    <i class="material-icons bomba1-op-btn">check</i>
+                                    </button>
+                                    <br>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <span class="badge bomba1-op bg-red">No Op.</span>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <button type="button" class="vina-btn-bomba-error1 btn waves-effect vina-btn_error_custom bg-green">
+                                    <span class="vina-custom-error texto-error1">Sin Error</span>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           {{-- 
+                           <h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
+                           <div class="body table-responsive">
+                              <table class="table table-striped">
+                                 <thead>
+                                    <tr>
+                                       <th>Fecha / Hora</th>
+                                       <th>Litros</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr>
+                                       <td>Flujo Promedio</td>
+                                       <td>5000</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Flujo minimo</td>
+                                       <td>5000</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Flujo Maximo</td>
+                                       <td>5000</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                           --}}
+                        </div>
+                        <div class="row">
+                           <div class="col-md-8">
+                              <canvas id="myChart" height="80"></canvas>
+                           </div>
+                        </div>
                      </div>
-                     <div class="col-md-4">
-                       <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
-                             <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Planta de agua</caption>
-                             <tbody>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 1</th>
-                                     <td>13134</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 2</th>
-                                     <td>13328</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 3</th>
-                                     <td>13084</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 4</th>
-                                     <td>13182</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel Bajo TK-100</th>
-                                     <td>13134</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel Alto TK-100</th>
-                                     <td>13328</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel Bajo TK-101</th>
-                                     <td>13084</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Nivel Alto TK-101</th>
-                                     <td>13182</td>
-                                 </tr>
-                             </tbody>
-                         </table>
-                       </div>
-                     </div>
-
-                     <div class="col-md-4">
-                       <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
-                             <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Dinamometro</caption>
-                             <tbody>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 601</th>
-                                     <td>1</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 602</th>
-                                     <td>1</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 603</th>
-                                     <td>1</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Bomba 604</th>
-                                     <td>1</td>
-                                 </tr>
-                                  <tr>
-                                     <th class="sicut-th">Bomba 605</th>
-                                     <td>1</td>
-                                 </tr>
-                                  <tr>
-                                     <th class="sicut-th">Bomba 606</th>
-                                     <td>1</td>
-                                 </tr>
-                                  <tr>
-                                     <th class="sicut-th">Bomba 607</th>
-                                     <td>1</td>
-                                 </tr>
-                                  <tr>
-                                     <th class="sicut-th">Bomba 608</th>
-                                     <td>1</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Inundación sala 1</th>
-                                     <td>1</td>
-                                 </tr>
-                                 <tr>
-                                     <th class="sicut-th">Inundación sala 2</th>
-                                     <td>1</td>
-                                 </tr>
-                             </tbody>
-                         </table>
-                       </div>
-                     </div>
-
-
-
-                     <div class="col-md-12" style="margin-top: 20px">
-                       <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
-                             <thead align="center">
-                                 <td>Fecha Hora</td>
-                                 <td>Nivel Bajo</td>
-                                 <td>Nivel Alto pozo</td>
-                                 <td>Nivel Alto</td>
-                                 <td>Nivel Alto TK</td>
-                             <tbody>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                                 <tr>
-                                     <td>Dato 1</td>
-                                     <td>Dato 2</td>
-                                     <td>Dato 3</td>
-                                     <td>Dato 4</td>
-                                     <td>Dato 5</td>
-                                 </tr>
-                             </tbody>
-                         </table>
-                       </div>
-                     </div>
-
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="profile">
                      <div id="MaitenalParametros"></div>
@@ -279,11 +175,14 @@
    }
 </style>
 <script  src="instalaciones/PlantaLican.js"></script>
-
-
 <script>
-      $( ".display-modal" ).click();
+   $( ".display-modal" ).click();
    $(".loader-insta").css("display", "none");
    
+      $(document).ready(function(){
+        $("#bombas_maitenal").load("<?php echo Request::root() ?>/MaitenalBombas");
+        $("#grafico_maitenal").load("<?php echo Request::root() ?>/MaitenalGrafico");
+        $("#MaitenalParametros").load("<?php echo Request::root() ?>/MaitenalParametros");
+      })
             
 </script>
