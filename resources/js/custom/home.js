@@ -4,8 +4,6 @@ $.ajaxSetup({
        }
 });
 
-
-
 window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
 
 

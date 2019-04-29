@@ -101,43 +101,43 @@
                              <tbody>
                                  <tr>
                                      <th class="sicut-th">Bomba 601</th>
-                                     <td>@if ($Datos[0]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 602</th>
-                                     <td>@if ($Datos[1]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 603</th>
-                                     <td>@if ($Datos[2]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 604</th>
-                                     <td>@if ($Datos[3]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 605</th>
-                                     <td>@if ($Datos[4]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 606</th>
-                                     <td>@if ($Datos[5]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 607</th>
-                                     <td>@if ($Datos[6]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 608</th>
-                                     <td>@if ($Datos[7]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Inundación sala 1</th>
-                                     <td>@if ($Datos[8]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Inundación sala 2</th>
-                                     <td>@if ($Datos[9]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>1</td>
                                  </tr>
                              </tbody>
                          </table>
