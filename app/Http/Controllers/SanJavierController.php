@@ -9,15 +9,19 @@ class SanJavierController extends Controller
 {
     public function index()
     {
-        return view("modals.SanJavier.SanJavier", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil03")->orderby("mt_time", "asc")->first()]);
+
+      $FlujoTotal = DB::connection("telemetria")->table("log_biofil03")->where("mt_name", "Biofiltro03--Consumo.Flujo")->orderby("mt_time", "asc")->first();
+
+
+        return view("modals.SanJavier.SanJavier", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil03")->orderby("mt_time", "asc")->first(), "FlujoTotal" => $FlujoTotal->mt_value]);
     }
 
     public function MostrarBombas(){
         $datos= DB::connection("telemetria")
-                          ->select("SELECT DATE_FORMAT(mt_time, '%Y-%m-%d %H:%i') as mt_time, mt_name, mt_value FROM log_biofil03 WHERE (mt_name='Biofiltro04--Consumo.EstadoBomba1'
-                                                                   OR mt_name='Biofiltro04--Consumo.EstadoBomba2'
-                                                                   OR mt_name='Biofiltro04--Consumo.Flujo')
-                                                                   AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil03 WHERE (mt_name='Biofiltro04--Consumo.EstadoBomba1' OR mt_name='Biofiltro04--Consumo.EstadoBomba2') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
+                          ->select("SELECT DATE_FORMAT(mt_time, '%Y-%m-%d %H:%i') as mt_time, mt_name, mt_value FROM log_biofil03 WHERE (mt_name='Biofiltro03--Consumo.Bomba1'
+                                                                   OR mt_name='Biofiltro03--Consumo.Bomba2'
+                                                                   OR mt_name='Biofiltro03--Consumo.Flujo')
+                                                                   AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil03 WHERE (mt_name='Biofiltro03--Consumo.Bomba1' OR mt_name='Biofiltro03--Consumo.Bomba2') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
                                                                    ORDER BY mt_name ASC, mt_time ASC");
             $Determinante="No hay nada papa";
   
@@ -31,7 +35,7 @@ class SanJavierController extends Controller
          $g=0;
          for ($i=0; $i <count($datos); $i++) {
   
-          if ($datos[$i]->mt_name=="Biofiltro04--Consumo.EstadoBomba1" || $datos[$i]->mt_name=="Biofiltro04--Consumo.EstadoBomba2" || $datos[$i]->mt_name=="Biofiltro02--Consumo.EstadoBomba3") {
+          if ($datos[$i]->mt_name=="Biofiltro03--Consumo.Bomba1" || $datos[$i]->mt_name=="Biofiltro03--Consumo.Bomba2" || $datos[$i]->mt_name=="Biofiltro02--Consumo.Bomba3") {
   
               if ($datos[$i]->mt_value!="0") {
   
@@ -136,7 +140,7 @@ class SanJavierController extends Controller
   
                     if ($Fila[$i]["Bombas"]==1) {
   
-                      $Fila[$i]["NumeroDeBomba"][$Bomba[$i][32]]=1;
+                      $Fila[$i]["NumeroDeBomba"][$Bomba[$i][26]]=1;
   
                     }  
                     if ($Fila[$i]["Bombas"]==2 || $Fila[$i]["Bombas"]==3){
@@ -192,9 +196,9 @@ class SanJavierController extends Controller
               return view("modals.SanJavier.BombasDefault", ["Bombas" => $Fila, "ImprimirBombas" => $ImprimirBombas,]);
       }
   
-      public function MaitenalGrafico(){
-         $Flujo=DB::connection("telemetria")->select("SELECT mt_value, mt_time FROM log_biofil03 WHERE mt_name='Biofiltro04--Consumo.Flujo'
-  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil03 WHERE (mt_name='Biofiltro04--Consumo.Flujo') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)");
+      public function JavierGrafico(){
+         $Flujo=DB::connection("telemetria")->select("SELECT mt_value, mt_time FROM log_biofil03 WHERE mt_name='Biofiltro03--Consumo.Flujo'
+  AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil03 WHERE (mt_name='Biofiltro03--Consumo.Flujo') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)");
   
             $i=0;
               foreach ($Flujo as $key => $value) {
@@ -210,15 +214,16 @@ class SanJavierController extends Controller
                   }
                 }
               }
+
   
-              return view("modals.Maitenal.GraficoFlujo", ["mt_value" => $DatoFlujo, "mt_time" => $FechaFlujo]);
+              return view("modals.SanJavier.GraficoFlujo", ["mt_value" => $DatoFlujo, "mt_time" => $FechaFlujo]);
       }
   
-      public function MaitenalParametros(){
+      public function JavierParametros(){
         $Parametros= DB::connection("telemetria")
                                       ->select("SELECT * FROM (SELECT * FROM log_biofil03 ORDER BY mt_time DESC limit 50) T1
-                                                                         WHERE  (mt_name='Biofiltro04--Consumo.TiempoRiego'
-                                                                              OR mt_name='Biofiltro04--Consumo.TiempoReposo')
+                                                                         WHERE  (mt_name='Biofiltro03--Consumo.TiempoRiego'
+                                                                              OR mt_name='Biofiltro03--Consumo.TiempoReposo')
                                                                               GROUP BY mt_name");
   
   

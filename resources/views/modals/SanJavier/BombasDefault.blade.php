@@ -49,7 +49,7 @@
                                  @if ($ImprimirBombas==false)
                                     <div>
                                        <p>Sin datos de Bombas activas en las ultimas 3 horas</p>
-                                       <p>Haga click para obetener datos en una fecha de mayor rango</p>
+                                       <!-- <p>Haga click para obetener datos en una fecha de mayor rango</p> -->
                                     </div>
                                  @endif
                               </div>

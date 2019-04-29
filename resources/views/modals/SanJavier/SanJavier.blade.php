@@ -6,10 +6,13 @@
          <div class="modal-header">
             <div class="row">
                <div class="col-md-2">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >El Maitenal</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >San Javier</h4>
                </div>
                <div class="col-md-5">
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion: {{$UltimaMedicion->mt_time}}</h4>
+               </div>
+               <div class="col-md-5">
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Flujo Total: {{$FlujoTotal}}</h4>
                </div>
             </div>
          </div>
@@ -26,7 +29,7 @@
                   <div role="tabpanel" class="tab-pane fade in active" id="home">
                      <div class="row" align="center">
                         <div class="col-md-4">
-                           <div id="bombas_maitenal"></div>
+                           <div id="bombas_javier"></div>
                            <div class="vina-loading-bomba" style="display: block; margin-top: 90px"></div>
                         </div>
                         <div class="col-md-4">
@@ -108,13 +111,13 @@
                      </div>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="profile">
-                     <div id="MaitenalParametros"></div>
+                     <div id="JavierParametros"></div>
                   </div>
                </div>
             </div>
          </div>
          <div class="modal-footer">
-            <div id="grafico_maitenal"></div>
+            <div id="grafico_javier"></div>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
          </div>
       </div>
@@ -180,9 +183,9 @@
    $(".loader-insta").css("display", "none");
    
       $(document).ready(function(){
-        $("#bombas_maitenal").load("<?php echo Request::root() ?>/MaitenalBombas");
-        $("#grafico_maitenal").load("<?php echo Request::root() ?>/MaitenalGrafico");
-        $("#MaitenalParametros").load("<?php echo Request::root() ?>/MaitenalParametros");
+        $("#bombas_javier").load("<?php echo Request::root() ?>/JavierBombas");
+        $("#grafico_javier").load("<?php echo Request::root() ?>/JavierGrafico");
+        $("#JavierMaitenalParametros").load("<?php echo Request::root() ?>/JavierMaitenalParametros");
       })
             
 </script>

@@ -141,3 +141,6 @@ Route::get('MaitenalParametros','MaitenalController@MaitenalParametros')->middle
 Route::post('FinningController','FinningController@index')->middleware("verificar_login");
 
 Route::post('SanJavierController','SanJavierController@index')->middleware("verificar_login");
+Route::get('JavierBombas','SanJavierController@MostrarBombas')->middleware("verificar_login");
+Route::get('JavierGrafico','SanJavierController@JavierGrafico')->middleware("verificar_login");
+Route::get('JavierParametros','SanJavierController@JavierParametros')->middleware("verificar_login");

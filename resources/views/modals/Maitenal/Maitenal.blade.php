@@ -11,6 +11,9 @@
                <div class="col-md-5">
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion: {{$UltimaMedicion->mt_time}}</h4>
                </div>
+               <div class="col-md-5">
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Flujo Total: {{$FlujoTotal}}</h4>
+               </div>
             </div>
          </div>
          <hr style=" color: black">
