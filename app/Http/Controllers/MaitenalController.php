@@ -10,7 +10,7 @@ class MaitenalController extends Controller
 {
     public function index(){
 
-      $FlujoTotal = DB::connection("telemetria")->table("log_biofil04")->where("mt_name", "Biofiltro04--Consumo.Flujo")->orderby("mt_time", "asc")->first();
+      $FlujoTotal = DB::connection("telemetria")->table("log_biofil04")->where("mt_name", "Biofiltro04--Consumo.Flujo")->orderby("mt_time", "desc")->first();
 
 
     	return view("modals.Maitenal.Maitenal", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil04")->orderby("mt_time", "asc")->first(), "FlujoTotal" => $FlujoTotal->mt_value]);
