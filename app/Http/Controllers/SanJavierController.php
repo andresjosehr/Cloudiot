@@ -13,7 +13,7 @@ class SanJavierController extends Controller
       $FlujoTotal = DB::connection("telemetria")->table("log_biofil03")->where("mt_name", "Biofiltro03--Consumo.Flujo")->orderby("mt_time", "desc")->first();
 
 
-        return view("modals.SanJavier.SanJavier", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil03")->orderby("mt_time", "asc")->first(), "FlujoTotal" => $FlujoTotal->mt_value]);
+        return view("modals.SanJavier.SanJavier", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil03")->orderby("mt_time", "desc")->first(), "FlujoTotal" => $FlujoTotal->mt_value]);
     }
 
     public function MostrarBombas(){
