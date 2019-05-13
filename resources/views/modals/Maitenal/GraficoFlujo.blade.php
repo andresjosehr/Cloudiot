@@ -3,8 +3,11 @@
 <script>
 	var mt_value='<?php echo json_encode($mt_value) ?>';
 	var mt_time='<?php echo json_encode($mt_time) ?>';
-	mt_value=JSON.parse(mt_value).length;
-	mt_time=JSON.parse(mt_time).length;
+	mt_value=JSON.parse(mt_value);
+	mt_time=JSON.parse(mt_time);
+
+	mt_value = Object.keys(mt_value).map(i => mt_value[i])
+	mt_time = Object.keys(mt_time).map(i => mt_time[i])
 
 			var ctx = document.getElementById('myChart').getContext('2d');
 			var myChart = new Chart(ctx, {
@@ -34,13 +37,26 @@
 			        }]
 			    },
 			    options: {
-			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero: true
-			                }
-			            }]
-			        }
-			    }
+            legend: {
+               display: true,
+               position: 'bottom'
+            },
+               scales: {
+                   yAxes: [{
+                   }], xAxes: [{
+                           padding: 50,
+                           lineHeight: 3,
+                       ticks: {
+                           padding: 50,
+                           lineHeight: 3
+                       }
+                   }]
+               },
+               elements: {
+                  rectangle: {
+
+                  }
+                }
+           }
 			});
 			</script>

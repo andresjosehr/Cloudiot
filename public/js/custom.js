@@ -1416,11 +1416,11 @@ window.AsignarIDHome = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\home.js */"./resources/js/custom/home.js");
-__webpack_require__(/*! c:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\RegistrarUsuarios.js */"./resources/js/custom/RegistrarUsuarios.js");
-__webpack_require__(/*! c:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\SicutIgnis.js */"./resources/js/custom/SicutIgnis.js");
-__webpack_require__(/*! c:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\Vina.js */"./resources/js/custom/Vina.js");
-module.exports = __webpack_require__(/*! c:\xampp\htdocs\Interline\Cloudiot\resources\sass\general.scss */"./resources/sass/general.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\home.js */"./resources/js/custom/home.js");
+__webpack_require__(/*! C:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\RegistrarUsuarios.js */"./resources/js/custom/RegistrarUsuarios.js");
+__webpack_require__(/*! C:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\SicutIgnis.js */"./resources/js/custom/SicutIgnis.js");
+__webpack_require__(/*! C:\xampp\htdocs\Interline\Cloudiot\resources\js\custom\Vina.js */"./resources/js/custom/Vina.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Interline\Cloudiot\resources\sass\general.scss */"./resources/sass/general.scss");
 
 
 /***/ })
