@@ -25,7 +25,8 @@
 
   
 
-   var ctx = document.getElementById("FlujoDiarioGrafico").getContext('2d');
+   var ctx = document.getElementById("FlujoDiarioGrafico");
+   var ctx = ctx.getContext('2d');
    var myChart = new Chart(ctx, {
      type: 'bar',
      data: {
