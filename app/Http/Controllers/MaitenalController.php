@@ -239,7 +239,7 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
                                              MIN(mt_value) AS mt_value,
                                              MIN(mt_time) AS mt_time
                                               FROM log_biofil04 
-                                                WHERE mt_name='Biofiltro04--Consumo.FlujoMedidor1' 
+                                                WHERE mt_name='Biofiltro04--Consumo.Flujo' 
                                                       AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                                       AND mt_value<>0
                                                         GROUP BY DAY(mt_time) 
@@ -252,7 +252,7 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
                                                MAX(mt_value) AS mt_value,
                                                MAX(mt_time) AS mt_time
                                                 FROM log_biofil04 
-                                                  WHERE mt_name='Biofiltro04--Consumo.FlujoMedidor1' 
+                                                  WHERE mt_name='Biofiltro04--Consumo.Flujo' 
                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                                           GROUP BY DAY(mt_time) 
                                                             ORDER BY mt_time ASC");
