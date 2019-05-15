@@ -76,33 +76,6 @@
                            </div>
                         </div>
                         <div class="col-md-4">
-                           {{-- 
-                           <h4 align="left" style="color:black;padding-left: 3%;">Alarmas</h4>
-                           <div class="body table-responsive">
-                              <table class="table table-striped">
-                                 <thead>
-                                    <tr>
-                                       <th>Fecha / Hora</th>
-                                       <th>Litros</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr>
-                                       <td>Flujo Promedio</td>
-                                       <td>5000</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Flujo minimo</td>
-                                       <td>5000</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Flujo Maximo</td>
-                                       <td>5000</td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                           --}}
                         </div>
                         <div class="row">
                            <div class="col-md-8">
@@ -116,6 +89,7 @@
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="flujoDiario">
                      <div id="MaitenalFlujoDiario"></div>
+                     <h1>Epalee</h1>
                   </div>
                </div>
             </div>

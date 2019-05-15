@@ -23,8 +23,6 @@
 
           <?php } ?>
 
-
-          GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego", "1");
   
 
    var ctx = document.getElementById("FlujoDiarioGrafico").getContext('2d');
