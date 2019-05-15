@@ -17,70 +17,43 @@ class PruebaController extends Controller{
 
     public function index(){
 
-    $Flujo=DB::connection("telemetria")->select("SELECT mt_value, mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo'
-      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofiltro04--Consumo.Flujo') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)");
+   $PrimerosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil04 
+                                                WHERE mt_name='Biofiltro04--Consumo.FlujoMedidor1' 
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
 
-          $i=0;
-            foreach ($Flujo as $key => $value) {
-              foreach ($value as $key2 => $value2) {
-                if ($key2=="mt_value") {
-                  if ($i!=0) {
-                    $DatoFlujo[$i]=$value2-$Flujo[$i-1]->mt_value;
-                    $FechaFlujo[$i]=$Flujo[$i-1]->mt_time;
-                    // echo $value2."---------------".$Flujo[$i-1]->mt_value;
-                    // echo "<br>";
-                    // echo $DatoFlujo[$i];
-                    // echo "<br>";
-                    $i++;
-                  }else{
-                    $i++;
-                  }
-                }
-              }
-            }
 
-             return $DatoFlujo;
+        $SegundosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil04 
+                                                  WHERE mt_name='Biofiltro04--Consumo.FlujoMedidor1' 
+                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        for ($i=0; $i <count($SegundosDatosBarras) ; $i++) { 
+          $GraficoBarras[$i]["mt_time"]=$SegundosDatosBarras[$i]->mt_time;
 
-            return view("modals.Maitenal.GraficoFlujo", ["mt_value" => $DatoFlujo, "mt_time" => $FechaFlujo]);
+          if (date_format(date_create($PrimerosDatosBarras[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j')) {
+            $GraficoBarras[$i]["mt_value"]=0;
+          } else{
+            $GraficoBarras[$i]["mt_value"]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $k++;
           }
-}
-
-class UsersExport implements FromCollection, WithHeadings
-{
-    use Exportable;
-
-    public function collection()
-    {
-
-       $mt_time = explode(",", $_GET["mt_time"]);
-       $mt_value = explode(",", $_GET["mt_value"]);
+        }
 
 
-       for ($i=0; $i <count($mt_time) ; $i++) { 
-         for ($k=0; $k < 2 ; $k++) { 
-           $Datos[$i]["mt_time"]=$mt_time[$i];
-           $Datos[$i]["mt_value"]=$mt_value[$i];
-         }
-       }
-
-       return collect($Datos);
-
-
-
-        // return collect([
-        //     [
-        //         'name' => $_GET["Valriable"],
-        //         'surname' => 'Korop',
-        //         'email' => 'povilas@laraveldaily.com',
-        //         'twitter' => '@povilaskorop'
-        //     ],
-        //     [
-        //         'name' => 'Taylor',
-        //         'surname' => 'Otwell',
-        //         'email' => 'taylor@laravel.com',
-        //         'twitter' => '@taylorotwell'
-        //     ]
-        // ]);
+        return $GraficoBarras;
     }
 
     public function headings(): array
