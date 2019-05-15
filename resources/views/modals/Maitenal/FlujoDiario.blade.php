@@ -1,5 +1,5 @@
 
-<div id="FlujoDiario"></div>
+<div id="FlujoDiarioGrafico"></div>
 
 <script>
 
@@ -27,7 +27,7 @@
           GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego", "1");
   
 
-   var ctx = document.getElementById("FlujoDiario").getContext('2d');
+   var ctx = document.getElementById("FlujoDiarioGrafico").getContext('2d');
    var myChart = new Chart(ctx, {
      type: 'bar',
      data: {
