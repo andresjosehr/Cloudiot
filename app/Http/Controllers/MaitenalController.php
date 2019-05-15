@@ -195,7 +195,7 @@ class MaitenalController extends Controller
             $Fila=null;
           }
 
-            return view("modals.Maitenal.BombasDefault", ["Bombas" => $Fila, "ImprimirBombas" => $ImprimirBombas,]);
+            return view("modals.Maitenal.BombasDefault", ["Bombas" => ["Valor" => 1], "ImprimirBombas" => ["Valor" => 1],]);
     }
 
     public function MaitenalGrafico(){
@@ -229,5 +229,72 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
 
 
       return view("modals.Maitenal.Parametros", ["Parametros" => $Parametros, "Rolito" => DB::table("instalaciones_asignadas")->select("rol")->where("id_usuario", Auth::user()->id)->where("id_instalacion", "2")->first()]);
+    }
+
+
+    public function MaitenalFlujoDiario(){
+      $PrimerosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil04 
+                                                WHERE mt_name='Biofiltro04--Consumo.FlujoMedidor1' 
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
+
+
+        $SegundosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil04 
+                                                  WHERE mt_name='Biofiltro04--Consumo.FlujoMedidor1' 
+                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        for ($i=0; $i <count($SegundosDatosBarras) ; $i++) { 
+          $GraficoBarras[$i]["mt_time"]=$SegundosDatosBarras[$i]->mt_time;
+
+          if (date_format(date_create($PrimerosDatosBarras[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j')) {
+            $GraficoBarras[$i]["mt_value"]=0;
+          } else{
+            $GraficoBarras[$i]["mt_value"]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $k++;
+          }
+        }
+
+
+        // ?><script>
+        //   var i=0;
+        //    var mt_time = [];
+        //    var mt_value = [];
+
+        //    var mt_time_flujos = [];
+        //    var mt_value_flujos = [];
+        //   <?php for($i=0; $i<count($GraficoBarras); $i++){ ?>
+
+        //      mt_time[i]='<?php echo date_format(date_create($GraficoBarras[$i]['mt_time']), 'm-j') ?>';
+        //      mt_value[i]='<?php echo $GraficoBarras[$i]['mt_value'] ?>';
+
+        //      mt_time_flujos[i] = "<?php echo $GraficoBarras[$i]['mt_time'] ?>";
+        //      mt_value_flujos = mt_value;
+        //      i++;
+
+
+        //   <?php } ?>
+
+
+        //   GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego", "1");
+
+        // </script><?php
+
+        return view("modals.Maitenal.FlujoDiario", ["GraficoBarras" => $GraficoBarras])
+
+
     }
 }
