@@ -293,7 +293,7 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
 
         // </script><?php
 
-        return view("modals.Maitenal.FlujoDiario", ["GraficoBarras" => $GraficoBarras])
+        return view("modals.Maitenal.FlujoDiario", ["GraficoBarras" => $GraficoBarras]);
 
 
     }
