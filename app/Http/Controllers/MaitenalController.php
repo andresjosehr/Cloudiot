@@ -269,29 +269,7 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
         }
 
 
-        // ?><script>
-        //   var i=0;
-        //    var mt_time = [];
-        //    var mt_value = [];
-
-        //    var mt_time_flujos = [];
-        //    var mt_value_flujos = [];
-        //   <?php for($i=0; $i<count($GraficoBarras); $i++){ ?>
-
-        //      mt_time[i]='<?php echo date_format(date_create($GraficoBarras[$i]['mt_time']), 'm-j') ?>';
-        //      mt_value[i]='<?php echo $GraficoBarras[$i]['mt_value'] ?>';
-
-        //      mt_time_flujos[i] = "<?php echo $GraficoBarras[$i]['mt_time'] ?>";
-        //      mt_value_flujos = mt_value;
-        //      i++;
-
-
-        //   <?php } ?>
-
-
-        //   GraficarFlujo(mt_time, mt_value, "flujo-bar-chart", "Flujo de Riego", "1");
-
-        // </script><?php
+     
 
         return view("modals.Maitenal.FlujoDiario", ["GraficoBarras" => $GraficoBarras]);
 
