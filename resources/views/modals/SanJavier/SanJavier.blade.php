@@ -23,6 +23,7 @@
                <ul class="nav nav-tabs tab-nav-right" role="tablist">
                   <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel</a></li>
                   <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros</a></li>
+                  <li role="presentation" id="flujoDiario_"><a href="#flujoDiario" data-toggle="tab">Flujo Diario</a></li>
                </ul>
                <!-- Tab panes -->
                <div class="tab-content">
@@ -113,6 +114,9 @@
                   <div role="tabpanel" class="tab-pane fade" id="profile">
                      <div id="JavierParametros"></div>
                   </div>
+                  <div role="tabpanel" class="tab-pane fade" id="flujoDiario">
+                     <div id="JavierFlujoDiario"></div>
+                  </div>
                </div>
             </div>
          </div>
@@ -186,6 +190,7 @@
         $("#bombas_javier").load("<?php echo Request::root() ?>/JavierBombas");
         $("#grafico_javier").load("<?php echo Request::root() ?>/JavierGrafico");
         $("#JavierMaitenalParametros").load("<?php echo Request::root() ?>/JavierMaitenalParametros");
+        $("#JavierFlujoDiario").load("<?php echo Request::root() ?>/JavierFlujoDiario");
       })
             
 </script>

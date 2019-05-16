@@ -12,7 +12,7 @@
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion: {{$UltimaMedicion->mt_time}}</h4>
                </div>
                <div class="col-md-5">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Flujo Total: {{$FlujoTotal}}</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Flujo Total: {{$FlujoTotal->mt_value}}</h4>
                </div>
             </div>
          </div>
@@ -23,7 +23,7 @@
                <ul class="nav nav-tabs tab-nav-right" role="tablist">
                   <li role="presentation" class="active"><a href="#home" data-toggle="tab">Panel</a></li>
                   <li role="presentation" id="parametros"><a href="#profile" data-toggle="tab">Parametros</a></li>
-                  <li role="presentation" id="flujoDiario"><a href="#flujoDiario" data-toggle="tab">Flujo Diario</a></li>
+                  <li role="presentation" id="flujoDiario_"><a href="#flujoDiario" data-toggle="tab">Flujo Diario</a></li>
                </ul>
                <!-- Tab panes -->
                <div class="tab-content">
@@ -89,7 +89,6 @@
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="flujoDiario">
                      <div id="MaitenalFlujoDiario"></div>
-                     <h1>Epalee</h1>
                   </div>
                </div>
             </div>

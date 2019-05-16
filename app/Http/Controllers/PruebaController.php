@@ -17,7 +17,7 @@ class PruebaController extends Controller{
 
     public function index(){
 
-    return $PrimerosDatosBarras = DB::connection("telemetria")
+     $PrimerosDatosBarras = DB::connection("telemetria")
                                   ->select("SELECT
                                              mt_name,
                                              MIN(mt_value) AS mt_value,

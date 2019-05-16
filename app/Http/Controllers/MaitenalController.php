@@ -194,7 +194,7 @@ class MaitenalController extends Controller
             $Fila=null;
           }
 
-            return view("modals.Maitenal.BombasDefault", ["Bombas" => ["Valor" => 1], "ImprimirBombas" => ["Valor" => 1],]);
+            return view("modals.Maitenal.BombasDefault", ["Bombas" => $Fila, "ImprimirBombas" => $ImprimirBombas]);
     }
 
     public function MaitenalGrafico(){

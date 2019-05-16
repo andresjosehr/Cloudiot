@@ -145,3 +145,4 @@ Route::post('SanJavierController','SanJavierController@index')->middleware("veri
 Route::get('JavierBombas','SanJavierController@MostrarBombas')->middleware("verificar_login");
 Route::get('JavierGrafico','SanJavierController@JavierGrafico')->middleware("verificar_login");
 Route::get('JavierParametros','SanJavierController@JavierParametros')->middleware("verificar_login");
+Route::get('JavierFlujoDiario','SanJavierController@JavierFlujoDiario')->middleware("verificar_login");
