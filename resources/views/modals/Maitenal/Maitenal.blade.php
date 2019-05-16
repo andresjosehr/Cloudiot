@@ -87,11 +87,11 @@
                   <div role="tabpanel" class="tab-pane fade" id="profile">
                      <div id="MaitenalParametros"></div>
                   </div>
-               </div>
-               <div role="tabpanel" class="tab-pane fade" id="flujoDiario">
+                  <div role="tabpanel" class="tab-pane fade" id="flujoDiario">
                      <div id="MaitenalFlujoDiario"></div>
                      <h1>Epalee</h1>
                   </div>
+               </div>
             </div>
          </div>
          <div class="modal-footer">

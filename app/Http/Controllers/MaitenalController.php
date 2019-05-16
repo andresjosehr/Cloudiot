@@ -12,8 +12,7 @@ class MaitenalController extends Controller
 
       $FlujoTotal = DB::connection("telemetria")->table("log_biofil04")->where("mt_name", "Biofiltro04--Consumo.Flujo")->orderby("mt_time", "desc")->first();
 
-
-    	return view("modals.Maitenal.Maitenal", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil04")->orderby("mt_time", "desc")->first(), "FlujoTotal" => $FlujoTotal->mt_value]);
+    	return view("modals.Maitenal.Maitenal", ["UltimaMedicion" => DB::connection("telemetria")->table("log_biofil04")->orderby("mt_time", "desc")->first(), "FlujoTotal" => $FlujoTotal]);
     }
 
 
