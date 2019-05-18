@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
+
 use Illuminate\Http\Request;
 use DB;
 use Auth;
@@ -274,4 +282,125 @@ AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE (mt_name='Biofilt
 
 
     }
+
+      public function GraficarFlujoPersonalizadoMaitenal(Request $Request){
+
+
+        $Request->merge(["FechaFin" => date("Y-m-d", strtotime($Request->FechaFin."+ 1 days"))]);
+        
+
+        $PrimerosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                             mt_name,
+                                             MIN(mt_value) AS mt_value,
+                                             MIN(mt_time) AS mt_time
+                                              FROM log_biofil04 
+                                                WHERE mt_name='Biofiltro04--Consumo.Flujo' 
+                                                      AND mt_time > '".$Request->FechaInicio."'
+                                                      AND mt_time < '".$Request->FechaFin."'
+                                                      AND mt_value<>0
+                                                        GROUP BY DAY(mt_time) 
+                                                          ORDER BY mt_time ASC");
+
+
+        $SegundosDatosBarras = DB::connection("telemetria")
+                                  ->select("SELECT
+                                               mt_name,
+                                               MAX(mt_value) AS mt_value,
+                                               MAX(mt_time) AS mt_time
+                                                FROM log_biofil04 
+                                                  WHERE mt_name='Biofiltro04--Consumo.Flujo' 
+                                                        AND mt_time > '".$Request->FechaInicio."'
+                                                          AND mt_time < '".$Request->FechaFin."'
+                                                          GROUP BY DAY(mt_time) 
+                                                            ORDER BY mt_time ASC");
+        $k=0;
+        for ($i=0; $i <count($SegundosDatosBarras) ; $i++) { 
+          $GraficoBarras[$i]["mt_time"]=$SegundosDatosBarras[$i]->mt_time;
+
+          if (date_format(date_create($PrimerosDatosBarras[$k]->mt_time), 'm-j')!=date_format(date_create($SegundosDatosBarras[$i]->mt_time), 'm-j')) {
+            $GraficoBarras[$i]["mt_value"]=0;
+          } else{
+            $GraficoBarras[$i]["mt_value"]=$SegundosDatosBarras[$i]->mt_value-$PrimerosDatosBarras[$k]->mt_value;
+            $k++;
+          }
+        }
+        return view("modals.Maitenal.FlujoDiario", ["GraficoBarras" => $GraficoBarras]);
+    }
+
+
+
+    public function DescargarExcelFlujoMaitenal(Request $Request)
+    {
+      return Excel::download(new UsersExport, "Datos.xlsx");
+    }
+}
+
+
+
+
+
+class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    use Exportable;
+
+    public function collection(){
+
+      if ($_GET['tipo']=="MaitenalFlujoDiario") {
+        return collect(self::RecopDatFlujoDiario());
+      }
+
+
+
+       
+    }
+
+    public function headings(): array
+    {
+      
+        return self::RecopHeader();
+    }
+
+
+
+
+
+
+
+
+
+public function RecopHeader()
+{
+
+  if ($_GET['tipo']=="MaitenalFlujoDiario") {
+
+        $hed =[
+          "Dia",
+          "Valor",
+        ];
+  }
+
+  return $hed;
+}
+
+
+
+
+public function RecopDatFlujoDiario(){
+
+
+            $mt_time    = explode(",", $_GET['mt_time']);
+            $mt_value   = explode(",", $_GET['mt_value']);
+
+            for ($i=0; $i <count($mt_value); $i++) { 
+               $Datos[$i]["mt_time"]=$mt_time[$i];
+               $Datos[$i]["mt_value"]=$mt_value[$i];
+           }
+
+
+           return $Datos;
+}
+
+
+
 }

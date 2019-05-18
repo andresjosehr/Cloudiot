@@ -136,6 +136,8 @@ Route::get('MaitenalBombas','MaitenalController@MostrarBombas')->middleware("ver
 Route::get('MaitenalGrafico','MaitenalController@MaitenalGrafico')->middleware("verificar_login");
 Route::get('MaitenalParametros','MaitenalController@MaitenalParametros')->middleware("verificar_login");
 Route::get('MaitenalFlujoDiario','MaitenalController@MaitenalFlujoDiario')->middleware("verificar_login");
+Route::post('GraficarFlujoPersonalizadoMaitenal','MaitenalController@GraficarFlujoPersonalizadoMaitenal')->middleware("verificar_login");
+Route::get('DescargarExcelFlujoMaitenal','MaitenalController@DescargarExcelFlujoMaitenal')->middleware("verificar_login");
 
 
 
@@ -146,3 +148,6 @@ Route::get('JavierBombas','SanJavierController@MostrarBombas')->middleware("veri
 Route::get('JavierGrafico','SanJavierController@JavierGrafico')->middleware("verificar_login");
 Route::get('JavierParametros','SanJavierController@JavierParametros')->middleware("verificar_login");
 Route::get('JavierFlujoDiario','SanJavierController@JavierFlujoDiario')->middleware("verificar_login");
+
+Route::post('GraficarFlujoPersonalizadoJavier','SanJavierController@GraficarFlujoPersonalizadoJavier')->middleware("verificar_login");
+Route::get('DescargarExcelFlujoJavier','SanJavierController@DescargarExcelFlujoJavier')->middleware("verificar_login");

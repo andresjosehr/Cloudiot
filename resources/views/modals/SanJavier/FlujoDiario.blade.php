@@ -1,5 +1,43 @@
 
-<canvas id="FlujoDiarioGrafico" width="400" height="70"></canvas>
+<script>
+  window.mt_value=mt_value_flujos;
+  window.mt_time=mt_time;
+</script>
+
+
+<div id="contenedorFlujos"></div>
+                    <div class="row">
+                        <div id="contenedorLFE2"></div>
+                        <div class="col-md-2">
+                            {{--
+                            <p class="modal-title" id="defaultModalLabel">Flujos</p> --}}
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button onclick="GraficarFlujoPersonalizadoJavier('<?php echo Request::root() ?>/GraficarFlujoPersonalizadoJavier');" type="button" class="btn btn-primary waves-effect">→</button>
+                        </div>
+                    </div>
+
+                    <canvas id="FlujoDiarioGrafico" width="400" height="70"></canvas>
+
+                    <div align="center" style="margin-top: 50px;">
+                      <button class="btn btn-primary" onclick="window.open('{{Request::root()}}/DescargarExcelFlujoJavier?mt_value='+window.mt_value+'&mt_time='+window.mt_time+'&tipo=JavierFlujoDiario', '_blank');">Descargar Excel</button>
+                    </div>
 
 <script>
 
@@ -93,5 +131,31 @@
          }
      }
    });
+
+
+
+      $('#fecha_flujo_inicio, #fecha_flujo_fin').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
+
+    window.GraficarFlujoPersonalizadoJavier = function(url_) {
+
+      $(".loader-insta").css("display", "block");
+      var FechaInicio = document.getElementById('fecha_flujo_inicio').value;
+      var FechaFin = document.getElementById('fecha_flujo_fin').value;
+      var url = url_;
+       $("#JavierFlujoDiario").load(url, {FechaInicio: FechaInicio, FechaFin: FechaFin});
+   }
+
+
+   $(".loader-insta").css("display", "none")
 
 </script>

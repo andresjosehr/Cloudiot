@@ -37,26 +37,21 @@
 			        }]
 			    },
 			    options: {
-            legend: {
-               display: true,
-               position: 'bottom'
-            },
-               scales: {
-                   yAxes: [{
-                   }], xAxes: [{
-                           padding: 50,
-                           lineHeight: 3,
-                       ticks: {
-                           padding: 50,
-                           lineHeight: 3
-                       }
-                   }]
-               },
-               elements: {
-                  rectangle: {
-
-                  }
-                }
-           }
+                            legend: {
+                                display: true
+                             },
+                            tooltips: {
+                                enabled: true,
+                                intersect: false
+                            },
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        display: false, 
+                                        maxTicksLimit: 10
+                                    }
+                                }]
+                            }
+                        }
 			});
 			</script>
