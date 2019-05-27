@@ -1,7 +1,3 @@
-<script>
-  window.mt_value=mt_value_flujos;
-  window.mt_time=mt_time;
-</script>
 <div id="contenedorFlujos"></div>
                     <div class="row">
                         <div id="contenedorLFE2"></div>

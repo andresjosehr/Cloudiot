@@ -17,9 +17,6 @@ class PruebaController extends Controller{
 
     public function index(){
 
-      $FechaFin='2019-05-15';
-      return date("Y-m-d", strtotime($FechaFin."+ 1 days")); 
-
       $PrimerosDatosBarras = DB::connection("telemetria")
                                   ->select("SELECT
                                              mt_name,
@@ -27,8 +24,7 @@ class PruebaController extends Controller{
                                              MIN(mt_time) AS mt_time
                                               FROM log_biofil04 
                                                 WHERE mt_name='Biofiltro04--Consumo.Flujo' 
-                                                      AND mt_time > '2019-05-10'
-                                                      AND mt_time < '2019-05-15'
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                                       AND mt_value<>0
                                                         GROUP BY DAY(mt_time) 
                                                           ORDER BY mt_time ASC");
@@ -41,8 +37,7 @@ class PruebaController extends Controller{
                                                MAX(mt_time) AS mt_time
                                                 FROM log_biofil04 
                                                   WHERE mt_name='Biofiltro04--Consumo.Flujo' 
-                                                        AND mt_time > '2019-05-10'
-                                                        AND mt_time < '2019-05-15'
+                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil04 WHERE mt_name='Biofiltro04--Consumo.Flujo' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                                           GROUP BY DAY(mt_time) 
                                                             ORDER BY mt_time ASC");
         $k=0;
@@ -56,6 +51,9 @@ class PruebaController extends Controller{
             $k++;
           }
         }
+
+
+     
 
         return $GraficoBarras;
     }
