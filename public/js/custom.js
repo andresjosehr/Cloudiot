@@ -1260,7 +1260,7 @@ $.ajaxSetup({
   }
 });
 
-window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_) {
+window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_, lat_ini, lon_ini) {
   function Marcador(lon, lat, id, controlador, rol_) {
     var vectorSource = new ol.source.Vector({//create empty vector
     }); //create a bunch of icons and add to source vector
@@ -1303,7 +1303,7 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
   }
 
   var vista = new ol.View({
-    center: [-71.148302, -34.078780],
+    center: [lon_ini, lat_ini],
     zoom: 8,
     projection: 'EPSG:4326'
   });

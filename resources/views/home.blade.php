@@ -36,7 +36,19 @@
       urlroot_="<?php echo Request::root() ?>/";
       var tabla_instalacion_asociada_ = "<?php echo $Instalacion->tabla_asociada ?>";
 
-      var Vista = RenderizarMapa(latitud_, longitud_, id_, controlador_, urlroot_, tabla_instalacion_asociada_, rol_);
+      @if ($Usuario->longitud==null)
+      @php
+        $longi='-71.148302';
+        $lati='-34.078780';
+      @endphp
+      @else
+      @php
+        $longi=$Usuario->longitud;
+        $lati=$Usuario->latitud;
+      @endphp
+      @endif
+
+      var Vista = RenderizarMapa(latitud_, longitud_, id_, controlador_, urlroot_, tabla_instalacion_asociada_, rol_, {{$lati}}, {{$longi}});
       
       <?php $i=0; ?>
       @foreach ($Instalaciones as $Instalacion)
