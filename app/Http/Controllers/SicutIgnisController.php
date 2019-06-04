@@ -652,6 +652,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
           } else{ 
 
             ?><script>
+              $("#FactorPotencia_td").text(FPiny[FPiny.length-1]);
             GraficosPotenciaINY("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
             </script><?php
 

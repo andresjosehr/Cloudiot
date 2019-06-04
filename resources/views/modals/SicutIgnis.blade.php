@@ -180,7 +180,7 @@
                                           </tr> --}}
                                           <tr>
                                               <th class="sicut-th">Total</th>
-                                              <td>{{ $Datos["FactorPotenciaTotal"] }}</td>
+                                              <td id="FactorPotencia_td">{{-- {{ $Datos["FactorPotenciaTotal"] }} --}}</td>
                                           </tr>
                                       </tbody>
                                   </table>
