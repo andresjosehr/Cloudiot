@@ -62,23 +62,23 @@
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 2</th>
-                                     <td>@if ($Datos["PlantaAgua"][1]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][1]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 3</th>
-                                     <td>@if ($Datos["PlantaAgua"][2]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][2]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 4</th>
-                                     <td>@if ($Datos["PlantaAgua"][3]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][3]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Bajo TK-100</th>
-                                     <td>@if ($Datos["PlantaAgua"][4]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Alto TK-100</th>
-                                     <td>@if ($Datos["PlantaAgua"][5]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Bajo TK-101</th>
@@ -101,7 +101,7 @@
                              <tbody>
                                  <tr>
                                      <th class="sicut-th">Bomba 601</th>
-                                     <td>@if ($Datos["Dinamometro"][0]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][0]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 602</th>
@@ -109,35 +109,35 @@
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 603</th>
-                                     <td>@if ($Datos["Dinamometro"][2]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][2]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 604</th>
-                                     <td>@if ($Datos["Dinamometro"][3]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][3]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 605</th>
-                                     <td>@if ($Datos["Dinamometro"][4]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 606</th>
-                                     <td>@if ($Datos["Dinamometro"][5]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 607</th>
-                                     <td>@if ($Datos["Dinamometro"][6]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][6]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 608</th>
-                                     <td>@if ($Datos["Dinamometro"][7]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][7]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Inundación sala 1</th>
-                                     <td>@if ($Datos["Dinamometro"][8]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][8]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Inundación sala 2</th>
-                                     <td>@if ($Datos["Dinamometro"][9]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][9]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                              </tbody>
                          </table>
@@ -185,30 +185,23 @@
                                      @php $f=$k+8; @endphp
                                      @for ($k = $k; $k < $f; $k++)
                                        @if ($k<120)
-                                      {{--  <td>{{$Datos["PlantaAgua15"][$k]->mt_name}} ({{$Datos["PlantaAgua15"][$k]->mt_value}}) </td> --}}
-                                         <td>@if ($Datos["PlantaAgua15"][$k]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                           @if ($Datos["PlantaAgua15"][$k]->mt_name=="PlantaAgua--Consumo.NivelBajoTK101" || $Datos["PlantaAgua15"][$k]->mt_name=="PlantaAgua--Consumo.NivelBajoTK100" || $Datos["PlantaAgua15"][$k]->mt_name=="PlantaAgua--Consumo.FallaBomba1001")
+                                               <td>@if ($Datos["PlantaAgua15"][$k]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                            @else
+                                                <td>@if ($Datos["PlantaAgua15"][$k]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                           @endif
                                        @endif
                                      @endfor
-
-
-                                     {{-- <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td>
-                                     <td>@if ($Datos["PlantaAgua15"][$i]->mt_value==1) {{$Datos["PlantaAgua15"][$i]->mt_name}}  @else {{$Datos["PlantaAgua15"][$i]->mt_name}} @endif</td> --}}
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
                                  </tr>
                               @endfor
                              </tbody>

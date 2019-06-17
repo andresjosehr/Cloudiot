@@ -26,7 +26,6 @@ window.SicutScriptDefault = function() {
            time: false
          });
 }
-
 window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato, max_dato, label1, label2, loading) {
 
                 
@@ -39,15 +38,16 @@ window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                                 label: label1,
                                 data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderColor:     'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             },
                             {   
+
                                 label: label2,
                                 data: mt_value2,
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
-                                borderColor: 'rgba(66, 134, 244, 1)',
+                                borderColor:     'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             }]
@@ -203,6 +203,7 @@ window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_valu
 
 }
 
+
 window.GraficoIgnisArribaDerecha=function(id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato_a, max_dato_a, min_dato_b, max_dato_b, label1, label2, loading) {
                 
                     var ctx = document.getElementById(id).getContext('2d');
@@ -213,15 +214,15 @@ window.GraficoIgnisArribaDerecha=function(id, mt_value1, mt_time1, mt_value2, mt
                             datasets: [{
                                 label: label1,
                                 data: mt_value1,
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(66, 134, 244, 0.2)',
+                                borderColor:     'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             },
                             {   label: label2,
                                 data: mt_value2,
-                                backgroundColor: 'rgba(66, 134, 244, 0.2)',
-                                borderColor: 'rgba(66, 134, 244, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor:     'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
                                 radius: 0
                             }]
@@ -295,6 +296,7 @@ window.SicutPieChart = function(){
 
 }
 
+
 window.PotGenerada = function (mt_time, mt_value1, mt_value2){
   var ctx = document.getElementById("sicut-myChart3").getContext('2d');
   var myChart = new Chart(ctx, {
@@ -304,16 +306,17 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2){
           datasets: [{
               label: 'Inyectada',
               data: mt_value1,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor:'rgba(255,99,132,1)',
+              backgroundColor: 'rgba(66, 134, 244, 0.2)',
+              borderColor:     'rgba(66, 134, 244, 1)',
               borderWidth: 1,
-              radius: 0
+              radius: 0,
+              fill: false
           }
           ,{
               label: 'Retirada',
               data: mt_value2,
-              backgroundColor: 'rgba(66, 134, 244, 0.2)',
-              borderColor:'rgba(66, 134, 244, 1)',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor:     'rgba(255,99,132,1)',
               borderWidth: 1,
               radius: 0
           }

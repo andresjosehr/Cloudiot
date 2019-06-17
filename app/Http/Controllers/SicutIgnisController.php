@@ -28,7 +28,7 @@ class SicutIgnisController extends Controller{
                       $Datos= array();
 
                       $Info= DB::connection("telemetria")
-                                  ->select("(SELECT mt_name, mt_value, MAX(mt_time) AS mt_time FROM log_aasa 
+                                  ->select("(SELECT mt_name, mt_value, MAX(mt_time) AS mt_time FROM (SELECT * FROM log_aasa ORDER BY mt_time DESC LIMIT 200) la 
                                                                      WHERE (mt_name='AASA--ION8650.EnerActIny'
                                                                          OR mt_name='AASA--ION8650.EnerActRet'
                                                                          OR mt_name='AASA--ION8650.EnerReactIny'
