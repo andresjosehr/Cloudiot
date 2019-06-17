@@ -9,7 +9,7 @@ class FinningController extends Controller
 {
     public function index()
     {
-    	$Datos["Dinamometro"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
+    	$Datos["Dinamometro"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba602'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba603'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba604'
@@ -24,7 +24,7 @@ class FinningController extends Controller
 
 
 
-      $Datos["PlantaAgua"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
+      $Datos["PlantaAgua"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1002'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1011'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1012'
@@ -37,7 +37,7 @@ class FinningController extends Controller
 
 
 
-      $Datos["Dinamometro15"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
+      $Datos["Dinamometro15"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba602'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba603'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba604'
@@ -52,7 +52,7 @@ class FinningController extends Controller
 
 
 
-      $Datos["PlantaAgua15"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
+      $Datos["PlantaAgua15"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1002'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1011'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1012'
