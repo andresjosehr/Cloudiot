@@ -39,7 +39,7 @@ Route::get('CerrarSesion', function(){
 
 
 
-Route::get('Prueba', "PruebaController@index");
+Route::get('Prueba', "FinningController@ExportarRango");
 
 Route::get('RegistrarInstalacion', function(){
 	return view("instalaciones.registrar", ["Usuario" => Auth::user()]);
@@ -151,3 +151,4 @@ Route::get('JavierFlujoDiario','SanJavierController@JavierFlujoDiario')->middlew
 
 Route::post('GraficarFlujoPersonalizadoJavier','SanJavierController@GraficarFlujoPersonalizadoJavier')->middleware("verificar_login");
 Route::get('DescargarExcelFlujoJavier','SanJavierController@DescargarExcelFlujoJavier')->middleware("verificar_login");
+

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\FinningExport;
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 
 class FinningController extends Controller
 {
     public function index()
     {
+
+
     	$Datos["Dinamometro"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba602'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba603'
@@ -66,5 +70,11 @@ class FinningController extends Controller
 
 
     	return view("modals.Finning.Finning", ["Datos" => $Datos]);
+    }
+
+
+     public function ExportarRango()
+    {
+        return Excel::download(new FinningExport, 'users.xlsx');
     }
 }
