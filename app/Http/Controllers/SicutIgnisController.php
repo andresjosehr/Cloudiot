@@ -91,22 +91,22 @@ class SicutIgnisController extends Controller{
 
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa  
+                                    ->select("SELECT * FROM log_aasa  la
                                                 WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                 OR mt_name='AASA--ION8650.EnerActRet')
                                                 $Condition
-                                                ORDER BY mt_name, mt_time ASC;");
+                                                ORDER BY mt_name, mt_time ASC LIMIT 1000;");
 
         $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
 
             if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
               if ($j==0) {
-                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value));
+                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value))*(-1);
                 $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value));
+                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value))*(-1);
                   $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
                 }
               }
@@ -203,7 +203,7 @@ class SicutIgnisController extends Controller{
                                     ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny'
                                                                         OR mt_name='AASA--ION8650.EnerReactRet')
                                                                         $Condition
-                                                                        ORDER BY mt_name, mt_time ASC ");
+                                                                        ORDER BY mt_name, mt_time ASC LIMIT 1000");
 
         $j=0;
         $k=0;
@@ -241,7 +241,7 @@ class SicutIgnisController extends Controller{
                   $EnergiaReactivaRetirada_mt_value[$k]=$datos[$i]->mt_value-$datos[$i]->mt_value;
                 } else{
                   if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                    $EnergiaReactivaRetirada_mt_value[$k]=$datos[$i]->mt_value-$datos[$i-1]->mt_value;
+                    $EnergiaReactivaRetirada_mt_value[$k]=abs($datos[$i]->mt_value-$datos[$i-1]->mt_value)*(-1);
                   }
                 }
                 $EnergiaReactivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
@@ -333,7 +333,7 @@ class SicutIgnisController extends Controller{
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaca'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
                                                                         $Condition
-                                                                        ORDER BY mt_name, mt_time ASC");
+                                                                        ORDER BY mt_name, mt_time ASC LIMIT 1000");
                   $j=0;
                   $k=0;                  
                   $h=0;
@@ -444,7 +444,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
                                                                         OR mt_name='AASA--ION8650.Voltajec'
                                                                         OR mt_name='AASA--ION8650.VoltajePromedio')
                                                                         $Condition
-                                                                        ORDER BY mt_name, mt_time ASC ");
+                                                                        ORDER BY mt_name, mt_time ASC LIMIT 1000");
                   $j=0;
                   $k=0;                  
                   $h=0;
@@ -556,7 +556,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
                                                 OR mt_name='AASA--ION8650.EnerReactIny' 
                                                 OR mt_name='AASA--ION8650.EnerReactRet')
                                                 $Condition 
-                                                ORDER BY mt_name, mt_time DESC;");
+                                                ORDER BY mt_name, mt_time DESC LIMIT 1000;");
 
 
                 $j=0; $k=0; $h=0; $g=0;
@@ -679,7 +679,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
                                                 WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                 OR mt_name='AASA--ION8650.EnerActRet')
                                                 $Condition
-                                                ORDER BY mt_name, mt_time ASC;");
+                                                ORDER BY mt_name, mt_time ASC LIMIT 1000;");
 
         $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
@@ -698,10 +698,10 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
             }
             if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
               if ($k==0) {
-                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
+                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4)*(-1);
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4);
+                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4)*(-1);
                 }
               }
               $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;

@@ -39,6 +39,7 @@ window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                                 data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor:     'rgba(255, 99, 132, 1)',
+                                fill: false,
                                 borderWidth: 1,
                                 radius: 0
                             },
@@ -48,6 +49,7 @@ window.GraficosIgnisArriba=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                                 data: mt_value2,
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor:     'rgba(66, 134, 244, 1)',
+                                fill: false,
                                 borderWidth: 1,
                                 radius: 0
                             }]
@@ -92,6 +94,7 @@ window.GraficosPotenciaINY=function(id, mt_value1, mt_time1, mt_value2, mt_time2
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             }
                             // ,{   
@@ -145,6 +148,7 @@ window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_valu
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             },
                             {
@@ -153,6 +157,7 @@ window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_valu
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor: 'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             },
                             {
@@ -161,6 +166,7 @@ window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_valu
                                 backgroundColor: 'rgba(242, 255, 0, 0.2)',
                                 borderColor: 'rgba(242, 255, 0, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0,
                                 hidden: oculto
                             },
@@ -170,6 +176,7 @@ window.GraficosIgnisAbajo = function(id, mt_value1, mt_time1, mt_value2, mt_valu
                                 backgroundColor: 'rgba(8, 255, 0, 0.2)',
                                 borderColor: 'rgba(8, 255, 0, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             }]
                         },
@@ -217,6 +224,7 @@ window.GraficoIgnisArribaDerecha=function(id, mt_value1, mt_time1, mt_value2, mt
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor:     'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             },
                             {   label: label2,
@@ -224,6 +232,7 @@ window.GraficoIgnisArribaDerecha=function(id, mt_value1, mt_time1, mt_value2, mt
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor:     'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             }]
                         },
@@ -310,7 +319,7 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2){
               borderColor:     'rgba(66, 134, 244, 1)',
               borderWidth: 1,
               radius: 0,
-              fill: false
+              fill: false,
           }
           ,{
               label: 'Retirada',
@@ -318,6 +327,7 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2){
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor:     'rgba(255,99,132,1)',
               borderWidth: 1,
+              fill: false,
               radius: 0
           }
           ]
