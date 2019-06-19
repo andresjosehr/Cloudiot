@@ -200,7 +200,7 @@ class SicutIgnisController extends Controller{
       }
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny'
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.EnerReactIny' 
                                                                         OR mt_name='AASA--ION8650.EnerReactRet')
                                                                         $Condition
                                                                         ORDER BY mt_name, mt_time ASC LIMIT 1000");
@@ -328,7 +328,7 @@ class SicutIgnisController extends Controller{
 
 
             $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaca'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
@@ -439,7 +439,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
 
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea'
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.Voltajea'
                                                                         OR mt_name='AASA--ION8650.Voltajeb'
                                                                         OR mt_name='AASA--ION8650.Voltajec'
                                                                         OR mt_name='AASA--ION8650.VoltajePromedio')
@@ -550,7 +550,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
       }
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa  
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) 
                                                 WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                 OR mt_name='AASA--ION8650.EnerActRet' 
                                                 OR mt_name='AASA--ION8650.EnerReactIny' 
@@ -675,7 +675,7 @@ GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, 
 
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa  
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index)
                                                 WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                 OR mt_name='AASA--ION8650.EnerActRet')
                                                 $Condition
