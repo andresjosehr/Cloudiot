@@ -11,6 +11,23 @@
                <div class="col-md-5">
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion:  {{$Datos["Dinamometro"][count($Datos["Dinamometro"])-1]->mt_time}}</h4>
                </div>
+               <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button onclick="GraficarFinning();" type="button" class="btn btn-primary waves-effect">→</button>
+                        </div>
             </div>
          </div>
          <hr style=" color: black">
@@ -284,5 +301,31 @@
       $( ".display-modal" ).click();
    $(".loader-insta").css("display", "none");
    
+   $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD HH:mm:ss',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: true
+    });
+
+    $('#fecha_flujo_fin').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD HH:mm:ss',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: true
+    });
+
+    function GraficarFinning() {
+        var win = window.open(location.href+'/../ExportarFinning?FechaInicio='+$("#fecha_flujo_inicio").val()+'&FechaFin='+$("#fecha_flujo_fin").val(), '_blank');
+        win.focus();
+    }
             
 </script>

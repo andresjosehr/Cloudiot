@@ -10,76 +10,50 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Finning;
+use DB;
 
-class FinningExport implements FromCollection, ShouldAutoSize
+class FinningExport implements FromView, ShouldAutoSize
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+
+
+    public function view(): View
     {
-        $Finning = Finning::where('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba601')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba602')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba603')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba604')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba605')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba606')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba607')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.ErrorBomba608')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.InundacionSala1')
-						->orWhere('mt_name', '=', 'Dinamometro--Consumo.InundacionSala2')
-
-						->groupBy('mt_time', 'mt_name')
-						->orderBy('mt_time', 'DESC')
-						->groupBy('mt_name', 'mt_time')
-						->limit("10")
-						->get();
-
-		$i=0;
-		foreach ($Finning as $Dato) {
-			if ($Dato->mt_name=='Dinamometro--Consumo.ErrorBomba602' && $Dato->mt_value==1) {
-				$DatosFinning[$i]['->mt_value']='Error';
-			}
-
-			if ($Dato->mt_name=='Dinamometro--Consumo.ErrorBomba602' && $Dato->mt_value==0) {
-				$DatosFinning[$i]->mt_value='Ok';
-			}
-
-			if ($Dato->mt_name!='Dinamometro--Consumo.ErrorBomba602' && $Dato->mt_value==1) {
-				$DatosFinning[$i]->mt_value='Error';
-			}
-			if ($Dato->mt_name!='Dinamometro--Consumo.ErrorBomba602' && $Dato->mt_value==0) {
-				$DatosFinning[$i]->mt_value='Ok';
-			}
-
-
-			$i++;
-		}
-
-		print_r($Finning);
-		die();
 
 
 
-						// 'Dinamometro--Consumo.ErrorBomba601' 0
-						// 'Dinamometro--Consumo.ErrorBomba602' 1
-						// 'Dinamometro--Consumo.ErrorBomba603' 0
-						// 'Dinamometro--Consumo.ErrorBomba604' 0
-						// 'Dinamometro--Consumo.ErrorBomba605' 0
-						// 'Dinamometro--Consumo.ErrorBomba606' 0
-						// 'Dinamometro--Consumo.ErrorBomba607' 0
-						// 'Dinamometro--Consumo.ErrorBomba608' 0
-						// 'Dinamometro--Consumo.InundacionSala1' 0
-						// 'Dinamometro--Consumo.InundacionSala2' 0
+
+    	$Datos["Dinamometro15"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba602'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba603'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba604'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba605'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba606'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba607'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba608'
+                                                                                     OR mt_name='Dinamometro--Consumo.InundacionSala1'
+                                                                                     OR mt_name='Dinamometro--Consumo.InundacionSala2') AND mt_time BETWEEN '".$_GET['FechaInicio']."' AND '".$_GET['FechaFin']."'
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC) ORDER BY mt_time, mt_name");
 
 
-						// 'PlantaAgua--Consumo.FallaBomba1001'			1
-      //                   'PlantaAgua--Consumo.FallaBomba1002'			0
-      //                   'PlantaAgua--Consumo.FallaBomba1011'			0
-      //                   'PlantaAgua--Consumo.FallaBomba1012'			0
-      //                   'PlantaAgua--Consumo.NivelBajoTK100'			0
-      //                   'PlantaAgua--Consumo.NivelAltoAltoTK100'		0
-      //                   'PlantaAgua--Consumo.NivelBajoTK101'			1
-      //                   'PlantaAgua--Consumo.NivelAltoAltoTK101'		1
-		}
+
+
+        $Datos["PlantaAgua15"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
+                                                                                     OR mt_name='PlantaAgua--Consumo.FallaBomba1002'
+                                                                                     OR mt_name='PlantaAgua--Consumo.FallaBomba1011'
+                                                                                     OR mt_name='PlantaAgua--Consumo.FallaBomba1012'
+                                                                                     OR mt_name='PlantaAgua--Consumo.NivelBajoTK100'
+                                                                                     OR mt_name='PlantaAgua--Consumo.NivelAltoAltoTK100'
+                                                                                     OR mt_name='PlantaAgua--Consumo.NivelBajoTK101'
+                                                                                     OR mt_name='PlantaAgua--Consumo.NivelAltoAltoTK101') AND mt_time BETWEEN '".$_GET['FechaInicio']."' AND '".$_GET['FechaFin']."'
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC) ORDER BY mt_time, mt_name");
+
+
+        return view('exports.Finning.FinningExport', [
+            'Datos' => $Datos
+        ]);
+    }
+
+
+
 }
+

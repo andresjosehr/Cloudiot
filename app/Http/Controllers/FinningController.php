@@ -75,6 +75,6 @@ class FinningController extends Controller
 
      public function ExportarRango()
     {
-        return Excel::download(new FinningExport, 'users.xlsx');
+        return Excel::download(new FinningExport, 'Finning.xlsx');
     }
 }
