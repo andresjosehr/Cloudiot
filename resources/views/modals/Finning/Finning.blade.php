@@ -4,34 +4,37 @@
    <div class="modal-dialog modal-lg" role="document" style="width: 95%;margin-top: 2%;">
       <div class="modal-content">
          <div class="modal-header">
-            <div class="row">
+            <div class="row" style="display: flex;">
                <div class="col-md-2">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" >Finning</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel" ><img style="width: 100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUa9m_RoIT_ufuH3oNPhKded1VXMx8_KnuE5PjUT9Gn5HjE1_CbA" alt=""></h4>
                </div>
                <div class="col-md-5">
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion:  {{$Datos["Dinamometro"][count($Datos["Dinamometro"])-1]->mt_time}}</h4>
                </div>
-               <div class="col-md-2">
+               <div class="col-md-6" style="padding-top: 9px;margin-top: -9px;margin-right: 26px;padding-right: 1px;-webkit-box-shadow: -1px 2px 40px -15px rgba(0,0,0,0.75);-moz-box-shadow: -1px 2px 40px -15px rgba(0,0,0,0.75);box-shadow: -1px 2px 40px -15px rgba(0,0,0,0.75);">
+                   <div class="row">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <div class="form-line">
                                     <input type="text" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <button onclick="GraficarFinning();" type="button" class="btn btn-primary waves-effect">→</button>
                         </div>
+                   </div>
+               </div>
             </div>
          </div>
-         <hr style=" color: black">
-         <div class="modal-body table-custom">
+         <div class="modal-body table-custom" style="padding-top: 0;margin-top: -5px">
             <div class="body">
                <!-- Nav tabs -->
                <ul class="nav nav-tabs tab-nav-right" role="tablist">
@@ -45,7 +48,7 @@
                        <div class="body table-responsive">
                            <table class="table sicut-table-bordered sicut-modal-table1">
                              <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Pozo nave 4</caption>
+                                 </thead><caption scope="row" class="sicut-tabla-titulo">Pozo nave 4 <i class="fa fa-volume-up" style="color: red;margin-left: 20px;"></i></caption>
                              <tbody>
                                  <tr>
                                      <th class="sicut-th">Nivel Bajo</th>
@@ -165,64 +168,86 @@
 
                      <div class="col-md-12" style="margin-top: 20px">
                        <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
-                             <thead align="center">
-                                 <td>Fecha Hora</td>
-                                 <td>Nivel ↓</td>
-                                 <td>Nivel ↑ pozo</td>
-                                 <td>Nivel ↑</td>
-                                 <td>Nivel ↑ TK</td>
-                                 <td>Bom 1</td>
-                                 <td>Bom 2</td>
-                                 <td>Bom 3</td>
-                                 <td>Bom 4</td>
-                                 <td>Nvl ↑ TK-100</td>
-                                 <td>Nvl ↑ TK-101</td>
-                                 <td>Nvl ↓ TK-100</td>
-                                 <td>Nvl ↓ TK-101</td>
-                                 <td>Bom 601</td>
-                                 <td>Bom 602</td>
-                                 <td>Bom 603</td>
-                                 <td>Bom 604</td>
-                                 <td>Bom 605</td>
-                                 <td>Bom 606</td>
-                                 <td>Bom 607</td>
-                                 <td>Bom 608</td>
-                                 <td>Inun. Sala 1</td>
-                                 <td>Inun. Sala 2</td>
-                             <tbody>
-                              @php $k=0; @endphp
-                              @for ($i = 0; $i < 15; $i++)
-                                <tr>
-                                    <td>{{ date_format(date_create($Datos["PlantaAgua15"][$k]->mt_time), 'H:i:s')}}</td>
-                                     <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
-                                     <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
-                                     <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
-                                     <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
-                                     @php $f=$k+8; @endphp
-                                     @for ($k = $k; $k < $f; $k++)
-                                       @if ($k<120)
-                                           @if ($Datos["PlantaAgua15"][$k]->mt_name=="PlantaAgua--Consumo.NivelBajoTK101" || $Datos["PlantaAgua15"][$k]->mt_name=="PlantaAgua--Consumo.NivelBajoTK100" || $Datos["PlantaAgua15"][$k]->mt_name=="PlantaAgua--Consumo.FallaBomba1001")
-                                               <td>@if ($Datos["PlantaAgua15"][$k]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                            @else
-                                                <td>@if ($Datos["PlantaAgua15"][$k]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                           @endif
-                                       @endif
-                                     @endfor
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                     <td>@if ($Datos["Dinamometro15"][$i]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
-                                 </tr>
-                              @endfor
-                             </tbody>
-                         </table>
+                            @php
+                             if (count($Datos["PlantaAgua15"])<count($Datos["Dinamometro15"])) $Mayor=count($Datos["Dinamometro15"])-1; else $Mayor=count($Datos["PlantaAgua15"])-1; 
+                             @endphp
+                            <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead align="center">
+
+
+                                <td>Fecha Hora</td>
+                                <td>Nivel ↓</td>
+                                <td>Nivel ↑ pozo</td>
+                                <td>Nivel ↑</td>
+                                <td>Nivel ↑ TK</td>
+
+                                <td>Bom 1</td>
+                                <td>Bom 2</td>
+                                <td>Bom 3</td>
+                                <td>Bom 4</td>
+                                <td>Nvl ↑ TK-100</td>
+                                <td>Nvl ↑ TK-101</td>
+                                <td>Nvl ↓ TK-100</td>
+                                <td>Nvl ↓ TK-101</td>
+                                
+                                <td>Bom 601</td>
+                                <td>Bom 602</td>
+                                <td>Bom 603</td>
+                                <td>Bom 604</td>
+                                <td>Bom 605</td>
+                                <td>Bom 606</td>
+                                <td>Bom 607</td>
+                                <td>Bom 608</td>
+                                <td>Inun. Sala 1</td>
+                                <td>Inun. Sala 2</td>
+                              </thead>
+                              <tbody>
+
+                                @php $j=0; $h=0; @endphp
+                                @for ($i = 0; $i < $Mayor; $i++)
+                                    <tr>
+                                      
+                                      @if (!isset($Datos["Dinamometro15"][$i+$h+9])) @php break; @endphp @endif
+
+                                      <td>{{ date_format(date_create($Datos["Dinamometro15"][$i+$h]->mt_time), 'H:i:s')}}</td>
+                                      <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
+                                      <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
+                                      <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
+                                      <td><i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i></td>
+
+                                      @if (isset($Datos["PlantaAgua15"][$i+$j+7]))
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+1]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+2]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+3]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+6]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        <td>@if ($Datos["PlantaAgua15"][$i+$j+7]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                        @php $j=$j+7; @endphp
+                                      @endif
+
+
+
+
+                                      @if (isset($Datos["Dinamometro15"][$i+$h+9]))
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif  </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+1]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+2]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+3]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+4]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+5]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+6]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+7]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+8]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+9]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        @php $h=$h+9; @endphp
+                                      @else
+                                      @endif
+                                    </tr>
+                                @endfor
+                              </tbody>
+                            </table>
                        </div>
                      </div>
 

@@ -41,7 +41,7 @@ class FinningController extends Controller
 
 
 
-      $Datos["Dinamometro15"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
+      $Datos["Dinamometro15"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba602'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba603'
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba604'
@@ -51,12 +51,12 @@ class FinningController extends Controller
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba608'
                                                                                      OR mt_name='Dinamometro--Consumo.InundacionSala1'
                                                                                      OR mt_name='Dinamometro--Consumo.InundacionSala2')
-                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 150) ORDER BY mt_name, mt_time");
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 150) ORDER BY mt_time, mt_name");
 
 
 
 
-      $Datos["PlantaAgua15"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
+        $Datos["PlantaAgua15"] = DB::connection("telemetria")->select("(SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1002'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1011'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1012'

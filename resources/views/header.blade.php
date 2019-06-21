@@ -18,6 +18,8 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Multi Select Css -->
     <link href="{{ asset('plugins/multi-select/css/multi-select.css') }}" rel="stylesheet">
 
