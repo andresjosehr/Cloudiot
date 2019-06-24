@@ -1,3 +1,13 @@
+<script>
+  $('#largeModal').modal('hide');
+  $(".modal-backdrop.fade.in").remove();
+  window.sound = new Howl({
+            src: ['{{ asset('Notificaciones/noti_1.mp3') }}'],
+            autoplay: true,
+            loop: true,
+            volume: 0.5,
+        });
+</script>
 <button type="button" class="btn btn-default waves-effect m-r-20 display-modal" data-toggle="modal" data-target="#largeModal" style="display: none"></button>
 <!-- Large Size -->
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
@@ -28,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button onclick="GraficarFinning();" type="button" class="btn btn-primary waves-effect">→</button>
+                            <button onclick="GraficarFinning();" type="button" class="btn btn-primary waves-effect"><i class="fa fa-table"></i></button>
                         </div>
                    </div>
                </div>
@@ -46,9 +56,9 @@
                   <div role="tabpanel" class="tab-pane fade in active" id="home">
                      <div class="col-md-4">
                        <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
+                           <table class="table sicut-table-bordered sicut-modal-table1 pozo_nave_table">
                              <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Pozo nave 4 <i class="fa fa-volume-up" style="color: red;margin-left: 20px;"></i></caption>
+                                 </thead><caption scope="row" class="sicut-tabla-titulo">Pozo nave 4 <i class="fa fa-volume-up" onclick='$window.sound.play();$(this).pause()' style="cursor: pointer;display:none;color: red;margin-left: 20px;"></i></caption>
                              <tbody>
                                  <tr>
                                      <th class="sicut-th">Nivel Bajo</th>
@@ -72,41 +82,41 @@
                      </div>
                      <div class="col-md-4">
                        <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
+                           <table class="table sicut-table-bordered sicut-modal-table1 planta_agua_table">
                              <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Planta de agua</caption>
+                                 </thead><caption scope="row" class="sicut-tabla-titulo">Planta de agua <i class="fa fa-volume-up" onclick='window.sound.pause();$(this).hide()' style="cursor: pointer;display:none;color: red;margin-left: 20px;"></i></caption>
                              <tbody>
                                  <tr>
                                      <th class="sicut-th">Bomba 1</th>
-                                     <td>@if ($Datos["PlantaAgua"][0]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][0]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 2</th>
-                                     <td>@if ($Datos["PlantaAgua"][1]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][1]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 3</th>
-                                     <td>@if ($Datos["PlantaAgua"][2]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][2]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Bomba 4</th>
-                                     <td>@if ($Datos["PlantaAgua"][3]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][3]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Bajo TK-100</th>
-                                     <td>@if ($Datos["PlantaAgua"][4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Alto TK-100</th>
-                                     <td>@if ($Datos["PlantaAgua"][5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Bajo TK-101</th>
-                                     <td>@if ($Datos["PlantaAgua"][6]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][6]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Nivel Alto TK-101</th>
-                                     <td>@if ($Datos["PlantaAgua"][7]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["PlantaAgua"][7]->mt_value==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                              </tbody>
                          </table>
@@ -115,9 +125,9 @@
 
                      <div class="col-md-4">
                        <div class="body table-responsive">
-                           <table class="table sicut-table-bordered sicut-modal-table1">
+                           <table class="table sicut-table-bordered sicut-modal-table1 dinamometro_table">
                              <thead>
-                                 </thead><caption scope="row" class="sicut-tabla-titulo">Dinamometro</caption>
+                                 </thead><caption scope="row" class="sicut-tabla-titulo">Dinamometro <i class="fa fa-volume-up" style="cursor: pointer;display: none;color: red;margin-left: 20px;" onclick='window.sound.pause();$(this).hide()'></i></caption>
                              <tbody>
                                  <tr>
                                      <th class="sicut-th">Bomba 601</th>
@@ -137,27 +147,27 @@
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 605</th>
-                                     <td>@if ($Datos["Dinamometro"][4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][4]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 606</th>
-                                     <td>@if ($Datos["Dinamometro"][5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][5]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 607</th>
-                                     <td>@if ($Datos["Dinamometro"][6]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][6]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                   <tr>
                                      <th class="sicut-th">Bomba 608</th>
-                                     <td>@if ($Datos["Dinamometro"][7]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][7]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Inundación sala 1</th>
-                                     <td>@if ($Datos["Dinamometro"][8]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][8]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                                  <tr>
                                      <th class="sicut-th">Inundación sala 2</th>
-                                     <td>@if ($Datos["Dinamometro"][9]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif</td>
+                                     <td>@if ($Datos["Dinamometro"][9]->mt_value==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i>  @else <i class="material-icons" style="color: red;font-size: 15px;">error</i> @endif</td>
                                  </tr>
                              </tbody>
                          </table>
@@ -352,5 +362,57 @@
         var win = window.open(location.href+'/../ExportarFinning?FechaInicio='+$("#fecha_flujo_inicio").val()+'&FechaFin='+$("#fecha_flujo_fin").val(), '_blank');
         win.focus();
     }
+
+
+    window.setInterval((function(){
+    var start = Date.now();
+    return function() {
+         if (Math.floor((Date.now()-start)/1000)==30) {
+          $("#contenedor").load("{{Request::root()}}/FinningController", {id: 6, tabla_asociada: "log_biofiltro03", rol: 1 })
+         }
+         };
+    }()), 1000);
             
+</script>
+
+<audio id="notifi">
+  <source src="{{ asset('Notificaciones/noti_1.mp3') }}" type="audio/mpeg">
+</audio>
+<button onclick="playAudio()" id="play_audio" style="display: none;" type="button">Play Mp3</button>
+<button onclick="pauseAudio()" id="pause_audio" style="display: none;" type="button">Pause Mp3</button> 
+
+
+<script>
+
+
+function pauseAudio() { 
+  var x = document.getElementById("notifi"); 
+  x.loop = true;
+  x.pause(); 
+} 
+
+    $(".pozo_nave_table td").map(function(){
+    if ($(this).find("i").text()==" error") {
+          $(".pozo_nave_table caption i").show();
+
+          window.sound.play();
+      }
+    })
+
+  $(".planta_agua_table td").map(function(){
+    if ($(this).find("i").text()==" error") {
+        $(".planta_agua_table caption i").show();
+
+            window.sound.play();
+        }
+      })
+
+  $(".dinamometro_table td").map(function(){
+    if ($(this).find("i").text()==" error") {
+        $(".dinamometro_table caption i").show();
+
+            window.sound.play();
+        }
+      })
+
 </script>

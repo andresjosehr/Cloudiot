@@ -29,6 +29,9 @@
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>
+
+
     
     <link rel="stylesheet" href="{{ asset('css/default.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
