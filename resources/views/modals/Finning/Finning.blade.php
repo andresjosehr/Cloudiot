@@ -1,11 +1,15 @@
 <script>
-  $('#largeModal').modal('hide');
+  $(".dtp.hidden").remove()
+  $(".modal-backdrop.in").remove()
   $(".modal-backdrop.fade.in").remove();
   window.sound = new Howl({
             src: ['{{ asset('Notificaciones/noti_1.mp3') }}'],
             autoplay: true,
             volume: 0.5,
         });
+  if (window.PrimeraVez=="Si") {
+    $("#largeModal").removeClass("fade");
+  }
 </script>
 <button type="button" class="btn btn-default waves-effect m-r-20 display-modal" data-toggle="modal" data-target="#largeModal" style="display: none"></button>
 <!-- Large Size -->
@@ -366,9 +370,25 @@
     window.setInterval((function(){
     var start = Date.now();
     return function() {
-         if (Math.floor((Date.now()-start)/1000)==30) {
-          $("#contenedor").load("{{Request::root()}}/FinningController", {id: 6, tabla_asociada: "log_biofiltro03", rol: 1 })
-         }
+         if (Math.floor((Date.now()-start)/1000)==1) {
+          // $("#contenedor").load("{{Request::root()}}/FinningController", {id: 6, tabla_asociada: "log_biofiltro03", rol: 1 });
+            if (($("#largeModal").data('bs.modal') || {}).isShown) {
+              window.request = $.ajax({
+                    type: 'POST',
+                    data:{
+                      id: 6,
+                      tabla_asociada: "log_biofiltro03",
+                      rol: 1 
+                    },
+                    url: '{{Request::root()}}/FinningController',
+                    success: function(result){
+                      $("#contenedor").html(result);
+                    }
+                });
+              }
+
+
+             }
          };
     }()), 1000);
             
@@ -412,6 +432,12 @@ function pauseAudio() {
 
             window.sound.play();
         }
-      })
+      });
+
+  window.PrimeraVez="Si";
+
+  $('#largeModal').on('hidden.bs.modal', function () {
+    window.request.abort();
+  })
 
 </script>
