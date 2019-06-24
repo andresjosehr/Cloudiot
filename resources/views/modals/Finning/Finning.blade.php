@@ -18,7 +18,7 @@
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel" ><img style="width: 100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUa9m_RoIT_ufuH3oNPhKded1VXMx8_KnuE5PjUT9Gn5HjE1_CbA" alt=""></h4>
                </div>
                <div class="col-md-5">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Mendicion:  {{$Datos["Dinamometro"][count($Datos["Dinamometro"])-1]->mt_time}}</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición:  {{$Datos["Dinamometro"][count($Datos["Dinamometro"])-1]->mt_time}}</h4>
                </div>
                <div class="col-md-6" style="padding-top: 9px;margin-top: -9px;margin-right: 26px;padding-right: 1px;-webkit-box-shadow: -1px 2px 40px -15px rgba(0,0,0,0.75);-moz-box-shadow: -1px 2px 40px -15px rgba(0,0,0,0.75);box-shadow: -1px 2px 40px -15px rgba(0,0,0,0.75);">
                    <div class="row">
@@ -241,7 +241,7 @@
 
                                       @if (isset($Datos["Dinamometro15"][$i+$h+9]))
                                         <td>@if ($Datos["Dinamometro15"][$i+$h]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif  </td>
-                                        <td>@if ($Datos["Dinamometro15"][$i+$h+1]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
+                                        <td>@if ($Datos["Dinamometro15"][$i+$h+1]->mt_name==1) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
                                         <td>@if ($Datos["Dinamometro15"][$i+$h+2]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
                                         <td>@if ($Datos["Dinamometro15"][$i+$h+3]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>
                                         <td>@if ($Datos["Dinamometro15"][$i+$h+4]->mt_name==0) <i class="material-icons"  style="color: green;font-size: 15px;">check_circle</i> @else <i class="material-icons" style="color: red;font-size: 15px;"> error</i> @endif </td>

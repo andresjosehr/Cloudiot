@@ -51,7 +51,7 @@ class FinningController extends Controller
                                                                                      OR mt_name='Dinamometro--Consumo.ErrorBomba608'
                                                                                      OR mt_name='Dinamometro--Consumo.InundacionSala1'
                                                                                      OR mt_name='Dinamometro--Consumo.InundacionSala2')
-                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 150) ORDER BY mt_time, mt_name");
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 150) ORDER BY mt_time DESC, mt_name");
 
 
 
@@ -64,7 +64,7 @@ class FinningController extends Controller
                                                                                      OR mt_name='PlantaAgua--Consumo.NivelAltoAltoTK100'
                                                                                      OR mt_name='PlantaAgua--Consumo.NivelBajoTK101'
                                                                                      OR mt_name='PlantaAgua--Consumo.NivelAltoAltoTK101')
-                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time, mt_name");
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 120) ORDER BY mt_time DESC, mt_name");
 
 
 
