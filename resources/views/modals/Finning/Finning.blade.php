@@ -4,7 +4,6 @@
   window.sound = new Howl({
             src: ['{{ asset('Notificaciones/noti_1.mp3') }}'],
             autoplay: true,
-            loop: true,
             volume: 0.5,
         });
 </script>
