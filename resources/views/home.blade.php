@@ -5,6 +5,18 @@
 
     @include('sidebar');
 
+
+    <style>
+      .ol-popup.input {
+        background: none;
+      }
+      .ol-popup.input input {
+        background-color: rgba(255,255,255,.6);
+        border: 1px solid #999;
+        padding: .2em .5em;
+      }
+    </style>
+
     <section>
         <div class="container-fluid">
             <div class="block-header">
