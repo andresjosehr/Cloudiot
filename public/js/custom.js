@@ -179,16 +179,16 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
       datasets: [{
         label: label1,
         data: mt_value1,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(66, 134, 244, 0.2)',
+        borderColor: 'rgba(66, 134, 244, 1)',
         fill: false,
         borderWidth: 1,
         radius: 0
       }, {
         label: label2,
         data: mt_value2,
-        backgroundColor: 'rgba(66, 134, 244, 0.2)',
-        borderColor: 'rgba(66, 134, 244, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
         fill: false,
         borderWidth: 1,
         radius: 0

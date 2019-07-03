@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use App\Exports\AasaExport;
 
 
 use DB;
@@ -81,7 +82,7 @@ class SicutIgnisController extends Controller{
     public function Grafico1(Request $Request){
 
 
-           if (isset($Request->Inicio) && isset($Request->Final)) {
+      if (isset($Request->Inicio) && isset($Request->Final)) {
         $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
@@ -418,622 +419,392 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
+  GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
 
-          FuncionesCompletas++;
-          FuncionExportacion(FuncionesCompletas);
-            </script><?php
+            FuncionesCompletas++;
+            FuncionExportacion(FuncionesCompletas);
+              </script><?php
 
-          }
-     
-    }
-    public function Grafico4(Request $Request){
-
-       if (isset($Request->Inicio) && isset($Request->Final)) {
-        $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
-      } else{
-        $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
-
+            }
+       
       }
-
-
-      $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.Voltajea'
-                                                                        OR mt_name='AASA--ION8650.Voltajeb'
-                                                                        OR mt_name='AASA--ION8650.Voltajec'
-                                                                        OR mt_name='AASA--ION8650.VoltajePromedio')
-                                                                        $Condition
-                                                                        ORDER BY mt_name, mt_time ASC LIMIT 1000");
-                  $j=0;
-                  $k=0;                  
-                  $h=0;
-                  $g=0;
-                for ($i=0; $i <count($datos) ; $i++) { 
-                  if ($datos[$i]->mt_name=='AASA--ION8650.Voltajea') {
-                    $Voltajea_mt_value[$j]=$datos[$i]->mt_value;
-                    $Voltajea_mt_time[$j]=$datos[$i]->mt_time;
-                    $j++;
-                  }
-                  if ($datos[$i]->mt_name=='AASA--ION8650.Voltajeb') {
-                    $Voltajeb_mt_value[$k]=$datos[$i]->mt_value;
-                    $Voltajeb_mt_time[$k]=$datos[$i]->mt_time;
-                    $k++;
-                  }
-                  if ($datos[$i]->mt_name=='AASA--ION8650.Voltajec') {
-                    $Voltajec_mt_value[$h]=$datos[$i]->mt_value;
-                    $Voltajec_mt_time[$h]=$datos[$i]->mt_time;
-                    $h++;
-                  }
-                  if ($datos[$i]->mt_name=='AASA--ION8650.VoltajePromedio') {
-                    $VoltajePromedio_mt_value[$g]=$datos[$i]->mt_value;
-                    $VoltajePromedio_mt_time[$g]=$datos[$i]->mt_time;
-                    $g++;
-                  }
-                  if ($i==0) {
-                    $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
-                    $MaxDato=0;
-                  } else{
-                    if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
-                      $MinDato=$datos[$i]->mt_value;
-                    }
-                    if ($MaxDato<$datos[$i]->mt_value) {
-                      $MaxDato=$datos[$i]->mt_value;
-                    }
-                  }
-                }
-
-      ?><script>
-          var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
-          var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
-          var Voltajea_mt_value = '<?php echo json_encode($Voltajea_mt_value); ?>';
-          Voltajea_mt_value = JSON.parse(Voltajea_mt_value)
-          var Voltajea_mt_time = '<?php echo json_encode($Voltajea_mt_time); ?>';
-          Voltajea_mt_time = JSON.parse(Voltajea_mt_time)
-
-          var Voltajeb_mt_value = '<?php echo json_encode($Voltajeb_mt_value); ?>';
-          Voltajeb_mt_value = JSON.parse(Voltajeb_mt_value)
-
-          var Voltajec_mt_value = '<?php echo json_encode($Voltajec_mt_value); ?>';
-          Voltajec_mt_value = JSON.parse(Voltajec_mt_value)
-
-          var VoltajePromedio_mt_value = '<?php echo json_encode($VoltajePromedio_mt_value); ?>';
-          VoltajePromedio_mt_value = JSON.parse(VoltajePromedio_mt_value)
-
-      </script><?php
-
-
-      if ($Request->Modal) { 
-
-            ?><script>
-              var mt_time_def1 = Voltajea_mt_time;
-              var mt_value_def1 = Voltajea_mt_value;
-              var mt_value_def2 = Voltajeb_mt_value;
-              var mt_value_def3 = Voltajec_mt_value;
-              var mt_value_def4 = VoltajePromedio_mt_value;
-              var Grac=2;
-              var grafper=4;
-
-
-              var nombre_1 = "Fecha";
-              var nombre_2 = "Voltaje A";
-              var nombre_3 = "Voltaje B";
-              var nombre_4 = "Voltaje C";
-              var nombre_5 = "Voltaje Promedio";
-
-
-            </script><?php
-
-            return view("modals.SicutIgnis.submodal");
-
-          } else{ 
-
-            ?><script>
-              GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_mt_time, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
-              FuncionesCompletas++;
-              FuncionExportacion(FuncionesCompletas);
-            </script><?php
-
-          } 
-     
-    }
-    public function Grafico5(Request $Request){
-
-
-
-        if (isset($Request->Inicio) && isset($Request->Final)) {
-        $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
-      } else{
-        $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
-
-      }
-
-      $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) 
-                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
-                                                OR mt_name='AASA--ION8650.EnerActRet' 
-                                                OR mt_name='AASA--ION8650.EnerReactIny' 
-                                                OR mt_name='AASA--ION8650.EnerReactRet')
-                                                $Condition 
-                                                ORDER BY mt_name, mt_time DESC LIMIT 1000;");
-
-
-                $j=0; $k=0; $h=0; $g=0;
-                for ($i=0; $i <count($datos) ; $i++) { 
-                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny') {
-                      $EnerActIny_value[$j]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                      $EnerActIny_time[$j]=$datos[$i]->mt_time;
-                      $j++;
-                    }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
-                      $EnerActRet_value[$k]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                      $k++;
-                    }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny') {
-                      $EnerReactIny_mt_value[$h]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                      $h++;
-                    }
-                    if ($i!=count($datos)-1) {
-                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet') {
-                        $EnerReactRet_mt_value[$g]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                        $g++;
-                      }
-                  } 
-
-                }
-
-                for ($i=0; $i <count($EnerActIny_time)-1 ; $i++) { 
-                  if ($EnerReactIny_mt_value[$i]==0) {
-                    $FPiny[$i]=0;
-                  } else{
-                    $FPiny[$i]=$EnerActIny_value[$i]/$EnerReactIny_mt_value[$i];
-                    $FPiny[$i]=cos(atan($FPiny[$i]));
-                  }
-                  if ($EnerReactRet_mt_value[$i]==0) {
-                    $FPret[$i]=0;
-                  } else{
-                    $FPret[$i]=$EnerActRet_value[$i]/$EnerReactRet_mt_value[$i];
-                    $FPret[$i]=cos(atan($FPret[$i]));
-                  }
-
-                  if ($i==0) {
-                    $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
-                    $MaxDato=0;
-                  } else{
-                    if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
-                      $MinDato=$datos[$i]->mt_value;
-                    }
-                    if ($MaxDato<$datos[$i]->mt_value) {
-                      $MaxDato=$datos[$i]->mt_value;
-                    }
-                }
-
-                } 
-
-
-
-      ?><script>
-
-        var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
-        var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
-
-
-        var FPret = '<?php echo json_encode($FPret); ?>';
-        FPret = JSON.parse(FPret)
-
-        var FPiny = '<?php echo json_encode($FPiny); ?>';
-        FPiny = JSON.parse(FPiny)
-
-        var mt_time = '<?php echo json_encode($EnerActIny_time); ?>';
-        mt_time = JSON.parse(mt_time)
-
-  
-
-
-      </script><?php
-
-      if ($Request->Modal) { 
-
-            ?><script>
-              var mt_time_def1 = mt_time;
-              var mt_value_def1 = FPiny;
-              var mt_value_def2 = FPret;
-              var Grac=1;
-              var grafper=5;
-
-              var nombre_1 = "Fecha";
-              var nombre_2 = "Factor Potencia Inyectada";
-              var nombre_3 = "Factor Potencia Retirada";
-            </script><?php
-
-            return view("modals.SicutIgnis.submodal");
-
-          } else{ 
-
-            ?><script>
-              $("#FactorPotencia_td").text(FPiny[FPiny.length-1]);
-            GraficosPotenciaINY("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
-            </script><?php
-
-          } 
-
-
-     
-     
-    }
-
-    public function Grafico7(Request $Request){
+      public function Grafico4(Request $Request){
 
          if (isset($Request->Inicio) && isset($Request->Final)) {
-        $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
-      } else{
-        $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
-
-      }
-
-
-      $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index)
-                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
-                                                OR mt_name='AASA--ION8650.EnerActRet')
-                                                $Condition
-                                                ORDER BY mt_name, mt_time ASC LIMIT 1000;");
-
-        $j=0; $k=0;
-        for ($i=0; $i <count($datos) ; $i++) { 
-
-            if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
-              if ($j==0) {
-                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
-                $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
-              } else{
-                if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4);
-                  $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
-                }
-              }
-              $j++;
-            }
-            if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
-              if ($k==0) {
-                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4)*(-1);
-              } else{
-                if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4)*(-1);
-                }
-              }
-              $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
-              $k++;
-            }
-
-            if ($i==0) {
-                    $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
-                    $MaxDato=0;
-                  } else{
-                    if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
-                      $MinDato=$datos[$i]->mt_value;
-                    }
-                    if ($MaxDato<$datos[$i]->mt_value) {
-                      $MaxDato=$datos[$i]->mt_value;
-                    }
-                  }
+          $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+        } else{
+          $Horas=24;
+          $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
 
-
-
-      ?><script>
-
-        var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
-        var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
-
-
-          var EnergiaActivaInyectada_mt_value = '<?php echo json_encode($EnergiaActivaInyectada_mt_value); ?>';
-          EnergiaActivaInyectada_mt_value = JSON.parse(EnergiaActivaInyectada_mt_value)
-          var EnergiaActivaInyectada_mt_time = '<?php echo json_encode($EnergiaActivaInyectada_mt_time); ?>';
-          EnergiaActivaInyectada_mt_time = JSON.parse(EnergiaActivaInyectada_mt_time)
-
-          var EnergiaActivaRetirada_mt_value = '<?php echo json_encode($EnergiaActivaRetirada_mt_value); ?>';
-          EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
-          var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
-          EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
-          var mt_mt=EnergiaActivaRetirada_mt_time;
-
-          EnergiaActivaInyectada_mt_time = Object.keys(EnergiaActivaInyectada_mt_time).map(i => EnergiaActivaInyectada_mt_time[i])
-          EnergiaActivaInyectada_mt_value = Object.keys(EnergiaActivaInyectada_mt_value).map(i => EnergiaActivaInyectada_mt_value[i])
-          EnergiaActivaRetirada_mt_value = Object.keys(EnergiaActivaRetirada_mt_value).map(i => EnergiaActivaRetirada_mt_value[i])
-
-    
-      </script><?php
-
-      if ($Request->Modal) { 
+        $datos = DB::connection('telemetria')
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.Voltajea'
+                                                                          OR mt_name='AASA--ION8650.Voltajeb'
+                                                                          OR mt_name='AASA--ION8650.Voltajec'
+                                                                          OR mt_name='AASA--ION8650.VoltajePromedio')
+                                                                          $Condition
+                                                                          ORDER BY mt_name, mt_time ASC LIMIT 1000");
+                    $j=0;
+                    $k=0;                  
+                    $h=0;
+                    $g=0;
+                  for ($i=0; $i <count($datos) ; $i++) { 
+                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajea') {
+                      $Voltajea_mt_value[$j]=$datos[$i]->mt_value;
+                      $Voltajea_mt_time[$j]=$datos[$i]->mt_time;
+                      $j++;
+                    }
+                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajeb') {
+                      $Voltajeb_mt_value[$k]=$datos[$i]->mt_value;
+                      $Voltajeb_mt_time[$k]=$datos[$i]->mt_time;
+                      $k++;
+                    }
+                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajec') {
+                      $Voltajec_mt_value[$h]=$datos[$i]->mt_value;
+                      $Voltajec_mt_time[$h]=$datos[$i]->mt_time;
+                      $h++;
+                    }
+                    if ($datos[$i]->mt_name=='AASA--ION8650.VoltajePromedio') {
+                      $VoltajePromedio_mt_value[$g]=$datos[$i]->mt_value;
+                      $VoltajePromedio_mt_time[$g]=$datos[$i]->mt_time;
+                      $g++;
+                    }
+                    if ($i==0) {
+                      $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
+                      $MaxDato=0;
+                    } else{
+                      if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
+                        $MinDato=$datos[$i]->mt_value;
+                      }
+                      if ($MaxDato<$datos[$i]->mt_value) {
+                        $MaxDato=$datos[$i]->mt_value;
+                      }
+                    }
+                  }
 
         ?><script>
-              var mt_time_def1 = EnergiaActivaInyectada_mt_time;
-              var mt_value_def1 = EnergiaActivaInyectada_mt_value;
-              var mt_value_def2 = EnergiaActivaRetirada_mt_value;
-              var Grac=1;
-              var grafper=7;
+            var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
+            var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
+            var Voltajea_mt_value = '<?php echo json_encode($Voltajea_mt_value); ?>';
+            Voltajea_mt_value = JSON.parse(Voltajea_mt_value)
+            var Voltajea_mt_time = '<?php echo json_encode($Voltajea_mt_time); ?>';
+            Voltajea_mt_time = JSON.parse(Voltajea_mt_time)
 
-              var nombre_1 = "Fecha";
-              var nombre_2 = "Potencia Inyectada";
-              var nombre_3 = "Potencia Retirada";
+            var Voltajeb_mt_value = '<?php echo json_encode($Voltajeb_mt_value); ?>';
+            Voltajeb_mt_value = JSON.parse(Voltajeb_mt_value)
 
-            </script><?php
+            var Voltajec_mt_value = '<?php echo json_encode($Voltajec_mt_value); ?>';
+            Voltajec_mt_value = JSON.parse(Voltajec_mt_value)
 
-            return view("modals.SicutIgnis.submodal");
+            var VoltajePromedio_mt_value = '<?php echo json_encode($VoltajePromedio_mt_value); ?>';
+            VoltajePromedio_mt_value = JSON.parse(VoltajePromedio_mt_value)
 
-          } else{ 
-
-            ?><script>
-              var last =  function(array, n) {
-                if (array == null) 
-                  return void 0;
-                if (n == null) 
-                   return array[array.length - 1];
-                return array.slice(Math.max(array.length - n, 0));  
-                };
-
-              $("#PoteIny").text(last(EnergiaActivaInyectada_mt_value));
-              $("#PoteRet").text(last(EnergiaActivaRetirada_mt_value));
-            PotGenerada(EnergiaActivaInyectada_mt_time, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
-            FuncionesCompletas++;
-            FuncionExportacion(FuncionesCompletas);
-            </script><?php
-
-          } 
-     
-     
-    }
+        </script><?php
 
 
-    public function ExportarSicutExcel(Request $Request){
+        if ($Request->Modal) { 
+
+              ?><script>
+                var mt_time_def1 = Voltajea_mt_time;
+                var mt_value_def1 = Voltajea_mt_value;
+                var mt_value_def2 = Voltajeb_mt_value;
+                var mt_value_def3 = Voltajec_mt_value;
+                var mt_value_def4 = VoltajePromedio_mt_value;
+                var Grac=2;
+                var grafper=4;
 
 
-        return Excel::download(new UsersExport, "Datos.xlsx");
-   }
-}
+                var nombre_1 = "Fecha";
+                var nombre_2 = "Voltaje A";
+                var nombre_3 = "Voltaje B";
+                var nombre_4 = "Voltaje C";
+                var nombre_5 = "Voltaje Promedio";
 
 
+              </script><?php
 
+              return view("modals.SicutIgnis.submodal");
 
-class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
-{
-    use Exportable;
+            } else{ 
 
-    public function collection(){
+              ?><script>
+                GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_mt_time, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
+                FuncionesCompletas++;
+                FuncionExportacion(FuncionesCompletas);
+              </script><?php
 
-      if (isset($_POST['EnergiaActivaInyectada_mt_time'])) {
-        return collect(self::RecopDat());
+            } 
+       
       }
+      public function Grafico5(Request $Request){
 
-      if ($_POST["tipo"]==1) {
-        return collect(self::RecopDat2());
-      }
 
-      if ($_POST["tipo"]==2) {
-        return collect(self::RecopDat3());
-      }
 
+          if (isset($Request->Inicio) && isset($Request->Final)) {
+          $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+        } else{
+          $Horas=24;
+          $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+
+        }
+
+        $datos = DB::connection('telemetria')
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) 
+                                                  WHERE (mt_name='AASA--ION8650.EnerActIny' 
+                                                  OR mt_name='AASA--ION8650.EnerActRet' 
+                                                  OR mt_name='AASA--ION8650.EnerReactIny' 
+                                                  OR mt_name='AASA--ION8650.EnerReactRet')
+                                                  $Condition 
+                                                  ORDER BY mt_name, mt_time DESC LIMIT 1000;");
+
+
+                  $j=0; $k=0; $h=0; $g=0;
+                  for ($i=0; $i <count($datos) ; $i++) { 
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny') {
+                        $EnerActIny_value[$j]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                        $EnerActIny_time[$j]=$datos[$i]->mt_time;
+                        $j++;
+                      }
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+                        $EnerActRet_value[$k]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                        $k++;
+                      }
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny') {
+                        $EnerReactIny_mt_value[$h]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                        $h++;
+                      }
+                      if ($i!=count($datos)-1) {
+                        if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet') {
+                          $EnerReactRet_mt_value[$g]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
+                          $g++;
+                        }
+                    } 
+
+                  }
+
+                  for ($i=0; $i <count($EnerActIny_time)-1 ; $i++) { 
+                    if ($EnerReactIny_mt_value[$i]==0) {
+                      $FPiny[$i]=0;
+                    } else{
+                      $FPiny[$i]=$EnerActIny_value[$i]/$EnerReactIny_mt_value[$i];
+                      $FPiny[$i]=cos(atan($FPiny[$i]));
+                    }
+                    if ($EnerReactRet_mt_value[$i]==0) {
+                      $FPret[$i]=0;
+                    } else{
+                      $FPret[$i]=$EnerActRet_value[$i]/$EnerReactRet_mt_value[$i];
+                      $FPret[$i]=cos(atan($FPret[$i]));
+                    }
+
+                    if ($i==0) {
+                      $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
+                      $MaxDato=0;
+                    } else{
+                      if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
+                        $MinDato=$datos[$i]->mt_value;
+                      }
+                      if ($MaxDato<$datos[$i]->mt_value) {
+                        $MaxDato=$datos[$i]->mt_value;
+                      }
+                  }
+
+                  } 
+
+
+
+        ?><script>
+
+          var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
+          var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
+
+
+          var FPret = '<?php echo json_encode($FPret); ?>';
+          FPret = JSON.parse(FPret)
+
+          var FPiny = '<?php echo json_encode($FPiny); ?>';
+          FPiny = JSON.parse(FPiny)
+
+          var mt_time = '<?php echo json_encode($EnerActIny_time); ?>';
+          mt_time = JSON.parse(mt_time)
+
+    
+
+
+        </script><?php
+
+        if ($Request->Modal) { 
+
+              ?><script>
+                var mt_time_def1 = mt_time;
+                var mt_value_def1 = FPiny;
+                var mt_value_def2 = FPret;
+                var Grac=1;
+                var grafper=5;
+
+                var nombre_1 = "Fecha";
+                var nombre_2 = "Factor Potencia Inyectada";
+                var nombre_3 = "Factor Potencia Retirada";
+              </script><?php
+
+              return view("modals.SicutIgnis.submodal");
+
+            } else{ 
+
+              ?><script>
+                $("#FactorPotencia_td").text(FPiny[FPiny.length-1]);
+              GraficosPotenciaINY("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
+              </script><?php
+
+            } 
 
 
        
-    }
-
-    public function headings(): array
-    {
-      
-        return self::RecopHeader();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public function RecopHeader()
-{
-
-  if ($_POST["tipo"]==1) {
-    $hed =[
-                      $_POST["nombre_1"],
-                      $_POST["nombre_2"],
-                      $_POST["nombre_3"],
-                    ];
-  }
-
-
-  if ($_POST["tipo"]==2) {
-    $hed =[
-                      $_POST["nombre_1"],
-                      $_POST["nombre_2"],
-                      $_POST["nombre_3"],
-                      $_POST["nombre_4"],
-                      $_POST["nombre_5"],
-                    ];
-  }
-
-  if (isset($_POST['EnergiaActivaInyectada_mt_time'])) {
-        $hed =[
-                      'Fecha',
-                      'Ene Act Inyectada (kWh)',
-                      'Ene Act Retirada (kWh)',
-                      'Ene React Inyectada (kVARh)',
-                      'Ene React Retirada (kVARh)',
-                      'VL AB',
-                      'VL BC',
-                      'VL CA',
-                      'VL Promedio',
-                      'V A',
-                      'V B',
-                      'V C',
-                      'V Promedio',
-                      'FP A',
-                      'FP B',
-                      'FP C',
-                      'FP Total'
-                    ];
+       
       }
-  return $hed;
-}
+
+      public function Grafico7(Request $Request){
+
+           if (isset($Request->Inicio) && isset($Request->Final)) {
+          $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+        } else{
+          $Horas=24;
+          $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+
+        }
+
+
+        $datos = DB::connection('telemetria')
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index)
+                                                  WHERE (mt_name='AASA--ION8650.EnerActIny' 
+                                                  OR mt_name='AASA--ION8650.EnerActRet')
+                                                  $Condition
+                                                  ORDER BY mt_name, mt_time ASC LIMIT 1000;");
+
+          $j=0; $k=0;
+          for ($i=0; $i <count($datos) ; $i++) { 
+
+              if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
+                if ($j==0) {
+                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
+                  $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                } else{
+                  if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
+                    $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4);
+                    $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                  }
+                }
+                $j++;
+              }
+              if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+                if ($k==0) {
+                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4)*(-1);
+                } else{
+                  if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
+                    $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4)*(-1);
+                  }
+                }
+                $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
+                $k++;
+              }
+
+              if ($i==0) {
+                      $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
+                      $MaxDato=0;
+                    } else{
+                      if ($MinDato>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
+                        $MinDato=$datos[$i]->mt_value;
+                      }
+                      if ($MaxDato<$datos[$i]->mt_value) {
+                        $MaxDato=$datos[$i]->mt_value;
+                      }
+                    }
+
+          }
 
 
 
 
-public function RecopDat2(){
+        ?><script>
+
+          var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
+          var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
 
 
-            $m_time    = explode(",", $_POST['mt_time']);
-            $m_value_1   = explode(",", $_POST['mt_value_1']);
-            $m_value_2    = explode(",", $_POST['mt_value_2']);
+            var EnergiaActivaInyectada_mt_value = '<?php echo json_encode($EnergiaActivaInyectada_mt_value); ?>';
+            EnergiaActivaInyectada_mt_value = JSON.parse(EnergiaActivaInyectada_mt_value)
+            var EnergiaActivaInyectada_mt_time = '<?php echo json_encode($EnergiaActivaInyectada_mt_time); ?>';
+            EnergiaActivaInyectada_mt_time = JSON.parse(EnergiaActivaInyectada_mt_time)
 
-            for ($i=0; $i <count($m_value_2); $i++) { 
-               $Datos[$i]["m_time"]=$m_time[$i];
-               $Datos[$i]["m_value_1"]=$m_value_1[$i];
-               $Datos[$i]["m_value_2"]=$m_value_2[$i];
-           }
+            var EnergiaActivaRetirada_mt_value = '<?php echo json_encode($EnergiaActivaRetirada_mt_value); ?>';
+            EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
+            var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
+            EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
+            var mt_mt=EnergiaActivaRetirada_mt_time;
 
+            EnergiaActivaInyectada_mt_time = Object.keys(EnergiaActivaInyectada_mt_time).map(i => EnergiaActivaInyectada_mt_time[i])
+            EnergiaActivaInyectada_mt_value = Object.keys(EnergiaActivaInyectada_mt_value).map(i => EnergiaActivaInyectada_mt_value[i])
+            EnergiaActivaRetirada_mt_value = Object.keys(EnergiaActivaRetirada_mt_value).map(i => EnergiaActivaRetirada_mt_value[i])
 
-           return $Datos;
-}
+      
+        </script><?php
 
+        if ($Request->Modal) { 
 
+          ?><script>
+                var mt_time_def1 = EnergiaActivaInyectada_mt_time;
+                var mt_value_def1 = EnergiaActivaInyectada_mt_value;
+                var mt_value_def2 = EnergiaActivaRetirada_mt_value;
+                var Grac=1;
+                var grafper=7;
 
-public function RecopDat3(){
-            
+                var nombre_1 = "Fecha";
+                var nombre_2 = "Potencia Inyectada";
+                var nombre_3 = "Potencia Retirada";
 
-            $m_time    = explode(",", $_POST['mt_time']);
-            $m_value_1   = explode(",", $_POST['mt_value_1']);
-            $m_value_2    = explode(",", $_POST['mt_value_2']);
-            $m_value_3    = explode(",", $_POST['mt_value_3']);
-            $m_value_4    = explode(",", $_POST['mt_value_4']);
+              </script><?php
 
-            for ($i=0; $i <count($m_value_2); $i++) { 
-               $Datos[$i]["m_time"]=$m_time[$i];
-               $Datos[$i]["m_value_1"]=$m_value_1[$i];
-               $Datos[$i]["m_value_2"]=$m_value_2[$i];
-               $Datos[$i]["m_value_3"]=$m_value_3[$i];
-               $Datos[$i]["m_value_4"]=$m_value_4[$i];
-           }
+              return view("modals.SicutIgnis.submodal");
 
+            } else{ 
 
-           return $Datos;
-}
+              ?><script>
+                var last =  function(array, n) {
+                  if (array == null) 
+                    return void 0;
+                  if (n == null) 
+                     return array[array.length - 1];
+                  return array.slice(Math.max(array.length - n, 0));  
+                  };
 
+                $("#PoteIny").text(last(EnergiaActivaInyectada_mt_value));
+                $("#PoteRet").text(last(EnergiaActivaRetirada_mt_value));
+              PotGenerada(EnergiaActivaInyectada_mt_time, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
+              FuncionesCompletas++;
+              FuncionExportacion(FuncionesCompletas);
+              </script><?php
 
-
-
-
-
-
-
-      public function RecopDat(){
-
-              $hed =[
-                      'Fecha',
-                      'Ene Act Inyectada (kWh)',
-                      'Ene Act Retirada (kWh)',
-                      'Ene React Inyectada (kVARh)',
-                      'Ene React Retirada (kVARh)',
-                      'VL AB',
-                      'VL BC',
-                      'VL CA',
-                      'VL Promedio',
-                      'V A',
-                      'V B',
-                      'V C',
-                      'V Promedio',
-                      'FP A',
-                      'FP B',
-                      'FP C',
-                      'FP Total'
-                    ];
-
-      define("HeadDefin", $hed);
-
-      $EnergiaActivaInyectada_mt_time    = explode(",", $_POST['EnergiaActivaInyectada_mt_time']);
-      $EnergiaActivaInyectada_mt_value   = explode(",", $_POST['EnergiaActivaInyectada_mt_value']);
-      $EnergiaActivaRetirada_mt_value    = explode(",", $_POST['EnergiaActivaRetirada_mt_value']);
-
-      $EnergiaReactivaInyectada_mt_time  = explode(",", $_POST['EnergiaReactivaInyectada_mt_time']);
-      $EnergiaReactivaInyectada_mt_value = explode(",", $_POST['EnergiaReactivaInyectada_mt_value']);
-      $EnergiaReactivaRetirada_mt_value  = explode(",", $_POST['EnergiaReactivaRetirada_mt_value']);
-
-      $VoltajeLineaab_mt_time            = explode(",", $_POST['VoltajeLineaab_mt_time']);
-      $VoltajeLineaab_mt_value           = explode(",", $_POST['VoltajeLineaab_mt_value']);
-      $VoltajeLineabc_mt_value           = explode(",", $_POST['VoltajeLineabc_mt_value']);
-      $VoltajeLineaca_mt_value           = explode(",", $_POST['VoltajeLineaca_mt_value']);
-      $VoltajeLineaPromedio_mt_value     = explode(",", $_POST['VoltajeLineaPromedio_mt_value']);
-
-      $Voltajea_mt_time                  = explode(",", $_POST['Voltajea_mt_time']);
-      $Voltajea_mt_value                 = explode(",", $_POST['Voltajea_mt_value']);
-      $Voltajeb_mt_value                 = explode(",", $_POST['Voltajeb_mt_value']);
-      $Voltajec_mt_value                 = explode(",", $_POST['Voltajec_mt_value']);
-      $VoltajePromedio_mt_value          = explode(",", $_POST['VoltajePromedio_mt_value']);
-
-      $FactorPotenciaa_mt_time           = explode(",", $_POST['FactorPotenciaa_mt_time']);
-      $FactorPotenciaa_mt_value          = explode(",", $_POST['FactorPotenciaa_mt_value']);
-      $FactorPotenciab_mt_value          = explode(",", $_POST['FactorPotenciab_mt_value']);
-      $FactorPotenciac_mt_value          = explode(",", $_POST['FactorPotenciac_mt_value']);
-      $FactorPotenciaTotal_mt_value      = explode(",", $_POST['FactorPotenciaTotal_mt_value']);
+            } 
+       
+       
+      }
 
 
-    
+      public function ExportarSicutExcel(Request $Request){
 
-      for ($i=0; $i <count($EnergiaActivaInyectada_mt_time); $i++) { 
-         for ($k=0; $k < 3 ; $k++) { 
-           $Datos[$i]["EnergiaActivaInyectada_mt_time"]=$EnergiaActivaInyectada_mt_time[$i];
-           $Datos[$i]["EnergiaActivaInyectada_mt_value"]=$EnergiaActivaInyectada_mt_value[$i];
-           $Datos[$i]["EnergiaActivaRetirada_mt_value"]=$EnergiaActivaRetirada_mt_value[$i];
-         }
-       }
 
-       for ($i=0; $i <count($EnergiaReactivaInyectada_mt_time); $i++) { 
-         for ($k=0; $k < 3 ; $k++) { 
-           $Datos[$i]["EnergiaReactivaInyectada_mt_value"]=$EnergiaReactivaInyectada_mt_value[$i];
-           $Datos[$i]["EnergiaReactivaRetirada_mt_value"]=$EnergiaReactivaRetirada_mt_value[$i];
-         }
-       }
+          return Excel::download(new UsersExport, "Datos.xlsx");
+     }
 
-       for ($i=0; $i <count($VoltajeLineaab_mt_time); $i++) { 
-         for ($k=0; $k < 6 ; $k++) { 
-           $Datos[$i]["VoltajeLineaab_mt_value"]=$VoltajeLineaab_mt_value[$i];
-           $Datos[$i]["VoltajeLineabc_mt_value"]=$VoltajeLineabc_mt_value[$i];
-           $Datos[$i]["VoltajeLineaca_mt_value"]=$VoltajeLineaca_mt_value[$i];
-           $Datos[$i]["VoltajeLineaPromedio_mt_value"]=$VoltajeLineaPromedio_mt_value[$i];
-         }
-       }
 
-       for ($i=0; $i <count($VoltajeLineaab_mt_time); $i++) { 
-         for ($k=0; $k < 6 ; $k++) { 
-           $Datos[$i]["Voltajea_mt_value"]=$Voltajea_mt_value[$i];
-           $Datos[$i]["Voltajeb_mt_value"]=$Voltajeb_mt_value[$i];
-           $Datos[$i]["Voltajec_mt_value"]=$Voltajec_mt_value[$i];
-           $Datos[$i]["VoltajePromedio_mt_value"]=$VoltajePromedio_mt_value[$i];
-         }
-       }
+     public function ExportarAasa()
+     {
+       return Excel::download(new AasaExport, 'Aasa.xlsx');
+     }
+  }
 
-       for ($i=0; $i <count($VoltajeLineaab_mt_time); $i++) { 
-         for ($k=0; $k < 6 ; $k++) { 
-           $Datos[$i]["FactorPotenciaa_mt_value"]=$FactorPotenciaa_mt_value[$i];
-           $Datos[$i]["FactorPotenciab_mt_value"]=$FactorPotenciab_mt_value[$i];
-           $Datos[$i]["FactorPotenciac_mt_value"]=$FactorPotenciac_mt_value[$i];
-           $Datos[$i]["FactorPotenciaTotal_mt_value"]=$FactorPotenciaTotal_mt_value[$i];
-         }
-       }
 
-       return $Datos;
-    }
 
-}
+
+ 

@@ -210,7 +210,7 @@
                         </div>
                         <div class="modal-footer">
                           <div align="center">
-                            <button class="btn btn-primary" id="SicutExportarExcel" disabled>Exportar a Excel</button>
+                            <a href="{{Request::root()}}/ExportarAasa" target="_blank" class="btn btn-primary" id="SicutExportarExcel">Exportar a Excel</a>
                           </div>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                         </div>

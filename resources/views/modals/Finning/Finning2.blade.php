@@ -51,38 +51,38 @@
          
          <div class="modal-body table-custom" style="padding-top: 0;margin-top: 35px">
             <div class="row">   
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h1 align="center" style="margin-top: 35px;font-size: 22px">Pozo Nave 4</h1>
                     <canvas id="pozo4" width="100%"></canvas>  
                     <div style="margin-top: -50px"></div>
-                    <canvas id="pozo4Chart" width="400" height="150"></canvas>
+                    <canvas id="pozo4Chart" width="400" height="200"></canvas>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h1 align="center" style="margin-top: 35px;font-size: 22px">Planta Agua</h1>
                     <canvas id="plantaAgua" width="100%"></canvas>
-                    <div class="row" style="margin-top: -83px">
+                    <div class="row" style="margin-top: -68px">
                       <div class="col-md-6" align="center">
                         {{-- style="filter: hue-rotate(327deg)" --}}
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" data-mt_name='{{$Datos["PlantaAgua"][0]->mt_name}}' data-mt_value='{{$Datos["PlantaAgua"][0]->mt_value}}' @if ($Datos["PlantaAgua"][0]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][0]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
                       </div>
                       <div class="col-md-6" align="center">
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" data-mt_name='{{$Datos["PlantaAgua"][1]->mt_name}}' data-mt_value='{{$Datos["PlantaAgua"][1]->mt_value}}' @if ($Datos["PlantaAgua"][1]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][1]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
                       </div>
                     </div>
-                    <canvas id="plantaAguaChart" width="400" height="150"></canvas>
+                    <canvas id="plantaAguaChart" width="400" height="200"></canvas>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h1 align="center" style="margin-top: 35px;font-size: 22px">Planta Agua</h1>
                     <canvas id="plantaAgua2" width="100%"></canvas>
-                    <div class="row" style="margin-top: -83px">
+                    <div class="row" style="margin-top: -68px">
                       <div class="col-md-6" align="center">
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" data-mt_name='{{$Datos["PlantaAgua"][2]->mt_name}}' data-mt_value='{{$Datos["PlantaAgua"][2]->mt_value}}' @if ($Datos["PlantaAgua"][2]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][2]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
                       </div>
                       <div class="col-md-6" align="center">
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" data-mt_name='{{$Datos["PlantaAgua"][3]->mt_name}}' data-mt_value='{{$Datos["PlantaAgua"][3]->mt_value}}' @if ($Datos["PlantaAgua"][3]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][3]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
                       </div>
                     </div>
-                    <canvas id="dinamometroChart" width="400" height="150"></canvas>
+                    <canvas id="dinamometroChart" width="400" height="200"></canvas>
                 </div>
                 <div class="col-md-3">
                     
@@ -199,9 +199,10 @@ if (tipo==1) {
 
 var gauge = new RadialGauge({
     renderTo: id,
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     units: title,
+    lineWidth: 0.23, // The line thickness
     value: valor,
     minValue: 0,
     startAngle: 90,
@@ -209,12 +210,11 @@ var gauge = new RadialGauge({
     valueBox: false,
     maxValue: 100,
     majorTicks: [
-        "0",
-        "20",
-        "40",
-        "60",
-        "80",
-        "100",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
     ],
     minorTicks: 2,
     strokeTicks: true,
@@ -283,7 +283,7 @@ var mt_time=[];
 @for ($i = 0; $i < count($Datos["Grafico1"]); $i++)
   PlantaAgua1.push("{{$Datos["Grafico1"][$i]->mt_value}}");
   PlantaAgua2.push("{{$Datos["Grafico2"][$i]->mt_value}}");
-  mt_time.push("{{date_format(date_create($Datos["Grafico1"][$i]->mt_time), 'i:s')}}");
+  mt_time.push("{{date_format(date_create($Datos["Grafico1"][$i]->mt_time), 'H:i')}}");
 @endfor
 
 console.log(PlantaAgua1)

@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Exports;
 
-use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithEvents; 
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Finning;
-
-use Request;
 use DB;
-use Auth;
 
-class PruebaController extends Controller{
-
-
-    public function index(){
-
-
-
-
+class AasaExport implements FromView, ShouldAutoSize
+{
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+     public function view(): View
+    {
+        
 
 
 
@@ -92,7 +91,7 @@ class PruebaController extends Controller{
 
         }
 
-		$regkWh["mt_time"]                = $EnergiaActivaRetirada_mt_time;
+		$regkWh["Fecha y Hora"]                = $EnergiaActivaRetirada_mt_time;
 		$regkWh["EnergiaActivaInyectada"] = $EnergiaActivaInyectada_mt_value;
 		$regkWh["EnergiaActivaRetirada"]  = $EnergiaActivaRetirada_mt_value;
 
@@ -184,7 +183,6 @@ class PruebaController extends Controller{
 
         }
 
-        $regkVAR['mt_time']=$EnergiaReactivaInyectada_mt_time;
         $regkVAR['EnergiaReactivaInyectada']=$EnergiaReactivaInyectada_mt_value;
         $regkVAR['EnergiaReactivaRetirada']=$EnergiaReactivaRetirada_mt_value;
         $Datos["regkVAR"]=$regkVAR;	
@@ -270,39 +268,9 @@ class PruebaController extends Controller{
           }
 
 
-        $PotenciakW['mt_time']=$EnergiaActivaRetirada_mt_time;
         $PotenciakW['EnergiaReactivaInyectada']=$EnergiaActivaInyectada_mt_value;
         $PotenciakW['EnergiaReactivaRetirada']=$EnergiaActivaRetirada_mt_value;
         $Datos["PotenciakW"]=$PotenciakW;	
-
-
-        ?><script>
-
-          var MinDato=parseInt('<?php echo $MinDato; ?>', 10);
-          var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
-
-
-            var EnergiaActivaInyectada_mt_value = '<?php echo json_encode($EnergiaActivaInyectada_mt_value); ?>';
-            EnergiaActivaInyectada_mt_value = JSON.parse(EnergiaActivaInyectada_mt_value)
-            var EnergiaActivaInyectada_mt_time = '<?php echo json_encode($EnergiaActivaInyectada_mt_time); ?>';
-            EnergiaActivaInyectada_mt_time = JSON.parse(EnergiaActivaInyectada_mt_time)
-
-            var EnergiaActivaRetirada_mt_value = '<?php echo json_encode($EnergiaActivaRetirada_mt_value); ?>';
-            EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
-            var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
-            EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
-            var mt_mt=EnergiaActivaRetirada_mt_time;
-
-            EnergiaActivaInyectada_mt_time = Object.keys(EnergiaActivaInyectada_mt_time).map(i => EnergiaActivaInyectada_mt_time[i])
-            EnergiaActivaInyectada_mt_value = Object.keys(EnergiaActivaInyectada_mt_value).map(i => EnergiaActivaInyectada_mt_value[i])
-            EnergiaActivaRetirada_mt_value = Object.keys(EnergiaActivaRetirada_mt_value).map(i => EnergiaActivaRetirada_mt_value[i])
-
-      
-        </script><?php
-
-
-
-
 
 
 
@@ -375,7 +343,6 @@ class PruebaController extends Controller{
                   }
                 }
 
-                $VoltajeLineas["mt_time"]=$VoltajeLineaab_mt_value;
                 $VoltajeLineas["VoltajeLineaab"]=$VoltajeLineaab_mt_value;
                 $VoltajeLineas["VoltajeLineabc"]=$VoltajeLineabc_mt_value;
                 $VoltajeLineas["VoltajeLineaca"]=$VoltajeLineaca_mt_value;
@@ -451,7 +418,6 @@ class PruebaController extends Controller{
                     }
                   }
 
-	        	$VoltajeFases["mt_time"]=$Voltajea_mt_time;
                 $VoltajeFases["Voltajea"]=$Voltajea_mt_value;
                 $VoltajeFases["Voltajeb"]=$Voltajeb_mt_value;
                 $VoltajeFases["Voltajec"]=$Voltajec_mt_value;
@@ -547,8 +513,5 @@ class PruebaController extends Controller{
                 $Datos["FactorPotencia"]=$FactorPotencia;
 
        				return view("exports.Aasa.aasaExport",["Datos" => $Datos]);
-				}
-
+    }
 }
-
-

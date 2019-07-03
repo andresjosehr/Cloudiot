@@ -102,6 +102,7 @@ Route::post('GraficoSigutIgnis4','SicutIgnisController@Grafico4')->middleware("v
 Route::post('GraficoSigutIgnis5','SicutIgnisController@Grafico5')->middleware("verificar_login");
 Route::post('GraficoSigutIgnis6','SicutIgnisController@Grafico6')->middleware("verificar_login");
 Route::post('GraficoSigutIgnis7','SicutIgnisController@Grafico7')->middleware("verificar_login");
+Route::get('ExportarAasa','SicutIgnisController@ExportarAasa')->middleware("verificar_login");
 
 
 
