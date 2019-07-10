@@ -71,30 +71,30 @@
                  });
 
 
-              function GrafDef(id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato, max_dato, label1, label2) {
+              function GrafDef(id, mt_value1, dt_utc1, mt_value2, dt_utc2, min_dato, max_dato, label1, label2) {
 
                 
                     var ctx = document.getElementById(id).getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: mt_time1,
+                            labels: dt_utc1,
                             datasets: [{
-                                yAxisID: 'A',
                                 label: label1,
                                 data: mt_value1,
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(66, 134, 244, 0.2)',
+                                borderColor    : 'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             },
                             {   
-                                yAxisID: 'B',
                                 label: label2,
                                 data: mt_value2,
-                                backgroundColor: 'rgba(66, 134, 244, 0.2)',
-                                borderColor: 'rgba(66, 134, 244, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor    : 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             }]
                         },
@@ -107,13 +107,6 @@
                                 intersect: false
                             },
                             scales: {
-                                yAxes: [{
-                                    id: 'A',
-                                    position: 'left'
-                                  }, {
-                                    id: 'B',
-                                    position: 'right'
-                                  }],
                                 xAxes: [{
                                     ticks: {
                                         display: false, 
@@ -126,19 +119,20 @@
                   }
 
 
-                   function GrafDef2(id, mt_value1, mt_time1, mt_value2, mt_value3, mt_value4, min_dato, max_dato, label1, label2, label3, label4, loading, oculto) {
+                   function GrafDef2(id, mt_value1, dt_utc1, mt_value2, mt_value3, mt_value4, min_dato, max_dato, label1, label2, label3, label4, loading, oculto) {
 
                    var ctx = document.getElementById(id).getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: mt_time1,
+                            labels: dt_utc1,
                             datasets: [{
                                 label: label1,
                                 data: mt_value1,
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             },
                             {
@@ -147,6 +141,7 @@
                                 backgroundColor: 'rgba(66, 134, 244, 0.2)',
                                 borderColor: 'rgba(66, 134, 244, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0
                             },
                             {
@@ -155,12 +150,14 @@
                                 backgroundColor: 'rgba(242, 255, 0, 0.2)',
                                 borderColor: 'rgba(242, 255, 0, 1)',
                                 borderWidth: 1,
+                                fill: false,
                                 radius: 0,
                                 hidden: oculto
                             },
                             {
                                 label: label4,
                                 data: mt_value4,
+                                fill: false,
                                 backgroundColor: 'rgba(8, 255, 0, 0.2)',
                                 borderColor: 'rgba(8, 255, 0, 1)',
                                 borderWidth: 1,
@@ -197,10 +194,10 @@
 }
 
                   if (Grac==1) {
-                      GrafDef("myChart0", mt_value_def1, mt_time_def1, mt_value_def2, mt_time_def1, MinDato, MaxDato, "Inyectada", "Retirada");
+                      GrafDef("myChart0", mt_value_def1, dt_utc_def1, mt_value_def2, dt_utc_def1, MinDato, MaxDato, "Inyectada", "Retirada");
                       SubirDatos1();
                   } else{
-                    GrafDef2("myChart0",mt_value_def1, mt_time_def1, mt_value_def2, mt_value_def3, mt_value_def4, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
+                    GrafDef2("myChart0",mt_value_def1, dt_utc_def1, mt_value_def2, mt_value_def3, mt_value_def4, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
                     SubirDatos2();
                   }
 
@@ -235,7 +232,7 @@
 
 
       function SubirDatos1(){
-          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_time' value='"+mt_time_def1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='dt_utc' value='"+dt_utc_def1+"'>" );
           $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_1' value='"+mt_value_def1+"'>" );
           $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_2' value='"+mt_value_def2+"'>" );
 
@@ -246,7 +243,7 @@
       } 
 
       function SubirDatos2(){
-          $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_time' value='"+mt_time_def1+"'>" );
+          $( "#TheFormSubModal" ).append( "<input type='hidden' name='dt_utc' value='"+dt_utc_def1+"'>" );
           $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_1' value='"+mt_value_def1+"'>" );
           $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_2' value='"+mt_value_def2+"'>" );
           $( "#TheFormSubModal" ).append( "<input type='hidden' name='mt_value_3' value='"+mt_value_def3+"'>" );

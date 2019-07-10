@@ -29,7 +29,7 @@ class SicutIgnisController extends Controller{
                       $Datos= array();
 
                       $Info= DB::connection("telemetria")
-                                  ->select("(SELECT mt_name, mt_value, MAX(mt_time) AS mt_time FROM (SELECT * FROM log_aasa ORDER BY mt_time DESC LIMIT 200) la 
+                                  ->select("(SELECT mt_name, mt_value, MAX(dt_utc) AS dt_utc FROM (SELECT * FROM log_aasa ORDER BY dt_utc DESC LIMIT 200) la 
                                                                      WHERE (mt_name='AASA--ION8650.EnerActIny'
                                                                          OR mt_name='AASA--ION8650.EnerActRet'
                                                                          OR mt_name='AASA--ION8650.EnerReactIny'
@@ -46,7 +46,7 @@ class SicutIgnisController extends Controller{
                                                                          OR mt_name='AASA--ION8650.FactorPotenciab'
                                                                          OR mt_name='AASA--ION8650.FactorPotenciac'
                                                                          OR mt_name='AASA--ION8650.FactorPotenciaTotal')
-                                                                         GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 32) ORDER BY mt_name, mt_time");
+                                                                         GROUP BY dt_utc, mt_name ORDER BY dt_utc DESC LIMIT 32) ORDER BY mt_name, dt_utc");
                                   
 
                                     
@@ -74,7 +74,7 @@ class SicutIgnisController extends Controller{
                                     
                                      $Datos["VoltajePromedio"]          =   $Info[31]->mt_value;
 
-                                     $Datos["UltimaMedicion"]           =   $Info[31]->mt_time;
+                                     $Datos["UltimaMedicion"]           =   $Info[31]->dt_utc;
 
                                      return view("modals.SicutIgnis", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
     }
@@ -83,10 +83,10 @@ class SicutIgnisController extends Controller{
 
 
       if (isset($Request->Inicio) && isset($Request->Final)) {
-        $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+        $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
@@ -96,7 +96,7 @@ class SicutIgnisController extends Controller{
                                                 WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                 OR mt_name='AASA--ION8650.EnerActRet')
                                                 $Condition
-                                                ORDER BY mt_name, mt_time ASC LIMIT 1000;");
+                                                ORDER BY mt_name, dt_utc ASC LIMIT 1000;");
 
         $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
@@ -104,11 +104,11 @@ class SicutIgnisController extends Controller{
             if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
               if ($j==0) {
                 $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value))*(-1);
-                $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
                   $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value))*(-1);
-                  $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                  $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
                 }
               }
               $j++;
@@ -121,7 +121,7 @@ class SicutIgnisController extends Controller{
                   $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value));
                 }
               }
-              $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
+              $EnergiaActivaRetirada_dt_utc[$k]=$datos[$i]->dt_utc;
               $k++;
             }
 
@@ -147,16 +147,16 @@ class SicutIgnisController extends Controller{
 
           var EnergiaActivaInyectada_mt_value = '<?php echo json_encode($EnergiaActivaInyectada_mt_value); ?>';
           EnergiaActivaInyectada_mt_value = JSON.parse(EnergiaActivaInyectada_mt_value)
-          var EnergiaActivaInyectada_mt_time = '<?php echo json_encode($EnergiaActivaInyectada_mt_time); ?>';
-          EnergiaActivaInyectada_mt_time = JSON.parse(EnergiaActivaInyectada_mt_time)
+          var EnergiaActivaInyectada_dt_utc = '<?php echo json_encode($EnergiaActivaInyectada_dt_utc); ?>';
+          EnergiaActivaInyectada_dt_utc = JSON.parse(EnergiaActivaInyectada_dt_utc)
 
           var EnergiaActivaRetirada_mt_value = '<?php echo json_encode($EnergiaActivaRetirada_mt_value); ?>';
           EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
-          var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
-          EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
-          var mt_mt=EnergiaActivaRetirada_mt_time;
+          var EnergiaActivaRetirada_dt_utc = '<?php echo json_encode($EnergiaActivaRetirada_dt_utc); ?>';
+          EnergiaActivaRetirada_dt_utc = JSON.parse(EnergiaActivaRetirada_dt_utc)
+          var mt_mt=EnergiaActivaRetirada_dt_utc;
 
-          EnergiaActivaInyectada_mt_time = Object.keys(EnergiaActivaInyectada_mt_time).map(i => EnergiaActivaInyectada_mt_time[i])
+          EnergiaActivaInyectada_dt_utc = Object.keys(EnergiaActivaInyectada_dt_utc).map(i => EnergiaActivaInyectada_dt_utc[i])
           EnergiaActivaInyectada_mt_value = Object.keys(EnergiaActivaInyectada_mt_value).map(i => EnergiaActivaInyectada_mt_value[i])
           EnergiaActivaRetirada_mt_value = Object.keys(EnergiaActivaRetirada_mt_value).map(i => EnergiaActivaRetirada_mt_value[i])
 
@@ -165,15 +165,15 @@ class SicutIgnisController extends Controller{
 
           if ($Request->Modal) { 
             ?><script>
-              var mt_time_def1 = EnergiaActivaInyectada_mt_time;
+              var dt_utc_def1   = EnergiaActivaInyectada_dt_utc;
               var mt_value_def1 = EnergiaActivaInyectada_mt_value;
               var mt_value_def2 = EnergiaActivaRetirada_mt_value;
-              var Grac=1;
-              var grafper=1;
-
-              var nombre_1 = "Fecha";
-              var nombre_2 = "Energia Activa Inyectada";
-              var nombre_3 = "Energia Activa Retirada";
+              var Grac          =1;
+              var grafper       =1;
+              
+              var nombre_1      = "Fecha";
+              var nombre_2      = "Energia Activa Inyectada";
+              var nombre_3      = "Energia Activa Retirada";
 
             </script><?php
 
@@ -182,7 +182,7 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-            GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_mt_time, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_mt_time, MinDato, MaxDato, "Inyectada", "Retirada" , 1);
+            GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_dt_utc, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_dt_utc, MinDato, MaxDato, "Inyectada", "Retirada" , 1);
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
             </script><?php
@@ -193,18 +193,18 @@ class SicutIgnisController extends Controller{
     public function Grafico2(Request $Request){
 
       if (isset($Request->Inicio) && isset($Request->Final)) {
-        $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+        $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.EnerReactIny' 
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.EnerReactIny' 
                                                                         OR mt_name='AASA--ION8650.EnerReactRet')
                                                                         $Condition
-                                                                        ORDER BY mt_name, mt_time ASC LIMIT 1000");
+                                                                        ORDER BY mt_name, dt_utc ASC LIMIT 1000");
 
         $j=0;
         $k=0;
@@ -219,11 +219,11 @@ class SicutIgnisController extends Controller{
 
                 if ($i==0 && $datos[$i]->mt_value!=0) {
                   $EnergiaReactivaInyectada_mt_value[$j]=$datos[$i]->mt_value-$datos[$i]->mt_value;
-                  $EnergiaReactivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                  $EnergiaReactivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
                 } else{
                   if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
                   $EnergiaReactivaInyectada_mt_value[$j]=$datos[$i]->mt_value-$datos[$i-1]->mt_value;
-                  $EnergiaReactivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                  $EnergiaReactivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
                   }
                 }
 
@@ -245,7 +245,7 @@ class SicutIgnisController extends Controller{
                     $EnergiaReactivaRetirada_mt_value[$k]=abs($datos[$i]->mt_value-$datos[$i-1]->mt_value)*(-1);
                   }
                 }
-                $EnergiaReactivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
+                $EnergiaReactivaRetirada_dt_utc[$k]=$datos[$i]->dt_utc;
 
                 if ($MinDato_b>$datos[$i]->mt_value && $datos[$i]->mt_value!=0) {
                   $MinDato_b=$datos[$i]->mt_value;
@@ -269,15 +269,15 @@ class SicutIgnisController extends Controller{
 
           var EnergiaReactivaInyectada_mt_value = '<?php echo json_encode($EnergiaReactivaInyectada_mt_value); ?>';
           EnergiaReactivaInyectada_mt_value = JSON.parse(EnergiaReactivaInyectada_mt_value)
-          var EnergiaReactivaInyectada_mt_time = '<?php echo json_encode($EnergiaReactivaInyectada_mt_time); ?>';
-          EnergiaReactivaInyectada_mt_time = JSON.parse(EnergiaReactivaInyectada_mt_time)
+          var EnergiaReactivaInyectada_dt_utc = '<?php echo json_encode($EnergiaReactivaInyectada_dt_utc); ?>';
+          EnergiaReactivaInyectada_dt_utc = JSON.parse(EnergiaReactivaInyectada_dt_utc)
 
           var EnergiaReactivaRetirada_mt_value = '<?php echo json_encode($EnergiaReactivaRetirada_mt_value); ?>';
           EnergiaReactivaRetirada_mt_value = JSON.parse(EnergiaReactivaRetirada_mt_value)
-          var EnergiaReactivaRetirada_mt_time = '<?php echo json_encode($EnergiaReactivaRetirada_mt_time); ?>';
-          EnergiaReactivaRetirada_mt_time = JSON.parse(EnergiaReactivaRetirada_mt_time)
+          var EnergiaReactivaRetirada_dt_utc = '<?php echo json_encode($EnergiaReactivaRetirada_dt_utc); ?>';
+          EnergiaReactivaRetirada_dt_utc = JSON.parse(EnergiaReactivaRetirada_dt_utc)
 
-          EnergiaReactivaInyectada_mt_time = Object.keys(EnergiaReactivaInyectada_mt_time).map(i => EnergiaReactivaInyectada_mt_time[i])
+          EnergiaReactivaInyectada_dt_utc = Object.keys(EnergiaReactivaInyectada_dt_utc).map(i => EnergiaReactivaInyectada_dt_utc[i])
           EnergiaReactivaInyectada_mt_value = Object.keys(EnergiaReactivaInyectada_mt_value).map(i => EnergiaReactivaInyectada_mt_value[i])
           EnergiaReactivaRetirada_mt_value = Object.keys(EnergiaReactivaRetirada_mt_value).map(i => EnergiaReactivaRetirada_mt_value[i])
 
@@ -287,7 +287,7 @@ class SicutIgnisController extends Controller{
       if ($Request->Modal) { 
 
         ?><script>
-              var mt_time_def1 = EnergiaReactivaInyectada_mt_time;
+              var dt_utc_def1 = EnergiaReactivaInyectada_dt_utc;
               var mt_value_def1 = EnergiaReactivaInyectada_mt_value;
               var mt_value_def2 = EnergiaReactivaRetirada_mt_value;
               var Grac=1;
@@ -304,7 +304,7 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-           GraficoIgnisArribaDerecha("myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_mt_time, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_mt_time, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2);
+           GraficoIgnisArribaDerecha("myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_dt_utc, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_dt_utc, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2);
 
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
@@ -319,22 +319,22 @@ class SicutIgnisController extends Controller{
     public function Grafico3(Request $Request){
 
        if (isset($Request->Inicio) && isset($Request->Final)) {
-        $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+        $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
 
 
             $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaca'
                                                                          OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
                                                                         $Condition
-                                                                        ORDER BY mt_name, mt_time ASC LIMIT 1000");
+                                                                        ORDER BY mt_name, dt_utc ASC LIMIT 1000");
                   $j=0;
                   $k=0;                  
                   $h=0;
@@ -342,22 +342,22 @@ class SicutIgnisController extends Controller{
                 for ($i=0; $i <count($datos) ; $i++) { 
                   if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaab") {
                     $VoltajeLineaab_mt_value[$j]=$datos[$i]->mt_value;
-                    $VoltajeLineaab_mt_time[$j]=$datos[$i]->mt_time;
+                    $VoltajeLineaab_dt_utc[$j]=$datos[$i]->dt_utc;
                     $j++;
                   }
                   if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineabc") {
                     $VoltajeLineabc_mt_value[$k]=$datos[$i]->mt_value;
-                    $VoltajeLineabc_mt_time[$k]=$datos[$i]->mt_time;
+                    $VoltajeLineabc_dt_utc[$k]=$datos[$i]->dt_utc;
                     $k++;
                   }
                   if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaca") {
                     $VoltajeLineaca_mt_value[$h]=$datos[$i]->mt_value;
-                    $VoltajeLineaca_mt_time[$h]=$datos[$i]->mt_time;
+                    $VoltajeLineaca_dt_utc[$h]=$datos[$i]->dt_utc;
                     $h++;
                   }
                   if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaPromedio") {
                     $VoltajeLineaPromedio_mt_value[$g]=$datos[$i]->mt_value;
-                    $VoltajeLineaPromedio_mt_time[$g]=$datos[$i]->mt_time;
+                    $VoltajeLineaPromedio_dt_utc[$g]=$datos[$i]->dt_utc;
                     $g++;
                   }
                   if ($i==0) {
@@ -381,8 +381,8 @@ class SicutIgnisController extends Controller{
 
           var VoltajeLineaab_mt_value = '<?php echo json_encode($VoltajeLineaab_mt_value); ?>';
           VoltajeLineaab_mt_value = JSON.parse(VoltajeLineaab_mt_value)
-          var VoltajeLineaab_mt_time = '<?php echo json_encode($VoltajeLineaab_mt_time); ?>';
-          VoltajeLineaab_mt_time = JSON.parse(VoltajeLineaab_mt_time)
+          var VoltajeLineaab_dt_utc = '<?php echo json_encode($VoltajeLineaab_dt_utc); ?>';
+          VoltajeLineaab_dt_utc = JSON.parse(VoltajeLineaab_dt_utc)
 
           var VoltajeLineabc_mt_value = '<?php echo json_encode($VoltajeLineabc_mt_value); ?>';
           VoltajeLineabc_mt_value = JSON.parse(VoltajeLineabc_mt_value)
@@ -398,7 +398,7 @@ class SicutIgnisController extends Controller{
       if ($Request->Modal) { 
 
             ?><script>
-              var mt_time_def1 = VoltajeLineaab_mt_time;
+              var dt_utc_def1 = VoltajeLineaab_dt_utc;
               var mt_value_def1 = VoltajeLineaab_mt_value;
               var mt_value_def2 = VoltajeLineabc_mt_value;
               var mt_value_def3 = VoltajeLineaca_mt_value;
@@ -419,7 +419,7 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-  GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_mt_time, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
+  GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_dt_utc, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
 
             FuncionesCompletas++;
             FuncionExportacion(FuncionesCompletas);
@@ -431,21 +431,21 @@ class SicutIgnisController extends Controller{
       public function Grafico4(Request $Request){
 
          if (isset($Request->Inicio) && isset($Request->Final)) {
-          $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+          $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
         } else{
           $Horas=24;
-          $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
 
         $datos = DB::connection('telemetria')
-                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) WHERE (mt_name='AASA--ION8650.Voltajea'
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.Voltajea'
                                                                           OR mt_name='AASA--ION8650.Voltajeb'
                                                                           OR mt_name='AASA--ION8650.Voltajec'
                                                                           OR mt_name='AASA--ION8650.VoltajePromedio')
                                                                           $Condition
-                                                                          ORDER BY mt_name, mt_time ASC LIMIT 1000");
+                                                                          ORDER BY mt_name, dt_utc ASC LIMIT 1000");
                     $j=0;
                     $k=0;                  
                     $h=0;
@@ -453,22 +453,22 @@ class SicutIgnisController extends Controller{
                   for ($i=0; $i <count($datos) ; $i++) { 
                     if ($datos[$i]->mt_name=='AASA--ION8650.Voltajea') {
                       $Voltajea_mt_value[$j]=$datos[$i]->mt_value;
-                      $Voltajea_mt_time[$j]=$datos[$i]->mt_time;
+                      $Voltajea_dt_utc[$j]=$datos[$i]->dt_utc;
                       $j++;
                     }
                     if ($datos[$i]->mt_name=='AASA--ION8650.Voltajeb') {
                       $Voltajeb_mt_value[$k]=$datos[$i]->mt_value;
-                      $Voltajeb_mt_time[$k]=$datos[$i]->mt_time;
+                      $Voltajeb_dt_utc[$k]=$datos[$i]->dt_utc;
                       $k++;
                     }
                     if ($datos[$i]->mt_name=='AASA--ION8650.Voltajec') {
                       $Voltajec_mt_value[$h]=$datos[$i]->mt_value;
-                      $Voltajec_mt_time[$h]=$datos[$i]->mt_time;
+                      $Voltajec_dt_utc[$h]=$datos[$i]->dt_utc;
                       $h++;
                     }
                     if ($datos[$i]->mt_name=='AASA--ION8650.VoltajePromedio') {
                       $VoltajePromedio_mt_value[$g]=$datos[$i]->mt_value;
-                      $VoltajePromedio_mt_time[$g]=$datos[$i]->mt_time;
+                      $VoltajePromedio_dt_utc[$g]=$datos[$i]->dt_utc;
                       $g++;
                     }
                     if ($i==0) {
@@ -489,8 +489,8 @@ class SicutIgnisController extends Controller{
             var MaxDato=parseInt('<?php echo $MaxDato; ?>', 10);
             var Voltajea_mt_value = '<?php echo json_encode($Voltajea_mt_value); ?>';
             Voltajea_mt_value = JSON.parse(Voltajea_mt_value)
-            var Voltajea_mt_time = '<?php echo json_encode($Voltajea_mt_time); ?>';
-            Voltajea_mt_time = JSON.parse(Voltajea_mt_time)
+            var Voltajea_dt_utc = '<?php echo json_encode($Voltajea_dt_utc); ?>';
+            Voltajea_dt_utc = JSON.parse(Voltajea_dt_utc)
 
             var Voltajeb_mt_value = '<?php echo json_encode($Voltajeb_mt_value); ?>';
             Voltajeb_mt_value = JSON.parse(Voltajeb_mt_value)
@@ -507,7 +507,7 @@ class SicutIgnisController extends Controller{
         if ($Request->Modal) { 
 
               ?><script>
-                var mt_time_def1 = Voltajea_mt_time;
+                var dt_utc_def1 = Voltajea_dt_utc;
                 var mt_value_def1 = Voltajea_mt_value;
                 var mt_value_def2 = Voltajeb_mt_value;
                 var mt_value_def3 = Voltajec_mt_value;
@@ -530,7 +530,7 @@ class SicutIgnisController extends Controller{
             } else{ 
 
               ?><script>
-                GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_mt_time, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
+                GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_dt_utc, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
                 FuncionesCompletas++;
                 FuncionExportacion(FuncionesCompletas);
               </script><?php
@@ -543,28 +543,28 @@ class SicutIgnisController extends Controller{
 
 
           if (isset($Request->Inicio) && isset($Request->Final)) {
-          $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+          $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
         } else{
           $Horas=24;
-          $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
         $datos = DB::connection('telemetria')
-                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index) 
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) 
                                                   WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                   OR mt_name='AASA--ION8650.EnerActRet' 
                                                   OR mt_name='AASA--ION8650.EnerReactIny' 
                                                   OR mt_name='AASA--ION8650.EnerReactRet')
                                                   $Condition 
-                                                  ORDER BY mt_name, mt_time DESC LIMIT 1000;");
+                                                  ORDER BY mt_name, dt_utc DESC LIMIT 1000;");
 
 
                   $j=0; $k=0; $h=0; $g=0;
                   for ($i=0; $i <count($datos) ; $i++) { 
                       if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny') {
                         $EnerActIny_value[$j]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
-                        $EnerActIny_time[$j]=$datos[$i]->mt_time;
+                        $EnerActIny_time[$j]=$datos[$i]->dt_utc;
                         $j++;
                       }
                       if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
@@ -626,8 +626,8 @@ class SicutIgnisController extends Controller{
           var FPiny = '<?php echo json_encode($FPiny); ?>';
           FPiny = JSON.parse(FPiny)
 
-          var mt_time = '<?php echo json_encode($EnerActIny_time); ?>';
-          mt_time = JSON.parse(mt_time)
+          var dt_utc = '<?php echo json_encode($EnerActIny_time); ?>';
+          dt_utc = JSON.parse(dt_utc)
 
     
 
@@ -637,7 +637,7 @@ class SicutIgnisController extends Controller{
         if ($Request->Modal) { 
 
               ?><script>
-                var mt_time_def1 = mt_time;
+                var dt_utc_def1 = dt_utc;
                 var mt_value_def1 = FPiny;
                 var mt_value_def2 = FPret;
                 var Grac=1;
@@ -654,7 +654,7 @@ class SicutIgnisController extends Controller{
 
               ?><script>
                 $("#FactorPotencia_td").text(FPiny[FPiny.length-1]);
-              GraficosPotenciaINY("myChart6", FPiny, mt_time, FPret, mt_time, MinDato, MaxDato, "FPiny", "FPret" , 5);
+              GraficosPotenciaINY("myChart6", FPiny, dt_utc, FPret, dt_utc, MinDato, MaxDato, "FPiny", "FPret" , 5);
               </script><?php
 
             } 
@@ -667,20 +667,20 @@ class SicutIgnisController extends Controller{
       public function Grafico7(Request $Request){
 
            if (isset($Request->Inicio) && isset($Request->Final)) {
-          $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
+          $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
         } else{
           $Horas=24;
-          $Condition = "AND mt_time > DATE_SUB((SELECT mt_time FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY mt_time DESC LIMIT 1), INTERVAL $Horas HOUR)";
+          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
 
         $datos = DB::connection('telemetria')
-                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_mt_time_index) FORCE INDEX (log_aasa_mt_time_index)
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index)
                                                   WHERE (mt_name='AASA--ION8650.EnerActIny' 
                                                   OR mt_name='AASA--ION8650.EnerActRet')
                                                   $Condition
-                                                  ORDER BY mt_name, mt_time ASC LIMIT 1000;");
+                                                  ORDER BY mt_name, dt_utc ASC LIMIT 1000;");
 
           $j=0; $k=0;
           for ($i=0; $i <count($datos) ; $i++) { 
@@ -688,11 +688,11 @@ class SicutIgnisController extends Controller{
               if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
                 if ($j==0) {
                   $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
-                  $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                  $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
                 } else{
                   if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
                     $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4);
-                    $EnergiaActivaInyectada_mt_time[$j]=$datos[$i]->mt_time;
+                    $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
                   }
                 }
                 $j++;
@@ -705,7 +705,7 @@ class SicutIgnisController extends Controller{
                     $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value)*4)*(-1);
                   }
                 }
-                $EnergiaActivaRetirada_mt_time[$k]=$datos[$i]->mt_time;
+                $EnergiaActivaRetirada_dt_utc[$k]=$datos[$i]->dt_utc;
                 $k++;
               }
 
@@ -734,16 +734,16 @@ class SicutIgnisController extends Controller{
 
             var EnergiaActivaInyectada_mt_value = '<?php echo json_encode($EnergiaActivaInyectada_mt_value); ?>';
             EnergiaActivaInyectada_mt_value = JSON.parse(EnergiaActivaInyectada_mt_value)
-            var EnergiaActivaInyectada_mt_time = '<?php echo json_encode($EnergiaActivaInyectada_mt_time); ?>';
-            EnergiaActivaInyectada_mt_time = JSON.parse(EnergiaActivaInyectada_mt_time)
+            var EnergiaActivaInyectada_dt_utc = '<?php echo json_encode($EnergiaActivaInyectada_dt_utc); ?>';
+            EnergiaActivaInyectada_dt_utc = JSON.parse(EnergiaActivaInyectada_dt_utc)
 
             var EnergiaActivaRetirada_mt_value = '<?php echo json_encode($EnergiaActivaRetirada_mt_value); ?>';
             EnergiaActivaRetirada_mt_value = JSON.parse(EnergiaActivaRetirada_mt_value)
-            var EnergiaActivaRetirada_mt_time = '<?php echo json_encode($EnergiaActivaRetirada_mt_time); ?>';
-            EnergiaActivaRetirada_mt_time = JSON.parse(EnergiaActivaRetirada_mt_time)
-            var mt_mt=EnergiaActivaRetirada_mt_time;
+            var EnergiaActivaRetirada_dt_utc = '<?php echo json_encode($EnergiaActivaRetirada_dt_utc); ?>';
+            EnergiaActivaRetirada_dt_utc = JSON.parse(EnergiaActivaRetirada_dt_utc)
+            var mt_mt=EnergiaActivaRetirada_dt_utc;
 
-            EnergiaActivaInyectada_mt_time = Object.keys(EnergiaActivaInyectada_mt_time).map(i => EnergiaActivaInyectada_mt_time[i])
+            EnergiaActivaInyectada_dt_utc = Object.keys(EnergiaActivaInyectada_dt_utc).map(i => EnergiaActivaInyectada_dt_utc[i])
             EnergiaActivaInyectada_mt_value = Object.keys(EnergiaActivaInyectada_mt_value).map(i => EnergiaActivaInyectada_mt_value[i])
             EnergiaActivaRetirada_mt_value = Object.keys(EnergiaActivaRetirada_mt_value).map(i => EnergiaActivaRetirada_mt_value[i])
 
@@ -753,7 +753,7 @@ class SicutIgnisController extends Controller{
         if ($Request->Modal) { 
 
           ?><script>
-                var mt_time_def1 = EnergiaActivaInyectada_mt_time;
+                var dt_utc_def1 = EnergiaActivaInyectada_dt_utc;
                 var mt_value_def1 = EnergiaActivaInyectada_mt_value;
                 var mt_value_def2 = EnergiaActivaRetirada_mt_value;
                 var Grac=1;
@@ -780,7 +780,7 @@ class SicutIgnisController extends Controller{
 
                 $("#PoteIny").text(last(EnergiaActivaInyectada_mt_value));
                 $("#PoteRet").text(last(EnergiaActivaRetirada_mt_value));
-              PotGenerada(EnergiaActivaInyectada_mt_time, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
+              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
               </script><?php

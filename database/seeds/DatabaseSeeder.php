@@ -16,16 +16,16 @@ class DatabaseSeeder extends Seeder
 
 
        // DB::table('users')->insert([
-       //      'name' => "Patricio",
-       //      'email' => 'Patricio.pinilla@finning.com',
-       //      'password' => bcrypt('Patricio2019'),
-       //      'rol' => "2"
+       //      'name' => "fiacobelli",
+       //      'email' => 'fiacobelli@maitenal.cl',
+       //      'password' => bcrypt('fiacobelli'),
+       //      'rol' => "1"
        //  ]);
 
        DB::table('instalaciones_asignadas')->insert([
-            'id_usuario' => 21,
-            'id_instalacion' => 6,
-            'rol' => "2"
+            'id_usuario' => 22,
+            'id_instalacion' => 5,
+            'rol' => "1"
         ]);
 
     }
