@@ -52,7 +52,7 @@
                                       <div class="body table-responsive">
                                           <table class="table sicut-table-bordered sicut-modal-table1">
                                             <thead>
-                                                <caption scope="row" class="sicut-tabla-titulo">reg. kVAR últ. 15 min</caption>
+                                                <caption scope="row" class="sicut-tabla-titulo">reg. kVARh últ. 15 min</caption>
                                             </thead>
                                             <tbody>
                                                 <tr>
