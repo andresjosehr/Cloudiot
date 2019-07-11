@@ -100,7 +100,7 @@ class FinningController extends Controller
 
 
 
-    	return view("modals.Finning.Finning2", ["Datos" => $Datos]);
+    	return view("modals.Finning.Finning", ["Datos" => $Datos]);
     }
 
 

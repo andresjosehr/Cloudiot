@@ -12,19 +12,41 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Finning;
 use DB;
 
-class AasaExport implements FromView, ShouldAutoSize
+
+class SubmodalAasa implements FromView, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-     public function view(): View
+    public function view(): View
     {
-        
+
+    	if (explode("/",request()->url())[count(explode( "/", request()->url() ))-1]==1) {
+    		$Dat=self::Grafico1();
+    	}
+    	if (explode("/",request()->url())[count(explode( "/", request()->url() ))-1]==2) {
+    		$Dat=self::Grafico2();
+    	}
+    	if (explode("/",request()->url())[count(explode( "/", request()->url() ))-1]==3) {
+    		$Dat=self::Grafico3();
+    	}
+    	if (explode("/",request()->url())[count(explode( "/", request()->url() ))-1]==4) {
+    		$Dat=self::Grafico4();
+    	}
+    	if (explode("/",request()->url())[count(explode( "/", request()->url() ))-1]==5) {
+    		$Dat=self::Grafico5();
+    	}
+
+    	return view("exports.Aasa.Submodalaasa",["Datos" => $Dat]);
+    }
 
 
 
 
-    	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+   		 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	////////////////
     	////////////////
     	////////////////
@@ -33,6 +55,9 @@ class AasaExport implements FromView, ShouldAutoSize
     	////////////////
     	////////////////
     	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function Grafico1()
+    {
 
        if (isset($Request->Inicio) && isset($Request->Final)) {
         $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
@@ -91,33 +116,38 @@ class AasaExport implements FromView, ShouldAutoSize
 
         }
 
-		$regkWh["Fecha y Hora"]                = $EnergiaActivaRetirada_mt_time;
+
+        // $Datos["Cabecera"][0]="Fecha y Hora";
+        // $Datos["Cabecera"][1]="Inyectada";
+        // $Datos["Cabecera"][2]="Retirada";
+
+		$regkWh["FechayHora"]                = $EnergiaActivaRetirada_mt_time;
 		$regkWh["EnergiaActivaInyectada"] = $EnergiaActivaInyectada_mt_value;
 		$regkWh["EnergiaActivaRetirada"]  = $EnergiaActivaRetirada_mt_value;
 
         $Datos["regkWh"]=$regkWh;
+        return $Datos;
 
 
 
 
+    }
 
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////
+    ////////////////
+    ////////////////
+    //////////////// Grafico 2
+    ////////////////
+    ////////////////
+    ////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    	////////////////
-    	////////////////
-    	////////////////
-    	//////////////// Grafico 2
-    	////////////////
-    	////////////////
-    	////////////////
-    	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    	if (isset($Request->Inicio) && isset($Request->Final)) {
+    public function Grafico2()
+    {
+    		if (isset($Request->Inicio) && isset($Request->Final)) {
         $Condition = "AND mt_time > '$Request->Inicio' AND mt_time < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
@@ -183,20 +213,15 @@ class AasaExport implements FromView, ShouldAutoSize
 
         }
 
+        $regkVAR['FechayHora']=$EnergiaReactivaInyectada_mt_time;
         $regkVAR['EnergiaReactivaInyectada']=$EnergiaReactivaInyectada_mt_value;
         $regkVAR['EnergiaReactivaRetirada']=$EnergiaReactivaRetirada_mt_value;
-        $Datos["regkVAR"]=$regkVAR;	
+       	$Datos["regkVAR"]=$regkVAR;	
+       	return  $Datos;
 
-
-
-
-
-
-
-
-
-
-
+    }
+    public function Grafico3()
+    {
     	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	////////////////
     	////////////////
@@ -267,15 +292,15 @@ class AasaExport implements FromView, ShouldAutoSize
 
           }
 
-
+        $PotenciakW['FechayHora']=$EnergiaActivaInyectada_mt_time;
         $PotenciakW['EnergiaReactivaInyectada']=$EnergiaActivaInyectada_mt_value;
         $PotenciakW['EnergiaReactivaRetirada']=$EnergiaActivaRetirada_mt_value;
-        $Datos["PotenciakW"]=$PotenciakW;	
-
-
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       	$Datos["PotenciakW"]=$PotenciakW;	
+       	return  $Datos;
+    }
+    public function Grafico4()
+    {
+    	 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	////////////////
     	////////////////
     	////////////////
@@ -343,15 +368,18 @@ class AasaExport implements FromView, ShouldAutoSize
                   }
                 }
 
+
+                $VoltajeLineas["FechayHora"]=$VoltajeLineaab_mt_time;
                 $VoltajeLineas["VoltajeLineaab"]=$VoltajeLineaab_mt_value;
                 $VoltajeLineas["VoltajeLineabc"]=$VoltajeLineabc_mt_value;
                 $VoltajeLineas["VoltajeLineaca"]=$VoltajeLineaca_mt_value;
                 $VoltajeLineas["VoltajeLineaPromedio"]=$VoltajeLineaPromedio_mt_value;
                 $Datos["VoltajeLineas"]=$VoltajeLineas;
-
-
-
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                return  $Datos;
+    }
+    public function Grafico5()
+    {
+    	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	////////////////
     	////////////////
     	////////////////
@@ -418,16 +446,17 @@ class AasaExport implements FromView, ShouldAutoSize
                     }
                   }
 
+                $VoltajeFases["FechayHora"]=$Voltajea_mt_time;
                 $VoltajeFases["Voltajea"]=$Voltajea_mt_value;
                 $VoltajeFases["Voltajeb"]=$Voltajeb_mt_value;
                 $VoltajeFases["Voltajec"]=$Voltajec_mt_value;
                 $VoltajeFases["VoltajePromedio"]=$VoltajePromedio_mt_value;
                 $Datos["VoltajeFases"]=$VoltajeFases;
-
-
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                return $Datos;
+    }
+    public function Grafico6()
+    {
+    	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     	////////////////
     	////////////////
     	////////////////
@@ -511,7 +540,25 @@ class AasaExport implements FromView, ShouldAutoSize
                 // $FactorPotencia=["mt_time"]=$EnerActIny_time;
                 $FactorPotencia["FPiny"]=$FPiny;
                 $Datos["FactorPotencia"]=$FactorPotencia;
+                return  $Datos;
 
-       				return view("exports.Aasa.aasaExport",["Datos" => $Datos]);
     }
+
+
+
+    	
+
+
+
+
+       
+
+
+
+      	
+
+
+
+
+      	
 }

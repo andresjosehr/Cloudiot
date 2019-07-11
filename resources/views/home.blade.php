@@ -42,7 +42,7 @@
         latitud_[i]     =  "{{ $Instalacion->latitud }}";
         id_[i]          =  "{{ $Instalacion->id }}";
         controlador_[i] =  "{{ $Instalacion->controlador }} ";
-        rol_[i] =  "{{ $Instalacion->rol }} ";
+        rol_[i]         =  "{{ $Instalacion->rol }} ";
         i++;
       @endforeach
       urlroot_="<?php echo Request::root() ?>/";
@@ -60,12 +60,20 @@
       @endphp
       @endif
 
-      var Vista = RenderizarMapa(latitud_, longitud_, id_, controlador_, urlroot_, tabla_instalacion_asociada_, rol_, {{$lati}}, {{$longi}});
+      @php
+        if ($Usuario->zoom==null) {
+          $zoom=8;
+        }else{
+          $zoom=$Usuario->zoom;
+        }
+      @endphp
+
+      var Vista = RenderizarMapa(latitud_, longitud_, id_, controlador_, urlroot_, tabla_instalacion_asociada_, rol_, {{$lati}}, {{$longi}}, '{{$zoom}}');
       
       <?php $i=0; ?>
-      @foreach ($Instalaciones as $Instalacion)
-      $("#EsteEsMiID_<?php echo $i; ?>").on("click", function(){ flyTo(Vista, [{{ $Instalacion->longitud }}, {{ $Instalacion->latitud }}], function() {}); });
-      <?php $i++; ?>
+        @foreach ($Instalaciones as $Instalacion)
+          $("#EsteEsMiID_<?php echo $i; ?>").on("click", function(){ flyTo(Vista, [{{ $Instalacion->longitud }}, {{ $Instalacion->latitud }}], function() {}); });
+        <?php $i++; ?>
       @endforeach
   });
 

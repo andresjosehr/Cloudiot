@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Exports\AasaExport;
+use App\Exports\SubmodalAasa;
 
 
 use DB;
@@ -174,7 +175,7 @@ class SicutIgnisController extends Controller{
               var nombre_1      = "Fecha";
               var nombre_2      = "Energia Activa Inyectada";
               var nombre_3      = "Energia Activa Retirada";
-
+              window.Grafico=1;
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -296,6 +297,7 @@ class SicutIgnisController extends Controller{
               var nombre_1 = "Fecha";
               var nombre_2 = "Energia Reactiva Inyectada";
               var nombre_3 = "Energia Reactiva Retirada";
+              window.Grafico=2;
 
             </script><?php
 
@@ -412,6 +414,7 @@ class SicutIgnisController extends Controller{
               var nombre_3 = "Voltaje Linea B-C";
               var nombre_4 = "Voltaje Linea C-A";
               var nombre_5 = "Voltaje Linea Promedio";
+              window.Grafico=4;
             </script><?php
 
             return view("modals.SicutIgnis.submodal");
@@ -521,6 +524,8 @@ class SicutIgnisController extends Controller{
                 var nombre_3 = "Voltaje B";
                 var nombre_4 = "Voltaje C";
                 var nombre_5 = "Voltaje Promedio";
+
+                window.Grafico=5;
 
 
               </script><?php
@@ -646,6 +651,7 @@ class SicutIgnisController extends Controller{
                 var nombre_1 = "Fecha";
                 var nombre_2 = "Factor Potencia Inyectada";
                 var nombre_3 = "Factor Potencia Retirada";
+                window.Grafico=6;
               </script><?php
 
               return view("modals.SicutIgnis.submodal");
@@ -762,6 +768,7 @@ class SicutIgnisController extends Controller{
                 var nombre_1 = "Fecha";
                 var nombre_2 = "Potencia Inyectada";
                 var nombre_3 = "Potencia Retirada";
+                window.Grafico=3;
 
               </script><?php
 
@@ -801,6 +808,11 @@ class SicutIgnisController extends Controller{
      public function ExportarAasa()
      {
        return Excel::download(new AasaExport, 'Aasa.xlsx');
+     }
+
+     public function ExportarAasa2($Grafico)
+     {
+       return Excel::download(new SubmodalAasa, 'Aasa.xlsx');
      }
   }
 

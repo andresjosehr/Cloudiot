@@ -35,7 +35,7 @@
                           <form id="TheFormSubModal" method="post" action="<?php echo Request::root() ?>/ExportarSicutExcel" target="TheWindow">
                              @csrf 
                              <div align="center">
-                                <button type="submit" class="btn btn-primary" id="SicutExportarExcelIndi">Exportar a Excel</button>
+                                <a href="{{Request::root()}}/ExportarAasaSubModal/" target="_blank" class="btn btn-primary" id="SicutExportarExcelSubmodal">Exportar a Excel</a>
                               </div>
                               <button type="button" class="btn btn-primary" onclick="$('#defaultModalpar').modal('toggle');">Cerrar</button>
                           </form>
@@ -47,6 +47,9 @@
             <button style="display: none" type="button" class="btn btn-default waves-effect m-r-20 submodal" data-toggle="modal" data-target="#defaultModalpar" id="defaultModal">MODAL </button>
 
             <script>
+                
+                $("#SicutExportarExcelSubmodal").attr("href", $("#SicutExportarExcelSubmodal").attr("href")+window.Grafico);
+
 
                 $('#datetimesubmodalSicut').bootstrapMaterialDatePicker
                  ({
