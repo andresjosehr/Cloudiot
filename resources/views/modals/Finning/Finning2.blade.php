@@ -2,14 +2,23 @@
   $(".dtp.hidden").remove()
   $(".modal-backdrop.in").remove()
   $(".modal-backdrop.fade.in").remove();
-  // window.sound = new Howl({
-  //           src: ['{{ asset('Notificaciones/noti_1.mp3') }}'],
-  //           autoplay: true,
-  //           volume: 0.5,
-  //       });
+  window.sound = new Howl({
+            src: ['{{ asset('Notificaciones/noti_1.mp3') }}'],
+            autoplay: true,
+            volume: 0.5,
+        });
   if (window.PrimeraVez=="Si") {
     $("#largeModal").removeClass("fade");
   }
+
+
+
+  setInterval(function(){ 
+    window.FechaInicio =$("#fecha_flujo_inicio").val();
+    window.FechaFin    =$("#fecha_flujo_fin").val();
+  }, 30);
+
+
 </script>
 <button type="button" class="btn btn-default waves-effect m-r-20 display-modal" data-toggle="modal" data-target="#largeModal" style="display: none"></button>
 <!-- Large Size -->
@@ -29,14 +38,14 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                                    <input type="datetime-local" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <input type="text" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                                    <input type="datetime-local" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
                                 </div>
                             </div>
                         </div>
@@ -105,27 +114,27 @@
       $( ".display-modal" ).click();
    $(".loader-insta").css("display", "none");
    
-   $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
-    ({
-      format: 'YYYY-MM-DD HH:mm:ss',
-      lang: 'fr',
-      weekStart: 1, 
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true,
-      time: true
-    });
+   // $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
+   //  ({
+   //    format: 'YYYY-MM-DD HH:mm:ss',
+   //    lang: 'fr',
+   //    weekStart: 1, 
+   //    cancelText : 'ANNULER',
+   //    nowButton : true,
+   //    switchOnClick : true,
+   //    time: true
+   //  });
 
-    $('#fecha_flujo_fin').bootstrapMaterialDatePicker
-    ({
-      format: 'YYYY-MM-DD HH:mm:ss',
-      lang: 'fr',
-      weekStart: 1, 
-      cancelText : 'ANNULER',
-      nowButton : true,
-      switchOnClick : true,
-      time: true
-    });
+   //  $('#fecha_flujo_fin').bootstrapMaterialDatePicker
+   //  ({
+   //    format: 'YYYY-MM-DD HH:mm:ss',
+   //    lang: 'fr',
+   //    weekStart: 1, 
+   //    cancelText : 'ANNULER',
+   //    nowButton : true,
+   //    switchOnClick : true,
+   //    time: true
+   //  });
 
     function GraficarFinning() {
         var win = window.open(location.href+'/../ExportarFinning?FechaInicio='+$("#fecha_flujo_inicio").val()+'&FechaFin='+$("#fecha_flujo_fin").val(), '_blank');
@@ -136,7 +145,7 @@
     window.setInterval((function(){
     var start = Date.now();
     return function() {
-         if (Math.floor((Date.now()-start)/1000)==30) {
+         if (Math.floor((Date.now()-start)/1000)==20) {
           // $("#contenedor").load("{{Request::root()}}/FinningController", {id: 6, tabla_asociada: "log_biofiltro03", rol: 1 });
             if (($("#largeModal").data('bs.modal') || {}).isShown) {
               window.request = $.ajax({
@@ -286,9 +295,6 @@ var mt_time=[];
   mt_time.push("{{date_format(date_create($Datos["Grafico1"][$i]->mt_time), 'H:i')}}");
 @endfor
 
-console.log(PlantaAgua1)
-console.log(PlantaAgua2)
-console.log(mt_time)
 
 renderFinningChart("pozo4Chart", PlantaAgua1, mt_time);
 renderFinningChart("plantaAguaChart", PlantaAgua1, mt_time);
@@ -297,3 +303,20 @@ renderFinningChart("dinamometroChart", PlantaAgua2, mt_time);
 RenderFinningGauge("pozo4", "Pozo Nave 4", 2, "0");
 RenderFinningGauge("plantaAgua", "Planta Agua", 1, "{{$Datos['Reloj1'][0]->mt_value}}");
 RenderFinningGauge("plantaAgua2", "Planta Agua", 1, "{{$Datos['Reloj2'][0]->mt_value}}");
+
+$("#fecha_flujo_inicio").val(window.FechaInicio);
+  
+$("#fecha_flujo_fin").val(window.FechaFin);
+
+
+if ({{$Datos['Reloj1'][0]->mt_value}}==75) {
+  window.sound.play();
+}
+
+if ({{$Datos['Reloj2'][0]->mt_value}}==75) {
+  window.sound.play();
+}
+
+
+
+</script>

@@ -145,6 +145,7 @@ Route::get('DescargarExcelFlujoMaitenal','MaitenalController@DescargarExcelFlujo
 
 Route::post('FinningController','FinningController@index')->middleware("verificar_login");
 Route::get('ExportarFinning','FinningController@ExportarRango')->middleware("verificar_login");
+Route::post('FinningEstadoBombasMarcador','FinningController@FinningEstadoBombasMarcador')->middleware("verificar_login");
 
 Route::post('SanJavierController','SanJavierController@index')->middleware("verificar_login");
 Route::get('JavierBombas','SanJavierController@MostrarBombas')->middleware("verificar_login");

@@ -104,11 +104,11 @@ class SicutIgnisController extends Controller{
 
             if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
               if ($j==0) {
-                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value))*(-1);
+                $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value));
                 $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value))*(-1);
+                  $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value));
                   $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
                 }
               }
@@ -116,10 +116,10 @@ class SicutIgnisController extends Controller{
             }
             if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
               if ($k==0) {
-                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value));
+                $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value))*(-1);
               } else{
                 if ($datos[$i]->mt_value!=0 && $datos[$i-1]->mt_value!=0) {
-                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value));
+                  $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i-1]->mt_value))*(-1);
                 }
               }
               $EnergiaActivaRetirada_dt_utc[$k]=$datos[$i]->dt_utc;
@@ -183,7 +183,13 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-            GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_dt_utc, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_dt_utc, MinDato, MaxDato, "Inyectada", "Retirada" , 1);
+              var Colores=[];
+              Colores[0]='rgba(66, 134, 244, 0.2)';
+              Colores[1]='rgba(66, 134, 244, 1)';
+              Colores[2]='rgba(255, 99, 132, 0.2)';
+              Colores[3]='rgba(255, 99, 132, 1)';
+
+            GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_dt_utc, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_dt_utc, MinDato, MaxDato, "Inyectada", "Retirada" , 1, Colores);
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
             </script><?php
@@ -306,7 +312,13 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-           GraficoIgnisArribaDerecha("myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_dt_utc, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_dt_utc, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2);
+              var Colores=[];
+              Colores[0]='rgba(66, 134, 244, 0.2)';
+              Colores[1]='rgba(66, 134, 244, 1)';
+              Colores[2]='rgba(255, 99, 132, 0.2)';
+              Colores[3]='rgba(255, 99, 132, 1)';
+
+           GraficoIgnisArribaDerecha("myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_dt_utc, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_dt_utc, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2, Colores);
 
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
@@ -787,7 +799,12 @@ class SicutIgnisController extends Controller{
 
                 $("#PoteIny").text(last(EnergiaActivaInyectada_mt_value));
                 $("#PoteRet").text(last(EnergiaActivaRetirada_mt_value));
-              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value);
+                var Colores=[];
+                Colores[0]='rgba(66, 134, 244, 0.2)';
+                Colores[1]='rgba(66, 134, 244, 1)';
+                Colores[2]='rgba(255, 99, 132, 0.2)';
+                Colores[3]='rgba(255, 99, 132, 1)';
+              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, Colores);
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
               </script><?php

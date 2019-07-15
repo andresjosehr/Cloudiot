@@ -170,7 +170,7 @@ window.SicutScriptDefault = function () {
   });
 };
 
-window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato, max_dato, label1, label2, loading) {
+window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_time2, min_dato, max_dato, label1, label2, loading, Colores) {
   var ctx = document.getElementById(id).getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'line',
@@ -179,16 +179,16 @@ window.GraficosIgnisArriba = function (id, mt_value1, mt_time1, mt_value2, mt_ti
       datasets: [{
         label: label1,
         data: mt_value1,
-        backgroundColor: 'rgba(66, 134, 244, 0.2)',
-        borderColor: 'rgba(66, 134, 244, 1)',
+        backgroundColor: Colores[0],
+        borderColor: Colores[1],
         fill: false,
         borderWidth: 1,
         radius: 0
       }, {
         label: label2,
         data: mt_value2,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: Colores[2],
+        borderColor: Colores[3],
         fill: false,
         borderWidth: 1,
         radius: 0
@@ -409,7 +409,7 @@ window.SicutPieChart = function () {
   });
 };
 
-window.PotGenerada = function (mt_time, mt_value1, mt_value2) {
+window.PotGenerada = function (mt_time, mt_value1, mt_value2, Colores) {
   var ctx = document.getElementById("sicut-myChart3").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'line',
@@ -418,16 +418,16 @@ window.PotGenerada = function (mt_time, mt_value1, mt_value2) {
       datasets: [{
         label: 'Inyectada',
         data: mt_value1,
-        backgroundColor: 'rgba(66, 134, 244, 0.2)',
-        borderColor: 'rgba(66, 134, 244, 1)',
+        backgroundColor: Colores[0],
+        borderColor: Colores[1],
         borderWidth: 1,
         radius: 0,
         fill: false
       }, {
         label: 'Retirada',
         data: mt_value2,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255,99,132,1)',
+        backgroundColor: Colores[2],
+        borderColor: Colores[3],
         borderWidth: 1,
         fill: false,
         radius: 0
@@ -1272,13 +1272,14 @@ $.ajaxSetup({
 });
 
 window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_, lat_ini, lon_ini, zoom_) {
-  function Marcador(lon, lat, id, controlador, rol_) {
+  function Marcador(lon, lat, id, controlador, rol_, imageDefault) {
     var vectorSource = new ol.source.Vector({//create empty vector
     }); //create a bunch of icons and add to source vector
 
     var iconFeature = new ol.Feature({
       geometry: new ol.geom.Point([lon, lat]),
       name: id,
+      customID: id,
       controlador: controlador,
       rol: rol_,
       population: 4000,
@@ -1294,8 +1295,8 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         cursor: "pointer",
-        opacity: 0.75,
-        src: 'images/marcador.png',
+        opacity: 1,
+        src: imageDefault,
         id: "1"
       })
     }); //add the feature vector to the layer vector, and apply a style to whole layer
@@ -1310,7 +1311,7 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
   var Instalaciones = [];
 
   for (var i = 0; i < longitud.length; i++) {
-    Instalaciones[i] = Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i]);
+    Instalaciones[i] = Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i], 'images/marc_negro.png');
   }
 
   var vista = new ol.View({
@@ -1364,9 +1365,36 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
         tabla_asociada: tabla_instalacion_asociada,
         rol: rol
       });
-      console.log('$("#contenedor").load(' + url + ', {id: ' + id + ', tabla_asociada: ' + tabla_instalacion_asociada + ', rol: ' + rol + '})');
     });
   });
+
+  function FinningQuery() {
+    $.ajax({
+      type: 'POST',
+      url: urlroot_ + "/FinningEstadoBombasMarcador",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function success(result) {
+        map.getLayers().forEach(function (feature, layerin) {
+          // map.removeLayer(map.getLayers());
+          if (layerin == 8) {
+            map.removeLayer(feature);
+            console.log(result.PlantaAgua);
+            if (result.PlantaAgua == 0) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController", 1, 'images/marc_verde.png'));
+            if (result.PlantaAgua == 1) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController", 1, 'images/marc_amarillo.png'));
+            if (result.PlantaAgua == 2) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController", 1, 'images/marc_rojo.png'));
+            map.addLayer(Marcador(-70.389085, -23.598169, 8, "FinningController", 1, 'images/marc_negro.png'));
+          }
+        });
+      }
+    });
+  }
+
+  FinningQuery();
+  setInterval(function () {
+    FinningQuery();
+  }, 60000);
   var tabla_instalacion_asociada = tabla_instalacion_asociada_;
   return vista;
 };

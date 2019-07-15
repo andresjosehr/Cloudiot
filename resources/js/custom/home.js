@@ -7,7 +7,8 @@ $.ajaxSetup({
 window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabla_instalacion_asociada_, rol_, lat_ini, lon_ini, zoom_) {
 
 
-  function Marcador(lon, lat, id, controlador, rol_) {
+  function Marcador(lon, lat, id, controlador, rol_, imageDefault) {
+
 
       var vectorSource = new ol.source.Vector({
         //create empty vector
@@ -19,6 +20,7 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
           geometry: new  
           ol.geom.Point([lon, lat]),
           name: id,
+          customID: id,
           controlador: controlador,
           rol: rol_,
           population: 4000,
@@ -34,8 +36,8 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
             cursor: "pointer",
-            opacity: 0.75,
-            src: 'images/marcador.png',
+            opacity: 1,
+            src: imageDefault,
             id: "1"
           }))
         });
@@ -52,7 +54,8 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
 
     var Instalaciones = [];
     for (var i = 0 ; i < longitud.length ; i++) {
-      Instalaciones[i]=Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i]);
+      Instalaciones[i]=Marcador(longitud[i], latitud[i], id[i], controlador[i], rol_[i], 'images/marc_negro.png');
+
     }
 
     var vista = new ol.View({
@@ -108,12 +111,61 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
                 var datos          = $('#consulta-form').serialize();
 
                 $("#contenedor").load(url, {id: id, tabla_asociada: tabla_instalacion_asociada, rol: rol});
-
-                console.log( '$("#contenedor").load('+url+', {id: '+id+', tabla_asociada: '+tabla_instalacion_asociada+', rol: '+rol+'})' );
-
-
             })
         });
+
+
+
+             function FinningQuery() {
+
+               $.ajax({
+                  type: 'POST',
+                  url: urlroot_+"/FinningEstadoBombasMarcador",
+                  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                  success: function(result){
+
+
+
+
+                     map.getLayers().forEach(function(feature, layerin) {
+
+                    // map.removeLayer(map.getLayers());
+                    if (layerin==8) {
+                            map.removeLayer(feature);
+
+                            console.log(result.PlantaAgua)
+
+                            if (result.PlantaAgua==0) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_verde.png' ));
+                            if (result.PlantaAgua==1) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_amarillo.png' ));
+                            if (result.PlantaAgua==2) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_rojo.png' ));
+
+                            map.addLayer(Marcador(-70.389085, -23.598169, 8, "FinningController" , 1, 'images/marc_negro.png' ));
+
+
+
+                          }
+                     }); 
+
+
+
+                  }
+              });
+             }
+
+              FinningQuery();
+
+              setInterval(function(){
+                  FinningQuery();
+              }, 60000);     
+
+
+
+
+
+
+
+
+
 
 
   var tabla_instalacion_asociada = tabla_instalacion_asociada_;
