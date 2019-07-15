@@ -605,13 +605,13 @@ class SicutIgnisController extends Controller{
                     if ($EnerReactIny_mt_value[$i]==0) {
                       $FPiny[$i]=0;
                     } else{
-                      $FPiny[$i]=$EnerActIny_value[$i]/$EnerReactIny_mt_value[$i];
+                      $FPiny[$i]=$EnerReactIny_mt_value[$i]/$EnerActIny_value[$i];
                       $FPiny[$i]=cos(atan($FPiny[$i]));
                     }
                     if ($EnerReactRet_mt_value[$i]==0) {
                       $FPret[$i]=0;
                     } else{
-                      $FPret[$i]=$EnerActRet_value[$i]/$EnerReactRet_mt_value[$i];
+                      $FPret[$i]=$EnerReactRet_mt_value[$i]/$EnerActRet_value[$i];
                       $FPret[$i]=cos(atan($FPret[$i]));
                     }
 
