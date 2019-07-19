@@ -72,17 +72,17 @@ class FinningController extends Controller
 
 
 
-      // $Datos["Dinamometro15"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) LF WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba602'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba603'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba604'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba605'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba606'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba607'
-      //                                                                                OR mt_name='Dinamometro--Consumo.ErrorBomba608'
-      //                                                                                OR mt_name='Dinamometro--Consumo.InundacionSala1'
-      //                                                                                OR mt_name='Dinamometro--Consumo.InundacionSala2')
-      //                                                                               GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 150) ORDER BY mt_time DESC, mt_name");
+      $Datos["Dinamometro"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) LF WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba602'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba603'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba604'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba605'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba606'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba607'
+                                                                                     OR mt_name='Dinamometro--Consumo.ErrorBomba608'
+                                                                                     OR mt_name='Dinamometro--Consumo.InundacionSala1'
+                                                                                     OR mt_name='Dinamometro--Consumo.InundacionSala2')
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 10) ORDER BY mt_time DESC, mt_name");
 
 
 

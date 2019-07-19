@@ -59,42 +59,97 @@
 
          
          <div class="modal-body table-custom" style="padding-top: 0;margin-top: 35px">
-            <div class="row">   
+            <div class="row"> 
+
+
                 <div class="col-md-2">
                     <h1 align="center" style="margin-top: 35px;font-size: 22px">Pozo Nave 4</h1>
                     <canvas id="pozo4" width="100%"></canvas>  
                     <div style="margin-top: -50px"></div>
                     <canvas id="pozo4Chart" width="400" height="200"></canvas>
                 </div>
-                <div class="col-md-2">
+
+                <div class="col-md-1"></div>
+
+                
+                <div class="col-md-5">
+                  <div class="row">
                     <h1 align="center" style="margin-top: 35px;font-size: 22px">Planta Agua</h1>
-                    <canvas id="plantaAgua" width="100%"></canvas>
-                    <div class="row" style="margin-top: -68px">
-                      <div class="col-md-6" align="center">
-                        {{-- style="filter: hue-rotate(327deg)" --}}
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][0]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                      <canvas id="plantaAgua" width="100%"></canvas>
+                      <div class="row" style="margin-top: -68px">
+                        <div class="col-md-6" align="center">
+                          {{-- style="filter: hue-rotate(327deg)" --}}
+                          <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][0]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                        </div>
+                        <div class="col-md-6" align="center">
+                          <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][1]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                        </div>
                       </div>
-                      <div class="col-md-6" align="center">
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][1]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
-                      </div>
+                      <canvas id="plantaAguaChart" width="400" height="200"></canvas>
                     </div>
-                    <canvas id="plantaAguaChart" width="400" height="200"></canvas>
-                </div>
-                <div class="col-md-2">
-                    <h1 align="center" style="margin-top: 35px;font-size: 22px">Planta Agua</h1>
-                    <canvas id="plantaAgua2" width="100%"></canvas>
-                    <div class="row" style="margin-top: -68px">
-                      <div class="col-md-6" align="center">
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][2]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
-                      </div>
-                      <div class="col-md-6" align="center">
-                        <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][3]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
-                      </div>
+                    <div class="col-md-5">
+                        <canvas id="plantaAgua2" width="100%"></canvas>
+                        <div class="row" style="margin-top: -68px">
+                          <div class="col-md-6" align="center">
+                            <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][2]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                          </div>
+                          <div class="col-md-6" align="center">
+                            <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][3]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                          </div>
+                        </div>
+                        <canvas id="dinamometroChart" width="400" height="200"></canvas>
                     </div>
-                    <canvas id="dinamometroChart" width="400" height="200"></canvas>
+                    <div class="col-md-1"></div>
+                  </div>
                 </div>
+
+
+
+
+                <div class="col-md-1"></div>
+
                 <div class="col-md-3">
-                    
+                    <h1 align="center" style="margin-top: 35px;font-size: 22px">Dinamometro</h1>
+                    <div class="row">
+                      <div class="col-md-3 bombas_dinamometro" align="center">
+                        <p>Bom 601</p>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][0]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif><br><br>
+                        <p>Bom 602</p>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][1]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif><br><br>
+                        <p>Bom 603</p>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][2]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif><br><br>
+                        <p>Bom 604</p>
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][3]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                      </div>
+                      <div class="col-md-3 bombas_dinamometro" align="center">
+                        <p>Bom 605</p> 
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][4]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif><br><br>
+                        <p>Bom 606</p> 
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][5]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif><br><br>
+                        <p>Bom 607</p> 
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][6]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif><br><br>
+                        <p>Bom 608</p> 
+                        <img src="{{Request::root()}}/images/bomba2.png" width="60%" alt="" @if ($Datos["Dinamometro"][7]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
+                      </div>
+                      <div class="col-md-6">
+                        <ul>
+                          <p align="left">Inun Sala 1</p>
+                          <li class="water-bottle" style="margin-bottom: 20px">
+                             <div class="bottle">
+                                  <div class="@if ($Datos["Dinamometro"][8]->mt_value==0) water-medium @else water-full @endif"></div>
+                              </div>
+                          </li>
+                          <p align="left">Inun Sala 2</p>
+                          <li class="water-bottle" style="margin-bottom: 20px">
+                             <div class="bottle">
+                                  <div class="@if ($Datos["Dinamometro"][9]->mt_value==0) water-medium @else water-full @endif"></div>
+                              </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                 </div>
             </div>
          </div>
@@ -141,11 +196,10 @@
         win.focus();
     }
 
-
-    window.setInterval((function(){
+  window.setTimeout((function(){
     var start = Date.now();
     return function() {
-         if (Math.floor((Date.now()-start)/1000)==20) {
+         if (Math.floor((Date.now()-start)/1000)==90) {
           // $("#contenedor").load("{{Request::root()}}/FinningController", {id: 6, tabla_asociada: "log_biofiltro03", rol: 1 });
             if (($("#largeModal").data('bs.modal') || {}).isShown) {
               window.request = $.ajax({
@@ -320,3 +374,10 @@ if ({{$Datos['Reloj2'][0]->mt_value}}==75) {
 
 
 </script>
+
+
+<style>
+  .bombas_dinamometro p{
+    margin-bottom: -2px;
+  }
+</style>
