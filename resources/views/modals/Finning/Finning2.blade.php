@@ -196,11 +196,16 @@
         win.focus();
     }
 
-  window.setTimeout((function(){
-    var start = Date.now();
-    return function() {
-         if (Math.floor((Date.now()-start)/1000)==90) {
-          // $("#contenedor").load("{{Request::root()}}/FinningController", {id: 6, tabla_asociada: "log_biofiltro03", rol: 1 });
+
+    window.segti=0;
+
+   var myTimer = window.setInterval(function(){
+
+        window.segti++;
+        console.log(window.segti);  
+        if (Number(window.segti)==Number(60)) {
+          console.log("LISTOOOOO")
+          clearInterval(myTimer);
             if (($("#largeModal").data('bs.modal') || {}).isShown) {
               window.request = $.ajax({
                     type: 'POST',
@@ -214,13 +219,12 @@
                       $("#contenedor").html(result);
                     }
                 });
-              }
+            }
+            }
 
+    }, 1000);
 
-             }
-         };
-    }()), 1000);
-            
+ 
 </script>
 
 <audio id="notifi">
