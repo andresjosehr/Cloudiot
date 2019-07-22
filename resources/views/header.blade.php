@@ -32,7 +32,7 @@
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
 
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.min.js"></script>
 
 
     
