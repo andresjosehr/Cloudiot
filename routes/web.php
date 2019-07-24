@@ -156,3 +156,6 @@ Route::get('JavierFlujoDiario','SanJavierController@JavierFlujoDiario')->middlew
 Route::post('GraficarFlujoPersonalizadoJavier','SanJavierController@GraficarFlujoPersonalizadoJavier')->middleware("verificar_login");
 Route::get('DescargarExcelFlujoJavier','SanJavierController@DescargarExcelFlujoJavier')->middleware("verificar_login");
 
+
+Route::post('EnViniloController', function(){ return view("modals.EnVinilo.EnVinilo"); })->middleware("verificar_login");
+

@@ -385,3 +385,4 @@ if ({{$Datos['Reloj2'][0]->mt_value}}==75) {
     margin-bottom: -2px;
   }
 </style>
+
