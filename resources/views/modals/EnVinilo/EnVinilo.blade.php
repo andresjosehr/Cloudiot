@@ -11,7 +11,7 @@
             </div>
          </div>
          <div class="modal-body table-custom" style="padding-top: 0;margin-top: 35px">
-            <iframe width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=e73b30ef-0391-4d85-8e09-5b1e2d31b40b&autoAuth=true&ctid=b0fe6b3e-4c52-485f-a76e-fc55cc23c8f0" frameborder="0" allowFullScreen="true"></iframe>
+            <iframe width="1546" height="541.25" src="https://app.powerbi.com/view?r=eyJrIjoiZmZiZTkzNjktYjQ5ZS00NDQ2LWFiZDYtNDlkY2RiNjk4MWFiIiwidCI6ImIwZmU2YjNlLTRjNTItNDg1Zi1hNzZlLWZjNTVjYzIzYzhmMCJ9" frameborder="0" allowFullScreen="true"></iframe>
          </div>
       </div>
    </div>
