@@ -43,6 +43,10 @@
         id_[i]          =  "{{ $Instalacion->id }}";
         controlador_[i] =  "{{ $Instalacion->controlador }} ";
         rol_[i]         =  "{{ $Instalacion->rol }} ";
+
+        if ("{{ $Instalacion->id }}"==8 || "{{ $Instalacion->id }}"==9 || "{{ $Instalacion->id }}"==10) {
+          window.StartFinning=true;
+        } else {window.StartFinning=false;}
         i++;
       @endforeach
       urlroot_="<?php echo Request::root() ?>/";

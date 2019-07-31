@@ -106,13 +106,17 @@ class FinningController extends Controller
 
     function FinningEstadoBombasMarcador()
     {
-      $Datos["PlantaAgua1"]=DB::connection("telemetria")->select("SELECT SUM(mt_value) as mt_value FROM ((SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK100'
+        $Datos["PlantaAgua1"]=DB::connection("telemetria")->select("SELECT SUM(mt_value) as mt_value FROM ((SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK100'
                                                                                      OR mt_name='PlantaAgua--Consumo.NivelAltoAltoTK100')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 2)) ta ORDER BY mt_time DESC");
 
-      $Datos["PlantaAgua2"]=DB::connection("telemetria")->select("SELECT SUM(mt_value) as mt_value FROM ((SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK101'
+        $Datos["PlantaAgua2"]=DB::connection("telemetria")->select("SELECT SUM(mt_value) as mt_value FROM ((SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK101'
                                                                                      OR mt_name='PlantaAgua--Consumo.NivelAltoAltoTK101')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 2)) ta ORDER BY mt_time DESC");
+
+        $Datos["Dinamometro"] = DB::connection("telemetria")->select("SELECT SUM(mt_value) as mt_value FROM ((SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='Dinamometro--Consumo.InundacionSala1'
+                                                                                     OR mt_name='Dinamometro--Consumo.InundacionSala2')
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 2)) ta ORDER BY mt_time DESC;");
 
         $Datos["PlantaAgua"] = max($Datos["PlantaAgua2"][0]->mt_value, $Datos["PlantaAgua1"][0]->mt_value); 
 

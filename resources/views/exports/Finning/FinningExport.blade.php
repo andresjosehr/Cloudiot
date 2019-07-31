@@ -44,7 +44,7 @@
           <td>Ok</td>
 
           @if (isset($Datos["PlantaAgua15"][$i+$j+7]))
-            <td>@if ($Datos["PlantaAgua15"][$i+$j]->mt_value==1) Ok @else Error @endif</td>
+            <td>@if ($Datos["PlantaAgua15"][$i+$j]->mt_value==0) Ok @else Error @endif</td>
             <td>@if ($Datos["PlantaAgua15"][$i+$j+1]->mt_value==0) Ok @else Error @endif</td>
             <td>@if ($Datos["PlantaAgua15"][$i+$j+2]->mt_value==0) Ok @else Error @endif</td>
             <td>@if ($Datos["PlantaAgua15"][$i+$j+3]->mt_value==0) Ok @else Error @endif</td>

@@ -1296,6 +1296,7 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
         anchorYUnits: 'pixels',
         cursor: "pointer",
         opacity: 1,
+        label: "Airport",
         src: imageDefault,
         id: "1"
       })
@@ -1366,28 +1367,44 @@ window.RenderizarMapa = function (latitud, longitud, id, controlador, urlroot, t
         rol: rol
       });
     });
-  }); // function FinningQuery() {
-  //   $.ajax({
-  //      type: 'POST',
-  //      url: urlroot_+"/FinningEstadoBombasMarcador",
-  //      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-  //      success: function(result){
-  //         map.getLayers().forEach(function(feature, layerin) {
-  //        // map.removeLayer(map.getLayers());
-  //        if (layerin==8) {
-  //                map.removeLayer(feature);
-  //                console.log(result.PlantaAgua)
-  //                if (result.PlantaAgua==0) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_verde.png' ));
-  //                if (result.PlantaAgua==1) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_amarillo.png' ));
-  //                if (result.PlantaAgua==2) map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_rojo.png' ));
-  //                map.addLayer(Marcador(-70.389085, -23.598169, 8, "FinningController" , 1, 'images/marc_negro.png' ));
-  //              }
-  //         }); 
-  //      }
-  //  });
-  // }
-  //  FinningQuery();
+  });
 
+  function FinningQuery() {
+    $.ajax({
+      type: 'POST',
+      url: urlroot_ + "/FinningEstadoBombasMarcador",
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function success(result) {
+        map.getLayers().forEach(function (feature, layerin) {
+          // map.removeLayer(map.getLayers());
+          if (layerin == 0) {
+            // map.removeLayer(feature);
+            if (result.PlantaAgua == 0) {
+              map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController", 1, 'images/marc_verde.png'));
+            }
+
+            if (result.PlantaAgua == 1) {
+              map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController", 1, 'images/marc_amarillo.png'));
+            }
+
+            if (result.PlantaAgua == 2) {
+              map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController", 1, 'images/marc_rojo.png'));
+            }
+
+            if (result.Dinamometro[0].mt_value == 0) {
+              map.addLayer(Marcador(-70.387544, -23.598190, 10, "FinningController", 1, 'images/marc_verde.png'));
+            } else {
+              map.addLayer(Marcador(-70.387544, -23.598190, 10, "FinningController", 1, 'images/marc_rojo.png'));
+            }
+          }
+        });
+      }
+    });
+  }
+
+  FinningQuery();
   setInterval(function () {
     FinningQuery();
   }, 60000);
