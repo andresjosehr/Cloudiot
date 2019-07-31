@@ -12,7 +12,7 @@
 
     if (!window.AlarmaPrimera) {
       console.log("Suena la alarma");
-      if ({{$Datos['Reloj1'][0]->mt_value}}==75 || {{$Datos['Reloj2'][0]->mt_value}}==75 || {{$Datos["Dinamometro"][8]->mt_value}}==0 || {{$Datos["Dinamometro"][9]->mt_value}}==1) {
+      if ({{$Datos['Reloj1'][0]->mt_value}}==75 || {{$Datos['Reloj2'][0]->mt_value}}==75 || {{$Datos["Dinamometro"][8]->mt_value}}==1 || {{$Datos["Dinamometro"][9]->mt_value}}==1) {
          window.sound.play();
        } else{
         window.sound.pause();
