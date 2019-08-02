@@ -11,7 +11,7 @@ class ParametrosController extends Controller
     public function InsertarParametroRiego(Request $Request){
     	$MinutosRiego=$_POST["Riego"];
 
-    	DB::table('cloudiot_mt_write')->insert([
+    	DB::connection("telemetria")->table('mt_write')->insert([
 			    ['mt_name' => 'Biofiltro02--Consumo.TiempoRiego', 
 			     'mt_value' => $MinutosRiego
 				]
@@ -28,7 +28,7 @@ class ParametrosController extends Controller
     public function InsertarParametroReposo(Request $Request){
     	$MinutosReposo=$_POST["Reposo"];
 
-    	DB::table('cloudiot_mt_write')->insert([
+    	DB::connection("telemetria")->table('mt_write')->insert([
 			    ['mt_name' => 'Biofiltro02--Consumo.TiempoReposo', 
 			     'mt_value' => $MinutosReposo
 				]
@@ -47,13 +47,13 @@ class ParametrosController extends Controller
     	$RangoPH_Inicio=$_POST["RangoPH_Ini"];
     	$RangoPH_Fini=$_POST["RangoPH_Fini"];
 
-    	DB::table('cloudiot_mt_write')->insert([
+    	DB::connection("telemetria")->table('mt_write')->insert([
 			    ['mt_name' => 'Biofiltro02--Consumo.LimitePH_Bajo', 
 			     'mt_value' => $RangoPH_Inicio
 				]
 			]);
 
-    	DB::table('cloudiot_mt_write')->insert([
+    	DB::connection("telemetria")->table('mt_write')->insert([
 			    ['mt_name' => 'Biofiltro02--Consumo.LimitePH_Alto', 
 			     'mt_value' => $RangoPH_Fini
 				]
