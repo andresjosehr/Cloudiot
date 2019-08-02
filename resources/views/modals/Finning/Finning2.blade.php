@@ -75,8 +75,8 @@
                   <h1 align="center" id="h1_3b6e_0">Pozo Nave 4</h1>
                   <div id="div_3b6e_4">
                     <div align="center" style="margin: 0 auto; display: flex">
-                      <img id="img_3b6e_1" src="{{ asset('images/tanque_pozo_nave0.png') }}" alt=""> 
-                      <img id="img_3b6e_2" src="{{ asset('images/tanque_pozo_nave0.png') }}" alt=""> 
+                      <img style="width: 95px" id="img_3b6e_1" src="{{ asset('images/tanque_pozo_nave0.png') }}" alt=""> 
+                      <img style="width: 95px" id="img_3b6e_2" src="{{ asset('images/tanque_pozo_nave0.png') }}" alt=""> 
                      </div>
                   </div>
                   <div id="div_3b6e_5"></div>
@@ -112,9 +112,9 @@
                      <div class="col-md-10" align="center">
                       <div class="row">
                         <div class="col-md-6">
-                           @if ($Datos['Reloj2'][0]->mt_value==25) <img id="img_3b6e_3" src="{{ asset('images/tanque_ancho0.png') }}" alt=""> @endif
-                        @if ($Datos['Reloj2'][0]->mt_value==50) <img id="img_3b6e_4" src="{{ asset('images/tanque_ancho1.png') }}" alt=""> @endif
-                        @if ($Datos['Reloj2'][0]->mt_value==75) <img id="img_3b6e_5" src="{{ asset('images/tanque_ancho11png') }}" alt=""> @endif
+                           @if ($Datos['Reloj2'][0]->mt_value==25) <img style="width: 95px" id="img_3b6e_3" src="{{ asset('images/tanque_ancho0.png') }}" alt=""> @endif
+                        @if ($Datos['Reloj2'][0]->mt_value==50) <img style="width: 95px" id="img_3b6e_4" src="{{ asset('images/tanque_ancho1.png') }}" alt=""> @endif
+                        @if ($Datos['Reloj2'][0]->mt_value==75) <img style="width: 95px" id="img_3b6e_5" src="{{ asset('images/tanque_ancho11png') }}" alt=""> @endif
                         <div class="row" id="div_3b6e_6">
                            <div class="col-md-6" align="center">
                               <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][0]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
@@ -126,9 +126,9 @@
 
                         </div>
                         <div class="col-md-6">
-                          @if ($Datos['Reloj2'][0]->mt_value==25) <img id="img_3b6e_6" src="{{ asset('images/tanque_ancho0.png') }}" alt=""> @endif
-                          @if ($Datos['Reloj2'][0]->mt_value==50) <img id="img_3b6e_7" src="{{ asset('images/tanque_ancho1.png') }}" alt=""> @endif
-                          @if ($Datos['Reloj2'][0]->mt_value==75) <img id="img_3b6e_8" src="{{ asset('images/tanque_ancho11png') }}" alt=""> @endif
+                          @if ($Datos['Reloj2'][0]->mt_value==25) <img style="width: 95px" id="img_3b6e_6" src="{{ asset('images/tanque_ancho0.png') }}" alt=""> @endif
+                          @if ($Datos['Reloj2'][0]->mt_value==50) <img style="width: 95px" id="img_3b6e_7" src="{{ asset('images/tanque_ancho1.png') }}" alt=""> @endif
+                          @if ($Datos['Reloj2'][0]->mt_value==75) <img style="width: 95px" id="img_3b6e_8" src="{{ asset('images/tanque_ancho11png') }}" alt=""> @endif
                         <div class="row" id="div_3b6e_7">
                            <div class="col-md-6" align="center">
                               <img src="{{Request::root()}}/images/bomba2.png" width="20%" alt="" @if ($Datos["PlantaAgua"][2]->mt_value==0) style="filter: hue-rotate(128deg)" @else style="filter: hue-rotate(327deg)" @endif>
@@ -252,8 +252,8 @@
                      </div>
                      <div class="col-md-4" align="center">
                         <ul id="ul_3b6e_0">
-                           @if ($Datos["Dinamometro"][8]->mt_value==0) <img id="img_3b6e_9" src="{{ asset('images/tanque_dina0.png') }}" alt=""> @else <img id="img_3b6e_10" src="{{ asset('images/tanque_dina1.png') }}" alt=""> @endif
-                           @if ($Datos["Dinamometro"][9]->mt_value==0) <img id="img_3b6e_11" src="{{ asset('images/tanque_dina0.png') }}" alt=""> @else <img id="img_3b6e_12" src="{{ asset('images/tanque_dina1.png') }}" alt=""> @endif
+                           @if ($Datos["Dinamometro"][8]->mt_value==0) <img style="width: 65px" id="img_3b6e_9" src="{{ asset('images/tanque_dina0.png') }}" alt=""> @else <img style="width: 65px" id="img_3b6e_10" src="{{ asset('images/tanque_dina1.png') }}" alt=""> @endif
+                           @if ($Datos["Dinamometro"][9]->mt_value==0) <img style="width: 65px" id="img_3b6e_11" src="{{ asset('images/tanque_dina0.png') }}" alt=""> @else <img style="width: 65px" id="img_3b6e_12" src="{{ asset('images/tanque_dina1.png') }}" alt=""> @endif
                         </ul>
                      </div>
                   </div>
@@ -436,6 +436,9 @@
    
 </script>
 <style>
+   table td, table th, tbody tr th{
+    font-size: 10px
+   }
    .bombas_dinamometro p{
    margin-bottom: -2px;
    }
