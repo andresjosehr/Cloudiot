@@ -41,6 +41,9 @@
     <script src='{{ asset('js/custom.js') }}'></script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        window.url='{{Request::root()}}';
+    </script>
 
 </head>
 

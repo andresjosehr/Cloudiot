@@ -56,6 +56,7 @@ Route::get('parametros', function (){
 Route::post('InsertarParametroRiego', "ParametrosController@InsertarParametroRiego")->middleware("verificar_login");
 Route::post('InsertarParametroReposo', "ParametrosController@InsertarParametroReposo")->middleware("verificar_login");
 Route::post('InsertarParametroRangoPH', "ParametrosController@InsertarParametroRangoPH")->middleware("verificar_login");
+Route::post('PausarReanudarParametros', "ParametrosController@PausarReanudarParametros")->middleware("verificar_login");
 
 Route::get('AlarmasInterval', "AlarmasController@Interval")->middleware("verificar_login");
 Route::get('Alarmas', "AlarmasController@index")->middleware("verificar_login");

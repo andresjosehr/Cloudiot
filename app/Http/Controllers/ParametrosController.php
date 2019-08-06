@@ -65,4 +65,40 @@ class ParametrosController extends Controller
         	$(".vina-loadingg3").css("display", "none");
     	</script><?php
     }
+
+    public function PausarReanudarParametros(Request $Request)
+    {   
+        if ($Request->proceso=="pausar") {
+
+            $Datos = DB::table("cloudiot_mt_write")->where("mt_name", $Request->mt_name)->get();
+
+            DB::table("parametros")->insert([
+                                               "parametro" => $Datos[count($Datos)-1]->mt_name,
+                                               "valor" => $Datos[count($Datos)-1]->mt_value
+                                           ]);
+
+            DB::table('cloudiot_mt_write')->insert([
+                     'mt_name' => $Datos[count($Datos)-1]->mt_name, 
+                     'mt_value' => 0
+                    ]);
+
+            return "swal('Listo', 'El proceso se ha realizado existosamente', 'success')";
+
+        }
+
+        if ($Request->proceso=="reanudar") {
+
+            $Datos = DB::table("parametros")->where("parametro", $Request->mt_name)->get();
+
+            DB::table("parametros")->where("parametro", $Request->mt_name)->delete();
+
+            DB::table('cloudiot_mt_write')->insert([
+                     'mt_name' => $Datos[0]->parametro, 
+                     'mt_value' => $Datos[0]->valor
+                    ]);
+
+            return "swal('Listo', 'El proceso se ha realizado existosamente', 'success')";
+
+        } 
+    }
 }

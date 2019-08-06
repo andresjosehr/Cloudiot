@@ -86,6 +86,25 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./custom/home.js */ "./resources/js/custom/home.js");
+
+__webpack_require__(/*! ./custom/RegistrarUsuarios.js */ "./resources/js/custom/RegistrarUsuarios.js");
+
+__webpack_require__(/*! ./custom/SicutIgnis.js */ "./resources/js/custom/SicutIgnis.js");
+
+__webpack_require__(/*! ./custom/Vina.js */ "./resources/js/custom/Vina.js");
+
+__webpack_require__(/*! ./custom/ajax.js */ "./resources/js/custom/ajax.js");
+
+/***/ }),
+
 /***/ "./resources/js/custom/RegistrarUsuarios.js":
 /*!**************************************************!*\
   !*** ./resources/js/custom/RegistrarUsuarios.js ***!
@@ -1258,6 +1277,71 @@ window.RegistarReposo = function (url_) {
 
 /***/ }),
 
+/***/ "./resources/js/custom/ajax.js":
+/*!*************************************!*\
+  !*** ./resources/js/custom/ajax.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.AjaxRequest = function (metodo, ruta, datos) {
+  $(".loader-insta").show();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: metodo,
+    url: ruta,
+    data: datos,
+    success: function success(result) {
+      $(".loader-insta").hide();
+      eval(result);
+    },
+    error: function error(e) {
+      $(".loader-insta").hide();
+      console.log("Error en la peticion");
+      console.log(e);
+    }
+  });
+};
+
+window.AjaxFileRequest = function (metodo, ruta, idArchivo) {
+  $(".loader").show();
+  var file_data = $('#' + idArchivo).prop('files')[0];
+  var form_data = new FormData();
+  form_data.append('_method', metodo);
+  form_data.append('file', file_data);
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    url: ruta,
+    // point to server-side PHP script 
+    dataType: 'text',
+    // what to expect back from the PHP script, if anything
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: form_data,
+    type: "POST",
+    success: function success(result) {
+      $(".loader").hide();
+      eval(result);
+    },
+    error: function error(e) {
+      $(".loader").hide();
+      console.log("Error en la peticion");
+      console.log(e);
+    }
+  });
+};
+
+/***/ }),
+
 /***/ "./resources/js/custom/home.js":
 /*!*************************************!*\
   !*** ./resources/js/custom/home.js ***!
@@ -1468,16 +1552,13 @@ window.AsignarIDHome = function () {
 /***/ }),
 
 /***/ 0:
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/custom/home.js ./resources/js/custom/RegistrarUsuarios.js ./resources/js/custom/SicutIgnis.js ./resources/js/custom/Vina.js ./resources/sass/general.scss ***!
-  \**************************************************************************************************************************************************************************************/
+/*!*****************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/general.scss ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Temporal\Interline\Cloudiot\resources\js\custom\home.js */"./resources/js/custom/home.js");
-__webpack_require__(/*! C:\xampp\htdocs\Temporal\Interline\Cloudiot\resources\js\custom\RegistrarUsuarios.js */"./resources/js/custom/RegistrarUsuarios.js");
-__webpack_require__(/*! C:\xampp\htdocs\Temporal\Interline\Cloudiot\resources\js\custom\SicutIgnis.js */"./resources/js/custom/SicutIgnis.js");
-__webpack_require__(/*! C:\xampp\htdocs\Temporal\Interline\Cloudiot\resources\js\custom\Vina.js */"./resources/js/custom/Vina.js");
+__webpack_require__(/*! C:\xampp\htdocs\Temporal\Interline\Cloudiot\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\xampp\htdocs\Temporal\Interline\Cloudiot\resources\sass\general.scss */"./resources/sass/general.scss");
 
 
