@@ -64,6 +64,7 @@ class ParametrosController extends Controller
     		$(".boton3").css("display", "block");
         	$(".vina-loadingg3").css("display", "none");
     	</script><?php
+
     }
 
     public function PausarReanudarParametros(Request $Request)

@@ -1164,14 +1164,15 @@ window.CompilarRango = function (alto, bajo, tiemporiego, tiemporeposo) {
   var slider = document.getElementById('slider');
   noUiSlider.create(slider, {
     start: [bajo, alto],
-    step: 0.1,
+    step: 1,
+    decimals: 0,
     connect: true,
     range: {
       'min': 0,
-      'max': 14
+      'max': 1400
     },
     format: wNumb({
-      decimals: 1
+      decimals: 0
     })
   });
   var nodes = [document.getElementById("BajoPH"), // 0
