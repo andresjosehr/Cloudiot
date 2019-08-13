@@ -11,6 +11,41 @@
 |
 */
 
+
+
+
+
+Route::get("enviar-email", function(){
+
+	$data=array("nombre" => "Curso Laravel");
+
+	Mail::send("emails.ejemplo", $data, function($m){
+		$m->from("ejemplo@gmail.com", "Email de Prueba");
+		$m->to("joseandreshernandezross@gmail.com")->subject("Email de Prueba");
+
+		$file = public_path('xml/Vina/08_13_2019_02_14_57_pm.xml');
+
+		$m->attach($file, [ 'as' => 'File name', 'mime' => 'application/xml']);
+	});
+
+	return "Email enviado correctamente";
+
+
+	// file location
+	// return $file = public_path('xml/Vina/08_13_2019_02_14_57_pm.xml');
+
+	// // return mail with an attachment
+	// return $this->view('emails.confirm')
+	//     ->from('me@stackoverflow.com', 'From')->subject('New mail')
+	//     ->with([
+	//         'name' => $this->data['name'],
+	//     ])->attach($file, [
+	//         'as' => 'File name',
+	//         'mime' => 'application/pdf',
+	//     ]);
+
+});
+
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -92,6 +127,7 @@ Route::post('CalculosLuisFelipe19','VinaLuisFelipeController@Entrada3')->middlew
 Route::post('CalculosLuisFelipe20','VinaLuisFelipeController@Salida1')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe21','VinaLuisFelipeController@Salida2')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe22','VinaLuisFelipeController@Salida3')->middleware("verificar_login");
+Route::get('exportar-xml-luis-felipe','VinaLuisFelipeController@ExportarXML');
 
 
 

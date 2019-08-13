@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use DB;
 use Auth;
 use Log;
+use View;
+use Storage;
+use Illuminate\Http\Response;
 
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,6 +19,29 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class VinaLuisFelipeController extends Controller{
+
+  public function ExportarXML()
+    {
+
+
+      date_default_timezone_set('Australia/Melbourne');
+      $date = date('m_d_Y_h_i_s_a', time());
+
+
+        
+        $output = View::make('welcome')->render();
+
+        $myfile = fopen($_SERVER["DOCUMENT_ROOT"]."/".$_SERVER["REQUEST_URI"]."/../xml/Vina/".$date.".xml", "w") or die("Unable to open file!");
+
+        $txt = $output;
+
+        fwrite($myfile, $txt);
+
+        fclose($myfile);
+    }
+
+
+
     public function index(){
 
       $id=$_POST['id'];
@@ -1704,5 +1730,7 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
 
            return $Datos;
     }
+
+
 
 }
