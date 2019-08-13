@@ -23,9 +23,9 @@ Route::get("enviar-email", function(){
 		$m->from("ejemplo@gmail.com", "Email de Prueba");
 		$m->to("joseandreshernandezross@gmail.com")->subject("Email de Prueba");
 
-		$file = public_path('xml/Vina/08_13_2019_02_14_57_pm.xml');
+		// $file = public_path('xml/Vina/08_13_2019_02_14_57_pm.xml');
 
-		$m->attach($file, [ 'as' => 'File name', 'mime' => 'application/xml']);
+		// $m->attach($file, [ 'as' => 'File name', 'mime' => 'application/xml']);
 	});
 
 	return "Email enviado correctamente";
