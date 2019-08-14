@@ -17,32 +17,20 @@
 
 Route::get("enviar-email", function(){
 
-	$data=array("nombre" => "Curso Laravel");
+	$data=array("nombre" => "Viña XML");
 
 	Mail::send("emails.ejemplo", $data, function($m){
-		$m->from("ejemplo@gmail.com", "Email de Prueba");
-		$m->to("joseandreshernandezross@gmail.com")->subject("Email de Prueba");
+		$m->from("Automatizacion@gmail.com", "Automatizacion");
+		// $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
-		// $file = public_path('xml/Vina/08_13_2019_02_14_57_pm.xml');
+		$m->to("joseandreshernandezross@gmail.com")->subject("Viña XML");
 
-		// $m->attach($file, [ 'as' => 'File name', 'mime' => 'application/xml']);
+		 $file = public_path('xml/Vina/08_14_2019_02_00_19_am.xml');
+		 $m->attach($file, [ 'as' => 'aguas_subterraneas', 'mime' => 'application/xml']);
 	});
+	
 
 	return "Email enviado correctamente";
-
-
-	// file location
-	// return $file = public_path('xml/Vina/08_13_2019_02_14_57_pm.xml');
-
-	// // return mail with an attachment
-	// return $this->view('emails.confirm')
-	//     ->from('me@stackoverflow.com', 'From')->subject('New mail')
-	//     ->with([
-	//         'name' => $this->data['name'],
-	//     ])->attach($file, [
-	//         'as' => 'File name',
-	//         'mime' => 'application/pdf',
-	//     ]);
 
 });
 
