@@ -1,0 +1,1 @@
+curl http://localhost/public/enviar-email
