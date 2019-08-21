@@ -18,6 +18,7 @@ use DB;
 
 class SicutIgnisController extends Controller{
     public function index(Request $request){
+
     	
     	$id=$_POST['id'];
             $tabla_asociada=$_POST['tabla_asociada'];

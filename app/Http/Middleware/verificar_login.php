@@ -16,6 +16,9 @@ class verificar_login
      */
     public function handle($request, Closure $next){
 
+
+        // return "Pata con huevo";
+
         $usuario = Auth::user();
 
         if (!$usuario) {

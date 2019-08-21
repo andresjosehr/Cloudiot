@@ -36,6 +36,8 @@ Route::get("enviar-email", function(){
 
 Route::get('/', 'HomeController@index');
 
+Route::get('testear-instalaciones', 'TestingController@index');
+
 Auth::routes();
 
 Route::get('panel-de-control','InstalacionesController@index')->middleware("verificar_login");
