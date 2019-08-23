@@ -1,14 +1,17 @@
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
+@import 'default/bootstrap.css';
+@import 'default/waves.css';
+@import 'default/animate.css';
+@import 'default/style.css';
+@import 'default/all-themes.css';
+@import 'default/openlayer_4_6_5.css';
+@import 'default/bootstrap-select.css';
+@import 'default/bootstrap-material-datetimepicker.css';
+@import 'default/nouislider.min.css';
+@import 'default/rpm.css';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+@import 'custom/home';
+@import 'custom/VinaLFE';
+@import 'custom/RegistrarUsuario';
+@import 'custom/SicutIgnis';

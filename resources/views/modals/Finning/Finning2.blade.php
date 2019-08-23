@@ -27,8 +27,8 @@
    
    
    setInterval(function(){ 
-     window.FechaInicio =$("#fecha_flujo_inicio").val();
-     window.FechaFin    =$("#fecha_flujo_fin").val();
+     window.FechaInicio = $("#fecha_flujo_inicio").val();
+     window.FechaFin    = $("#fecha_flujo_fin").val();
    }, 30);
    
    
@@ -51,14 +51,14 @@
                      <div class="col-md-5">
                         <div class="form-group">
                            <div class="form-line">
-                              <input type="datetime-local" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
+                              <input type="text" id="fecha_flujo_inicio" class="datetimepicker form-control" placeholder="Fecha Inicio">
                            </div>
                         </div>
                      </div>
                      <div class="col-md-5">
                         <div class="form-group">
                            <div class="form-line">
-                              <input type="datetime-local" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
+                              <input type="text" id="fecha_flujo_fin" class="datetimepicker form-control" placeholder="Fecha Fin">
                            </div>
                         </div>
                      </div>
@@ -427,8 +427,30 @@
    
    
    $("#fecha_flujo_inicio").val(window.FechaInicio);
-     
    $("#fecha_flujo_fin").val(window.FechaFin);
+
+
+   $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
+
+    $('#fecha_flujo_fin').bootstrapMaterialDatePicker
+    ({
+      format: 'YYYY-MM-DD',
+      lang: 'fr',
+      weekStart: 1, 
+      cancelText : 'ANNULER',
+      nowButton : true,
+      switchOnClick : true,
+      time: false
+    });
   
 
    

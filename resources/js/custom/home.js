@@ -186,7 +186,7 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
 
 window.flyTo=function(vistamo ,location, done) {
         var duration = 2000;
-        var zoom = 10;
+        var zoom = 17;
         var parts = 2;
         var called = false;
         function callback(complete) {

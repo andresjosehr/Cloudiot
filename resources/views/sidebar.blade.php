@@ -1,8 +1,8 @@
     <section>
         <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
+        <aside id="leftsidebar" class="sidebar" style="margin-top: -8px;">
             <!-- User Info -->
-            <div class="user-info">
+            <div class="user-info" style="background-image: url({{ asset('/images/user-img-background.jpg') }});">
                 <div style="text-align: center;">
                     <img src="http://www.proyex.cl/wp-content/uploads/2018/03/logo__menu_somb.png" style="width: 60%" alt="User" />
                 </div>

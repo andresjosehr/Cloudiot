@@ -12,7 +12,7 @@
         
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol-debug.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol-debug.js"></script> --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
 
@@ -36,14 +36,11 @@
 
 
     
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    <script src='{{ asset('js/custom.js') }}'></script>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src='{{ asset('js/app.js') }}'></script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script>
-        window.url='{{Request::root()}}';
-    </script>
+    <script> window.url='{{Request::root()}}'; </script>
 
 </head>
 
