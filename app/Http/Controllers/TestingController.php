@@ -109,7 +109,7 @@ class TestingController extends Controller
 		 $data=array("nombre" => "Informe diario de instalaciones");
 
 		Mail::send("emails.testing", ["Datos" => $Datos], function($m) use ($Datos){
-			$m->from("Automatizacion@gmail.com", "Automatizacion");
+			$m->from("automatizacion@proyex.cl", "Automatizacion");
 			// $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
 			$m->to("hernan.canales@proyex.cl")->subject("Informe diario de instalaciones");

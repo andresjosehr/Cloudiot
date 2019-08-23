@@ -28,7 +28,10 @@ class FinningController extends Controller
 
 
 
-      $Datos["PlantaAgua"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
+      $Datos["PlantaAgua"] = DB::connection("telemetria")->select("(SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
+                                                                                     OR mt_name='PlantaAgua--Consumo.FallaBomba1002'
+                                                                                     OR mt_name='PlantaAgua--Consumo.FallaBomba1011'
+                                                                                     OR mt_name='PlantaAgua--Consumo.FallaBomba1012') order by mt_time desc limit 400) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1002'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1011'
                                                                                      OR mt_name='PlantaAgua--Consumo.FallaBomba1012')
@@ -58,28 +61,28 @@ class FinningController extends Controller
 
 
 
-            $Datos["PlantaAguaTabla"]["BajoTK100"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK100')
+            $Datos["PlantaAguaTabla"]["BajoTK100"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK100') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK100')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["BajoTK101"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK101')
+            $Datos["PlantaAguaTabla"]["BajoTK101"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK101') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelBajoTK101')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["AltoTK100"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelAltoAltoTK100')
+            $Datos["PlantaAguaTabla"]["AltoTK100"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.NivelAltoAltoTK100') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelAltoAltoTK100')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["AltoTK101"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelAltoAltoTK101')
+            $Datos["PlantaAguaTabla"]["AltoTK101"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.NivelAltoAltoTK101') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.NivelAltoAltoTK101')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["Bomba1001"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001')
+            $Datos["PlantaAguaTabla"]["Bomba1001"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1001')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["Bomba1002"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1002')
+            $Datos["PlantaAguaTabla"]["Bomba1002"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1002') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1002')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["Bomba1011"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1011')
+            $Datos["PlantaAguaTabla"]["Bomba1011"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1011') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1011')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["PlantaAguaTabla"]["Bomba1012"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1012')
+            $Datos["PlantaAguaTabla"]["Bomba1012"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1012') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PlantaAgua--Consumo.FallaBomba1012')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
 
@@ -87,34 +90,34 @@ class FinningController extends Controller
 
 
 
-            $Datos["DinamometroTabla"]["ErrorBomba601"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601')
+            $Datos["DinamometroTabla"]["ErrorBomba601"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba601')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba602"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba602')
+            $Datos["DinamometroTabla"]["ErrorBomba602"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba602') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba602')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba603"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba603')
+            $Datos["DinamometroTabla"]["ErrorBomba603"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba603') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba603')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba604"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba604')
+            $Datos["DinamometroTabla"]["ErrorBomba604"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba604') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba604')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba605"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba605')
+            $Datos["DinamometroTabla"]["ErrorBomba605"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba605') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba605')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba606"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba606')
+            $Datos["DinamometroTabla"]["ErrorBomba606"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba606') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba606')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba607"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba607')
+            $Datos["DinamometroTabla"]["ErrorBomba607"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba607') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba607')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["ErrorBomba608"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba608')
+            $Datos["DinamometroTabla"]["ErrorBomba608"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.ErrorBomba608') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.ErrorBomba608')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["InundacionSala1"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.InundacionSala1')
+            $Datos["DinamometroTabla"]["InundacionSala1"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.InundacionSala1') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.InundacionSala1')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-            $Datos["DinamometroTabla"]["InundacionSala2"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.InundacionSala2')
+            $Datos["DinamometroTabla"]["InundacionSala2"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='Dinamometro--Consumo.InundacionSala2') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='Dinamometro--Consumo.InundacionSala2')
                                                                                     GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
 
