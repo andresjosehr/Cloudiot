@@ -133,7 +133,7 @@ class TestingController extends Controller
 			$m->from("automatizacion@proyex.cl", "Automatizacion");
 			// $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
-			$m->to("joseandreshernandezrross@gmail.com")->subject("Informe diario de instalaciones");
+			$m->to("joseandreshernandezross@gmail.com")->subject("Informe diario de instalaciones");
 		});
 		
 
