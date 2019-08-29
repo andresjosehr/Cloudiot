@@ -44,9 +44,21 @@
 			</tr>
 			<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
 			<tr>
-				<th style="min-width: 200px" align="left">Finning:</th>
-				<th style="min-width: 200px" @if ($Datos["Finning"]=="Con error") style="color: red" @else style="color: green" @endif>{{$Datos["Finning"]}}</th>
-				<th style="min-width: 200px">{{$Datos["FinningUltimaFecha"][0]->mt_time}}</th>
+				<th style="min-width: 200px" align="left">PozoNave4:</th>
+				<th style="min-width: 200px" @if ($Datos["PozoNave4"]=="Con error") style="color: red" @else style="color: green" @endif>{{$Datos["PozoNave4"]}}</th>
+				<th style="min-width: 200px"></th>
+			</tr>
+			<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+			<tr>
+				<th style="min-width: 200px" align="left">PlantaAgua:</th>
+				<th style="min-width: 200px" @if ($Datos["PlantaAgua"]=="Con error") style="color: red" @else style="color: green" @endif>{{$Datos["PlantaAgua"]}}</th>
+				<th style="min-width: 200px">{{$Datos["PlantaAguaUltimaFecha"][0]->mt_time}}</th>
+			</tr>
+			<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+			<tr>
+				<th style="min-width: 200px" align="left">Dinamometro:</th>
+				<th style="min-width: 200px" @if ($Datos["Dinamometro"]=="Con error") style="color: red" @else style="color: green" @endif>{{$Datos["Dinamometro"]}}</th>
+				<th style="min-width: 200px">{{$Datos["DinamometroUltimaFecha"][0]->mt_time}}</th>
 			</tr>
 
 		</tbody>

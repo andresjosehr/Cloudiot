@@ -28,6 +28,9 @@ class TestingController extends Controller
 
 
 
+
+
+
 		$SicutIgnis = $client->post(url("SicutIgnisController"), [
 		    'form_params' => [
 		        'id' => '1',
@@ -68,15 +71,20 @@ class TestingController extends Controller
 
 		$Datos["MaitenalUltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_biofil04 ORDER BY mt_time DESC LIMIT 1");
 
-		$Finning = $client->post(url("FinningController"), [
-		    'form_params' => [
-		        'id' => '8',
-		        'tabla_asociada' => '',
-		        'rol' => '1'
-		    ]
-		]);
 
-		$Datos["FinningUltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_finning01 ORDER BY mt_time DESC LIMIT 1");
+
+
+
+
+
+
+		$PozoNave4 = $client->post(url("FinningPozoNave4"));
+
+		$PlantaAgua = $client->post(url("FinningPlantaAgua"));
+		$Datos["PlantaAguaUltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'PlantaAgua%' ORDER BY mt_time DESC LIMIT 1;");
+
+		$Dinamometro = $client->post(url("FinningDinamometro"));
+		$Datos["DinamometroUltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'Dinamometro%' ORDER BY mt_time DESC LIMIT 1;");
 
 
 
@@ -100,10 +108,23 @@ class TestingController extends Controller
 		} else{
 			$Datos["Maitenal"] = "Con error";
 		}
-		if ($Finning->getStatusCode()==200) {
-			$Datos["Finning"] = "Sin errores";
+
+		if ($PozoNave4->getStatusCode()==200) {
+			$Datos["PozoNave4"] = "Sin errores";
 		} else{
-			$Datos["Finning"] = "Con error";
+			$Datos["PozoNave4"] = "Con error";
+		}
+
+		if ($PlantaAgua->getStatusCode()==200) {
+			$Datos["PlantaAgua"] = "Sin errores";
+		} else{
+			$Datos["PlantaAgua"] = "Con error";
+		}
+
+		if ($Dinamometro->getStatusCode()==200) {
+			$Datos["Dinamometro"] = "Sin errores";
+		} else{
+			$Datos["Dinamometro"] = "Con error";
 		}
 
 		 $data=array("nombre" => "Informe diario de instalaciones");
@@ -112,7 +133,7 @@ class TestingController extends Controller
 			$m->from("automatizacion@proyex.cl", "Automatizacion");
 			// $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
-			$m->to("hernan.canales@proyex.cl")->subject("Informe diario de instalaciones");
+			$m->to("joseandreshernandezrross@gmail.com")->subject("Informe diario de instalaciones");
 		});
 		
 
