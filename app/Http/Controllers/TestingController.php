@@ -73,11 +73,6 @@ class TestingController extends Controller
 
 
 
-
-
-
-
-
 		$PozoNave4 = $client->post(url("FinningPozoNave4"));
 
 		$PlantaAgua = $client->post(url("FinningPlantaAgua"));
@@ -85,6 +80,13 @@ class TestingController extends Controller
 
 		$Dinamometro = $client->post(url("FinningDinamometro"));
 		$Datos["DinamometroUltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'Dinamometro%' ORDER BY mt_time DESC LIMIT 1;");
+
+
+
+		$Datos["OBRA_OB-0501-24UltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_minlascenizas WHERE mt_name LIKE 'MineraLasCenizas_A5%' ORDER BY mt_time DESC LIMIT 1;");
+
+
+		$Datos["OBRA_OB-0501-23UltimaFecha"]=DB::connection("telemetria")->select("SELECT * FROM log_minlascenizas WHERE mt_name LIKE 'MineraLasCenizas_A2%' ORDER BY mt_time DESC LIMIT 1");
 
 
 
@@ -133,7 +135,7 @@ class TestingController extends Controller
 			$m->from("automatizacion@proyex.cl", "Automatizacion");
 			// $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
-			$m->to("hernan.canales@proyex.cl")->subject("Informe diario de instalaciones");
+			$m->to("joseandreshernandezross@gmail.com")->subject("Informe diario de instalaciones");
 		});
 		
 

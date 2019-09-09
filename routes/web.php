@@ -15,24 +15,7 @@
 
 
 
-Route::get("enviar-email", function(){
-
-	$data=array("nombre" => "Viña XML");
-
-	Mail::send("emails.ejemplo", $data, function($m){
-		$m->from("Automatizacion@gmail.com", "Automatizacion");
-		// $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
-
-		$m->to("hernan.canales@proyex.cl")->subject("Viña XML");
-
-		 $file = public_path('xml/Vina/08_14_2019_02_00_19_am.xml');
-		 $m->attach($file, [ 'as' => 'aguas_subterraneas', 'mime' => 'application/xml']);
-	});
-	
-
-	return "Email enviado correctamente";
-
-});
+Route::get("xml-subterraneo", "InstalacionesController@PozoSubterraneo");
 
 Route::get('/', 'HomeController@index');
 

@@ -61,6 +61,24 @@
 				<th style="min-width: 200px">{{$Datos["DinamometroUltimaFecha"][0]->mt_time}}</th>
 			</tr>
 
+
+			<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+
+
+			<tr>
+				<th style="min-width: 200px" align="left">OBRA OB-0501-24:</th>
+				<th style="min-width: 200px">Sin Error</th>
+				<th style="min-width: 200px">{{$Datos["OBRA_OB-0501-24UltimaFecha"][0]->mt_time}}</th>
+			</tr>
+
+			<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+
+			<tr>
+				<th style="min-width: 200px" align="left">OBRA OB-0501-23:</th>
+				<th style="min-width: 200px">Sin Error</th>
+				<th style="min-width: 200px">{{$Datos["OBRA_OB-0501-23UltimaFecha"][0]->mt_time}}</th>
+			</tr>
+
 		</tbody>
 	</table>
 
