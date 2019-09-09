@@ -149,7 +149,7 @@ class InstalacionesController extends Controller{
           $m->from("Automatizacion@gmail.com", "Automatizacion");
           // $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
-          $m->to("joseandreshernandezross@gmail.com")->subject("Viña XML");
+          $m->to("hernan.canales@proyex.cl")->subject("Viña XML");
 
            $file = public_path('xml/Vina/'.$data["nombre_archivo"].'.xml');
            $m->attach($file, [ 'as' => 'OB-0501-24"', 'mime' => 'application/xml']);
