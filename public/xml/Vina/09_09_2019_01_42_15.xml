@@ -1,0 +1,19 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAPENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <SOAP-ENV:Header>
+      <m:sendDataExtraccionTraza xmlns:m="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/SendDataExtraccionRequest">
+         <m:codigoDeLaObra>OB-0501-23</m:codigoDeLaObra>
+         <m:timeStampOrigen>2019-09-08T23:00:01Z</m:timeStampOrigen>
+      </m:sendDataExtraccionTraza>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <m:sendDataExtraccionRequest xmlns:m="http://www.mop.cl/controlextraccion/xsd/datosExtraccion/SendDataExtraccionRequest">
+         <m:dataExtraccionSubterranea>
+            <m:fechaMedicion>2019-09-08</m:fechaMedicion>
+            <m:horaMedicion>23:00:01</m:horaMedicion>
+            <m:totalizador>2387</m:totalizador>
+            <m:caudal>374</m:caudal>
+            <m:nivelFreaticoDelPozo >1325</m:nivelFreaticoDelPozo >
+         </m:dataExtraccionSubterranea>
+      </m:sendDataExtraccionRequest>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

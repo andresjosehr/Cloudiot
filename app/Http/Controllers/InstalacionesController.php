@@ -106,7 +106,7 @@ class InstalacionesController extends Controller{
 
 
 
-
+        sleep(2);
 
 
 
