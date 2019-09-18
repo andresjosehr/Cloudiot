@@ -173,3 +173,17 @@ Route::get('DescargarExcelFlujoJavier','SanJavierController@DescargarExcelFlujoJ
 
 Route::post('EnViniloController', function(){ return view("modals.EnVinilo.EnVinilo"); })->middleware("verificar_login");
 
+
+
+
+
+
+
+
+Route::get('sincronizar-log_aasa','TareasProgramadas\SincronizacionBDController@log_aasa');
+
+
+
+
+
+

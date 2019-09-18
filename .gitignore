@@ -1,6 +1,5 @@
 /node_modules
 /public/hot
-/config/database.php
 /public/storage
 /storage/*.key
 .phpunit.result.cache
