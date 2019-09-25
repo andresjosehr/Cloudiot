@@ -1,0 +1,1 @@
+curl http://localhost/public/sincronizar-log_aasa
