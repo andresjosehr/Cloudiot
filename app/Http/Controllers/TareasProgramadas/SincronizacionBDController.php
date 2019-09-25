@@ -20,6 +20,9 @@ class SincronizacionBDController extends Controller
 		$InsertarDatos=json_decode(json_encode($InsertarDatos), true);
 
 		DB::connection("telemetria_local")->table("log_aasa")->insert($InsertarDatos);
+
+
+		return "Exito";
 		
     }
 }
