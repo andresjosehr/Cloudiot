@@ -1,1 +1,0 @@
-curl http://localhost/public/exportar-xml-luis-felipe
