@@ -13,6 +13,8 @@ class SincronizacionBDController extends Controller
     {
     	$UltimaFecha = DB::connection("telemetria_local")->select("SELECT * FROM log_aasa ORDER BY mt_time DESC LIMIT 1");
 
+    	DB::connection("telemetria_local")->select("DELETE FROM log_aasa WHERE mt_time='".$UltimaFecha[0]->mt_time."' ");
+
 
 		$InsertarDatos = DB::connection("telemetria")->select("SELECT * FROM log_aasa WHERE mt_time>='".$UltimaFecha[0]->mt_time."' ORDER BY mt_time DESC ");
 
@@ -22,7 +24,7 @@ class SincronizacionBDController extends Controller
 
 		
 		$UltimaFechaEliminar = DB::connection("telemetria_local")->select("SELECT * FROM log_aasa ORDER BY mt_time ASC LIMIT 1");
-		
+
 		DB::connection("telemetria_local")->select("DELETE FROM log_aasa WHERE mt_time='".$UltimaFechaEliminar[0]->mt_time."' ");
 
 		return "Exito";
