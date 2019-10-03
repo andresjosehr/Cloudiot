@@ -64,9 +64,9 @@ class SincronizacionBDController extends Controller
      public function log_finning01()
     {
 
-      $Fechas = DB::connection("telemetria")->select("SELECT DISTINCT mt_time FROM log_finning01 ORDER BY mt_time DESC LIMIT 3");
+      $Fechas = DB::connection("telemetria")->select("SELECT DISTINCT mt_time FROM log_finning01 WHERE mt_name like 'Dinamometro%' ORDER BY mt_time DESC LIMIT 1");
 
-      $InsertarDatos0=DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_time='".$Fechas[0]->mt_time."'");
+      $InsertarDatos0=DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_time='".$Fechas[0]->mt_time."' AND mt_name like 'Dinamometro%'");
 
       DB::connection("telemetria_local")->select("DELETE FROM log_finning01");
 
