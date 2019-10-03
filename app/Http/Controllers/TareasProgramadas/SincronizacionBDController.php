@@ -30,6 +30,7 @@ class SincronizacionBDController extends Controller
       DB::connection("telemetria_local")->table("log_aasa")->insert($InsertarDatos2);
 
       self::log_biofil02();
+      self::log_finning01();
     
     }
 
@@ -56,7 +57,25 @@ class SincronizacionBDController extends Controller
       DB::connection("telemetria_local")->table("log_biofil02")->insert($InsertarDatos1);
       DB::connection("telemetria_local")->table("log_biofil02")->insert($InsertarDatos2);
 
-      return "Exito";
+    
+    }
+
+
+     public function log_finning01()
+    {
+
+      $Fechas = DB::connection("telemetria")->select("SELECT DISTINCT mt_time FROM log_finning01 ORDER BY mt_time DESC LIMIT 3");
+
+      $InsertarDatos0=DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_time='".$Fechas[0]->mt_time."'");
+
+      DB::connection("telemetria_local")->select("DELETE FROM log_finning01");
+
+
+      $InsertarDatos0=json_decode(json_encode($InsertarDatos0), true);
+
+
+      DB::connection("telemetria_local")->table("log_finning01")->insert($InsertarDatos0);
+
     
     }
 }
