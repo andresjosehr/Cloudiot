@@ -16,7 +16,7 @@ use App\Exports\SubmodalAasa;
 
 use DB;
 
-class SicutIgnisController extends Controller{
+class SicutIgnisController2 extends Controller{
     public function index(Request $request){
 
     	
@@ -32,21 +32,21 @@ class SicutIgnisController extends Controller{
 
                       $Info= DB::connection("telemetria")
                                   ->select("(SELECT mt_name, mt_value, MAX(dt_utc) AS dt_utc FROM (SELECT * FROM log_aasa ORDER BY dt_utc DESC LIMIT 200) la 
-                                                                     WHERE (mt_name='AASA--ION8650.EnerActIny'
-                                                                         OR mt_name='AASA--ION8650.EnerActRet'
-                                                                         OR mt_name='AASA--ION8650.EnerReactIny'
-                                                                         OR mt_name='AASA--ION8650.EnerReactRet'
-                                                                         OR mt_name='AASA--ION8650.VoltajeLineaab'
-                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc'
-                                                                         OR mt_name='AASA--ION8650.VoltajeLineaca'
-                                                                         OR mt_name='AASA--ION8650.VoltajeLineaPromedio'
-                                                                         OR mt_name='AASA--ION8650.Voltajea'
-                                                                         OR mt_name='AASA--ION8650.Voltajeb'
-                                                                         OR mt_name='AASA--ION8650.Voltajec'
-                                                                         OR mt_name='AASA--ION8650.VoltajePromedio'
-                                                                         OR mt_name='AASA--ION8650.FactorPotenciaa'
-                                                                         OR mt_name='AASA--ION8650.FactorPotenciab'
-                                                                         OR mt_name='AASA--ION8650.FactorPotenciac'
+                                                                     WHERE (mt_name='AASA--ION8650.EnerActIny7400'
+                                                                         OR mt_name='AASA--ION8650.EnerActRet7400'
+                                                                         OR mt_name='AASA--ION8650.EnerReactIny7400'
+                                                                         OR mt_name='AASA--ION8650.EnerReactRet7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaab7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineabc7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaca7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaPromedio7400'
+                                                                         OR mt_name='AASA--ION8650.Voltajea7400'
+                                                                         OR mt_name='AASA--ION8650.Voltajeb7400'
+                                                                         OR mt_name='AASA--ION8650.Voltajec7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajePromedio7400'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciaa7400'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciab7400'
+                                                                         OR mt_name='AASA--ION8650.FactorPotenciac7400'
                                                                          OR mt_name='AASA--ION8650.FactorPotenciaTotal')
                                                                          GROUP BY dt_utc, mt_name ORDER BY dt_utc DESC LIMIT 32) ORDER BY mt_name, dt_utc");
                                   
@@ -78,7 +78,7 @@ class SicutIgnisController extends Controller{
 
                                      $Datos["UltimaMedicion"]           =   $Info[31]->dt_utc;
 
-                                     $Datos["instalacion"]=0;
+                                     $Datos["instalacion"]=1;
 
                                      return view("modals.SicutIgnis", ["Instalacion" => $instalaciones, "Datos" => $Datos]);
     }
@@ -90,22 +90,22 @@ class SicutIgnisController extends Controller{
         $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet7400') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
 
       $datos = DB::connection('telemetria')
                                     ->select("SELECT * FROM log_aasa  la
-                                                WHERE (mt_name='AASA--ION8650.EnerActIny' 
-                                                OR mt_name='AASA--ION8650.EnerActRet')
+                                                WHERE (mt_name='AASA--ION8650.EnerActIny7400' 
+                                                OR mt_name='AASA--ION8650.EnerActRet7400')
                                                 $Condition
                                                 ORDER BY mt_name, dt_utc ASC LIMIT 1000;");
 
         $j=0; $k=0;
         for ($i=0; $i <count($datos) ; $i++) { 
 
-            if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
+            if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny7400") {
               if ($j==0) {
                 $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value));
                 $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
@@ -117,7 +117,7 @@ class SicutIgnisController extends Controller{
               }
               $j++;
             }
-            if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+            if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet7400') {
               if ($k==0) {
                 $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value))*(-1);
               } else{
@@ -192,7 +192,7 @@ class SicutIgnisController extends Controller{
               Colores[2]='rgba(255, 99, 132, 0.2)';
               Colores[3]='rgba(255, 99, 132, 1)';
 
-            GraficosIgnisArriba("myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_dt_utc, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_dt_utc, MinDato, MaxDato, "Inyectada", "Retirada" , 1, Colores);
+            GraficosIgnisArriba("aasa2_myChart0", EnergiaActivaInyectada_mt_value, EnergiaActivaInyectada_dt_utc, EnergiaActivaRetirada_mt_value, EnergiaActivaRetirada_dt_utc, MinDato, MaxDato, "Inyectada", "Retirada" , 1, Colores);
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
             </script><?php
@@ -206,13 +206,13 @@ class SicutIgnisController extends Controller{
         $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerReactIny7400') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
       $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.EnerReactIny' 
-                                                                        OR mt_name='AASA--ION8650.EnerReactRet')
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.EnerReactIny7400' 
+                                                                        OR mt_name='AASA--ION8650.EnerReactRet7400')
                                                                         $Condition
                                                                         ORDER BY mt_name, dt_utc ASC LIMIT 1000");
 
@@ -225,7 +225,7 @@ class SicutIgnisController extends Controller{
 
         for ($i=0; $i <count($datos) ; $i++) { 
 
-              if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny') {
+              if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny7400') {
 
                 if ($i==0 && $datos[$i]->mt_value!=0) {
                   $EnergiaReactivaInyectada_mt_value[$j]=$datos[$i]->mt_value-$datos[$i]->mt_value;
@@ -246,7 +246,7 @@ class SicutIgnisController extends Controller{
 
                 $j++;
               }
-              if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet') {
+              if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet7400') {
 
                 if ($k==0) {
                   $EnergiaReactivaRetirada_mt_value[$k]=$datos[$i]->mt_value-$datos[$i]->mt_value;
@@ -321,7 +321,7 @@ class SicutIgnisController extends Controller{
               Colores[2]='rgba(255, 99, 132, 0.2)';
               Colores[3]='rgba(255, 99, 132, 1)';
 
-           GraficoIgnisArribaDerecha("myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_dt_utc, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_dt_utc, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2, Colores);
+           GraficoIgnisArribaDerecha("aasa2_myChart1", EnergiaReactivaInyectada_mt_value, EnergiaReactivaInyectada_dt_utc, EnergiaReactivaRetirada_mt_value, EnergiaReactivaRetirada_dt_utc, MinDato_a, MaxDato_a, MinDato_b, MaxDato_b, "Inyectada", "Retirada", 2, Colores);
 
           FuncionesCompletas++;
           FuncionExportacion(FuncionesCompletas);
@@ -339,17 +339,17 @@ class SicutIgnisController extends Controller{
         $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
       } else{
         $Horas=24;
-        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
+        $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.VoltajeLineaab7400') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
       }
 
 
 
             $datos = DB::connection('telemetria')
-                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.VoltajeLineaab'
-                                                                        OR mt_name='AASA--ION8650.VoltajeLineabc'
-                                                                         OR mt_name='AASA--ION8650.VoltajeLineaca'
-                                                                         OR mt_name='AASA--ION8650.VoltajeLineaPromedio')
+                                    ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.VoltajeLineaab7400'
+                                                                        OR mt_name='AASA--ION8650.VoltajeLineabc7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaca7400'
+                                                                         OR mt_name='AASA--ION8650.VoltajeLineaPromedio7400')
                                                                         $Condition
                                                                         ORDER BY mt_name, dt_utc ASC LIMIT 1000");
                   $j=0;
@@ -357,22 +357,22 @@ class SicutIgnisController extends Controller{
                   $h=0;
                   $g=0;
                 for ($i=0; $i <count($datos) ; $i++) { 
-                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaab") {
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaab7400") {
                     $VoltajeLineaab_mt_value[$j]=$datos[$i]->mt_value;
                     $VoltajeLineaab_dt_utc[$j]=$datos[$i]->dt_utc;
                     $j++;
                   }
-                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineabc") {
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineabc7400") {
                     $VoltajeLineabc_mt_value[$k]=$datos[$i]->mt_value;
                     $VoltajeLineabc_dt_utc[$k]=$datos[$i]->dt_utc;
                     $k++;
                   }
-                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaca") {
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaca7400") {
                     $VoltajeLineaca_mt_value[$h]=$datos[$i]->mt_value;
                     $VoltajeLineaca_dt_utc[$h]=$datos[$i]->dt_utc;
                     $h++;
                   }
-                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaPromedio") {
+                  if ($datos[$i]->mt_name=="AASA--ION8650.VoltajeLineaPromedio7400") {
                     $VoltajeLineaPromedio_mt_value[$g]=$datos[$i]->mt_value;
                     $VoltajeLineaPromedio_dt_utc[$g]=$datos[$i]->dt_utc;
                     $g++;
@@ -437,7 +437,7 @@ class SicutIgnisController extends Controller{
           } else{ 
 
             ?><script>
-  GraficosIgnisAbajo("myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_dt_utc, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
+  GraficosIgnisAbajo("aasa2_myChart4", VoltajeLineaab_mt_value, VoltajeLineaab_dt_utc, VoltajeLineabc_mt_value, VoltajeLineaca_mt_value, VoltajeLineaPromedio_mt_value, MinDato, MaxDato, "A-B", "B-C", "C-A", "Promedio", 3, false);
 
             FuncionesCompletas++;
             FuncionExportacion(FuncionesCompletas);
@@ -452,16 +452,16 @@ class SicutIgnisController extends Controller{
           $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
         } else{
           $Horas=24;
-          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
+          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.Voltajea7400') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
 
         $datos = DB::connection('telemetria')
-                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.Voltajea'
-                                                                          OR mt_name='AASA--ION8650.Voltajeb'
-                                                                          OR mt_name='AASA--ION8650.Voltajec'
-                                                                          OR mt_name='AASA--ION8650.VoltajePromedio')
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) WHERE (mt_name='AASA--ION8650.Voltajea7400'
+                                                                          OR mt_name='AASA--ION8650.Voltajeb7400'
+                                                                          OR mt_name='AASA--ION8650.Voltajec7400'
+                                                                          OR mt_name='AASA--ION8650.VoltajePromedio7400')
                                                                           $Condition
                                                                           ORDER BY mt_name, dt_utc ASC LIMIT 1000");
                     $j=0;
@@ -469,22 +469,22 @@ class SicutIgnisController extends Controller{
                     $h=0;
                     $g=0;
                   for ($i=0; $i <count($datos) ; $i++) { 
-                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajea') {
+                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajea7400') {
                       $Voltajea_mt_value[$j]=$datos[$i]->mt_value;
                       $Voltajea_dt_utc[$j]=$datos[$i]->dt_utc;
                       $j++;
                     }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajeb') {
+                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajeb7400') {
                       $Voltajeb_mt_value[$k]=$datos[$i]->mt_value;
                       $Voltajeb_dt_utc[$k]=$datos[$i]->dt_utc;
                       $k++;
                     }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajec') {
+                    if ($datos[$i]->mt_name=='AASA--ION8650.Voltajec7400') {
                       $Voltajec_mt_value[$h]=$datos[$i]->mt_value;
                       $Voltajec_dt_utc[$h]=$datos[$i]->dt_utc;
                       $h++;
                     }
-                    if ($datos[$i]->mt_name=='AASA--ION8650.VoltajePromedio') {
+                    if ($datos[$i]->mt_name=='AASA--ION8650.VoltajePromedio7400') {
                       $VoltajePromedio_mt_value[$g]=$datos[$i]->mt_value;
                       $VoltajePromedio_dt_utc[$g]=$datos[$i]->dt_utc;
                       $g++;
@@ -550,7 +550,7 @@ class SicutIgnisController extends Controller{
             } else{ 
 
               ?><script>
-                GraficosIgnisAbajo("myChart5", Voltajea_mt_value, Voltajea_dt_utc, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
+                GraficosIgnisAbajo("aasa2_myChart5", Voltajea_mt_value, Voltajea_dt_utc, Voltajeb_mt_value, Voltajec_mt_value, VoltajePromedio_mt_value, MinDato, MaxDato, "A", "B", "C", "Promedio", 4, false);
                 FuncionesCompletas++;
                 FuncionExportacion(FuncionesCompletas);
               </script><?php
@@ -566,37 +566,37 @@ class SicutIgnisController extends Controller{
           $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
         } else{
           $Horas=24;
-          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
+          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet7400') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
         $datos = DB::connection('telemetria')
                                       ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index) 
-                                                  WHERE (mt_name='AASA--ION8650.EnerActIny' 
-                                                  OR mt_name='AASA--ION8650.EnerActRet' 
-                                                  OR mt_name='AASA--ION8650.EnerReactIny' 
-                                                  OR mt_name='AASA--ION8650.EnerReactRet')
+                                                  WHERE (mt_name='AASA--ION8650.EnerActIny7400' 
+                                                  OR mt_name='AASA--ION8650.EnerActRet7400' 
+                                                  OR mt_name='AASA--ION8650.EnerReactIny7400' 
+                                                  OR mt_name='AASA--ION8650.EnerReactRet7400')
                                                   $Condition 
                                                   ORDER BY mt_name, dt_utc DESC LIMIT 1000;");
 
 
                   $j=0; $k=0; $h=0; $g=0;
                   for ($i=0; $i <count($datos) ; $i++) { 
-                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny') {
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerActIny7400') {
                         $EnerActIny_value[$j]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
                         $EnerActIny_time[$j]=$datos[$i]->dt_utc;
                         $j++;
                       }
-                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet7400') {
                         $EnerActRet_value[$k]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
                         $k++;
                       }
-                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny') {
+                      if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactIny7400') {
                         $EnerReactIny_mt_value[$h]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
                         $h++;
                       }
                       if ($i!=count($datos)-1) {
-                        if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet') {
+                        if ($datos[$i]->mt_name=='AASA--ION8650.EnerReactRet7400') {
                           $EnerReactRet_mt_value[$g]=$datos[$i]->mt_value-$datos[$i+1]->mt_value;
                           $g++;
                         }
@@ -683,7 +683,7 @@ class SicutIgnisController extends Controller{
 
               ?><script>
                 $("#FactorPotencia_td").text(FPiny[FPiny.length-1]);
-              GraficosPotenciaINY("myChart6", FPiny, dt_utc, FPret, dt_utc, MinDato, MaxDato, "FPiny", "FPret" , 5);
+              GraficosPotenciaINY("aasa2_myChart6", FPiny, dt_utc, FPret, dt_utc, MinDato, MaxDato, "FPiny", "FPret" , 5);
               </script><?php
 
             } 
@@ -699,22 +699,22 @@ class SicutIgnisController extends Controller{
           $Condition = "AND dt_utc > '$Request->Inicio' AND dt_utc < '".date("Y-m-d",strtotime($Request->Final."+ 1 days"))."'";
         } else{
           $Horas=24;
-          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
+          $Condition = "AND dt_utc > DATE_SUB((SELECT dt_utc FROM log_aasa WHERE (mt_name='AASA--ION8650.EnerActRet7400') ORDER BY dt_utc DESC LIMIT 1), INTERVAL $Horas HOUR)";
 
         }
 
 
         $datos = DB::connection('telemetria')
                                       ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index)
-                                                  WHERE (mt_name='AASA--ION8650.EnerActIny' 
-                                                  OR mt_name='AASA--ION8650.EnerActRet')
+                                                  WHERE (mt_name='AASA--ION8650.EnerActIny7400' 
+                                                  OR mt_name='AASA--ION8650.EnerActRet7400')
                                                   $Condition
                                                   ORDER BY mt_name, dt_utc ASC LIMIT 1000;");
 
           $j=0; $k=0;
           for ($i=0; $i <count($datos) ; $i++) { 
 
-              if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny") {
+              if ($datos[$i]->mt_name=="AASA--ION8650.EnerActIny7400") {
                 if ($j==0) {
                   $EnergiaActivaInyectada_mt_value[$j]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4);
                   $EnergiaActivaInyectada_dt_utc[$j]=$datos[$i]->dt_utc;
@@ -726,7 +726,7 @@ class SicutIgnisController extends Controller{
                 }
                 $j++;
               }
-              if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet') {
+              if ($datos[$i]->mt_name=='AASA--ION8650.EnerActRet7400') {
                 if ($k==0) {
                   $EnergiaActivaRetirada_mt_value[$k]=abs(($datos[$i]->mt_value-$datos[$i]->mt_value)*4)*(-1);
                 } else{
@@ -749,8 +749,6 @@ class SicutIgnisController extends Controller{
                         $MaxDato=$datos[$i]->mt_value;
                       }
                     }
-
-          }
 
 
 

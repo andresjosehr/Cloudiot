@@ -36,6 +36,11 @@
                   </a>
                </li>
                <li role="presentation" class="">
+                  <a href="#aasa2" data-toggle="tab" aria-expanded="false">
+                  Aasa 2
+                  </a>
+               </li>
+               <li role="presentation" class="">
                   <a href="#profile_only_icon_title" data-toggle="tab" aria-expanded="false">
                   Power Bi
                   </a>
@@ -212,6 +217,171 @@
                      </div>
                   </div>
                </div>
+               <div role="tabpanel" class="tab-pane fade" id="aasa2">
+                 
+                  <div class="row" align="center">
+                     <div class="col-md-4">
+                        <div class="body table-responsive">
+                           <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead>
+                                 <caption scope="row" class="sicut-tabla-titulo">reg. kWh últ. 15 min.</caption>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th class="sicut-th">Inyectada</th>
+                                    <td>{{ $Datos["EnergiaActivaInyectada"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Retirada</th>
+                                    <td>{{ $Datos["EnergiaActivaRetirada"] }}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="body table-responsive">
+                           <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead>
+                                 <caption scope="row" class="sicut-tabla-titulo">reg. kVARh últ. 15 min</caption>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th class="sicut-th">Inyectada</th>
+                                    <td>{{ $Datos["EnergíaReactivaInyectada"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Retirada</th>
+                                    <td>{{ $Datos["EnergíaReactivaRetirada"] }}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="body table-responsive">
+                           <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead>
+                                 <caption scope="row" class="sicut-tabla-titulo">Potencia (kW)</caption>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th class="sicut-th">Inyectada</th>
+                                    <td id="PoteIny"></td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Retirada</th>
+                                    <td id="PoteRet"></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-4" align="center">
+                        <div class="div-chart1">
+                           <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '1')" id="aasa2_myChart0" height="100"></canvas>
+                        </div>
+                     </div>
+                     <div class="col-md-4" align="center">
+                        <div class="div-chart2">
+                           <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '2')" id="aasa2_myChart1" height="100"></canvas>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '7')" id="aasa2_sicut-myChart3" height="100"></canvas>
+                     </div>
+                  </div>
+                  <div class="row sicut-row2" align="center">
+                     <div class="col-md-4">
+                        <div class="body table-responsive">
+                           <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead>
+                                 <caption scope="row" class="sicut-tabla-titulo">Voltaje de Lineas</caption>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th class="sicut-th">VL ab</th>
+                                    <td>{{ $Datos["VoltajeDeLineaAB"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">VL bc</th>
+                                    <td>{{ $Datos["VoltajeDeLineaBC"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">VL ca</th>
+                                    <td>{{ $Datos["VoltajeDeLineaCA"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Promedio</th>
+                                    <td>{{ $Datos["VoltajeDeLineaPromedio"] }}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="body table-responsive">
+                           <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead>
+                                 <caption scope="row" class="sicut-tabla-titulo">Voltaje de Fases</caption>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th class="sicut-th">Voltaje A</th>
+                                    <td>{{ $Datos["VoltajeA"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Voltaje B</th>
+                                    <td>{{ $Datos["VoltajeB"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Voltaje C</th>
+                                    <td>{{ $Datos["VoltajeC"] }}</td>
+                                 </tr>
+                                 <tr>
+                                    <th class="sicut-th">Promedio</th>
+                                    <td>{{ $Datos["VoltajePromedio"] }}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="body table-responsive">
+                           <table class="table sicut-table-bordered sicut-modal-table1">
+                              <thead>
+                                 <caption scope="row" class="sicut-tabla-titulo">Factor de potencia</caption>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <th class="sicut-th">Total</th>
+                                    <td id="FactorPotencia_td">{{-- {{ $Datos["FactorPotenciaTotal"] }} --}}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row" align="center" class="sicut-row-chart-2">
+                     <div class="col-md-4">
+                        <div class="div-chart3">
+                           <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '3')" id="aasa2_myChart4" height="100"></canvas>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="div-chart4">
+                           <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '4')" id="aasa2_myChart5" height="100"></canvas>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="div-chart5">
+                           <canvas onclick="GraficarDefaultIgnis('<?php echo Request::root(); ?>', '5')" id="aasa2_myChart6" height="100"></canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
                <div role="tabpanel" class="tab-pane fade" id="profile_only_icon_title">
                   <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMzE2YWRmNDUtMTJjNy00OWQzLTkwYTItMWZhMmNlNTFiYjViIiwidCI6ImIwZmU2YjNlLTRjNTItNDg1Zi1hNzZlLWZjNTVjYzIzYzhmMCJ9" frameborder="0" width="100%" height="600"></iframe>
                </div>
@@ -238,7 +408,9 @@
    var FuncionesCompletas=0;
    var url_ = "<?php echo Request::root() ?>";
    SicutScriptDefault();
-   GraficarTodo(url_);
+
+   GraficarTodo(url_, '{{$Datos['instalacion']}}');
+
    var SicutFormLimit=0;
    
    function FuncionExportacion(final) {

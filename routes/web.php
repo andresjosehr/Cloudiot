@@ -72,6 +72,8 @@ Route::post('RegistrarIntervaloAlarma', "AlarmasController@RegistrarIntervalo")-
 Route::post('RegistrarDatoAlarma', "AlarmasController@RegistrarDatoAlarma")->middleware("verificar_login");
 Route::post('EditarDatoAlarma', "AlarmasController@EditarDatoAlarma")->middleware("verificar_login");
 
+Route::post('SicutIgnisController2','SicutIgnisController2@index')->middleware("verificar_login");
+
 Route::post('SicutIgnisController','SicutIgnisController@index')->middleware("verificar_login");
 Route::post('VinaLuisFelipeController','VinaLuisFelipeController@index')->middleware("verificar_login");
 Route::post('CalculosLuisFelipe','VinaLuisFelipeController@Calculos')->middleware("verificar_login");
@@ -103,7 +105,13 @@ Route::post('CalculosLuisFelipe22','VinaLuisFelipeController@Salida3')->middlewa
 Route::get('exportar-xml-luis-felipe','VinaLuisFelipeController@ExportarXML');
 
 
-
+Route::post('GraficoSigutIgnis1-2','SicutIgnisController2@Grafico1')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis2-2','SicutIgnisController2@Grafico2')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis3-2','SicutIgnisController2@Grafico3')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis4-2','SicutIgnisController2@Grafico4')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis5-2','SicutIgnisController2@Grafico5')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis6-2','SicutIgnisController2@Grafico6')->middleware("verificar_login");
+Route::post('GraficoSigutIgnis7-2','SicutIgnisController2@Grafico7')->middleware("verificar_login");
 
 Route::post('GraficoSigutIgnis1','SicutIgnisController@Grafico1')->middleware("verificar_login");
 Route::post('GraficoSigutIgnis2','SicutIgnisController@Grafico2')->middleware("verificar_login");

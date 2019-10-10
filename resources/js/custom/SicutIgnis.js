@@ -361,14 +361,21 @@ window.GraficarDefaultIgnis=function(url, param){
     Modal: true
   });
 }
-window.GraficarTodo=function(url){
+window.GraficarTodo=function(url, instalacion){
 
-    $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
-    $("#SicutContenedor7").load(url+"/GraficoSigutIgnis7", {dato: "Epa5"});
-    $("#SicutContenedor1").load(url+"/GraficoSigutIgnis1", {dato: "Epa"});
-    $("#SicutContenedor2").load(url+"/GraficoSigutIgnis2", {dato: "Epa2"});
-    $("#SicutContenedor3").load(url+"/GraficoSigutIgnis3", {dato: "Epa3"});
-    $("#SicutContenedor4").load(url+"/GraficoSigutIgnis4", {dato: "Epa4"});
+        $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5", {dato: "Epa5"});
+        $("#SicutContenedor7").load(url+"/GraficoSigutIgnis7", {dato: "Epa5"});
+        $("#SicutContenedor1").load(url+"/GraficoSigutIgnis1", {dato: "Epa"});
+        $("#SicutContenedor2").load(url+"/GraficoSigutIgnis2", {dato: "Epa2"});
+        $("#SicutContenedor3").load(url+"/GraficoSigutIgnis3", {dato: "Epa3"});
+        $("#SicutContenedor4").load(url+"/GraficoSigutIgnis4", {dato: "Epa4"});
+
+        $("#SicutContenedor5").load(url+"/GraficoSigutIgnis5-2", {dato: "Epa5"});
+        $("#SicutContenedor7").load(url+"/GraficoSigutIgnis7-2", {dato: "Epa5"});
+        $("#SicutContenedor1").load(url+"/GraficoSigutIgnis1-2", {dato: "Epa"});
+        $("#SicutContenedor2").load(url+"/GraficoSigutIgnis2-2", {dato: "Epa2"});
+        $("#SicutContenedor3").load(url+"/GraficoSigutIgnis3-2", {dato: "Epa3"});
+        $("#SicutContenedor4").load(url+"/GraficoSigutIgnis4-2", {dato: "Epa4"});
 }
 
 window.GraficarGra5 = function(mt_time_, EnergiaActivaInyectada_, EnergiaActivaRetirada_, EnergiaReactivaInyectada_, EnergiaReactivaRetirada_) {

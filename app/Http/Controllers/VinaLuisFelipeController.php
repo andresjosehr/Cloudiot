@@ -724,6 +724,7 @@ class VinaLuisFelipeController extends Controller{
                                   SUM(mt_value) AS mt_value,
                                   mt_time
                                    FROM log_biofil02 
+                                   FORCE INDEX (index_biofil02)
                                      WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' 
                                            AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                              GROUP BY DAY(mt_time) 
@@ -731,7 +732,9 @@ class VinaLuisFelipeController extends Controller{
 
         $NumeroRegistros = DB::connection("telemetria")
                             ->select("SELECT mt_time ,COUNT(*) Registros
-                                        FROM log_biofil02 WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Entrada'
+                                        FROM log_biofil02 
+                                        FORCE INDEX (index_biofil02)
+                                         WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Entrada'
                                         GROUP BY day(mt_time)
                                         ORDER BY mt_time ASC");
 
@@ -741,6 +744,7 @@ class VinaLuisFelipeController extends Controller{
                                   SUM(mt_value) AS mt_value,
                                   mt_time
                                    FROM log_biofil02 
+                                   FORCE INDEX (index_biofil02)
                                      WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
                                            AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                              GROUP BY DAY(mt_time) 
@@ -748,7 +752,9 @@ class VinaLuisFelipeController extends Controller{
 
         $NumeroRegistrosSalida = DB::connection("telemetria")
                             ->select("SELECT mt_time ,COUNT(*) Registros
-                                        FROM log_biofil02 WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Salida'
+                                        FROM log_biofil02 
+                                        FORCE INDEX (index_biofil02)
+                                         WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Salida'
                                         GROUP BY day(mt_time)
                                         ORDER BY mt_time ASC");
 
