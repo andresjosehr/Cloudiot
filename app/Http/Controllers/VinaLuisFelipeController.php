@@ -726,7 +726,7 @@ class VinaLuisFelipeController extends Controller{
                                    FROM log_biofil02 
                                    FORCE INDEX (index_biofil02)
                                      WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' 
-                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY)
                                              GROUP BY DAY(mt_time) 
                                                ORDER BY mt_time ASC");
 
@@ -734,7 +734,7 @@ class VinaLuisFelipeController extends Controller{
                             ->select("SELECT mt_time ,COUNT(*) Registros
                                         FROM log_biofil02 
                                         FORCE INDEX (index_biofil02)
-                                         WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Entrada'
+                                         WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY) AND mt_name='Biofiltro02--Consumo.PH_Entrada'
                                         GROUP BY day(mt_time)
                                         ORDER BY mt_time ASC");
 
@@ -746,7 +746,7 @@ class VinaLuisFelipeController extends Controller{
                                    FROM log_biofil02 
                                    FORCE INDEX (index_biofil02)
                                      WHERE mt_name='Biofiltro02--Consumo.PH_Salida' 
-                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY)
                                              GROUP BY DAY(mt_time) 
                                                ORDER BY mt_time ASC");
 
@@ -754,7 +754,7 @@ class VinaLuisFelipeController extends Controller{
                             ->select("SELECT mt_time ,COUNT(*) Registros
                                         FROM log_biofil02 
                                         FORCE INDEX (index_biofil02)
-                                         WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY) AND mt_name='Biofiltro02--Consumo.PH_Salida'
+                                         WHERE mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY) AND mt_name='Biofiltro02--Consumo.PH_Salida'
                                         GROUP BY day(mt_time)
                                         ORDER BY mt_time ASC");
 
@@ -801,7 +801,7 @@ class VinaLuisFelipeController extends Controller{
                                              MIN(mt_time) AS mt_time
                                               FROM log_biofil02 
                                                 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
-                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                      AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY)
                                                       AND mt_value<>0
                                                         GROUP BY DAY(mt_time) 
                                                           ORDER BY mt_time ASC");
@@ -814,7 +814,7 @@ class VinaLuisFelipeController extends Controller{
                                                MAX(mt_time) AS mt_time
                                                 FROM log_biofil02 
                                                   WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' 
-                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                                        AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.FlujoMedidor1' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY)
                                                           GROUP BY DAY(mt_time) 
                                                             ORDER BY mt_time ASC");
         $k=0;
@@ -1428,7 +1428,7 @@ if ($h!=0) {
                                   mt_time
                                    FROM log_biofil02 
                                      WHERE (mt_name='Biofiltro02--Consumo.ORP_Entrada' OR mt_name='Biofiltro02--Consumo.ORP_Salida')
-                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.ORP_Entrada' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY)
                                              GROUP BY mt_name, DAY(mt_time)
                                                ORDER BY mt_name, mt_time ASC");
 
@@ -1552,7 +1552,7 @@ if ($h!=0) {
                                   mt_time
                                    FROM log_biofil02 
                                      WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
-                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
+                                           AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 DAY)
                                              GROUP BY mt_name, DAY(mt_time)
                                                ORDER BY mt_name, mt_time ASC");
 
