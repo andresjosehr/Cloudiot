@@ -16,7 +16,7 @@
                         <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">{{ $Instalacion->nombre }}</h4>
                     </div>
                     <div class="col-md-4">
-                        <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">Última Mendición {{ $UltimaMedicion->mt_time }}</h4>
+                        <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">Última Mendición {{ $UltimaMedicion[0]->mt_time }}</h4>
                     </div>
                 </div>
                 <div id="MostrarRelojes"></div>

@@ -51,10 +51,8 @@ class VinaLuisFelipeController extends Controller{
                         ->where("id", $id)
                           ->first();
 
-      $UltimaMedicion = DB::connection("telemetria")
-                              ->table("log_biofil02")
-                                ->orderBy("mt_time", "DESC")
-                                  ->first();
+       $UltimaMedicion = DB::connection("telemetria")
+                               ->select("SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1");
 
 
            
