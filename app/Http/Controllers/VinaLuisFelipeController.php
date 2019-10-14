@@ -62,12 +62,12 @@ class VinaLuisFelipeController extends Controller{
 
     public function MostrarBombas(){
       $datos= DB::connection("telemetria")
-                        ->select("SELECT mt_time, mt_name, mt_value FROM log_biofil02 FORCE INDEX (index_biofil02) WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
-                                                                 OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
-                                                                 OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
-                                                                 AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1' OR mt_name='Biofiltro02--Consumo.EstadoBomba2' OR mt_name='Biofiltro02--Consumo.EstadoBomba3') AND mt_value<>0 ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
-                                                                 ORDER BY mt_name ASC, mt_time ASC");
+                        ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 WHERE mt_name IN ('Biofiltro02--Consumo.EstadoBomba1',
+                                                                        'Biofiltro02--Consumo.EstadoBomba2',
+                                                                        'Biofiltro02--Consumo.EstadoBomba3',
+                                                                       'Biofiltro02--Consumo.FlujoMedidor1')
+                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_value<>0 AND mt_name IN ('Biofiltro02--Consumo.EstadoBomba1', 'Biofiltro02--Consumo.EstadoBomba2', 'Biofiltro02--Consumo.EstadoBomba3') ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
+                                                                         ORDER BY mt_name ASC, mt_time ASC;");
           $Determinante="No hay nada papa";
 
           
@@ -244,11 +244,11 @@ class VinaLuisFelipeController extends Controller{
     {
       $Parametros= DB::connection("telemetria")
                                     ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 FORCE INDEX (index_biofil02)
-                                                                       WHERE  (mt_name='Biofiltro02--Consumo.TiempoRiego'
-                                                                            OR mt_name='Biofiltro02--Consumo.TiempoReposo'
-                                                                            OR mt_name='Biofiltro02--Consumo.LimitePH_Bajo'
-                                                                            OR mt_name='Biofiltro02--Consumo.LimitePH_Alto')
-                                                                            GROUP BY mt_name");
+                                                                       WHERE mt_name IN ('Biofiltro02--Consumo.TiempoRiego',
+                                                                            'Biofiltro02--Consumo.TiempoReposo',
+                                                                            'Biofiltro02--Consumo.LimitePH_Bajo',
+                                                                            'Biofiltro02--Consumo.LimitePH_Alto')
+                                                                            GROUP BY mt_name;");
 
       $ParametrosPausados = DB::table("parametros")->get();
 
@@ -594,7 +594,7 @@ class VinaLuisFelipeController extends Controller{
      } else{
 
       $fecha = DB::connection('telemetria')
-                                  ->select("SELECT mt_time FROM log_biofil02 FORCE INDEX (index_biofil02) WHERE mt_name='$mt_name' ORDER BY mt_time DESC LIMIT 1");
+                                  ->select("SELECT mt_time FROM log_biofil02 WHERE mt_name='$mt_name' ORDER BY mt_time DESC LIMIT 1");
        $date= $fecha[0]->mt_time; 
        $newDate = strtotime ( '-24 hours' , strtotime ($date) ) ; 
        $newDate = date ( 'Y-m-j H:i:s' , $newDate); 
@@ -625,7 +625,7 @@ class VinaLuisFelipeController extends Controller{
      $mt_name     =$_POST["mt_name"];
 
      $Datos = DB::connection('telemetria')
-                                   ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 FORCE INDEX (index_biofil02) WHERE mt_name='$mt_name' AND mt_time >= '$FechaInicio' AND mt_time<='$FechaFin' ORDER BY mt_time DESC");
+                                   ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 WHERE mt_name='$mt_name' AND mt_time >= '$FechaInicio' AND mt_time<='$FechaFin' ORDER BY mt_time DESC");
 
 
       for ($i=0; $i <count($Datos) ; $i++) { 
@@ -1059,7 +1059,7 @@ class VinaLuisFelipeController extends Controller{
    public function ListarBombas(){
 
     $datos= DB::connection("telemetria")
-                        ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 FORCE INDEX (index_biofil02) WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                        ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
@@ -1241,7 +1241,7 @@ if ($h!=0) {
 
 
     $datos= DB::connection("telemetria")
-                        ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 FORCE INDEX (index_biofil02) WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
+                        ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 WHERE (mt_name='Biofiltro02--Consumo.EstadoBomba1'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
                                                                  OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
                                                                  OR mt_name='Biofiltro02--Consumo.FlujoMedidor1')
@@ -1550,7 +1550,7 @@ if ($h!=0) {
                                   SUM(mt_value) AS mt_value, COUNT(*) Registros, MAX(mt_value) AS maximo, MIN(mt_value) AS minimo,
                                   mt_time
                                    FROM log_biofil02
-                                   FORCE INDEX (index_biofil02) 
+                                   
                                      WHERE (mt_name='Biofiltro02--Consumo.Conductividad_Entrada' OR mt_name='Biofiltro02--Consumo.Conductividad_Salida')
                                            AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.Conductividad_Salida' ORDER BY mt_time DESC LIMIT 1), INTERVAL 7 DAY)
                                              GROUP BY mt_name, DAY(mt_time)
