@@ -52,7 +52,7 @@ class VinaLuisFelipeController extends Controller{
                           ->first();
 
        $UltimaMedicion = DB::connection("telemetria")
-                               ->select("SELECT * FROM log_biofil02 WHERE mt_name='Biofiltro02--Consumo.PH_Entrada' ORDER BY mt_time DESC LIMIT 1");
+                               ->select("SELECT * FROM log_biofil02 ORDER BY mt_time DESC LIMIT 1");
 
 
            
@@ -62,11 +62,11 @@ class VinaLuisFelipeController extends Controller{
 
     public function MostrarBombas(){
       $datos= DB::connection("telemetria")
-                        ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02 WHERE mt_name IN ('Biofiltro02--Consumo.EstadoBomba1',
+                        ->select("(SELECT mt_name, mt_value, mt_time FROM log_biofil02 WHERE mt_name IN ('Biofiltro02--Consumo.EstadoBomba1',
                                                                         'Biofiltro02--Consumo.EstadoBomba2',
                                                                         'Biofiltro02--Consumo.EstadoBomba3',
                                                                        'Biofiltro02--Consumo.FlujoMedidor1')
-                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_value<>0 AND mt_name IN ('Biofiltro02--Consumo.EstadoBomba1', 'Biofiltro02--Consumo.EstadoBomba2', 'Biofiltro02--Consumo.EstadoBomba3') ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR)
+                                                                         AND mt_time > DATE_SUB((SELECT mt_time FROM log_biofil02 WHERE mt_value<>0 AND mt_name IN ('Biofiltro02--Consumo.EstadoBomba1', 'Biofiltro02--Consumo.EstadoBomba2', 'Biofiltro02--Consumo.EstadoBomba3') ORDER BY mt_time DESC LIMIT 1), INTERVAL 3 HOUR))
                                                                          ORDER BY mt_name ASC, mt_time ASC;");
           $Determinante="No hay nada papa";
 
