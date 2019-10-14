@@ -57,7 +57,7 @@
                                             <p align="center"><b>PH</b></p>
                                             <div class="col-md-12" id="rpm-0">
                                                 <div class="vina-loading"></div>
-                                                <b class="vina-vertical">Entrada</b>
+                                                <b class="vina-vertical" style="margin-left: -50%;">Entrada</b>
                                                 <div>
                                                     <img src="images/rpm.png" class="img-rpm-lfe">
                                                     <canvas id="gauge0"></canvas>
@@ -109,7 +109,7 @@
                                     <div class="col-md-4">
                                         <div class="row">
                                             <div class="col-md-12" id="rpm-3">
-                                                <b class="vina-vertical">Salida</b>
+                                                <b class="vina-vertical" style="margin-left: -50%;">Salida</b>
                                                 <div class="vina-loading"></div>
                                                 <div>
                                                     <img src="images/rpm.png" class="img-rpm-lfe">
