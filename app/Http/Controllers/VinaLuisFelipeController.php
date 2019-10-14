@@ -44,7 +44,7 @@ class VinaLuisFelipeController extends Controller{
 
     public function index(){
 
-       $UltimaMedicion = DB::connection("telemetria")
+       return $UltimaMedicion = DB::connection("telemetria")
                                ->select("SELECT * FROM log_biofil02 ORDER BY mt_time DESC LIMIT 1");
            
 
