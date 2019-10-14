@@ -44,17 +44,8 @@ class VinaLuisFelipeController extends Controller{
 
     public function index(){
 
-      $id=$_POST['id'];
-      $tabla_asociada=$_POST['tabla_asociada'];
-
-      $instalaciones = DB::table('instalaciones')
-                        ->where("id", $id)
-                          ->first();
-
        $UltimaMedicion = DB::connection("telemetria")
                                ->select("SELECT * FROM log_biofil02 ORDER BY mt_time DESC LIMIT 1");
-
-
            
 
         return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Usuario" => Auth::user(), "Rol" => $_POST['rol']]);
