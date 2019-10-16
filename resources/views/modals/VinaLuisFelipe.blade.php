@@ -13,10 +13,10 @@
                 <p id="contenedorLFE"></p>
                 <div class="row">
                     <div class="col-md-4">
-                        <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">{{ $Instalacion->nombre }}</h4>
+                        <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">Viña Luis Felipe Edwards</h4>
                     </div>
                     <div class="col-md-4">
-                        <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">Última Mendición {{ $UltimaMedicion[0]->mt_time }}</h4>
+                        <h4 class="modal-title vina-nombre-instalacion" id="largeModalLabel">Última Mendición</h4>
                     </div>
                 </div>
                 <div id="MostrarRelojes"></div>
@@ -42,124 +42,261 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
+
+
+
+
+
+
+
+
+
+
+
+
                     <div role="tabpanel" class="tab-pane fade in active" id="home">
-                        <div>
-                            <div class="row">
-                              <div id="MostrarBombas">
-                              </div>
-                            <div class="col-md-6">
-                                <canvas id="myChart0" height="50"></canvas>
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="row" id="MostrarBombas">
+                    </div>
+                </div>
+
+                <div class="col-md-6" align="center">
+                    <div class="vina-loading-bomba"></div>
+                    <div class="vina-cargando  bombas-cargando">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Bomba 1
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <p align="center"><b>PH</b></p>
-                                            <div class="col-md-12" id="rpm-0">
-                                                <div class="vina-loading"></div>
-                                                <b class="vina-vertical" style="margin-left: -50%;">Entrada</b>
-                                                <div>
-                                                    <img src="images/rpm.png" class="img-rpm-lfe">
-                                                    <canvas id="gauge0"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 chart-lfe" id="chart-lfe1">
-                                                <div class="vina-loading"></div>
-                                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
-                                                <canvas id="myChart1" height="140"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <p><b align="center">ORP</b></p>
-                                            <div class="col-md-12" id="rpm-1">
-                                                <div class="vina-loading"></div>
-                                                <div>
-                                                    <img src="images/rpm.png" class="img-rpm-lfe">
-                                                    <canvas id="gauge1"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 chart-lfe" id="chart-lfe2">
-                                                <div class="vina-loading"></div>
-                                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
-                                                <canvas id="myChart2" height="140"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <p align="center"><b>Conductividad</b></p>
-                                            <div class="col-md-12" id="rpm-2">
-                                                <div class="vina-loading"></div>
-                                                <div>
-                                                    <img src="images/rpm.png" class="img-rpm-lfe">
-                                                    <canvas id="gauge2"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 chart-lfe" id="chart-lfe3">
-                                                <div class="vina-loading"></div>
-                                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
-                                                <canvas id="myChart3" height="140"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row vina-row-rpm">
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-12" id="rpm-3">
-                                                <b class="vina-vertical" style="margin-left: -50%;">Salida</b>
-                                                <div class="vina-loading"></div>
-                                                <div>
-                                                    <img src="images/rpm.png" class="img-rpm-lfe">
-                                                    <canvas id="gauge3"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 chart-lfe" id="chart-lfe4">
-                                                <div class="vina-loading"></div>
-                                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
-                                                <canvas id="myChart4" height="140"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-12" id="rpm-4">
-                                                <div class="vina-loading"></div>
-                                                <div>
-                                                    <img src="images/rpm.png" class="img-rpm-lfe">
-                                                    <canvas id="gauge4"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 chart-lfe" id="chart-lfe5">
-                                                <div class="vina-loading"></div>
-                                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
-                                                <canvas id="myChart5" height="140"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-12" id="rpm-5">
-                                                <div class="vina-loading"></div>
-                                                <div>
-                                                    <img src="images/rpm.png" class="img-rpm-lfe">
-                                                    <canvas id="gauge5"></canvas>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 chart-lfe" id="chart-lfe6">
-                                                <div class="vina-loading"></div>
-                                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
-                                                <canvas id="myChart6" height="140"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btncasc0 btn bg-green btn-circle waves-effect waves-circle waves-float vina-circle-custom">
+                                    <i class="material-icons bomba0-op-btn">check</i>
+                                </button>
+                                <br>
                             </div>
+                            <div class="col-md-3">
+                                <span class="badge bg-red bomba0-op">No Op.</span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="vina-btn-bomba-error0 btn bg-red waves-effect vina-btn_error_custom">
+                                    <span class="vina-custom-error texto-error0">Error</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Bomba 2
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btncasc1 btn bg-red btn-circle waves-effect waves-circle waves-float vina-circle-custom">
+                                    <i class="material-icons bomba1-op-btn">error_outline</i>
+                                </button>
+                                <br>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="badge bg-green bomba1-op">Operativa</span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="vina-btn-bomba-error1 btn bg-red waves-effect vina-btn_error_custom">
+                                    <span class="vina-custom-error texto-error1">Error</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Bomba 3
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btncasc2 btn bg-green btn-circle waves-effect waves-circle waves-float vina-circle-custom">
+                                    <i class="material-icons bomba2-op-btn">check</i>
+                                </button>
+                                <br>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="badge bg-red bomba2-op">No Op.</span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="vina-btn-bomba-error2 btn bg-red waves-effect vina-btn_error_custom">
+                                    <span class="vina-custom-error texto-error2">Error</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Bomba 4
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btncasc3 btn bg-red btn-circle waves-effect waves-circle waves-float vina-circle-custom">
+                                    <i class="material-icons bomba3-op-btn">error_outline</i>
+                                </button>
+                                <br>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="badge bg-green bomba3-op">Operativa</span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="vina-btn-bomba-error3 btn bg-red waves-effect vina-btn_error_custom">
+                                    <span class="vina-custom-error texto-error3">Error</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Bomba 5
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btncasc4 btn bg-red btn-circle waves-effect waves-circle waves-float vina-circle-custom">
+                                    <i class="material-icons bomba4-op-btn">error_outline</i>
+                                </button>
+                                <br>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="badge bg-green bomba4-op">Operativa</span>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="vina-btn-bomba-error4 btn bg-red waves-effect vina-btn_error_custom">
+                                    <span class="vina-custom-error texto-error4">Error</span>
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <p align="center"><b>PH</b></p>
+                            <div class="col-md-12" id="rpm-0">
+                                <div class="vina-loading"></div>
+                                <b class="vina-vertical" style="margin-left: -50%;">Entrada</b>
+                                <div>
+                                    <img src="images/rpm.png" class="img-rpm-lfe">
+                                    <canvas id="gauge0"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-12 chart-lfe" id="chart-lfe1">
+                                <div class="vina-loading"></div>
+                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                <canvas id="myChart1" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <p><b align="center">ORP</b></p>
+                            <div class="col-md-12" id="rpm-1">
+                                <div class="vina-loading"></div>
+                                <div>
+                                    <img src="images/rpm.png" class="img-rpm-lfe">
+                                    <canvas id="gauge1"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-12 chart-lfe" id="chart-lfe2">
+                                <div class="vina-loading"></div>
+                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                <canvas id="myChart2" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <p align="center"><b>Conductividad</b></p>
+                            <div class="col-md-12" id="rpm-2">
+                                <div class="vina-loading"></div>
+                                <div>
+                                    <img src="images/rpm.png" class="img-rpm-lfe">
+                                    <canvas id="gauge2"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-12 chart-lfe" id="chart-lfe3">
+                                <div class="vina-loading"></div>
+                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                <canvas id="myChart3" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row vina-row-rpm">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12" id="rpm-3">
+                                <b class="vina-vertical" style="margin-left: -50%;">Salida</b>
+                                <div class="vina-loading"></div>
+                                <div>
+                                    <img src="images/rpm.png" class="img-rpm-lfe">
+                                    <canvas id="gauge3"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-12 chart-lfe" id="chart-lfe4">
+                                <div class="vina-loading"></div>
+                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                <canvas id="myChart4" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12" id="rpm-4">
+                                <div class="vina-loading"></div>
+                                <div>
+                                    <img src="images/rpm.png" class="img-rpm-lfe">
+                                    <canvas id="gauge4"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-12 chart-lfe" id="chart-lfe5">
+                                <div class="vina-loading"></div>
+                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                <canvas id="myChart5" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12" id="rpm-5">
+                                <div class="vina-loading"></div>
+                                <div>
+                                    <img src="images/rpm.png" class="img-rpm-lfe">
+                                    <canvas id="gauge5"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-12 chart-lfe" id="chart-lfe6">
+                                <div class="vina-loading"></div>
+                                <img class="vina-cargando  img-chart-lfe" src="images/chart.png" class="img-rpm-lfe">
+                                <canvas id="myChart6" height="140"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div role="tabpanel" class="tab-pane fade" id="profile">
                     <div id='parametros-ejecucion'></div>
                     <div id='parametros-index'></div>
@@ -322,20 +459,24 @@
 
 <script src="instalaciones/VinaLuisFelipe.js"></script>
 <script>
+
+
+    $( ".vina-modal" ).click();
+    $(".loader-insta").css("display", "none");
+    VinaScriptDefault("<?php echo Request::root() ?>/CalculosLuisFelipe");
     GraficarPHDiario("<?php echo Request::root() ?>/CalculosLuisFelipe7");
     GraficarORPDiario("<?php echo Request::root() ?>/CalculosLuisFelipe9");
     GraficarConductividadDiario("<?php echo Request::root() ?>/CalculosLuisFelipe11");
     GraficarFlujos("<?php echo Request::root() ?>/CalculosLuisFelipe13")
     ConsultarParametros("<?php echo Request::root() ?>/CalculosLuisFelipe14")
     MostrarBombas("<?php echo Request::root() ?>/CalculosLuisFelipe15")
-    MostrarRelojes("<?php echo Request::root() ?>/CalculosLuisFelipe16", <?php echo json_encode($Instalacion); ?>);
-
-    MostrarEntrada1("<?php echo Request::root() ?>/CalculosLuisFelipe17", <?php echo json_encode($Instalacion); ?>);
-    MostrarEntrada2("<?php echo Request::root() ?>/CalculosLuisFelipe18", <?php echo json_encode($Instalacion); ?>);
-    MostrarEntrada3("<?php echo Request::root() ?>/CalculosLuisFelipe19", <?php echo json_encode($Instalacion); ?>);
-    MostrarSalida1("<?php echo Request::root() ?>/CalculosLuisFelipe20", <?php echo json_encode($Instalacion); ?>);
-    MostrarSalida2("<?php echo Request::root() ?>/CalculosLuisFelipe21", <?php echo json_encode($Instalacion); ?>);
-    MostrarSalida3("<?php echo Request::root() ?>/CalculosLuisFelipe22", <?php echo json_encode($Instalacion); ?>);
+    MostrarRelojes("<?php echo Request::root() ?>/CalculosLuisFelipe16", <?php echo $Instalacion; ?>);
+    MostrarEntrada1("<?php echo Request::root() ?>/CalculosLuisFelipe17", <?php echo $Instalacion; ?>);
+    MostrarEntrada2("<?php echo Request::root() ?>/CalculosLuisFelipe18", <?php echo $Instalacion; ?>);
+    MostrarEntrada3("<?php echo Request::root() ?>/CalculosLuisFelipe19", <?php echo $Instalacion; ?>);
+    MostrarSalida1("<?php echo Request::root() ?>/CalculosLuisFelipe20", <?php echo $Instalacion; ?>);
+    MostrarSalida2("<?php echo Request::root() ?>/CalculosLuisFelipe21", <?php echo $Instalacion; ?>);
+    MostrarSalida3("<?php echo Request::root() ?>/CalculosLuisFelipe22", <?php echo $Instalacion; ?>);
 
     $("#ListarBombas").click(function() {
         ListarBombas("<?php echo Request::root() ?>/CalculosLuisFelipe5");

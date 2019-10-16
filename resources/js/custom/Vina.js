@@ -163,8 +163,6 @@ window.VinaScriptDefault = function(url_){
 
     $("#contenedorLFE").load(url_, {instalacion: "epa"});
 
-    $( ".vina-modal" ).click();
-    $(".loader-insta").css("display", "none");
 
     $('#fecha_flujo_inicio').bootstrapMaterialDatePicker
     ({
@@ -264,6 +262,8 @@ window.VinaScriptDefault = function(url_){
            nowButton : true,
            switchOnClick : true
          });
+
+
 
 }
 window.MostrarEntrada1=function(url_, info) {

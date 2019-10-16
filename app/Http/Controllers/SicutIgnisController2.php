@@ -705,7 +705,7 @@ class SicutIgnisController2 extends Controller{
 
 
         $datos = DB::connection('telemetria')
-                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index) FORCE INDEX (log_aasa_dt_utc_index)
+                                      ->select("SELECT * FROM log_aasa FORCE INDEX (log_aasa_dt_utc_index)
                                                   WHERE (mt_name='AASA--ION8650.EnerActIny7400' 
                                                   OR mt_name='AASA--ION8650.EnerActRet7400')
                                                   $Condition
@@ -749,6 +749,7 @@ class SicutIgnisController2 extends Controller{
                         $MaxDato=$datos[$i]->mt_value;
                       }
                     }
+                  }
 
 
 
@@ -813,7 +814,7 @@ class SicutIgnisController2 extends Controller{
                 Colores[1]='rgba(66, 134, 244, 1)';
                 Colores[2]='rgba(255, 99, 132, 0.2)';
                 Colores[3]='rgba(255, 99, 132, 1)';
-              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, Colores);
+              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, Colores, 'aasa2_sicut-myChart3');
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
               </script><?php

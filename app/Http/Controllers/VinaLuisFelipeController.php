@@ -44,20 +44,15 @@ class VinaLuisFelipeController extends Controller{
 
     public function index(){
 
-      $id=$_POST['id'];
-      $tabla_asociada=$_POST['tabla_asociada'];
+      $instalaciones = '{"id":2,"nombre":"Viña Luis Felipe Edwards","modelo_equipo":null,"numero_serie":null,"grupo_asociado":null,"datos":null,"tabla_asociada":"log_biofil02","controlador":"VinaLuisFelipeController","latitud":"-34.683290","longitud":"-71.172243"}';
 
-      $instalaciones = DB::table('instalaciones')
-                        ->where("id", $id)
-                          ->first();
-
-       $UltimaMedicion = DB::connection("telemetria")
-                               ->select("SELECT * FROM log_biofil02 ORDER BY mt_time DESC LIMIT 1");
+       // $UltimaMedicion = DB::connection("telemetria")
+       //                         ->select("SELECT * FROM log_biofil02 ORDER BY mt_time DESC LIMIT 1");
 
 
            
 
-        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "UltimaMedicion" => $UltimaMedicion, "Usuario" => Auth::user(), "Rol" => $_POST['rol']]);
+        return view("modals.VinaLuisFelipe", ["Instalacion" => $instalaciones, "Usuario" => Auth::user(), "Rol" => $_POST['rol']]);
     }
 
     public function MostrarBombas(){

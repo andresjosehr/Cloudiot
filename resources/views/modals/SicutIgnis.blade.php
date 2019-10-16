@@ -37,7 +37,7 @@
                </li>
                <li role="presentation" class="">
                   <a href="#aasa2" data-toggle="tab" aria-expanded="false">
-                  Aasa 2
+                  Aasa 7400
                   </a>
                </li>
                <li role="presentation" class="">

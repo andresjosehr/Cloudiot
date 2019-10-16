@@ -602,29 +602,26 @@ class SicutIgnisController extends Controller{
                         }
                     } 
 
+
                   }
 
                   for ($i=0; $i <count($EnerActIny_time)-1 ; $i++) { 
-                    if ($EnerReactIny_mt_value[$i]==0) {
-                      $FPiny[$i]=0;
-                    } else{
+                    
                       if ($EnerActIny_value[$i]!=0) {
                         $FPiny[$i]=$EnerReactIny_mt_value[$i]/$EnerActIny_value[$i];
                         $FPiny[$i]=cos(atan($FPiny[$i]));
                       }else{
                         $FPiny[$i]=0;
                       }
-                    }
-                    if ($EnerReactRet_mt_value[$i]==0) {
-                      $FPret[$i]=0;
-                    } else{
+                    
+                    
                       if ($EnerActRet_value[$i]!=0) {
                         $FPret[$i]=$EnerReactRet_mt_value[$i]/$EnerActRet_value[$i];
                         $FPret[$i]=cos(atan($FPret[$i]));
                       } else{
                         $FPret[$i]=0;
                       }
-                    }
+                    
 
                     if ($i==0) {
                       $MinDato=999999999999999999999999999999999999999999999999999999999999999999999;
@@ -815,7 +812,7 @@ class SicutIgnisController extends Controller{
                 Colores[1]='rgba(66, 134, 244, 1)';
                 Colores[2]='rgba(255, 99, 132, 0.2)';
                 Colores[3]='rgba(255, 99, 132, 1)';
-              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, Colores);
+              PotGenerada(EnergiaActivaInyectada_dt_utc, EnergiaActivaInyectada_mt_value, EnergiaActivaRetirada_mt_value, Colores, 'sicut-myChart3');
               FuncionesCompletas++;
               FuncionExportacion(FuncionesCompletas);
               </script><?php

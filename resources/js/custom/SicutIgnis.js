@@ -305,8 +305,8 @@ window.SicutPieChart = function(){
 }
 
 
-window.PotGenerada = function (mt_time, mt_value1, mt_value2, Colores){
-  var ctx = document.getElementById("sicut-myChart3").getContext('2d');
+window.PotGenerada = function (mt_time, mt_value1, mt_value2, Colores, id){
+  var ctx = document.getElementById(id).getContext('2d');
   var myChart = new Chart(ctx, {
       type: 'line',
       data: {
