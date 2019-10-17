@@ -73,6 +73,22 @@ return [
             'engine' => null,
         ],
 
+        'powerbi_local' => [
+            'driver' => 'mysql',
+            'host' => env('DB4_HOST'),
+            'port' => env('DB4_PORT', '3306'),
+            'database' => env('DB4_DATABASE'),
+            'username' => env('DB4_USERNAME'),
+            'password' => env('DB4_PASSWORD'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'telemetria' => [
             'driver' => 'mysql',
             'host' => env('DB2_HOST'),

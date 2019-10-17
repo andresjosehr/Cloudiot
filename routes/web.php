@@ -188,7 +188,7 @@ Route::post('EnViniloController', function(){ return view("modals.EnVinilo.EnVin
 
 
 
-Route::get('sincronizar-log_aasa','TareasProgramadas\SincronizacionBDController@log_aasa');
+Route::get('sincronizar-instalaciones','TareasProgramadas\SincronizacionBDController@index');
 
 
 
