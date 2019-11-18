@@ -30,7 +30,7 @@
          <div class="body">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
-               <li role="presentation" class="active">
+               {{-- <li role="presentation">
                   <a href="#home_only_icon_title" data-toggle="tab" aria-expanded="true">
                   Graficos
                   </a>
@@ -39,8 +39,8 @@
                   <a href="#aasa2" data-toggle="tab" aria-expanded="false">
                   Aasa 7400
                   </a>
-               </li>
-               <li role="presentation" class="">
+               </li> --}}
+               <li role="presentation" class="active">
                   <a href="#profile_only_icon_title" data-toggle="tab" aria-expanded="false">
                   Power Bi
                   </a>
@@ -48,7 +48,7 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-               <div role="tabpanel" class="tab-pane fade active in" id="home_only_icon_title">
+               <div role="tabpanel" class="tab-pane fade" id="home_only_icon_title">
                   <div class="row" align="center">
                      <div class="col-md-4">
                         <div class="body table-responsive">
@@ -382,7 +382,7 @@
                      </div>
                   </div>
                </div>
-               <div role="tabpanel" class="tab-pane fade" id="profile_only_icon_title">
+               <div role="tabpanel" class="tab-pane fade active in" id="profile_only_icon_title">
                   <iframe src="https://app.powerbi.com/view?r=eyJrIjoiMzE2YWRmNDUtMTJjNy00OWQzLTkwYTItMWZhMmNlNTFiYjViIiwidCI6ImIwZmU2YjNlLTRjNTItNDg1Zi1hNzZlLWZjNTVjYzIzYzhmMCJ9" frameborder="0" width="100%" height="600"></iframe>
                </div>
             </div>
