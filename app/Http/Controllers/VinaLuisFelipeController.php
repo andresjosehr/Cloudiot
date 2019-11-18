@@ -505,16 +505,16 @@ class VinaLuisFelipeController extends Controller{
 
        $datos = DB::connection('telemetria')
                                   ->select("SELECT mt_name, mt_value, mt_time FROM log_biofil02
-                                                                       WHERE  (mt_name='Biofiltro02--Consumo.EstadoBomba1'
-                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba2'
-                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba3'
-                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba4'
-                                                                            OR mt_name='Biofiltro02--Consumo.EstadoBomba5'
-                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba1'
-                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba2'
-                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba3'
-                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba4'
-                                                                            OR mt_name='Biofiltro02--Consumo.ErrorBomba5')
+                                                                       WHERE mt_name IN ('Biofiltro02--Consumo.EstadoBomba1',
+                                                                               'Biofiltro02--Consumo.EstadoBomba2',
+                                                                               'Biofiltro02--Consumo.EstadoBomba3',
+                                                                               'Biofiltro02--Consumo.EstadoBomba4',
+                                                                               'Biofiltro02--Consumo.EstadoBomba5',
+                                                                               'Biofiltro02--Consumo.ErrorBomba1',
+                                                                               'Biofiltro02--Consumo.ErrorBomba2',
+                                                                               'Biofiltro02--Consumo.ErrorBomba3',
+                                                                               'Biofiltro02--Consumo.ErrorBomba4',
+                                                                               'Biofiltro02--Consumo.ErrorBomba5')
                                                                             GROUP BY mt_name LIMIT 10");
 
 
