@@ -65,12 +65,24 @@ class FinningController extends Controller
     public function FinningPozoNave4(Request $Request)
     {
 
+        $Datos["PozoNave4Tabla"]["NivelBajoE1"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PozoNave4--Consumo.NivelBajoE1') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PozoNave4--Consumo.NivelBajoE1')
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
 
-      $Vista = (string)View::make('modals.Finning.pozo_nave_4');
+        $Datos["PozoNave4Tabla"]["NivelAltoE1"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PozoNave4--Consumo.NivelBajoE2') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PozoNave4--Consumo.NivelBajoE2')
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
+
+        $Datos["PozoNave4Tabla"]["NivelBajoE2"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PozoNave4--Consumo.NivelAltoE1') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PozoNave4--Consumo.NivelAltoE1')
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
+
+        $Datos["PozoNave4Tabla"]["NivelAltoE2"]=DB::connection("telemetria")->select("SELECT mt_name, SUM(mt_value) as mt_value, mt_time FROM (SELECT * FROM (SELECT * FROM log_finning01 WHERE (mt_name='PozoNave4--Consumo.NivelAltoE2') order by mt_time desc LIMIT 2000) lf WHERE (mt_name='PozoNave4--Consumo.NivelAltoE2')
+                                                                                    GROUP BY mt_time, mt_name ORDER BY mt_time DESC LIMIT 60) lf GROUP BY mt_time;");
+
+
+      $Vista = (string)View::make('modals.Finning.pozo_nave_4', ["Datos" => $Datos]);
 
       $Vista = preg_replace("/[\r\n|\n|\r]+/", " ", $Vista);
 
-      return 'ImprimirDatosFinning("'.$Vista.'", "pozo_nave_4_div")';
+      return 'ImprimirDatosFinning("'.$Vista.'", "pozo_nave_4_div", `'.json_encode($Datos).'`)';
 
 
     }
