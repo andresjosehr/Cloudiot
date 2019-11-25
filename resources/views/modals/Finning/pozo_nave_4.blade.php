@@ -41,14 +41,14 @@
                                     <th class='sicut-th'>{{date_format(date_create($Datos['PozoNave4Tabla']['NivelBajoE1'][$i]->mt_time), 'H:i') }}</th>
 
                                     <th class='sicut-th'>
-                                      @if ($Datos['PozoNave4Tabla']['NivelBajoE1'][$i]->mt_value==1)
+                                      @if ($Datos['PozoNave4Tabla']['NivelBajoE1'][$i]->mt_value==0)
                                         <i class='material-icons'  style='color: green;font-size: 15px;'>check_circle</i>
                                         @else
                                         <i class='material-icons' style='color: red;font-size: 15px;'>error</i>
                                       @endif
                                     </th>
                                     <th class='sicut-th'>
-                                        @if ($Datos['PozoNave4Tabla']['NivelAltoE1'][$i]->mt_value==1)
+                                        @if ($Datos['PozoNave4Tabla']['NivelAltoE1'][$i]->mt_value==0)
                                         <i class='material-icons'  style='color: green;font-size: 15px;'>check_circle</i>
                                         @else
                                         <i class='material-icons' style='color: red;font-size: 15px;'>error</i>
@@ -57,7 +57,7 @@
 
 
                                     <th class='sicut-th'>
-                                       @if ($Datos['PozoNave4Tabla']['NivelBajoE2'][$i]->mt_value==1)
+                                       @if ($Datos['PozoNave4Tabla']['NivelBajoE2'][$i]->mt_value==0)
                                         <i class='material-icons'  style='color: green;font-size: 15px;'>check_circle</i>
                                         @else
                                         <i class='material-icons' style='color: red;font-size: 15px;'>error</i>
@@ -66,7 +66,7 @@
                                     </th>
 
                                     <th class='sicut-th'>
-                                       @if ($Datos['PozoNave4Tabla']['NivelAltoE2'][$i]->mt_value==1)
+                                       @if ($Datos['PozoNave4Tabla']['NivelAltoE2'][$i]->mt_value==0)
                                         <i class='material-icons'  style='color: green;font-size: 15px;'>check_circle</i>
                                         @else
                                         <i class='material-icons' style='color: red;font-size: 15px;'>error</i>
