@@ -37,9 +37,10 @@ window.sound = new Howl({
                <div class="col-md-2">
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel" ><img id="img_3b6e_0" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUa9m_RoIT_ufuH3oNPhKded1VXMx8_KnuE5PjUT9Gn5HjE1_CbA" alt=""></h4>
                </div>
-               <div class="col-md-5">
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición Dinamometro: {{$Datos["UltimaMedicionDinamometro"][0]->mt_time}}</h4><br>
+               <div class="col-md-5" style="line-height: 0">
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición Dinamometro: {{$Datos["UltimaMedicionDinamometro"][0]->mt_time}}</h4>
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición PlantaAgua: {{$Datos["UltimaMedicionPlantaAgua"][0]->mt_time}}</h4>
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición PlantaAgua: {{$Datos["UltimaMedicionPozoNave4"][0]->mt_time}}</h4>
                </div>
                <div class="col-md-6" id="div_3b6e_2">
                   <div class="row">
