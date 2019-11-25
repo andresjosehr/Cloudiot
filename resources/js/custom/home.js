@@ -139,17 +139,34 @@ window.RenderizarMapa=function(latitud, longitud, id, controlador, urlroot, tabl
                             if (result.PlantaAgua==0) {
                               map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_verde.png' ));
                             }
+
                             if (result.PlantaAgua==1) {
                               map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_amarillo.png' ));
                             }
                             if (result.PlantaAgua==2) {
                               map.addLayer(Marcador(-70.388521, -23.597659, 9, "FinningController" , 1, 'images/marc_rojo.png' ));
                             }
+
+
+
+
                             if (result.Dinamometro[0].mt_value==0) {
                               map.addLayer(Marcador(-70.387544, -23.598190, 10, "FinningController" , 1, 'images/marc_verde.png' ));
                             } else{
                               map.addLayer(Marcador(-70.387544, -23.598190, 10, "FinningController" , 1, 'images/marc_rojo.png' ));
                             }
+
+
+
+                            if (result.PozoNave4==0) {
+                              map.addLayer(Marcador(-70.387544, -23.598190, 10, "FinningController" , 1, 'images/marc_verde.png' ));
+                            } 
+                            if (result.PozoNave4!=0 && result.PozoNave4!=4) {
+                              map.addLayer(Marcador(-70.389085, -23.598169, 10, "FinningController" , 1, 'images/marc_amarillo.png' ));
+                            }
+                            if (result.PozoNave4==4) {
+                              map.addLayer(Marcador(-70.387544, -23.598190, 10, "FinningController" , 1, 'images/marc_rojo.png' ));
+                            } 
 
 
 
