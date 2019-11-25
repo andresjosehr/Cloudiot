@@ -15,17 +15,17 @@ class DatabaseSeeder extends Seeder
     {
 
 
-       // DB::table('users')->insert([
-       //      'name' => "fiacobelli",
-       //      'email' => 'fiacobelli@maitenal.cl',
-       //      'password' => bcrypt('fiacobelli'),
-       //      'rol' => "1"
-       //  ]);
+       DB::table('users')->insert([
+            'name' => "Welko",
+            'email' => 'welko@welkco.com',
+            'password' => bcrypt('welko'),
+            'rol' => 2
+        ]);
 
        DB::table('instalaciones_asignadas')->insert([
-            'id_usuario' => 22,
-            'id_instalacion' => 5,
-            'rol' => "1"
+            'id_usuario' => 23,
+            'id_instalacion' => 13,
+            'rol' => 1
         ]);
 
     }

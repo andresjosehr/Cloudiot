@@ -183,7 +183,7 @@ Route::post('EnViniloController', function(){ return view("modals.EnVinilo.EnVin
 
 
 
-
+Route::post('WelkoController','WelkoController@index')->middleware("verificar_login");
 
 
 
