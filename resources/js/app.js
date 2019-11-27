@@ -7,3 +7,4 @@
 	    require ("./custom/SicutIgnis.js");
 	    require ("./custom/Vina.js");
 	    require ("./custom/ajax.js");
+	    require ("./custom/welko.js");

@@ -6,11 +6,12 @@
          <div class="modal-header">
             <div class="row" id="div_3b6e_1">
                <div class="col-md-2">
-                Welko
+                <h2 class="font-weight-bold">Welko</h2>
                </div>
-               <div class="col-md-5">
-               </div>
-               <div class="col-md-6" id="div_3b6e_2">
+               <div class="col-md-5" style="line-height: 0">
+                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición: {{$Datos["UltimaMedicion"][0]->mt_time}}</h4>
+                </div>
+           {{--     <div class="col-md-6" id="div_3b6e_2">
                   <div class="row">
                      <div class="col-md-5">
                         <div class="form-group">
@@ -30,22 +31,16 @@
                         <button onclick="GraficarFinning();" type="button" class="btn btn-primary waves-effect"><i class="fa fa-table"></i></button>
                      </div>
                   </div>
-               </div>
+               </div> --}}
             </div>
          </div>
          <div class="modal-body table-custom" id="div_3b6e_3">
-            <div class="row" style="min-height: 300px;">
-               <div class="col-md-2" id='pozo_nave_4_div'>
-                 {{-- @include("modals.Finning.pozo_nave_4") --}}
-                 <div class="sicut-loading" id="sicut-loading5" style="margin-top:75px;"></div>
-               </div>
-               <div class="col-md-5" id="planta_agua_div">
-                 {{-- @include("modals.Finning.planta_agua") --}}
-                 <div class="sicut-loading" id="sicut-loading5" style="margin-top:75px;"></div>
-               </div>
-               <div class="col-md-5" id="dinamometro_div">
-                 {{-- @include("modals.Finning.dinamometro") --}}
-                 <div class="sicut-loading" id="sicut-loading5" style="margin-top:75px;"></div>
+            <div class="row" style="">
+              
+
+               <div class="col-md-12">
+                <div class="sicut-loading" id="WelkoNivel-loader" style="margin-top:75px;"></div>
+                 <canvas id="WelkoNivel" height="50"></canvas>
                </div>
             </div>
          </div>
@@ -58,6 +53,7 @@
 </div>
 
 <script>
+   window.AjaxRequest("POST", "WelkoGraficarNivel", "1")
    $( ".display-modal" ).click();
    $(".loader-insta").css("display", "none");
   </script>
