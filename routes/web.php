@@ -141,9 +141,7 @@ Route::get('ExcelFlujosDiarios', "ExcelController@ExcelFlujosDiarios")->middlewa
 Route::post('ExportarSicutExcel', "SicutIgnisController@ExportarSicutExcel")->middleware("verificar_login");
 
 
-Route::get('Cuenta', function(){
-	return view("usuarios.cuenta", ["Usuario" =>  Auth::user()]);
-})->middleware("verificar_login");
+Route::get('Cuenta', 'UsuariosController@DisplayInfoAccount')->middleware("verificar_login");
 
 Route::post('CambiarContrasena', 'UsuariosController@CambiarContrasena')->middleware("verificar_login");
 

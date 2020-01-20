@@ -3,7 +3,7 @@
 
     @include('header');
 
-    {{-- @include('loader.index'); --}}
+    @include('loader.index');
 
     @include('top_menu');
 

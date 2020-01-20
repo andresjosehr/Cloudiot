@@ -7,15 +7,22 @@ use Illuminate\Http\Request;
 
 use Auth;
 use DB;
+use View;
 
 class UsuariosController extends Controller
 {
+
+  public function DisplayInfoAccount($value='')
+  {
+    return view::make("usuarios.cuenta", ["Usuario" =>  Auth::user()]);
+  }
 
     public function index(){
         $Instalacioness = DB::table("instalaciones")->get();
         $UsuariosTemp = DB::table("users_reg_temp")->get();
         return view("usuarios.registrar", ["Usuario" => Auth::user(), "Instalaciones" => $Instalacioness, "UsuariosTemp" => $UsuariosTemp]);
     }
+    
     public function CambiarContrasena(Request $Request){
     	$pass1= bcrypt($_POST["pass1"]);
 
