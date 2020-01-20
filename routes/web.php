@@ -163,9 +163,13 @@ Route::post('FinningController','FinningController@index')->middleware("verifica
 Route::get('ExportarFinning','FinningController@ExportarRango')->middleware("verificar_login");
 Route::post('FinningEstadoBombasMarcador','FinningController@FinningEstadoBombasMarcador')->middleware("verificar_login");
 
-Route::post('FinningPozoNave4','FinningController@FinningPozoNave4')->middleware("verificar_login");
-Route::post('FinningPlantaAgua','FinningController@FinningPlantaAgua')->middleware("verificar_login");
-Route::post('FinningDinamometro','FinningController@FinningDinamometro')->middleware("verificar_login");
+// Route::post('FinningPozoNave4','FinningController@FinningPozoNave4')->middleware("verificar_login");
+// Route::post('FinningPlantaAgua','FinningController@FinningPlantaAgua')->middleware("verificar_login");
+// Route::post('FinningDinamometro','FinningController@FinningDinamometro')->middleware("verificar_login");
+
+Route::post('PozoNave4Controller','PozoNave4Controller@index')->middleware("verificar_login");
+Route::post('PlantaAguaController','PlantaAguaController@index')->middleware("verificar_login");
+Route::post('DinamometroController','DinamometroController@index')->middleware("verificar_login");
 
 Route::post('SanJavierController','SanJavierController@index')->middleware("verificar_login");
 Route::get('JavierBombas','SanJavierController@MostrarBombas')->middleware("verificar_login");

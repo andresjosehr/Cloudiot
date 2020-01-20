@@ -68,15 +68,12 @@
          <div class="modal-body table-custom" id="div_3b6e_3">
             <div class="row" style="min-height: 300px;">
                <div class="col-md-3" id='pozo_nave_4_div' style="padding: 0px">
-                 {{-- @include("modals.Finning.pozo_nave_4") --}}
                  <div class="sicut-loading" id="sicut-loading5" style="margin-top:75px;"></div>
                </div>
                <div class="col-md-4" id="planta_agua_div" style="padding: 0px">
-                 {{-- @include("modals.Finning.planta_agua") --}}
                  <div class="sicut-loading" id="sicut-loading5" style="margin-top:75px;"></div>
                </div>
                <div class="col-md-5" id="dinamometro_div" style="padding: 0px">
-                 {{-- @include("modals.Finning.dinamometro") --}}
                  <div class="sicut-loading" id="sicut-loading5" style="margin-top:75px;"></div>
                </div>
             </div>
