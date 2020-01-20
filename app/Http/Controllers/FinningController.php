@@ -14,7 +14,7 @@ class FinningController extends Controller
     {
 
 
-    	$Datos["UltimaMedicionDinamometro"] = DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'PlantaAgua%' ORDER BY mt_time DESC LIMIT 1;");
+    	$Datos["UltimaMedicionDinamometro"] = DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'Dinamometro%' ORDER BY mt_time DESC LIMIT 1;");
         $Datos["UltimaMedicionPlantaAgua"] = DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'PlantaAgua%' ORDER BY mt_time DESC LIMIT 1;");
         $Datos["UltimaMedicionPozoNave4"] = DB::connection("telemetria")->select("SELECT * FROM log_finning01 WHERE mt_name LIKE 'PozoNave%' ORDER BY mt_time DESC LIMIT 1;");
 

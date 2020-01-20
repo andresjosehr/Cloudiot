@@ -39,8 +39,6 @@
                </div>
                <div class="col-md-5" style="line-height: 0">
                   <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición Dinamometro: {{$Datos["UltimaMedicionDinamometro"][0]->mt_time}}</h4>
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición PlantaAgua: {{$Datos["UltimaMedicionPlantaAgua"][0]->mt_time}}</h4>
-                  <h4 class="modal-title nombre-instalacion" id="largeModalLabel">Ultima Medición Pozo Nave 4: {{$Datos["UltimaMedicionPozoNave4"][0]->mt_time}}</h4>
                </div>
                <div class="col-md-6" id="div_3b6e_2">
                   <div class="row">
@@ -72,36 +70,36 @@
                   <div class='row'>
                      <div class='col-md-2 bombas_dinamometro' style='padding-left: 0px !important;padding-right: 0px !important' align='center'>
                         <p id='p_3b6e_0'>Bom 601</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][0]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][0]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                         <p id='p_3b6e_1'>Bom 602</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][1]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][1]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                      </div>
                      <div class='col-md-2 bombas_dinamometro' style='padding-left: 0px !important;padding-right: 0px !important' align='center'>
                         <p id='p_3b6e_2'>Bom 603</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][2]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][2]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                         <p id='p_3b6e_3'>Bom 604</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][3]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][3]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                      </div>
                      <div class='col-md-2 bombas_dinamometro' style='padding-left: 0px !important;padding-right: 0px !important' align='center'>
                         <p id='p_3b6e_4'>Bom 605</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][4]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][4]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                         <p id='p_3b6e_5'>Bom 606</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][5]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][5]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                      </div>
                      <div class='col-md-2 bombas_dinamometro' style='padding-left: 0px !important;padding-right: 0px !important' align='center'>
                         <p id='p_3b6e_6'>Bom 607</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][6]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][6]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                         <p id='p_3b6e_7'>Bom 608</p>
-                        <img src='{{Request::root()}}/images/bomba2.png' width='35%' alt='' @if ($Datos['Dinamometro'][7]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
+                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos['Dinamometro'][7]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif><br><br>
                      </div>
                      <div class='col-md-4' align='center'>
                         <ul id='ul_3b6e_0'>
-                           @if ($Datos['Dinamometro'][8]->mt_value==0) <img style='width: 65px' id='img_3b6e_9' src='{{ asset('images/tanque_dina0.png') }}' alt=''> @else <img style='width: 65px' id='img_3b6e_10' src='{{ asset('images/tanque_dina1.png') }}' alt=''> @endif
-                           @if ($Datos['Dinamometro'][9]->mt_value==0) <img style='width: 65px' id='img_3b6e_11' src='{{ asset('images/tanque_dina0.png') }}' alt=''> @else <img style='width: 65px' id='img_3b6e_12' src='{{ asset('images/tanque_dina1.png') }}' alt=''> @endif
+                           @if ($Datos['Dinamometro'][8]->mt_value==0) <img style='width: 125px' id='img_3b6e_9' src='{{ asset('images/tanque_dina0.png') }}' alt=''> @else <img style='width: 125px' id='img_3b6e_10' src='{{ asset('images/tanque_dina1.png') }}' alt=''> @endif
+                           @if ($Datos['Dinamometro'][9]->mt_value==0) <img style='width: 125px' id='img_3b6e_11' src='{{ asset('images/tanque_dina0.png') }}' alt=''> @else <img style='width: 125px' id='img_3b6e_12' src='{{ asset('images/tanque_dina1.png') }}' alt=''> @endif
                         </ul>
                      </div>
                   </div>
-                  <div class='body table-responsive' align='center' style='max-height: 500px'>
+                  <div class='body table-responsive' align='center' style='max-height: 400px'>
                           <table class='table sicut-table-bordered sicut-modal-table1 pozo_nave_table'>
                             <thead>
                               <th class='sicut-th'>Hrs</th>
