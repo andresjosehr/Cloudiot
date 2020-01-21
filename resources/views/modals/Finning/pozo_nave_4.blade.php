@@ -97,7 +97,7 @@
    </div>
 </div>
 <div id='div_3b6e_5'></div>
-<div class='body table-responsive' align='center' style='margin-top:25px; max-height: 200px;overflow: auto;'>
+<div class='body table-responsive' align='center' style='margin-top:25px; max-height: 150px;overflow: auto;'>
     <table class='table sicut-table-bordered sicut-modal-table1 pozo_nave_table'>
       <thead></thead>
       <caption scope='row' class='sicut-tabla-titulo'>Pozo nave 4 <i class='fa fa-volume-up' onclick='$window.sound.play();$(this).pause()' style='cursor: pointer;display:none;color: red;margin-left: 20px;'></i></caption>

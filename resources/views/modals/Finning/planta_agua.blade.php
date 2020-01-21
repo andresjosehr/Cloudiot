@@ -71,8 +71,8 @@
                                         <h3>Sala Sur</h3>
 
 
-                                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos[ 'PlantaAgua'][0]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
-                                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos[ 'PlantaAgua'][1]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
+                                        <img src='{{Request::root()}}/images/bomba2.png' width='10%' alt='' @if ($Datos[ 'PlantaAgua'][0]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
+                                        <img src='{{Request::root()}}/images/bomba2.png' width='10%' alt='' @if ($Datos[ 'PlantaAgua'][1]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
                                         @if ($Datos['Reloj1'][0]->mt_value==25) <img style='width: 95px' id='img_3b6e_3' src='{{ asset('images/tanque_ancho0.png') }}' alt=''> @endif @if ($Datos['Reloj1'][0]->mt_value==50) <img style='width: 95px' id='img_3b6e_4' src='{{ asset('images/tanque_ancho1.png') }}' alt=''> @endif @if ($Datos['Reloj1'][0]->mt_value==75) <img style='width: 95px' id='img_3b6e_5' src='{{ asset(' images/tanque_ancho11png ') }}' alt=''> @endif
 
 
@@ -91,8 +91,8 @@
 
                                         <h3>Sala Norte</h3>
 
-                                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos[ 'PlantaAgua'][2]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
-                                        <img src='{{Request::root()}}/images/bomba2.png' width='20%' alt='' @if ($Datos[ 'PlantaAgua'][3]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
+                                        <img src='{{Request::root()}}/images/bomba2.png' width='10%' alt='' @if ($Datos[ 'PlantaAgua'][2]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
+                                        <img src='{{Request::root()}}/images/bomba2.png' width='10%' alt='' @if ($Datos[ 'PlantaAgua'][3]->mt_value==0) style='filter: hue-rotate(128deg)' @else style='filter: hue-rotate(327deg)' @endif>
                                         @if ($Datos['Reloj2'][0]->mt_value==25) <img style='width: 95px' id='img_3b6e_6' src='{{ asset('images/tanque_ancho0.png') }}' alt=''> @endif @if ($Datos['Reloj2'][0]->mt_value==50) <img style='width: 95px' id='img_3b6e_7' src='{{ asset('images/tanque_ancho1.png') }}' alt=''> @endif @if ($Datos['Reloj2'][0]->mt_value==75) <img style='width: 95px' id='img_3b6e_8' src='{{ asset(' images/tanque_ancho11png ') }}' alt=''> @endif
 
 
@@ -101,7 +101,7 @@
 
                                     </div>
                                 </div>
-                                <div class='body table-responsive' align='center' style='margin-top:25px; max-height: 300px'>
+                                <div class='body table-responsive' align='center' style='margin-top:25px; max-height: 250px'>
                                     <table class='table sicut-table-bordered sicut-modal-table1 pozo_nave_table'>
                                         <thead>
                                             <th class='sicut-th'>Hrs</th>
