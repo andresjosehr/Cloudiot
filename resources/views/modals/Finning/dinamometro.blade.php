@@ -99,7 +99,7 @@
                         </ul>
                      </div>
                   </div>
-                  <div class='body table-responsive' align='center' style='max-height: 400px'>
+                  <div class='body table-responsive' align='center' style='max-height: 250px'>
                           <table class='table sicut-table-bordered sicut-modal-table1 pozo_nave_table'>
                             <thead>
                               <th class='sicut-th'>Hrs</th>

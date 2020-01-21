@@ -69,27 +69,31 @@
                <div class="col-md-12" id='pozo_nave_4_div' style="padding: 0px">
                  <h1 align='center' id='h1_3b6e_0'>Pozo Nave 4</h1>
 <div id='div_3b6e_4'>
-  <div align='center' style='margin: 0 auto; display: flex'>
-    @if ($Datos['PozoNave4Tabla']['NivelBajoE1'][59]->mt_value==0 && $Datos['PozoNave4Tabla']['NivelAltoE1'][59]->mt_value==0)
-      <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave0.png') }}' alt=''> 
-    @endif
-    @if ($Datos['PozoNave4Tabla']['NivelBajoE1'][59]->mt_value==1 && $Datos['PozoNave4Tabla']['NivelAltoE1'][59]->mt_value==0)
-      <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave2.png') }}' alt=''> 
-    @endif
-    @if ($Datos['PozoNave4Tabla']['NivelAltoE1'][59]->mt_value==1)
-      <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave4.png') }}' alt=''> 
-    @endif
-
-    @if ($Datos['PozoNave4Tabla']['NivelBajoE2'][59]->mt_value==0 && $Datos['PozoNave4Tabla']['NivelAltoE2'][59]->mt_value==0)
-      <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave0.png') }}' alt=''> 
-    @endif
-    @if ($Datos['PozoNave4Tabla']['NivelBajoE2'][59]->mt_value==1 && $Datos['PozoNave4Tabla']['NivelAltoE2'][59]->mt_value==0)
-      <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave2.png') }}' alt=''> 
-    @endif
-    @if ($Datos['PozoNave4Tabla']['NivelAltoE2'][59]->mt_value==1)
-      <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave4.png') }}' alt=''> 
-    @endif
-
+  <div align='center' style='width: 100%'>
+    <div style="float: left;margin-left: 20%"><br>
+      <h3>Pozo de Contencion</h3> 
+        @if ($Datos['PozoNave4Tabla']['NivelBajoE1'][59]->mt_value==0 && $Datos['PozoNave4Tabla']['NivelAltoE1'][59]->mt_value==0)
+          <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave0.png') }}' alt='' style="float: left;"> 
+        @endif
+        @if ($Datos['PozoNave4Tabla']['NivelBajoE1'][59]->mt_value==1 && $Datos['PozoNave4Tabla']['NivelAltoE1'][59]->mt_value==0)
+          <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave2.png') }}' alt='' style="float: left;"> 
+        @endif
+        @if ($Datos['PozoNave4Tabla']['NivelAltoE1'][59]->mt_value==1)
+          <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave4.png') }}' alt='' style="float: left;"> 
+        @endif
+    </div>
+    <div style="float: right;margin-right: 20%"><br>
+      <h3>Pozo de Emergencia</h3>
+      @if ($Datos['PozoNave4Tabla']['NivelBajoE2'][59]->mt_value==0 && $Datos['PozoNave4Tabla']['NivelAltoE2'][59]->mt_value==0)
+        <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave0.png') }}' alt='' style="float: right;"> 
+      @endif
+      @if ($Datos['PozoNave4Tabla']['NivelBajoE2'][59]->mt_value==1 && $Datos['PozoNave4Tabla']['NivelAltoE2'][59]->mt_value==0)
+        <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave2.png') }}' alt='' style="float: right;"> 
+      @endif
+      @if ($Datos['PozoNave4Tabla']['NivelAltoE2'][59]->mt_value==1)
+        <img style='width: 95px' id='img_3b6e_1' src='{{ asset('images/tanque_pozo_nave4.png') }}' alt='' style="float: right;"> 
+      @endif
+    </div>
    </div>
 </div>
 <div id='div_3b6e_5'></div>
